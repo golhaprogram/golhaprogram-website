@@ -1,0 +1,20 @@
+<article dir="rtl" class="program-content">
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.tags }}
+    {{ range . }}
+    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+    {{ end }}
+    <div class="tags-section">
+      <span>برچسب‌ها:</span>
+      {{ range . }}
+        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+  
+  <div class="content">
+    {{ .Content }}
+  </div>
+</article>

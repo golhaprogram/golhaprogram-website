@@ -1,3 +1,30 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = "https://golhaprogram.com"
+title = "Golha Program"
+theme = "PaperMod"
+defaultContentLanguage = "fa"
+
+[languages.fa]
+languageName = "فارسی"
+languageCode = "fa"
+weight = 1
+
+[languages.fa.params]
+rtl = true
+
+
+[params]
+defaultTheme = "light"
+ShowReadingTime = false
+ShowShareButtons = true
+ShowPostNavLinks = true
+ShowCodeCopyButtons = true
+
+[taxonomies]
+tag = "tags"
+category = "categories"
+
+[[menu.main]]
+identifier = "archives"
+name = "آرشیو"
+url = "/archives/"
+weight = 10
