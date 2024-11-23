@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="{{ .Site.Language.Lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{ $styles := resources.Get "css/main.css" }}
-    {{ if hugo.IsProduction }}
-        {{ $styles = $styles | minify | fingerprint }}
-        <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
-    {{ else }}
-        <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
-    {{ end }}
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- Add your Vazirmatn font or other Persian fonts here -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-    {{ block "main" . }}{{ end }}
+<body dir="rtl">
+    <header>
+        <nav>
+            <a href="/">خانه</a>
+            <a href="/programs/">برنامه‌ها</a>
+            <a href="/about/">درباره</a>
+        </nav>
+    </header>
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+    <footer>
+        <p>© {{ now.Format "2006" }} گلها. تمامی حقوق محفوظ است.</p>
+    </footer>
 </body>
 </html>

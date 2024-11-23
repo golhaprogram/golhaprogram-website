@@ -1,7 +1,18 @@
 baseURL = "https://golhaprogram.com"
-title = "Golha Program"
+title = "برنامه‌ی گلها"
 theme = "PaperMod"
 defaultContentLanguage = "fa"
+
+# Enable Persian characters in URLs
+disablePathToLower = true
+removePathAccents = false
+
+# Content organization
+contentDir = "content"
+
+# URL/Output configuration
+uglyURLs = false
+canonifyURLs = true
 
 [languages.fa]
 languageName = "فارسی"
@@ -11,20 +22,5 @@ weight = 1
 [languages.fa.params]
 rtl = true
 
-
-[params]
-defaultTheme = "light"
-ShowReadingTime = false
-ShowShareButtons = true
-ShowPostNavLinks = true
-ShowCodeCopyButtons = true
-
-[taxonomies]
-tag = "tags"
-category = "categories"
-
-[[menu.main]]
-identifier = "archives"
-name = "آرشیو"
-url = "/archives/"
-weight = 10
+[permalinks]
+  programs = "/:section/:sections[last]/:filename/"

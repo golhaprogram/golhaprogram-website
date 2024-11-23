@@ -1,20 +1,80 @@
-<article dir="rtl" class="program-content">
-  <header>
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.tags }}
-    {{ range . }}
-    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
-    {{ end }}
-    <div class="tags-section">
-      <span>برچسب‌ها:</span>
-      {{ range . }}
-        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
-      {{ end }}
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<article class="program">
+    <header>
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.date }}
+        <time datetime="{{ . }}">{{ dateFormat "2006-01-02" . }}</time>
+        {{ end }}
+    </header>
+
+    {{ with .Params.audio_url }}
+    <div class="audio-player">
+        <audio controls>
+            <source src="{{ . }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
     {{ end }}
-  </header>
-  
-  <div class="content">
-    {{ .Content }}
-  </div>
+
+    {{ if .Params.performers }}
+    <div class="performers">
+        {{ if .Params.performers.singers }}
+        <div class="singers">
+            <h3>خوانندگان:</h3>
+            {{ range .Params.performers.singers }}
+            <span class="performer">{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+        
+        {{ if .Params.performers.players }}
+        <div class="players">
+            <h3>نوازندگان:</h3>
+            {{ range .Params.performers.players }}
+            <span class="performer">{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+    </div>
+
+    <div class="content">
+        {{ .Content }}
+    </div>
+
+    {{ end }}
+
+    <!-- Comments section -->
+    <div class="comments">
+        <div id="isso-thread" data-isso="//comments.golhaprogram.com/"
+             data-isso-lang="fa"
+             data-isso-max-comments-top="10"
+             data-isso-max-comments-nested="5">
+        </div>
+    </div>
 </article>
+
+<div style="direction: ltr; text-align: left;">
+    <h3>Debug Info:</h3>
+    <pre>
+Page Path: {{ .File.Path }}
+Section: {{ .Section }}
+Sections: {{ .CurrentSection }}
+Type: {{ .Type }}
+
+Sections Array:
+{{ range $index, $element := .Sections }}
+  {{ $index }}: {{ $element }}
+{{ end }}
+
+File Info:
+Dir: {{ .File.Dir }}
+Filename: {{ .File.LogicalName }}
+Path: {{ .File.Path }}
+
+URL/Permalink Info:
+RelPermalink: {{ .RelPermalink }}
+Permalink: {{ .Permalink }}
+    </pre>
+</div>
+{{ end }}

@@ -1,26 +1,28 @@
 {{ define "main" }}
-<div class="container">
-    {{ range .Pages }}
-    <article class="program-entry">
-        <h2>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        </h2>
-        
-        {{ with .Params.tags }}
-        <div class="tags">
-            {{ range . }}
-            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">{{ . }}</a>
-            {{ end }}
-        </div>
-        {{ end }}
-        
-        <!-- Optional: Add a preview or description -->
-        <div class="program-meta">
-            {{ if .Params.program_number }}
-            <span>برنامه شماره {{ .Params.program_number }}</span>
-            {{ end }}
-        </div>
-    </article>
+  <header class="program-header">
+    <h1>{{ .Title }}</h1>
+    <div class="program-meta">
+      {{ with .Params.years }}<p>سال‌های پخش: {{ . }}</p>{{ end }}
+      {{ with .Params.producer }}<p>تهیه‌کننده: {{ . }}</p>{{ end }}
+      {{ with .Params.total_episodes }}<p>تعداد برنامه‌ها: {{ . }}</p>{{ end }}
+    </div>
+    {{ with .Description }}
+      <p class="description">{{ . }}</p>
     {{ end }}
-</div>
+    {{ .Content }}
+  </header>
+
+  <div class="episode-list">
+    {{ range .Pages.ByDate }}
+      <article class="episode-card">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Params.performers }}
+          <p class="performers">خوانندگان: {{ . }}</p>
+        {{ end }}
+        {{ with .Date }}
+          <p class="date">تاریخ: {{ .Format "2006-01-02" }}</p>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
 {{ end }}

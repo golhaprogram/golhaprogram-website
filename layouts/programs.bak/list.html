@@ -1,0 +1,81 @@
+<!-- layouts/programs/list.html -->
+{{ define "main" }}
+<div class="container mx-auto px-4" dir="rtl">
+    <h1 class="text-3xl mb-8">{{ .Title }}</h1>
+
+    <!-- Display Subsections (like golhaye-rangarang) -->
+    {{ range .Sections }}
+    <section class="mb-12">
+        <h2 class="text-2xl mb-4">
+            <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">
+                {{ .Title }}
+            </a>
+        </h2>
+        
+        <!-- Show latest 5 episodes from this section -->
+        {{ $pages := .RegularPages }}
+        {{ if gt (len $pages) 0 }}
+        <div class="grid gap-4">
+            {{ range first 5 $pages.ByDate.Reverse }}
+            <article class="border rounded p-4">
+                <h3 class="text-xl">
+                    <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">
+                        {{ .Title }}
+                    </a>
+                </h3>
+                {{ with .Date }}
+                <time class="text-gray-600 text-sm">{{ .Format "2006-01-02" }}</time>
+                {{ end }}
+                
+                {{ with .Params.dastgah }}
+                <div class="mt-2">
+                    <span class="text-gray-700">دستگاه:</span> {{ . }}
+                </div>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+        
+        {{ if gt (len $pages) 5 }}
+        <div class="mt-4">
+            <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">
+                مشاهده همه برنامه‌ها →
+            </a>
+        </div>
+        {{ end }}
+        {{ end }}
+    </section>
+    {{ end }}
+
+    <!-- If there are any direct pages in /programs/ -->
+    {{ $regularPages := .RegularPages }}
+    {{ if gt (len $regularPages) 0 }}
+    <section class="mb-12">
+        <h2 class="text-2xl mb-4">برنامه‌های دیگر</h2>
+        <div class="grid gap-4">
+            {{ range $regularPages }}
+            <article class="border rounded p-4">
+                <h3 class="text-xl">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h3>
+                {{ with .Date }}
+                <time class="text-gray-600 text-sm">{{ .Format "2006-01-02" }}</time>
+                {{ end }}
+            </article>
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+
+    <!-- Debug info (remove in production) -->
+    {{ if eq hugo.Environment "development" }}
+    <div class="mt-8 p-4 bg-gray-100 rounded" dir="ltr">
+        <pre class="text-sm">
+Number of Sections: {{ len .Sections }}
+Number of Regular Pages: {{ len .RegularPages }}
+Current Section: {{ .Section }}
+        </pre>
+    </div>
+    {{ end }}
+</div>
+{{ end }}
