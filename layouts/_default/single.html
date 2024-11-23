@@ -54,27 +54,4 @@
     </div>
 </article>
 
-<div style="direction: ltr; text-align: left;">
-    <h3>Debug Info:</h3>
-    <pre>
-Page Path: {{ .File.Path }}
-Section: {{ .Section }}
-Sections: {{ .CurrentSection }}
-Type: {{ .Type }}
-
-Sections Array:
-{{ range $index, $element := .Sections }}
-  {{ $index }}: {{ $element }}
-{{ end }}
-
-File Info:
-Dir: {{ .File.Dir }}
-Filename: {{ .File.LogicalName }}
-Path: {{ .File.Path }}
-
-URL/Permalink Info:
-RelPermalink: {{ .RelPermalink }}
-Permalink: {{ .Permalink }}
-    </pre>
-</div>
 {{ end }}
