@@ -17,10 +17,14 @@
       <article class="episode-card">
         <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         {{ with .Params.performers }}
-          <p class="performers">خوانندگان: {{ . }}</p>
-        {{ end }}
-        {{ with .Date }}
-          <p class="date">تاریخ: {{ .Format "2006-01-02" }}</p>
+
+          <p class="performers">با همکاری: 
+            {{ with .singers }}{{ range $i, $e := . }}{{ if $i }}، {{ end }}{{ $e }}{{ end }}{{ end }}
+            {{ if .players }}، {{ with .players }}{{ range $i, $e := . }}{{ if $i }}، {{ end }}{{ $e }}{{ end }}{{ end }}{{ end }}
+            {{ if .poets }}اشعار متن برنامه: {{ with .poets }}{{ range $i, $e := . }}{{ if $i }}، {{ end }}{{ $e }}{{ end }}{{ end }}{{ end }}
+            {{ if .announcers }}گوینده: {{ with .announcers }}{{ range $i, $e := . }}{{ if $i }}، {{ end }}{{ $e }}{{ end }}{{ end }}{{ end }}
+          </p>
+
         {{ end }}
       </article>
     {{ end }}

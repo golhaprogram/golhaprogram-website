@@ -36,6 +36,24 @@
             {{ end }}
         </div>
         {{ end }}
+
+        {{ if .Params.performers.poets }}
+        <div class="poets">
+            <h3>شعرا:</h3>
+            {{ range .Params.performers.poets }}
+            <span class="performer">{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+
+        {{ if .Params.performers.announcers }}
+        <div class="announcers">
+            <h3>گوینده:</h3>
+            {{ range .Params.performers.announcers }}
+            <span class="performer">{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
     </div>
 
     <div class="content">

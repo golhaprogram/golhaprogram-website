@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
+<html lang="{{ .Site.Language.Lang }}" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="/css/main.css">
     <!-- Add your Vazirmatn font or other Persian fonts here -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+    <!-- Iranian Sans font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/iran-sans@v1.0.0-alpha.3/dist/font-face.css" rel="stylesheet" type="text/css" />
+
+    {{ $styles := resources.Get "css/main.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+
 </head>
 <body dir="rtl">
     <header>
