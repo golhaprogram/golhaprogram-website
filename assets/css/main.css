@@ -9,6 +9,7 @@
 @import "base/_typography.scss";
 
 /* Components */
+@import "components/_navigation.scss";
 @import "components/_audio-player.scss";
 @import "components/_performers.scss";
 @import "components/_comments.scss";

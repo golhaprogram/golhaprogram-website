@@ -47,3 +47,61 @@
         margin-top: 1.5rem;
     }
 }
+
+// utils/_responsive.scss
+
+@media (max-width: 768px) {
+    .main-nav {
+        &-toggle-label {
+            display: block;
+            padding: 1rem;
+            cursor: pointer;
+
+            span,
+            span::before,
+            span::after {
+                display: block;
+                background: var(--text-color);
+                height: 2px;
+                width: 1.5rem;
+                position: relative;
+            }
+
+            span::before,
+            span::after {
+                content: '';
+                position: absolute;
+            }
+
+            span::before {
+                bottom: 7px;
+            }
+
+            span::after {
+                top: 7px;
+            }
+        }
+
+        &-links {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            background: white;
+            display: none;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+            li {
+                text-align: center;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        &-toggle:checked ~ .nav-links {
+            display: flex;
+        }
+    }
+}
