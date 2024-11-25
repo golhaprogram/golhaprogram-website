@@ -278,3 +278,119 @@ a:hover {
         padding: 0;
     }
 }
+
+/* Program Section Styles */
+.program-section {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Header Styles */
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.section-description {
+    color: var(--text-color-secondary, #666);
+    margin-bottom: 1rem;
+}
+
+.program-count {
+    color: var(--text-color-secondary, #666);
+    font-size: 0.9rem;
+}
+
+/* Table Styles */
+.programs-table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.programs-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+.programs-table th {
+    background: var(--background-color);
+    padding: 1rem;
+    font-weight: 600;
+    color: var(--text-color-secondary, #666);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.programs-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.programs-table tr:last-child td {
+    border-bottom: none;
+}
+
+.programs-table tr:hover {
+    background: var(--hover-color, #f8f9fa);
+}
+
+.program-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.program-link:hover {
+    color: var(--primary-color-dark);
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .program-section {
+        margin: 1rem;
+        padding: 0;
+    }
+
+    .programs-table th,
+    .programs-table td {
+        padding: 0.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .program-section {
+        margin: 0;
+        padding: 0;
+    }
+
+    .programs-table-container {
+        box-shadow: none;
+    }
+
+    .programs-table th {
+        background: none;
+        border-bottom: 1px solid #000;
+    }
+
+    .programs-table td {
+        border-bottom: 1px solid #ccc;
+    }
+}
