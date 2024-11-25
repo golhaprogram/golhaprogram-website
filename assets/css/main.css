@@ -4,21 +4,21 @@
  */
 
 /* Base */
-@import "base/_variables.css";
-@import "base/_typography.css";
-@import "base/_base.css";
+@import "base/_base.scss";
+@import "base/_variables.scss";
+@import "base/_typography.scss";
 
 /* Components */
-@import "components/_audio-player.css";
-@import "components/_performers.css";
-@import "components/_comments.css";
-@import "components/_tables.css";
+@import "components/_audio-player.scss";
+@import "components/_performers.scss";
+@import "components/_comments.scss";
+@import "components/_tables.scss";
 
 /* Layouts */
-@import "layouts/_program.css";
-@import "layouts/_program-section.css";
-@import "layouts/_content.css";
+@import "layouts/_program.scss";
+@import "layouts/_program-section.scss";
+@import "layouts/_content.scss";
 
 /* Utils */
-@import "utils/_responsive.css";
-@import "utils/_print.css";
+@import "utils/_responsive.scss";
+@import "utils/_print.scss";
