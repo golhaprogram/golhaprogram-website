@@ -1,0 +1,77 @@
+// components/_taxonomy.scss
+
+// Terms list page container
+.terms-list {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1rem;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--primary-color);
+    }
+}
+
+// Grid of performer cards
+.performers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+// Individual performer card
+.performer-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .performer-name {
+        color: var(--primary-color);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// Stats section in performer card
+.performer-stats {
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.program-count {
+    background: var(--performer-bg);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .performers-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .performer-card {
+        padding: 1rem;
+    }
+}

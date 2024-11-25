@@ -34,22 +34,22 @@
                     </td>
                     <td>{{ .Params.dastgah }}</td>
                     <td>
-                        {{ with .Params.performers.singers }}
+                        {{ with .Params.singers }}
                             {{ delimit . "، " }}
                         {{ end }}
                     </td>
                     <td>
-                        {{ with .Params.performers.players }}
+                        {{ with .Params.players }}
                             {{ delimit . "، " }}
                         {{ end }}
                     </td>
                     <td>
-                        {{ with .Params.performers.poets }}
+                        {{ with .Params.poets }}
                             {{ delimit . "، " }}
                         {{ end }}
                     </td>
                     <td>
-                        {{ with .Params.performers.announcers }}
+                        {{ with .Params.announcers }}
                             {{ delimit . "، " }}
                         {{ end }}
                     </td>

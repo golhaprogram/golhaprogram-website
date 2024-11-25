@@ -24,11 +24,18 @@ rtl = true
 
 [permalinks]
   programs = "/:section/:sections[last]/:filename/"
+  singers = "/singers/:slug/"
+  players = "/players/:slug/"
+  poets = "/poets/:slug/"
+  announcers = "/announcers/:slug/"
 
 [taxonomies]
-dastgah = "dastgahs"
-singer = "singers"
-poet = "poets"
+  dastgah = "dastgahs"
+  singer = "singers"
+  poet = "poets"
+  player = "players"
+  announcer = "announcers"
+
 
 [menu]
 [[menu.main]]

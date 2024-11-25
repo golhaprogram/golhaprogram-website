@@ -27,39 +27,38 @@
     </div>
     {{ end }}
 
-    {{ if .Params.performers }}
     <div class="performers">
-        {{ if .Params.performers.singers }}
+        {{ if .Params.singers }}
         <div class="singers">
             <h3>خوانندگان:</h3>
-            {{ range .Params.performers.singers }}
+            {{ range .Params.singers }}
             <span class="performer">{{ . }}</span>
             {{ end }}
         </div>
         {{ end }}
         
-        {{ if .Params.performers.players }}
+        {{ if .Params.players }}
         <div class="players">
             <h3>نوازندگان:</h3>
-            {{ range .Params.performers.players }}
+            {{ range .Params.players }}
             <span class="performer">{{ . }}</span>
             {{ end }}
         </div>
         {{ end }}
 
-        {{ if .Params.performers.poets }}
+        {{ if .Params.poets }}
         <div class="poets">
             <h3>شعرا:</h3>
-            {{ range .Params.performers.poets }}
+            {{ range .Params.poets }}
             <span class="performer">{{ . }}</span>
             {{ end }}
         </div>
         {{ end }}
 
-        {{ if .Params.performers.announcers }}
+        {{ if .Params.announcers }}
         <div class="announcers">
             <h3>گوینده:</h3>
-            {{ range .Params.performers.announcers }}
+            {{ range .Params.announcers }}
             <span class="performer">{{ . }}</span>
             {{ end }}
         </div>
@@ -70,7 +69,6 @@
         {{ .Content }}
     </div>
 
-    {{ end }}
 
     <!-- Comments section -->
     <div class="comments">

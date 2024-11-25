@@ -1,0 +1,76 @@
+{{ define "main" }}
+<div class="taxonomy-term-page" dir="rtl">
+  {{ if hugo.IsServer }}
+  <div style="background: #f0f0f0; padding: 1rem; margin: 1rem; font-family: monospace;">
+    Template: term.html<br>
+    Term: {{ .Title }}<br>
+    Taxonomy: {{ .Data.Plural }}<br>
+    Number of Programs: {{ len .Pages }}<br>
+  </div>
+  {{ end }}
+
+  {{ if hugo.IsServer }}
+  <div style="background: #f0f0f0; padding: 1rem; margin: 1rem; font-family: monospace;">
+    Template: term.html<br>
+    Layout: {{ .Layout }}<br>
+    Kind: {{ .Kind }}<br>
+    Type: {{ .Type }}<br>
+    Data.Singular: {{ .Data.Singular }}<br>
+    Data.Plural: {{ .Data.Plural }}<br>
+    Data.Term: {{ .Data.Term }}<br>
+    Title: {{ .Title }}<br>
+    Number of Programs: {{ len .Pages }}<br>
+    Current URL: {{ .RelPermalink }}<br>
+  </div>
+  {{ end }}
+
+  <header class="term-header">
+    {{ if eq .Data.Plural "players" }}
+      <h1>برنامه‌های نوازنده: {{ .Title }}</h1>
+    {{ else if eq .Data.Plural "singers" }}
+      <h1>برنامه‌های خواننده: {{ .Title }}</h1>
+    {{ else if eq .Data.Plural "poets" }}
+      <h1>برنامه‌های شاعر: {{ .Title }}</h1>
+    {{ else if eq .Data.Plural "announcers" }}
+      <h1>برنامه‌های گوینده: {{ .Title }}</h1>
+    {{ end }}
+    <div class="program-count">{{ partial "fa-number" (len .Pages)}} برنامه </div>
+  </header>
+
+  <div class="programs-list">
+    {{ range .Pages.ByParam "program_number" }}
+    <article class="program-card">
+      <h2>
+        <a href="{{ .RelPermalink }}">{{ partial "program-title" . }}</a>
+      </h2>
+      
+      <div class="program-performers">
+        {{ with .Params.singers }}
+        <div class="singers">
+          <strong>خواننده‌ها:</strong>
+          {{ range . }}<span class="performer">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+        
+        {{ with .Params.players }}
+        <div class="players">
+          <strong>نوازنده‌ها:</strong>
+          {{ range . }}<span class="performer">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+        
+        {{ with .Params.poets }}
+        <div class="poets">
+          <strong>شاعرها:</strong>
+          {{ range . }}<span class="performer">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+      
+<!--
+-->
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -14,6 +14,7 @@
 @import "components/_performers.scss";
 @import "components/_comments.scss";
 @import "components/_tables.scss";
+@import 'components/_taxonomy.scss';
 
 /* Layouts */
 @import "layouts/_program.scss";

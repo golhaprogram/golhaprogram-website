@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="terms-list" dir="rtl">
+  {{ if hugo.IsServer }}
+  <div style="background: #f0f0f0; padding: 1rem; margin: 1rem; font-family: monospace;">
+    Template: terms.html<br>
+    Kind: {{ .Kind }}<br>
+    Data.Plural: {{ .Data.Plural }}<br>
+    Number of Terms: {{ len .Data.Terms }}<br>
+    Terms: {{ range $key, $value := .Data.Terms }}{{ $key }}, {{ end }}
+  </div>
+  {{ end }}
+
+  {{ if eq .Data.Plural "singers" }}
+    <h1>فهرست خوانندگان</h1>
+  {{ else if eq .Data.Plural "players" }}
+    <h1>فهرست نوازندگان</h1>
+  {{ else if eq .Data.Plural "poets" }}
+    <h1>فهرست شاعران</h1>
+  {{ else if eq .Data.Plural "announcers" }}
+    <h1>فهرست گویندگان</h1>
+  {{ end }}
+
+  <div class="performers-grid">
+    {{ range $term, $pages := .Data.Terms }}
+    <div class="performer-card">
+      <h2>
+        <a href="{{ $.RelPermalink }}{{ $term | urlize }}/" class="performer-name">{{ $term }}</a>
+      </h2>
+      <div class="performer-stats">
+        <span class="program-count">{{ len $pages }} برنامه</span>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,61 @@
+{{/* layouts/_default/taxonomy.html */}}
+{{ define "main" }}
+<div class="taxonomy-page" dir="rtl">
+  <h1>{{ .Title }}</h1>
+  
+  {{/* List terms in this taxonomy */}}
+  <div class="taxonomy-list">
+    {{ range .Pages }}
+    <article class="program-item">
+      <h2>
+        {{/* Use RelPermalink which will use Hugo's URL handling */}}
+        <a href="{{ .RelPermalink }}">{{ partial "program-title" . }}</a>
+      </h2>
+      
+      {{ with .Params.dastgah }}
+      <p class="dastgah">دستگاه: {{ . }}</p>
+      {{ end }}
+      
+      <div class="performers">
+        {{ with .Params.singers }}
+        <div class="singers">
+          <h3>خواننده‌ها:</h3>
+          {{ range . }}
+          {{/* Create properly encoded URLs for performers */}}
+          <a href="{{ printf "/singers/%s/" . | urlize }}" class="performer">{{ . }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+        
+        {{ with .Params.players }}
+        <div class="players">
+          <h3>نوازنده‌ها:</h3>
+          {{ range . }}
+          <a href="{{ printf "/players/%s/" . | urlize }}" class="performer">{{ . }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+        
+        {{ with .Params.poets }}
+        <div class="poets">
+          <h3>شاعرها:</h3>
+          {{ range . }}
+          <a href="{{ printf "/poets/%s/" . | urlize }}" class="performer">{{ . }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+        
+        {{ with .Params.announcers }}
+        <div class="announcers">
+          <h3>گوینده‌ها:</h3>
+          {{ range . }}
+          <a href="{{ printf "/announcers/%s/" . | urlize }}" class="performer">{{ . }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
