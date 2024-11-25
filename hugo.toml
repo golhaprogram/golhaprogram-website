@@ -45,3 +45,28 @@ weight = 2
 name = "درباره"
 url = "/about/"
 weight = 3
+
+[build]
+writeStats = true
+
+[build.buildStats]
+  enable = true
+
+[build.processing]
+  js = true
+  html = true
+  
+[build.processing.css]
+  includePaths = ["assets/css"]
+
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+
+[minify]
+  minifyOutput = true
+
+  [minify.css]
+    includePaths = ["assets/css"]
+

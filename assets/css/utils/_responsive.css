@@ -1,0 +1,49 @@
+/* Responsive Design */
+@media (max-width: 768px) {
+    .program {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .audio-player {
+        padding: 1rem;
+    }
+
+    .performers {
+        padding: 0.5rem;
+    }
+    
+    .content p {
+        padding: 0 0.5rem;
+    }
+
+    .program-section {
+        margin: 1rem;
+        padding: 0;
+    }
+
+    .programs-table th,
+    .programs-table td {
+        padding: 0.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .audio-container {
+        flex-direction: column;
+    }
+    
+    .audio-container audio {
+        width: 100%;
+    }
+    
+    .download-button {
+        width: 100%;
+        height: 36px;
+        margin-top: 1.5rem;
+    }
+}

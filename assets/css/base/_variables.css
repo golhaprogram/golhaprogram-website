@@ -1,0 +1,15 @@
+:root {
+    --primary-color: #2c3e50;
+    --primary-rgb: 44, 62, 80;  /* RGB values for primary color */
+    --secondary-color: #34495e;
+    --secondary-rgb: 52, 73, 94;
+    --accent-color: #8e44ad;
+    --accent-rgb: 142, 68, 173;
+    --background-color: #f8f9fa;
+    --performer-bg: #f1f5f9;  /* Light gray-blue background */
+    --performer-border: #e2e8f0;  /* Slightly darker for border */
+    --text-color: #2c3e50;
+    --border-color: #e0e0e0;
+    --player-background: #ffffff;
+    --max-width: 800px;
+}

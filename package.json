@@ -1,0 +1,25 @@
+{
+  "name": "golhaprogram-website",
+  "version": "1.0.0",
+  "description": "golhaprogram.com: layouts/_default/home.html golhaprogram.com/programs: layouts/programs/list.html golhaprogram.com/programs/golhaye-rangarang: layouts/programs/section.html golhaprogram.com/programs/golhaye-rangarang/203: layouts/programs/single.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/golhaprogram/golhaprogram-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/golhaprogram/golhaprogram-website/issues"
+  },
+  "homepage": "https://github.com/golhaprogram/golhaprogram-website#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0"
+  }
+}

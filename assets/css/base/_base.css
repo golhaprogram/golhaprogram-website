@@ -1,0 +1,56 @@
+/* Global styles */
+body {
+    font-family: 'Vazirmatn', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Main container */
+body > main {
+    width: 100%;
+    max-width: var(--max-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* Default container width */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* Force center alignment for text containers */
+.text-center {
+    text-align: center;
+}
+
+/* Override default RTL alignment where needed */
+h1, h2, h3,
+.content,
+.performers,
+.comments {
+    text-align: center !important;
+    width: 100%;
+}
+
+/* Ensure tables keep RTL but stay within bounds */
+table {
+    direction: rtl;
+    margin: 0 auto;
+    width: 100%;
+}

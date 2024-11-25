@@ -1,0 +1,29 @@
+/* Typography enhancements */
+h1, h2, h3 {
+    color: var(--primary-color);
+    line-height: 1.3;
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+/* Link styling */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #6c3384;
+    text-decoration: underline;
+}

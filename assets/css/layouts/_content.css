@@ -1,0 +1,29 @@
+/* Content area */
+.content {
+    width: 100%;
+    line-height: 2;
+    text-align: center;
+    padding: 1rem 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.content p {
+    margin: 0 auto 1.5rem auto;
+    text-align: center;
+    padding: 0 1rem;
+    max-width: var(--max-width);
+}
+
+/* Poetry styles */
+.content p,
+.content div {
+    text-align: center;
+    direction: rtl;
+    margin: 0 auto;
+}
+
+/* Poetry line spacing */
+.content br {
+    line-height: 2.5;
+}

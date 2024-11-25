@@ -1,0 +1,30 @@
+@media print {
+    .audio-player,
+    .comments {
+        display: none;
+    }
+
+    .program {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .program-section {
+        margin: 0;
+        padding: 0;
+    }
+
+    .programs-table-container {
+        box-shadow: none;
+    }
+
+    .programs-table th {
+        background: none;
+        border-bottom: 1px solid #000;
+    }
+
+    .programs-table td {
+        border-bottom: 1px solid #ccc;
+    }
+}

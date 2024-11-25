@@ -1,0 +1,42 @@
+/* Program Section Styles */
+.program-section {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 2rem auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* Header Styles */
+.section-header {
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.section-description {
+    color: var(--text-color-secondary, #666);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.program-count {
+    color: var(--text-color-secondary, #666);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Ensure table container stays centered */
+.programs-table-container {
+    margin: 0 auto;
+    width: 100%;
+}
