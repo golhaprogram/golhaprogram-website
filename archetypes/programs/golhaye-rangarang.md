@@ -2,7 +2,7 @@
 title: "گلهای رنگارنگ {{ .Name }}"
 date: {{ .Date }}
 program_type: "golhaye-rangarang"
-episode_number: "{{ .Name }}"
+program_number: "{{ .Name }}"
 performers: ""
 instruments: []
 poets: []

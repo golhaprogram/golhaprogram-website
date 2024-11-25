@@ -24,3 +24,24 @@ rtl = true
 
 [permalinks]
   programs = "/:section/:sections[last]/:filename/"
+
+[taxonomies]
+dastgah = "dastgahs"
+singer = "singers"
+poet = "poets"
+
+[menu]
+[[menu.main]]
+name = "خانه"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "برنامه‌ها"
+url = "/programs/"
+weight = 2
+
+[[menu.main]]
+name = "درباره"
+url = "/about/"
+weight = 3

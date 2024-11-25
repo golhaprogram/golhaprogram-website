@@ -2,10 +2,7 @@
 {{ define "main" }}
 <article class="program">
     <header>
-        <h1>{{ .Title }}</h1>
-        {{ with .Params.date }}
-        <time datetime="{{ . }}">{{ dateFormat "2006-01-02" . }}</time>
-        {{ end }}
+        <h1>{{ partial "program-title" . }}</h1>
     </header>
 
     {{ with .Params.audio_url }}

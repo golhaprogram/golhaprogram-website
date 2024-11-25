@@ -1,0 +1,4 @@
+{{ $type := replace .Params.program_type "-" " " }}
+{{ $number := .Params.program_number }}
+{{ printf "%s %s" $type $number }}
+{{- with .Params.dastgah }} - {{ . }}{{ end }}

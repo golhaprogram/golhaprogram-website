@@ -2,7 +2,7 @@
 title: "گلهای تازه {{ .Name }}"
 date: {{ .Date }}
 program_type: "golhaye-tazeh"
-episode_number: "{{ .Name }}"
+program_number: "{{ .Name }}"
 performers: ""
 instruments: []
 poets: []

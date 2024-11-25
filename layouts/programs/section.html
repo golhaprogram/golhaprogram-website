@@ -1,0 +1,64 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 py-8" dir="rtl">
+    <div class="max-w-4xl mx-auto">
+        <!-- Series Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold mb-4">{{ .Title }}</h1>
+            {{ with .Description }}
+                <p class="text-gray-600 mb-4">{{ . }}</p>
+            {{ end }}
+            <div class="text-sm text-gray-500">
+                تعداد برنامه‌ها: {{ partial "fa-number" (len .Pages) }}
+            </div>
+        </header>
+
+        <!-- Programs List -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-50">
+                        <th class="px-6 py-3 text-right text-sm font-medium text-gray-500">شماره برنامه</th>
+                        <th class="px-6 py-3 text-right text-sm font-medium text-gray-500">دستگاه</th>
+                        <th class="px-6 py-3 text-right text-sm font-medium text-gray-500">خواننده</th>
+                        <th class="px-6 py-3 text-right text-sm font-medium text-gray-500">نوازندگان</th>
+                        <th class="px-6 py-3 text-right text-sm font-medium text-gray-500">شاعر</th>
+                        <th class="px-6 py-3 text-right text-sm font-medium text-gray-500">گوینده</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {{ range .Pages.ByParam "program_number" }}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            <a href="{{ .RelPermalink }}" class="text-blue-600 hover:text-blue-800">
+                                {{ .Params.program_number }}
+                            </a>
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">{{ .Params.dastgah }}</td>
+                        <td class="px-6 py-4 text-gray-500">
+                            {{ with .Params.performers.singers }}
+                                {{ delimit . "، " }}
+                            {{ end }}
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">
+                            {{ with .Params.performers.players }}
+                                {{ delimit . "، " }}
+                            {{ end }}
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">
+                            {{ with .Params.performers.poets }}
+                                {{ delimit . "، " }}
+                            {{ end }}
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">
+                            {{ with .Params.performers.announcers }}
+                                {{ delimit . "، " }}
+                            {{ end }}
+                        </td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{ end }}
