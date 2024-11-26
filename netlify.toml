@@ -2,15 +2,10 @@
   publish = "public"
   command = "npm run build:sass && hugo --gc --minify"
 
-[context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
-
-[context.production.environment]
+[build.environment]
   HUGO_VERSION = "0.121.0"
   NODE_VERSION = "20"
   NPM_VERSION = "10"
-
-[context.production.environment]
   HUGO_ENV = "production"
   HUGO_ENABLEGITINFO = "true"
 
