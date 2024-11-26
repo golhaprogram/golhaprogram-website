@@ -1,0 +1,79 @@
+{{/* layouts/partials/tag-cloud.html */}}
+
+{{ $performersData := dict 
+    "singers" dict 
+    "players" dict 
+    "poets" dict 
+    "announcers" dict 
+}}
+
+<!-- Process all pages -->
+{{ range site.Pages }}
+  <!-- Process singers -->
+  {{ range .Params.singers }}
+    {{ $name := . }}
+    {{ $currentCount := 0 }}
+    {{ if isset (index $performersData "singers") $name }}
+      {{ $currentCount = index (index $performersData "singers") $name }}
+    {{ end }}
+    {{ $newCount := add $currentCount 1 }}
+    {{ $categoryDict := index $performersData "singers" }}
+    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
+    {{ $performersData = merge $performersData (dict "singers" $categoryDict) }}
+  {{ end }}
+
+  <!-- Process players -->
+  {{ range .Params.players }}
+    {{ $name := . }}
+    {{ $currentCount := 0 }}
+    {{ if isset (index $performersData "players") $name }}
+      {{ $currentCount = index (index $performersData "players") $name }}
+    {{ end }}
+    {{ $newCount := add $currentCount 1 }}
+    {{ $categoryDict := index $performersData "players" }}
+    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
+    {{ $performersData = merge $performersData (dict "players" $categoryDict) }}
+  {{ end }}
+
+  <!-- Process poets -->
+  {{ range .Params.poets }}
+    {{ $name := . }}
+    {{ $currentCount := 0 }}
+    {{ if isset (index $performersData "poets") $name }}
+      {{ $currentCount = index (index $performersData "poets") $name }}
+    {{ end }}
+    {{ $newCount := add $currentCount 1 }}
+    {{ $categoryDict := index $performersData "poets" }}
+    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
+    {{ $performersData = merge $performersData (dict "poets" $categoryDict) }}
+  {{ end }}
+
+  <!-- Process announcers -->
+  {{ range .Params.announcers }}
+    {{ $name := . }}
+    {{ $currentCount := 0 }}
+    {{ if isset (index $performersData "announcers") $name }}
+      {{ $currentCount = index (index $performersData "announcers") $name }}
+    {{ end }}
+    {{ $newCount := add $currentCount 1 }}
+    {{ $categoryDict := index $performersData "announcers" }}
+    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
+    {{ $performersData = merge $performersData (dict "announcers" $categoryDict) }}
+  {{ end }}
+{{ end }}
+
+<!-- Debug final data -->
+<pre style="display:none">
+Data structure:
+{{ printf "%#v" $performersData }}
+</pre>
+
+<div 
+  data-tag-cloud 
+  data-performers='{{ $performersData | jsonify }}'
+  {{ with .context.Params.program_type }}data-program-type="{{ . }}"{{ end }}
+></div>
+
+{{ $opts := dict "targetPath" "js/main.js" "minify" true }}
+{{ $js := resources.Get "js/main.js" | js.Build $opts | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

@@ -54,7 +54,8 @@ url = "/about/"
 weight = 3
 
 [build]
-writeStats = true
+  writeStats = true
+
 
 [build.buildStats]
   enable = true
@@ -62,7 +63,7 @@ writeStats = true
 [build.processing]
   js = true
   html = true
-  
+
 [build.processing.css]
   includePaths = ["assets/css"]
 
@@ -70,6 +71,9 @@ writeStats = true
   [[module.mounts]]
     source = "assets"
     target = "assets"
+  [module.hugoVersion]
+    extended = true
+
 
 [minify]
   minifyOutput = true

@@ -4,7 +4,10 @@
   "description": "golhaprogram.com: layouts/_default/home.html golhaprogram.com/programs: layouts/programs/list.html golhaprogram.com/programs/golhaye-rangarang: layouts/programs/section.html golhaprogram.com/programs/golhaye-rangarang/203: layouts/programs/single.html",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "hugo server",
+    "build": "npm run build:js && hugo --minify",
+    "build:js": "esbuild assets/js/main.js --bundle --minify --outdir=static/js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +20,13 @@
     "url": "https://github.com/golhaprogram/golhaprogram-website/issues"
   },
   "homepage": "https://github.com/golhaprogram/golhaprogram-website#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "esbuild": "^0.19.12",
     "postcss": "^8.4.49",
     "postcss-cli": "^11.0.0"
   }

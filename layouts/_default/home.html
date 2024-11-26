@@ -13,5 +13,9 @@
             برنامه‌های گلها
         </a>
     </div>
+
+  <div> <p></p> </div>
+  {{ partial "tag-cloud.html" (dict "context" . "allPrograms" true "debug" true) }}
+
 </div>
 {{ end }}
