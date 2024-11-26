@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css">
     
     <!-- CSS -->
-    {{ $style := resources.Get "css/main.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
+    {{ $style := resources.Get "css/main.css" | css.Sass | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" blocking="render">
 
 
