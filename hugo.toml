@@ -1,4 +1,4 @@
-baseURL = "https://golhaprogram.com"
+baseURL = "https://golhaprogram.netlify.app"
 title = "برنامه‌ی گلها"
 theme = "PaperMod"
 defaultContentLanguage = "fa"
