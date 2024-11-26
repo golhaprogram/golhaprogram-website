@@ -3,7 +3,7 @@
   command = "hugo --gc --minify"
 
 [build.environment]
-  HUGO_VERSION = "0.121.0"
+  HUGO_VERSION = "0.139.2"
   NODE_VERSION = "20"
   NPM_VERSION = "10"
   HUGO_ENV = "production"
