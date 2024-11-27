@@ -36,10 +36,12 @@
       "td",
       "th",
       "thead",
+      "title",
       "tr",
       "ul"
     ],
     "classes": [
+      "active",
       "announcers",
       "audio-container",
       "audio-player",
@@ -48,9 +50,17 @@
       "container",
       "content",
       "download-button",
+      "dropdown-item",
+      "dropdown-menu",
       "font-bold",
+      "footer",
+      "footer-bottom",
+      "footer-container",
+      "footer-content",
+      "footer-section",
       "gap-8",
       "grid",
+      "has-dropdown",
       "home",
       "hover:shadow-lg",
       "hover:text-blue-800",
@@ -67,6 +77,8 @@
       "md:grid-cols-2",
       "mt-12",
       "mx-auto",
+      "nav-item",
+      "nav-link",
       "not-found",
       "p-6",
       "p-8",
@@ -95,6 +107,7 @@
       "section-title",
       "shadow-md",
       "singers",
+      "site-footer",
       "taxonomy-term-page",
       "term-header",
       "terms-list",
@@ -103,11 +116,13 @@
       "text-blue-600",
       "text-center",
       "text-gray-600",
+      "top-link",
       "transition-shadow"
     ],
     "ids": [
       "isso-thread",
-      "nav-toggle"
+      "nav-toggle",
+      "top-link"
     ]
   }
 }

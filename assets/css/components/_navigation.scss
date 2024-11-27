@@ -1,14 +1,14 @@
-// components/_navigation.scss
-
 .main-nav {
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 0 1rem;
     position: relative;
+    width: 100%;
+    z-index: 1000;
 
     &-container {
         max-width: var(--max-width);
         margin: 0 auto;
+        padding: 0 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -20,6 +20,10 @@
         font-weight: bold;
         color: var(--text-color);
         text-decoration: none;
+        
+        &:hover {
+            color: var(--primary-color);
+        }
     }
 
     &-links {
@@ -28,35 +32,149 @@
         margin: 0;
         padding: 0;
         list-style: none;
+    }
 
-        a {
+    .nav-item {
+        position: relative;
+        
+        &.has-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    }
+
+    .nav-link {
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 0.5rem;
+        transition: color 0.2s ease;
+        
+        &:hover, &.active {
+            color: var(--primary-color);
+        }
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0; // RTL support
+        background: white;
+        min-width: 200px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        padding: 0.5rem 0;
+        
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 1rem;
             color: var(--text-color);
             text-decoration: none;
-            padding: 0.5rem;
-            transition: color 0.3s;
-
+            
             &:hover {
+                background: var(--background-color);
                 color: var(--primary-color);
             }
         }
     }
 
+    // Mobile menu toggle
     &-toggle {
         display: none;
-
+        
         &-label {
             display: none;
+            cursor: pointer;
+            
+            span {
+                display: block;
+                width: 24px;
+                height: 2px;
+                background: var(--text-color);
+                position: relative;
+                transition: all 0.2s ease;
+                
+                &::before, &::after {
+                    content: '';
+                    position: absolute;
+                    width: 24px;
+                    height: 2px;
+                    background: var(--text-color);
+                    transition: all 0.2s ease;
+                }
+                
+                &::before { top: -8px; }
+                &::after { bottom: -8px; }
+            }
         }
     }
 }
 
-// RTL Support
-[dir="rtl"] {
+// Mobile styles
+@media (max-width: 768px) {
     .main-nav {
+        &-toggle-label {
+            display: block;
+        }
+        
+        &-toggle:checked ~ .main-nav-links {
+            display: flex;
+        }
+        
         &-links {
-            padding-right: 0;
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+            .nav-item {
+                width: 100%;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 0.75rem 0;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                display: none;
+                padding-right: 1rem;
+            }
+            
+            .has-dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            
+            .has-dropdown.active .dropdown-menu {
+                display: block;
+            }
         }
     }
 }
 
-// Mobile styles moved to _responsive.scss
+// RTL specific adjustments
+[dir="rtl"] .main-nav {
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+    
+    @media (max-width: 768px) {
+        &-links {
+            right: 0;
+            left: 0;
+            text-align: right;
+            
+            .dropdown-menu {
+                padding-right: 1rem;
+                padding-left: 0;
+            }
+        }
+    }
+}

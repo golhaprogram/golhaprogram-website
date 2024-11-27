@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" dir="rtl">
+<html lang="{{ .Site.Language.Lang }}" dir="{{ if .Site.Params.rtl }}rtl{{ else }}ltr{{ end }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>{{ block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
+
+    {{/* Meta tags */}}
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+    {{/* Favicon */}}
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjx0ZXh0IHk9IjkwIiBmb250LXNpemU9IjkwIj4mIzEyNzkzMjs8L3RleHQ+PC9zdmc+"/>
 <!--
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎼</text></svg>">
 -->
 
+    {{/* Styles */}}
     <!-- Vazir Font from CDN with local fallback -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css">
@@ -17,38 +24,32 @@
     {{ $style := resources.Get "css/main.css" | css.Sass | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" blocking="render">
 
+    {{/* Isso Comments */}}
+    <script data-isso="//comments.golhaprogram.com/"
+            data-isso-css="true"
+            data-isso-lang="fa"
+            data-isso-max-comments-top="10"
+            data-isso-max-comments-nested="5"
+            src="//comments.golhaprogram.com/js/embed.min.js"></script>
 
 </head>
 <body dir="rtl">
     <header>
-    <nav class="main-nav">
-        <div class="main-nav-container">
-            <a href="/" class="main-nav-logo">گلها</a>
-            <input type="checkbox" id="nav-toggle" class="main-nav-toggle">
-            <label for="nav-toggle" class="main-nav-toggle-label">
-                <span></span>
-            </label>
-            <ul class="main-nav-links">
-                <li><a href="/programs/golhaye-rangarang">گلهای رنگارنگ</a></li>
-                <li><a href="/programs/golhaye-taze">گلهای تازه</a></li>
-                <li><a href="/programs/golhaye-javidan">گلهای جاویدان</a></li>
-                <li><a href="/programs/yek-shakhe-gol">یک شاخه گل</a></li>
-                <li><a href="/programs/golhaye-sahraee">گلهای صحرایی</a></li>
-                <li><a href="/about">درباره</a></li>
-            </ul>
-        </div>
-    </nav>
-        <nav>
-            <a href="/">خانه</a>
-            <a href="/programs/">برنامه‌ها</a>
-            <a href="/about/">درباره</a>
+        <nav class="main-nav">
+            {{ partial "navigation.html" . }}
         </nav>
     </header>
+
     <main>
         {{ block "main" . }}{{ end }}
     </main>
+
     <footer>
-        <p>© {{ now.Format "2006" }} گلها. تمامی حقوق محفوظ است.</p>
+        {{ partial "footer.html" . }}
     </footer>
+
+    {{/* Scripts */}}
+    {{ $js := resources.Get "js/main.js" | js.Build | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $js.RelPermalink }}"></script>
 </body>
 </html>
