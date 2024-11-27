@@ -55,6 +55,7 @@
 
     .dropdown-menu {
         display: none;
+        list-style: none;
         position: absolute;
         top: 100%;
         right: 0; // RTL support
