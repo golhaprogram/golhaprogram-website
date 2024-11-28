@@ -1,9 +1,5 @@
 {{ $currentPage := . }}
 <div class="main-nav-container">
-    {{/* Logo/Home Link */}}
-    <a href="{{ .Site.Home.RelPermalink }}" class="main-nav-logo">
-        گلها
-    </a>
 
     {{/* Mobile Menu Toggle */}}
     <input type="checkbox" id="nav-toggle" class="main-nav-toggle" aria-label="منوی موبایل">
@@ -13,9 +9,17 @@
 
     {{/* Navigation Links */}}
     <ul class="main-nav-links">
+
+        {{/* Logo/Home Link */}}
+        <li class="nav-item">
+            <a href="{{ .Site.Home.RelPermalink }}" class="nav-link">
+                خانه
+            </a>
+        </li>
+
         {{/* Programs Dropdown */}}
         <li class="nav-item has-dropdown">
-            <a href="/programs/" class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
+            <a class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
                 برنامه‌ها
             </a>
             <ul class="dropdown-menu">
@@ -35,13 +39,18 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/programs/golhaye-sahraee" class="dropdown-item">
+                        گلهای صحرایی
+                    </a>
+                </li>
+                <li>
                     <a href="/programs/yek-shakhe-gol" class="dropdown-item">
                         یک شاخه گل
                     </a>
                 </li>
                 <li>
-                    <a href="/programs/golhaye-sahraee" class="dropdown-item">
-                        گلهای صحرایی
+                    <a href="/programs/barge-sabz" class="dropdown-item">
+                        برگ سبز  
                     </a>
                 </li>
             </ul>
@@ -49,7 +58,7 @@
 
         {{/* Artists Dropdown */}}
         <li class="nav-item has-dropdown">
-            <a href="/programs/" class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
+            <a class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
                  هنرمندان
             </a>
             <ul class="dropdown-menu">
@@ -77,28 +86,6 @@
         </li>
         
         {{/* Other Navigation Links */}}
-<!--
-        <li class="nav-item">
-            <a href="/singers/" class="nav-link {{ if eq .Section "singers" }}active{{ end }}">
-                خوانندگان
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/players/" class="nav-link {{ if eq .Section "players" }}active{{ end }}">
-                نوازندگان
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/poets/" class="nav-link {{ if eq .Section "poets" }}active{{ end }}">
-                شاعران
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/announcers/" class="nav-link {{ if eq .Section "announcers" }}active{{ end }}">
-                گویندگان
-            </a>
-        </li>
--->
         <li class="nav-item">
             <a href="/about/" class="nav-link {{ if eq .Section "about" }}active{{ end }}">
                 درباره
