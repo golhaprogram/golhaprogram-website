@@ -1,5 +1,9 @@
 {{ $currentPage := . }}
 <div class="main-nav-container">
+    {{/* Logo/Home Link */}}
+    <a href="{{ .Site.Home.RelPermalink }}" class="main-nav-logo">
+        گلها
+    </a>
 
     {{/* Mobile Menu Toggle */}}
     <input type="checkbox" id="nav-toggle" class="main-nav-toggle" aria-label="منوی موبایل">
@@ -7,26 +11,13 @@
         <span></span>
     </label>
 
-
     {{/* Navigation Links */}}
     <ul class="main-nav-links">
-
-        {{/* Logo/Home Link */}}
-        <li class="nav-item has-dropdown">
-           <a href="{{ .Site.Home.RelPermalink }}" class="main-nav-logo">
-               <button class="nav-link ">
-                    گلها
-               </button>
-           </a>
-        </li>
-
         {{/* Programs Dropdown */}}
         <li class="nav-item has-dropdown">
-
-	    <button class="nav-link ">
-		برنامه‌ها
-	    </button>
-
+            <a href="/programs/" class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
+                برنامه‌ها
+            </a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="/programs/golhaye-rangarang" class="dropdown-item">
@@ -58,9 +49,9 @@
 
         {{/* Artists Dropdown */}}
         <li class="nav-item has-dropdown">
-	    <button class="nav-link ">
+            <a href="/programs/" class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
                  هنرمندان
-	    </button>
+            </a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="/singers" class="dropdown-item">
@@ -86,13 +77,32 @@
         </li>
         
         {{/* Other Navigation Links */}}
+<!--
         <li class="nav-item">
-
-	    <button class="nav-link dropdown-toggle ">
-	        <a href="/about/" class="nav-link ">
-                    درباره
-	        </a>
-	    </button>
+            <a href="/singers/" class="nav-link {{ if eq .Section "singers" }}active{{ end }}">
+                خوانندگان
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/players/" class="nav-link {{ if eq .Section "players" }}active{{ end }}">
+                نوازندگان
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/poets/" class="nav-link {{ if eq .Section "poets" }}active{{ end }}">
+                شاعران
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/announcers/" class="nav-link {{ if eq .Section "announcers" }}active{{ end }}">
+                گویندگان
+            </a>
+        </li>
+-->
+        <li class="nav-item">
+            <a href="/about/" class="nav-link {{ if eq .Section "about" }}active{{ end }}">
+                درباره
+            </a>
         </li>
     </ul>
 </div>
