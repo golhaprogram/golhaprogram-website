@@ -65,4 +65,7 @@
         </div>
     </div>
 </div>
+
+{{ partial "tag-cloud.html" (dict "context" . "allPrograms" true "debug" true) }}
+
 {{ end }}
