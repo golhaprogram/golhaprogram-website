@@ -1,85 +1,62 @@
 {{ define "main" }}
-<div class="container mx-auto px-4 py-8" dir="rtl">
-    <div class="max-w-4xl mx-auto">
-        <!-- Hero Section -->
-        <header class="text-center mb-12">
-            <h1 class="text-4xl font-bold mb-4">برنامه‌های گلها</h1>
-                {{ with .GetPage "/programs/" }}
-                    {{ .Content }}
-                {{ end }}
+<div class="container" dir="rtl">
+    <div class="program-section">
+        <header class="program-section-header">
+            <h1>برنامه‌های گلها</h1>
+            {{ with .GetPage "/programs/" }}
+                {{ .Content }}
+            {{ end }}
         </header>
 
-        <!-- Program Types Grid -->
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- گلهای رنگارنگ -->
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h2 class="text-2xl font-bold mb-3">
-                    <a href="/programs/golhaye-rangarang" class="text-blue-600 hover:text-blue-800">
-                        گلهای رنگارنگ
-                    </a>
+        <div class="program-section-grid">
+            <div class="program-section-card">
+                <h2>
+                    <a href="/programs/golhaye-rangarang" class="card-title">گلهای رنگارنگ</a>
                 </h2>
-                <p class="text-gray-600 mb-4">
-                    {{ with .GetPage "/programs/golhaye-rangarang" }}
-                        {{ .Content }}
-                    {{ end }}
-                </p>
+                {{ with .GetPage "/programs/golhaye-rangarang" }}
+                    {{ .Content }}
+                {{ end }}
             </div>
 
-            <!-- گلهای تازه -->
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h2 class="text-2xl font-bold mb-3">
-                    <a href="/programs/golhaye-tazeh" class="text-blue-600 hover:text-blue-800">
-                        گلهای تازه
-                    </a>
+            <div class="program-section-card">
+                <h2>
+                    <a href="/programs/golhaye-tazeh" class="card-title">گلهای تازه</a>
                 </h2>
                 {{ with .GetPage "/programs/golhaye-tazeh" }}
                     {{ .Content }}
                 {{ end }}
             </div>
 
-            <!-- گلهای جاویدان -->
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h2 class="text-2xl font-bold mb-3">
-                    <a href="/programs/golhaye-javidan" class="text-blue-600 hover:text-blue-800">
-                        گلهای جاویدان
-                    </a>
+            <div class="program-section-card">
+                <h2>
+                    <a href="/programs/golhaye-javidan" class="card-title">گلهای جاویدان</a>
                 </h2>
                 {{ with .GetPage "/programs/golhaye-javidan" }}
                     {{ .Content }}
                 {{ end }}
             </div>
 
-            <!-- گلهای صحرایی -->
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h2 class="text-2xl font-bold mb-3">
-                    <a href="/programs/golhaye-sahraee" class="text-blue-600 hover:text-blue-800">
-                        گلهای صحرایی
-                    </a>
+            <div class="program-section-card">
+                <h2>
+                    <a href="/programs/golhaye-sahraee" class="card-title">گلهای صحرایی</a>
                 </h2>
                 {{ with .GetPage "/programs/golhaye-sahraee" }}
                     {{ .Content }}
                 {{ end }}
             </div>
 
-
-            <!-- یک شاخه گل -->
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h2 class="text-2xl font-bold mb-3">
-                    <a href="/programs/yek-shakhe-gol" class="text-blue-600 hover:text-blue-800">
-                        یک شاخه گل
-                    </a>
+            <div class="program-section-card">
+                <h2>
+                    <a href="/programs/yek-shakhe-gol" class="card-title">یک شاخه گل</a>
                 </h2>
                 {{ with .GetPage "/programs/yek-shakhe-gol" }}
                     {{ .Content }}
                 {{ end }}
             </div>
 
-            <!-- برگ سبز -->
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h2 class="text-2xl font-bold mb-3">
-                    <a href="/programs/barge-sabz" class="text-blue-600 hover:text-blue-800">
-                        برگ سبز
-                    </a>
+            <div class="program-section-card">
+                <h2>
+                    <a href="/programs/barge-sabz" class="card-title">برگ سبز</a>
                 </h2>
                 {{ with .GetPage "/programs/barge-sabz" }}
                     {{ .Content }}

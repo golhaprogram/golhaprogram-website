@@ -18,12 +18,23 @@ h2 {
 
 /* Link styling */
 a {
-    color: var(--accent-color);
+    color: var(--secondary-color);
     text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: #6c3384;
-    text-decoration: underline;
+    //text-decoration: underline;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        color: var(--accent-dark);
+        text-decoration: underline;
+    }
+    
+    /* Preserve white links in buttons/cards */
+    &.download-button,
+    .main-nav-container & {
+        color: inherit;
+        
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }

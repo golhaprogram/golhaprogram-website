@@ -1,42 +1,64 @@
-/* Program Section Styles */
+// css for programs/list.html
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
 .program-section {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 2rem auto;
-    padding: 0 1rem;
-    box-sizing: border-box;
-}
-
-/* Header Styles */
-.section-header {
+  &-header {
     text-align: center;
-    margin: 0 auto 2rem auto;
-    width: 100%;
-}
+    margin-bottom: 3rem;
+    
+    h1 {
+      font-size: 2.25rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+  }
 
-.section-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    text-align: center;
-    width: 100%;
-}
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
 
-.section-description {
-    color: var(--text-color-secondary, #666);
-    margin-bottom: 1rem;
-    text-align: center;
-}
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 
-.program-count {
-    color: var(--text-color-secondary, #666);
-    font-size: 0.9rem;
-    text-align: center;
-}
+  &-card {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s;
 
-/* Ensure table container stays centered */
-.programs-table-container {
-    margin: 0 auto;
-    width: 100%;
+    .card-title {
+        text-decoration: none;
+        transition: color 0.2s;
+        &:hover {
+           text-decoration: underline;
+           text-underline-offset: 4px;
+       }
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.1);
+        border-color: var(--background-accent);
+
+        .card-title {
+            color: var(--accent-dark);
+        }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+    }
+  }
 }
