@@ -4,7 +4,9 @@
         <!-- Hero Section -->
         <header class="text-center mb-12">
             <h1 class="text-4xl font-bold mb-4">برنامه‌های گلها</h1>
-            <p class="text-gray-600">آرشیو برنامه‌های ماندگار رادیو ایران</p>
+                {{ with .GetPage "/programs/" }}
+                    {{ .Content }}
+                {{ end }}
         </header>
 
         <!-- Program Types Grid -->
@@ -17,7 +19,9 @@
                     </a>
                 </h2>
                 <p class="text-gray-600 mb-4">
-                    برنامه گلهای رنگارنگ یکی از محبوب‌ترین برنامه‌های رادیو ایران بود که از سال ۱۳۳۵ تا ۱۳۵۷ پخش می‌شد.
+                    {{ with .GetPage "/programs/golhaye-rangarang" }}
+                        {{ .Content }}
+                    {{ end }}
                 </p>
             </div>
 
@@ -28,9 +32,9 @@
                         گلهای تازه
                     </a>
                 </h2>
-                <p class="text-gray-600 mb-4">
-                    برنامه گلهای تازه که از سال ۱۳۳۶ آغاز به کار کرد.
-                </p>
+                {{ with .GetPage "/programs/golhaye-tazeh" }}
+                    {{ .Content }}
+                {{ end }}
             </div>
 
             <!-- گلهای جاویدان -->
@@ -40,10 +44,23 @@
                         گلهای جاویدان
                     </a>
                 </h2>
-                <p class="text-gray-600 mb-4">
-                    برنامه گلهای جاویدان که از سال ۱۳۳۶ آغاز به کار کرد.
-                </p>
+                {{ with .GetPage "/programs/golhaye-javidan" }}
+                    {{ .Content }}
+                {{ end }}
             </div>
+
+            <!-- گلهای صحرایی -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h2 class="text-2xl font-bold mb-3">
+                    <a href="/programs/golhaye-sahraee" class="text-blue-600 hover:text-blue-800">
+                        گلهای صحرایی
+                    </a>
+                </h2>
+                {{ with .GetPage "/programs/golhaye-sahraee" }}
+                    {{ .Content }}
+                {{ end }}
+            </div>
+
 
             <!-- یک شاخه گل -->
             <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
@@ -52,19 +69,22 @@
                         یک شاخه گل
                     </a>
                 </h2>
-                <p class="text-gray-600 mb-4">
-                    برنامه یک شاخه گل که از سال ۱۳۳۶ آغاز به کار کرد.
-                </p>
+                {{ with .GetPage "/programs/yek-shakhe-gol" }}
+                    {{ .Content }}
+                {{ end }}
             </div>
-        </div>
 
-        <!-- About Section -->
-        <div class="mt-12 bg-white rounded-lg shadow-md p-8">
-            <h2 class="text-2xl font-bold mb-4">درباره آرشیو گلها</h2>
-            <p class="text-gray-600">
-                برنامه‌های گلها مجموعه‌ای از موسیقی سنتی و اصیل ایرانی است که در رادیو ایران اجرا و پخش می‌شد. 
-                این مجموعه توسط داوود پیرنیا پایه‌گذاری شد و از سال ۱۳۳۵ تا ۱۳۵۷ ادامه داشت.
-            </p>
+            <!-- برگ سبز -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h2 class="text-2xl font-bold mb-3">
+                    <a href="/programs/barge-sabz" class="text-blue-600 hover:text-blue-800">
+                        برگ سبز
+                    </a>
+                </h2>
+                {{ with .GetPage "/programs/barge-sabz" }}
+                    {{ .Content }}
+                {{ end }}
+            </div>
         </div>
     </div>
 </div>
