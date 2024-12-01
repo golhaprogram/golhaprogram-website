@@ -5,6 +5,8 @@
     "players" dict 
     "poets" dict 
     "announcers" dict 
+    "composers" dict
+    "arrangers" dict
 }}
 
 <!-- Process all pages -->
@@ -59,6 +61,32 @@
     {{ $categoryDict := index $performersData "announcers" }}
     {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
     {{ $performersData = merge $performersData (dict "announcers" $categoryDict) }}
+  {{ end }}
+
+  <!-- Process composers -->
+  {{ range .Params.composers }}
+    {{ $name := . }}
+    {{ $currentCount := 0 }}
+    {{ if isset (index $performersData "composers") $name }}
+      {{ $currentCount = index (index $performersData "composers") $name }}
+    {{ end }}
+    {{ $newCount := add $currentCount 1 }}
+    {{ $categoryDict := index $performersData "composers" }}
+    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
+    {{ $performersData = merge $performersData (dict "composers" $categoryDict) }}
+  {{ end }}
+
+  <!-- Process arrangers -->
+  {{ range .Params.arrangers }}
+    {{ $name := . }}
+    {{ $currentCount := 0 }}
+    {{ if isset (index $performersData "arrangers") $name }}
+      {{ $currentCount = index (index $performersData "arrangers") $name }}
+    {{ end }}
+    {{ $newCount := add $currentCount 1 }}
+    {{ $categoryDict := index $performersData "arrangers" }}
+    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
+    {{ $performersData = merge $performersData (dict "arrangers" $categoryDict) }}
   {{ end }}
 {{ end }}
 

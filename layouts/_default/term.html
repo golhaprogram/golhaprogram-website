@@ -33,6 +33,10 @@
       <h1>برنامه‌های شاعر: {{ .Title }}</h1>
     {{ else if eq .Data.Plural "announcers" }}
       <h1>برنامه‌های گوینده: {{ .Title }}</h1>
+    {{ else if eq .Data.Plural "composers" }}
+      <h1>برنامه‌های آهنگساز: {{ .Title }}</h1>
+    {{ else if eq .Data.Plural "arranger" }}
+      <h1>برنامه‌های تنظیم کننده: {{ .Title }}</h1>
     {{ end }}
     <div class="program-count">{{ partial "fa-number" (len .Pages)}} برنامه </div>
   </header>
@@ -62,6 +66,20 @@
         {{ with .Params.poets }}
         <div class="poets">
           <strong>شاعرها:</strong>
+          {{ range . }}<span class="performer">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+
+        {{ with .Params.composers }}
+        <div class="composers">
+          <strong>آهنگسازان:</strong>
+          {{ range . }}<span class="performer">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+
+        {{ with .Params.arrangers }}
+        <div class="arrangers">
+          <strong>تنظیم کنندگان:</strong>
           {{ range . }}<span class="performer">{{ . }}</span>{{ end }}
         </div>
         {{ end }}

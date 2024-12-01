@@ -28,6 +28,8 @@ rtl = true
   players = "/players/:slug/"
   poets = "/poets/:slug/"
   announcers = "/announcers/:slug/"
+  composers = "/composers`/:slug/"
+  arrangers = "/arrangers/:slug/"
 
 [taxonomies]
   dastgah = "dastgahs"
@@ -35,6 +37,8 @@ rtl = true
   poet = "poets"
   player = "players"
   announcer = "announcers"
+  composers = "composers"
+  arrangers = "arrangers"
 
 
 [menu]

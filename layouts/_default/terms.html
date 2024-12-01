@@ -18,6 +18,10 @@
     <h1>فهرست شاعران</h1>
   {{ else if eq .Data.Plural "announcers" }}
     <h1>فهرست گویندگان</h1>
+  {{ else if eq .Data.Plural "composers" }}
+    <h1>فهرست آهنگسازان</h1>
+  {{ else if eq .Data.Plural "arrangers" }}
+    <h1>فهرست تنظیم کنندگان</h1>
   {{ end }}
 
   <div class="performers-grid">

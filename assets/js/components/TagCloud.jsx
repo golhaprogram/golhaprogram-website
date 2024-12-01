@@ -22,7 +22,9 @@ const TagCloud = ({ data, programType }) => {
     singers: 'خوانندگان',
     players: 'نوازندگان',
     poets: 'شاعران',
-    announcers: 'گویندگان'
+    announcers: 'گویندگان',
+    composers: 'آهنگسازان',
+    arrangers: 'تنظیم کنندگان',
   };
 
   const availableCategories = Object.keys(data).filter(cat => 
