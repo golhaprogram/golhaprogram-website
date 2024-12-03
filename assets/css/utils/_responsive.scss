@@ -121,3 +121,24 @@
         }
     }
 }
+
+
+@media (max-width: 768px) {
+    .programs-list {
+        gap: 1rem;
+    }
+    .program-card {
+        padding: 1rem;
+        h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+    }
+    .program-performers {
+        gap: 0.5rem;
+        .performer {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.85rem;
+        }
+    }
+}

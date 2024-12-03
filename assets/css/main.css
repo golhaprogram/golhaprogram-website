@@ -18,6 +18,7 @@
 
 /* Layouts */
 @import "layouts/_program.scss";
+@import "layouts/_programs.scss";
 @import "layouts/_program-section.scss";
 @import "layouts/_content.scss";
 
