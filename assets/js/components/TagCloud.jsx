@@ -11,7 +11,14 @@ const TagCloud = ({ data, programType }) => {
 
   // Helper function to convert name to URL-friendly slug
   const nameToSlug = (name) => {
-    return name.replace(/\s+/g, '-');
+    //return name.replace(/\s+/g, '-');
+    //return name.toLowerCase().replace(/[\s\.\+]+/g, '-');
+    // Replace ZWNJ (Nim faseleh) with dash. Also replace all spaces with dashes.
+    //return name.toLowerCase().replace(/\u200C/g, '-').replace(/[\s\.\+]+/g,'-');
+
+    // Remove ZWNJ (Nim faseleh). Also replace all spaces with dashes.
+    return name.toLowerCase().replace(/\u200C/g, '').replace(/[\s\.\+]+/g,'-');
+
   };
 
   // Get max count for current category

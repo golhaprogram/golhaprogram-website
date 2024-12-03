@@ -1,13 +1,5 @@
 {{ define "main" }}
 <div class="taxonomy-term-page" dir="rtl">
-  {{ if hugo.IsServer }}
-  <div style="background: #f0f0f0; padding: 1rem; margin: 1rem; font-family: monospace;">
-    Template: term.html<br>
-    Term: {{ .Title }}<br>
-    Taxonomy: {{ .Data.Plural }}<br>
-    Number of Programs: {{ len .Pages }}<br>
-  </div>
-  {{ end }}
 
   {{ if hugo.IsServer }}
   <div style="background: #f0f0f0; padding: 1rem; margin: 1rem; font-family: monospace;">
