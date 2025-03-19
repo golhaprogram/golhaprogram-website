@@ -1,19 +1,35 @@
 {{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
 {{ define "main" }}
+
+{{ $filename := path.Base .File.LogicalName }}
+{{ $filenameNoExt := replace $filename ".md" "" }}
+
+{{ $section := path.Base .File.Dir }}
+{{ $prefix := "" }}
+{{ if eq $section "golhaye-rangarang" }}
+  {{ $prefix = "GR" }}
+{{ else if eq $section "golhaye-tazeh" }}
+  {{ $prefix = "GT" }}
+{{ else }}
+  {{ $prefix = "UNKNOWN" }} <!-- Default case or error indicator -->
+{{ end }}
+
+{{ $audioURL := printf "https://music.golhaprogram.com/%s_%s.mp3" $prefix $filenameNoExt }}
+
+
 <article class="program">
     <header>
         <h1>{{ partial "program-title" . }}</h1>
     </header>
 
-    {{ with .Params.audio_url }}
     <div class="audio-player">
         <div class="audio-container">
             <audio controls>
                 <source src="{{ . }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-            <a href="{{ . }}" 
-               download="{{ path.Base . }}"
+            <a href="{{ $audioURL }}"
+               download="{{ $prefix }}_{{ $filenameNoExt }}.mp3"
                class="download-button" 
                title="دانلود"
                onclick="event.preventDefault(); window.open(this.href, '_blank');">
@@ -25,7 +41,6 @@
             </a>
         </div>
     </div>
-    {{ end }}
 
     <div class="performers">
         {{ if .Params.singers }}
