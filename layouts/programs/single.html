@@ -14,6 +14,12 @@
   {{ $prefix = "UNKNOWN" }} <!-- Default case or error indicator -->
 {{ end }}
 
+
+<!-- 
+{{ $domain := replaceRE "^https?://[^.]+\\." "" .Site.BaseURL }}
+{{ $audioURL := printf "https://music.%s/%s_%s.mp3" $domain $prefix $filenameNoExt }}
+-->
+
 {{ $audioURL := printf "https://music.golhaprogram.com/%s_%s.mp3" $prefix $filenameNoExt }}
 
 
@@ -25,7 +31,7 @@
     <div class="audio-player">
         <div class="audio-container">
             <audio controls>
-                <source src="{{ . }}" type="audio/mpeg">
+        <source src="{{ $audioURL }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
             <a href="{{ $audioURL }}"

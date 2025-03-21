@@ -1,57 +1,61 @@
 /* Audio player styling */
 .audio-player {
-    width: 100%;
-    background: var(--player-background);
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 1px 3px rgba(var(--primary-rgb), 0.1);
-    text-align: center;
-    box-sizing: border-box;
+  width: 100%;
+  background: var(--player-background);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(var(--primary-rgb), 0.1);
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .audio-container {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: 0.5rem;
-    max-width: 600px;
-    margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .audio-container audio {
-    flex: 1;
-    min-width: 0;
-    height: 40px;
-    width: 100%;
-    max-width: 600px;
-    margin: 1rem auto 0;
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto 0;
 }
 
 .download-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    background: ButtonText;
-    color: ButtonFace;
-    transition: all 0.2s ease;
-    border: 1px solid var(--border-color);
-    padding: 0;
-    margin: 0;
-    margin-top: 1rem;
-}
-
-.download-button:hover {
-    background: Highlight;
-    color: HighlightText;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(var(--primary-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: ButtonText;
+  color: ButtonFace;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  padding: 0;
+  margin: 0;
+  margin-top: 1rem;
 }
 
 .download-button svg {
-    width: 18px;
-    height: 18px;
+  color: white;
+}
+
+.download-button:hover {
+  background: Highlight;
+  color: HighlightText;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(var(--primary-rgb), 0.1);
+}
+
+.download-button svg {
+  width: 18px;
+  height: 18px;
 }
