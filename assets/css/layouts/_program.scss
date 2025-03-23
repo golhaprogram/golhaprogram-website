@@ -1,25 +1,25 @@
 /* Program container */
 .program {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 /* Ensure all direct children of program are centered */
-.program > * {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+.program>* {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 /* Special handling for text that should be RTL but centered in its container */
 .program p {
-    text-align: center;
-    direction: rtl;
-    width: 100%;
+  text-align: center;
+  direction: rtl;
+  width: 100%;
 }

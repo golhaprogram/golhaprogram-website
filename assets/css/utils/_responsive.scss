@@ -1,144 +1,235 @@
-/* Responsive Design */
-@media (max-width: 768px) {
-    .program {
-        margin: 1rem;
-        padding: 1rem;
-    }
+/* ===================================
+   Base Styles
+   =================================== */
 
-    .audio-player {
-        padding: 1rem;
-    }
 
-    .performers {
-        padding: 0.5rem;
-    }
-    
-    .content p {
-        padding: 0 0.5rem;
-    }
-
-    .program-section {
-        margin: 1rem;
-        padding: 0;
-    }
-
-    .programs-table th,
-    .programs-table td {
-        padding: 0.75rem;
-    }
-
-    .section-title {
-        font-size: 1.5rem;
-    }
+* {
+  box-sizing: border-box;
 }
 
+/* Fix for horizontal scrolling on mobile */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Table Styles */
+.programs-table-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.programs-table {
+  width: 100%;
+  //border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.programs-table th,
+.programs-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.programs-table thead {
+  background-color: #f8f8f8;
+}
+
+/* Clickable Row Styles */
+.clickable-row {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: underline;
+}
+
+.clickable-row:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+
+}
+
+/* ===================================
+   Responsive Styles - Tablet (768px)
+   =================================== */
+@media (max-width: 768px) {
+
+  /* Program Details */
+  .program {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .program-section {
+    margin: 1rem;
+    padding: 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  /* Audio Player */
+  .audio-player {
+    padding: 1rem;
+  }
+
+  .performers {
+    padding: 0.5rem;
+  }
+
+  .content p {
+    padding: 0 0.5rem;
+  }
+
+  /* Table Styles */
+  .programs-table th,
+  .programs-table td {
+    padding: 8px 10px;
+    font-size: 0.9em;
+  }
+
+  .clickable-row:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Program Cards */
+  .programs-list {
+    gap: 1rem;
+  }
+
+  .program-card {
+    padding: 1rem;
+  }
+
+  .program-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .program-performers {
+    gap: 0.5rem;
+  }
+
+  .program-performers .performer {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* Navigation */
+  .main-nav-toggle-label {
+    display: block;
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  .main-nav-toggle-label span,
+  .main-nav-toggle-label span::before,
+  .main-nav-toggle-label span::after {
+    display: block;
+    background: var(--text-color);
+    height: 2px;
+    width: 1.5rem;
+    position: relative;
+  }
+
+  .main-nav-toggle-label span::before,
+  .main-nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+  }
+
+  .main-nav-toggle-label span::before {
+    bottom: 7px;
+  }
+
+  .main-nav-toggle-label span::after {
+    top: 7px;
+  }
+
+  .main-nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background: white;
+    display: none;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-nav-links li {
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .main-nav-toggle:checked~.nav-links {
+    display: flex;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 2rem 0 1rem;
+  }
+
+  .site-footer .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .site-footer .footer-section {
+    text-align: center;
+  }
+
+  .site-footer .footer-section h3 {
+    text-align: center;
+  }
+}
+
+/* ===================================
+   Responsive Styles - Mobile (576px)
+   =================================== */
+@media (max-width: 576px) {
+
+  /* Table Styles */
+  .programs-table th,
+  .programs-table td {
+    padding: 6px 8px;
+    font-size: 0.85em;
+  }
+
+  /* Optional: Uncomment to hide less important columns */
+  // Performers
+  .programs-table th:nth-child(4),
+  // Poets
+  .programs-table th:nth-child(5),
+  // Announcers
+  .programs-table th:nth-child(6),
+  .programs-table td:nth-child(4),
+  .programs-table td:nth-child(5),
+  .programs-table td:nth-child(6) {
+    display: none;
+  }
+}
+
+/* ===================================
+   Responsive Styles - Small Mobile (480px)
+   =================================== */
+
+/* For very small screens, adjust font size and padding further */
 @media (max-width: 480px) {
-    .audio-container {
-        flex-direction: column;
-    }
-    
-    .audio-container audio {
-        width: 100%;
-    }
-    
-    .download-button {
-        width: 100%;
-        height: 36px;
-        margin-top: 1.5rem;
-    }
-}
 
-// utils/_responsive.scss
-
-@media (max-width: 768px) {
-    .main-nav {
-        &-toggle-label {
-            display: block;
-            padding: 1rem;
-            cursor: pointer;
-
-            span,
-            span::before,
-            span::after {
-                display: block;
-                background: var(--text-color);
-                height: 2px;
-                width: 1.5rem;
-                position: relative;
-            }
-
-            span::before,
-            span::after {
-                content: '';
-                position: absolute;
-            }
-
-            span::before {
-                bottom: 7px;
-            }
-
-            span::after {
-                top: 7px;
-            }
-        }
-
-        &-links {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            left: 0;
-            background: white;
-            display: none;
-            flex-direction: column;
-            padding: 0;
-            margin: 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-            li {
-                text-align: center;
-                padding: 0.75rem 1rem;
-            }
-        }
-
-        &-toggle:checked ~ .nav-links {
-            display: flex;
-        }
-    }
-    .site-footer {
-        padding: 2rem 0 1rem;
-
-        .footer-content {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .footer-section {
-            text-align: center;
-
-            h3 {
-                text-align: center;
-            }
-        }
-    }
-}
-
-
-@media (max-width: 768px) {
-    .programs-list {
-        gap: 1rem;
-    }
-    .program-card {
-        padding: 1rem;
-        h2 {
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-        }
-    }
-    .program-performers {
-        gap: 0.5rem;
-        .performer {
-            padding: 0.2rem 0.5rem;
-            font-size: 0.85rem;
-        }
-    }
+  .programs-table th,
+  .programs-table td {
+    padding: 4px 6px;
+    font-size: 0.8em;
+    //word-break: break-word;
+  }
 }

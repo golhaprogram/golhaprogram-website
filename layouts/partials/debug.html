@@ -1,0 +1,10 @@
+
+
+<div class="template-debug" style="background: #f5f5f5; border: 1px solid #ddd; padding: 15px; margin: 20px 0; font-family: monospace;">
+  <h3>Template Debugging:</h3>
+  <p><strong>Layout:</strong> {{ printf "%#v" .Layout }}</p>
+  <p><strong>Kind:</strong> {{ .Kind }}</p>
+  <p><strong>Type:</strong> {{ .Type }}</p>
+  <p><strong>Section:</strong> {{ .Section }}</p>
+  <!-- The template.Name line was causing the error -->
+</div>

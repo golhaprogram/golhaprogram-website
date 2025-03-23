@@ -1,46 +1,61 @@
 /* Table Styles */
 .programs-table-container {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
 }
 
 .programs-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: right;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
 }
 
 .programs-table th {
-    background: var(--background-color);
-    padding: 1rem;
-    font-weight: 600;
-    color: var(--text-color-secondary, #666);
-    border-bottom: 2px solid var(--border-color);
+  background: var(--background-color);
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--text-color-secondary, #666);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .programs-table td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-color);
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
 }
 
 .programs-table tr:last-child td {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .programs-table tr:hover {
-    background: var(--hover-color, #f8f9fa);
+  background: var(--hover-color, #f8f9fa);
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clickable-row:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 10 2px 8px rgba(0, 0, 0, 0.85);
+  transform: translateY(-2px);
+  text-decoration: underline;
+  text-decoration-color: var(--hover-color);
+  text-decoration-thickness: .2px;
+  text-decoration-style: solid;
 }
 
 .program-link {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .program-link:hover {
-    color: var(--primary-color-dark);
-    text-decoration: underline;
+  color: var(--primary-color-dark);
+  text-decoration: underline;
 }

@@ -26,13 +26,9 @@
             </thead>
             <tbody>
                 {{ range .Pages.ByParam "program_number" }}
-                <tr>
-                    <td>
-                        <a href="{{ .RelPermalink }}" class="program-link">
-                            {{ partial "fa-number" .Params.program_number }}
-                        </a>
-                    </td>
-                    <td>{{ .Params.dastgah }}</td>
+                <tr class="clickable-row" onclick="window.location='{{ .RelPermalink }}'">
+                    <td> {{ partial "fa-number" .Params.program_number }} </td>
+                    <td> {{ .Params.dastgah }}</td>
                     <td>
                         {{ with .Params.singers }}
                             {{ delimit . "، " }}

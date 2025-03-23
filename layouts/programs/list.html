@@ -1,4 +1,10 @@
 {{ define "main" }}
+
+{{ if eq hugo.Environment "development" }}
+  {{ partial "debug.html" . }}
+{{ end }}
+
+
 <div class="container" dir="rtl">
     <div class="program-section">
         <header class="program-section-header">

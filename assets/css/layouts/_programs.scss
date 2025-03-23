@@ -1,85 +1,82 @@
 /* Program card styling */
 .programs-list {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 1rem auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-    padding: 0 1rem;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0 1rem;
 }
 
 .program-card {
-    background: white;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-    h2 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1.1rem;
-        
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.2s ease;
-            
-            &:hover {
-                color: var(--accent-color);
-                text-decoration: none;
-            }
-        }
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--accent-color);
+        text-decoration: none;
+      }
     }
+  }
 }
 
 .program-performers {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-    gap: 0.1rem;
-    
-    .singers,
-    .players,
-    .poets,
-    .composers,
-    .arrangers,
-    .announcers {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        width: 100%;
-        gap: 0.1rem;
-        align-items: right;
-        
-        strong {
-            color: var(--secondary-color);
-            margin-left: 0.5rem;
-        }
-    }
-    
-    .performer {
-        display: inline-block;
-        padding: 0.2rem 0.5rem;
-        background: var(--performer-bg);
-        border: 1px solid var(--performer-border);
-        border-radius: 6px;
-        font-size: 0.85rem;
-        color: var(--primary-color);
-        transition: all 0.2s ease;
-        
-        &:hover {
-            background: var(--background-color);
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(var(--primary-rgb), 0.1);
-        }
-    }
-}
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  gap: 0.1rem;
 
-/* Moved to utils/_responsive.scss */
-/* Responsive adjustments */
+  .singers,
+  .players,
+  .poets,
+  .composers,
+  .arrangers,
+  .announcers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.1rem;
+    align-items: right;
+
+    strong {
+      color: var(--secondary-color);
+      margin-left: 0.5rem;
+    }
+  }
+
+  .performer {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: var(--performer-bg);
+    border: 1px solid var(--performer-border);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--background-color);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(var(--primary-rgb), 0.1);
+    }
+  }
+}
