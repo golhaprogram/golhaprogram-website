@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
           { name: 'players', weight: 0.7 },
           { name: 'composers', weight: 0.7 },
           { name: 'poets', weight: 0.7 },
+          { name: 'announcers', weight: 0.7 },
           { name: 'dastgah', weight: 0.6 },
           { name: 'content', weight: 0.5 }
         ],
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         findAllMatches: false,
         tokenize: true,           // Break the text into tokens (words)
         matchAllTokens: false,    // Don't require matching all tokens
-        minMatchCharLength: 3     // Minimum character length for a match
+        minMatchCharLength: 2     // Minimum character length for a match
         //distance: 0 // Makes matching more strict
       });
     });
@@ -74,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
               case 'dastgah': displayKey = 'دستگاه'; break;
               case 'singers': displayKey = 'خواننده'; break;
               case 'players': displayKey = 'نوازنده'; break;
+              case 'announcers': displayKey = 'گوینده'; break;
               case 'composers': displayKey = 'آهنگساز'; break;
               case 'poets': displayKey = 'شاعر'; break;
               case 'content': displayKey = 'محتوا'; break;

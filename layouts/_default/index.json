@@ -10,6 +10,7 @@
         "players" .Params.players
         "composers" .Params.composers
         "poets" .Params.poets
+        "announcers" .Params.announcers
         "content" .Plain
     -}}
     {{- $index = $index | append $data -}}
