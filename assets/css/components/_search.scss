@@ -73,5 +73,34 @@
       text-align: center;
       color: #666;
     }
+
+    .match-highlights {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      font-size: 0.85rem;
+
+      .match-snippet {
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+        white-space: normal; // Allow text to wrap
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        strong {
+          color: #555;
+          margin-left: 0.25rem;
+        }
+
+        mark {
+          background-color: #ffeb3b;
+          padding: 0 2px;
+          border-radius: 2px;
+        }
+      }
+    }
   }
 }
