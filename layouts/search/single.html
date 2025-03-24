@@ -1,0 +1,300 @@
+{{ define "main" }}
+<div class="search-container">
+  <div class="search-header">
+    <h1>Search</h1>
+    <div class="search-input-wrapper">
+      <input type="text" id="search-input" placeholder="Search for content..." aria-label="Search">
+      <button id="search-button">Search</button>
+    </div>
+  </div>
+
+  <div id="search-results" class="search-results">
+    <!-- Results will be displayed here -->
+    <p class="initial-message">Enter a search term above to find content.</p>
+  </div>
+</div>
+
+<!-- Load Fuse.js -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // DOM elements
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const resultsContainer = document.getElementById('search-results');
+
+    let fuse; // Will hold our Fuse instance
+    let documents = []; // Will hold our search documents
+
+    // Function to fetch the search index
+    async function fetchSearchIndex() {
+      try {
+        const response = await fetch('/index.json');
+        if (!response.ok) {
+          throw new Error('Failed to load search index');
+        }
+
+        const data = await response.json();
+        documents = data;
+
+        // Initialize Fuse.js once we have the data
+        fuse = new Fuse(documents, {
+          keys: [
+            'title',
+            'content',
+            'program_type',
+            'singers',
+            'poets',
+            'dastgah',
+            'players',
+            'announcers'
+          ],
+          includeMatches: true,
+          threshold: 0.3,
+          ignoreLocation: true,
+          useExtendedSearch: true
+        });
+
+        // Check for URL parameter to handle direct links to search
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryParam = urlParams.get('q');
+        if (queryParam) {
+          searchInput.value = queryParam;
+          performSearch();
+        }
+      } catch (error) {
+        console.error('Error loading search index:', error);
+        resultsContainer.innerHTML = '<p class="error-message">Error loading search data. Please try again later.</p>';
+      }
+    }
+
+    // Function to highlight matched text
+    function highlightText(text, indices) {
+      if (!indices || !indices.length || !text) return text;
+
+      // Sort indices to ensure proper order
+      indices.sort((a, b) => a[0] - b[0]);
+
+      let result = '';
+      let lastIndex = 0;
+
+      indices.forEach(([startIdx, endIdx]) => {
+        // Add text before the highlight
+        result += text.substring(lastIndex, startIdx);
+
+        // Add the highlighted portion
+        result += '<span class="highlight">' + text.substring(startIdx, endIdx + 1) + '</span>';
+
+        lastIndex = endIdx + 1;
+      });
+
+      // Add any remaining text
+      result += text.substring(lastIndex);
+      return result;
+    }
+
+    // Handle search function
+    function performSearch() {
+      const query = searchInput.value.trim();
+
+      if (!query) {
+        resultsContainer.innerHTML = '<p class="initial-message">Enter a search term above to find content.</p>';
+        return;
+      }
+
+      if (!fuse) {
+        resultsContainer.innerHTML = '<p class="loading-message">Loading search index...</p>';
+        return;
+      }
+
+      const results = fuse.search(query);
+
+      if (results.length === 0) {
+        resultsContainer.innerHTML = '<p class="no-results">No results found for your search.</p>';
+        return;
+      }
+
+      // Create results HTML
+      const resultsHtml = results.map(result => {
+        let itemHtml = '<div class="search-result">';
+
+        // Add title and link
+        itemHtml += '<h3><a href="' + (result.item.permalink || result.item.url) + '">' + (result.item.title || 'Untitled') + '</a></h3>';
+
+        // Process matches to show which fields matched
+        if (result.matches && result.matches.length) {
+          itemHtml += '<div class="match-details">';
+
+          // Display only unique fields (no duplicates)
+          const processedFields = new Set();
+
+          // Loop through each match
+          result.matches.forEach(match => {
+            // Get the key name (field that matched)
+            const fieldName = match.key;
+
+            // Skip if we've already processed this field
+            if (processedFields.has(fieldName)) return;
+            processedFields.add(fieldName);
+
+            // Get the value from the original item
+            const value = result.item[fieldName];
+
+            // Only show non-empty values
+            if (value && (typeof value === 'string' || Array.isArray(value)) && String(value).length) {
+              // Handle arrays (like singers might be an array)
+              let displayValue = Array.isArray(value) ? value.join(', ') : value;
+
+              // Limit content field to prevent overly long results
+              if (fieldName === 'content' && displayValue.length > 200) {
+                // Find the first match position
+                let firstMatchPos = 0;
+                if (match.indices && match.indices.length) {
+                  firstMatchPos = Math.max(0, match.indices[0][0] - 50);
+                }
+
+                // Extract a context window around the first match
+                displayValue = '...' + displayValue.substring(firstMatchPos, firstMatchPos + 200) + '...';
+              }
+
+              // Highlight the matching portions if we have indices
+              if (match.indices && match.indices.length) {
+                displayValue = highlightText(displayValue, match.indices);
+              }
+
+              // Use more user-friendly field names
+              const fieldLabelMap = {
+                'title': 'Title',
+                'content': 'Content',
+                'program_type': 'Program Type',
+                'singers': 'Singers',
+                'poets': 'Poets',
+                'dastgah': 'Dastgah',
+                'players': 'Players',
+                'announcers': 'Announcers'
+              };
+              const fieldLabel = fieldLabelMap[fieldName] || fieldName;
+
+              itemHtml += '<p><strong>' + fieldLabel + ':</strong> ' + displayValue + '</p>';
+            }
+          });
+
+          itemHtml += '</div>';
+        }
+
+        itemHtml += '</div>';
+        return itemHtml;
+      }).join('');
+
+      resultsContainer.innerHTML = resultsHtml;
+    }
+
+    // Event listeners
+    searchButton.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', function (e) {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    // Initialize: fetch the search index
+    fetchSearchIndex();
+  });
+</script>
+
+<style>
+  /* Search styling */
+  .search-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .search-header {
+    margin-bottom: 2rem;
+  }
+
+  .search-input-wrapper {
+    display: flex;
+    margin: 1rem 0;
+  }
+
+  #search-input {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+  }
+
+  #search-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+
+  #search-button:hover {
+    background-color: #1a252f;
+  }
+
+  .search-results {
+    margin-top: 1rem;
+  }
+
+  .initial-message,
+  .no-results,
+  .loading-message,
+  .error-message {
+    color: #666;
+    font-style: italic;
+    padding: 1rem 0;
+  }
+
+  .error-message {
+    color: #c0392b;
+  }
+
+  .search-result {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-result h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-result h3 a {
+    color: #2c3e50;
+    text-decoration: none;
+  }
+
+  .search-result h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .match-details {
+    font-size: 0.95rem;
+    color: #444;
+  }
+
+  .match-details p {
+    margin: 0.5rem 0;
+  }
+
+  .match-details strong {
+    color: #2c3e50;
+  }
+
+  .highlight {
+    background-color: rgba(255, 215, 0, 0.4);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+</style>
+{{ end }}

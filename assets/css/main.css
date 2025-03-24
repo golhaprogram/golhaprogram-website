@@ -3,6 +3,7 @@
  * https://golhaprogram.com
  */
 
+
 /* Base */
 @import "base/_base.scss";
 @import "base/_variables.scss";
@@ -15,6 +16,7 @@
 @import "components/_comments.scss";
 @import "components/_tables.scss";
 @import 'components/_taxonomy.scss';
+@import 'components/search';
 
 /* Layouts */
 @import "layouts/_program.scss";

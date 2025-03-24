@@ -23,22 +23,22 @@ weight = 1
 rtl = true
 
 [permalinks]
-  programs = "/:section/:sections[last]/:filename/"
-  singers = "/singers/:slug/"
-  players = "/players/:slug/"
-  poets = "/poets/:slug/"
-  announcers = "/announcers/:slug/"
-  composers = "/composers`/:slug/"
-  arrangers = "/arrangers/:slug/"
+programs = "/:section/:sections[last]/:filename/"
+singers = "/singers/:slug/"
+players = "/players/:slug/"
+poets = "/poets/:slug/"
+announcers = "/announcers/:slug/"
+composers = "/composers`/:slug/"
+arrangers = "/arrangers/:slug/"
 
 [taxonomies]
-  dastgah = "dastgahs"
-  singer = "singers"
-  poet = "poets"
-  player = "players"
-  announcer = "announcers"
-  composers = "composers"
-  arrangers = "arrangers"
+dastgah = "dastgahs"
+singer = "singers"
+poet = "poets"
+player = "players"
+announcer = "announcers"
+composers = "composers"
+arrangers = "arrangers"
 
 
 [menu]
@@ -58,30 +58,38 @@ url = "/about/"
 weight = 3
 
 [build]
-  writeStats = true
+writeStats = true
 
 
 [build.buildStats]
-  enable = true
+enable = true
 
 [build.processing]
-  js = true
-  html = true
+js = true
+html = true
 
 [build.processing.css]
-  includePaths = ["assets/css"]
+includePaths = ["assets/css"]
 
 [module]
-  [[module.mounts]]
-    source = "assets"
-    target = "assets"
-  [module.hugoVersion]
-    extended = true
+[[module.mounts]]
+source = "assets"
+target = "assets"
+[module.hugoVersion]
+extended = true
 
 
 [minify]
-  minifyOutput = true
+minifyOutput = true
 
-  [minify.css]
-    includePaths = ["assets/css"]
+[minify.css]
+includePaths = ["assets/css"]
 
+[outputFormats.JSON]
+mediaType = "application/json"
+baseName = "index"
+isPlainText = true
+notAlternative = true
+
+[outputs]
+home = ["HTML", "JSON"]

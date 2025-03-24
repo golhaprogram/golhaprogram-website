@@ -1,0 +1,17 @@
+{{- $index := slice -}}
+{{- range where .Site.RegularPages "Type" "not in" (slice "page") -}}
+    {{- $data := dict 
+        "title" .Title 
+        "permalink" .Permalink 
+        "program_type" .Params.program_type
+        "program_number" .Params.program_number
+        "dastgah" .Params.dastgah
+        "singers" .Params.singers
+        "players" .Params.players
+        "composers" .Params.composers
+        "poets" .Params.poets
+        "content" .Plain
+    -}}
+    {{- $index = $index | append $data -}}
+{{- end -}}
+{{- $index | jsonify -}}

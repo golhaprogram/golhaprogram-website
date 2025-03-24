@@ -1,3 +1,5 @@
+import './components/Search.js';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TagCloud from './components/TagCloud';
