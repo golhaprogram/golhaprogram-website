@@ -61,16 +61,6 @@
   <footer>
     {{ partial "footer.html" . }}
   </footer>
-
-  <script src="/js/fuse.min.js"></script>
-  {{ $js := resources.Get "js/main.js" | js.Build }}
-  <script src="{{ $js.RelPermalink }}"></script>
-
-  <!--
-    {{/* Scripts */}}
-    {{ $js := resources.Get "js/main.js" | js.Build | resources.Minify | resources.Fingerprint }}
-    <script src="{{ $js.RelPermalink }}"></script>
--->
 </body>
 
 </html>

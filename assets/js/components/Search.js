@@ -1,3 +1,5 @@
+import Fuse from 'fuse.js';
+
 document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
