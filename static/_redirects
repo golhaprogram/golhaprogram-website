@@ -260,6 +260,7 @@
 /tag/elaheh/ /singers/%D8%A7%D9%84%D9%87%D9%87/ 301
 /tag/homayoun-khorram/ /composers/%D9%87%D9%85%D8%A7%DB%8C%D9%88%D9%86-%D8%AE%D8%B1%D9%85/ 301
 /tag/iraj/ /singers/%D8%A7%DB%8C%D8%B1%D8%AC/ 301
+/tag/homayra/ /singers/%d8%ad%d9%85%db%8c%d8%b1%d8%a7/ 301
 /tag/mahmoudi-khansari/ /singers/%D9%85%D8%AD%D9%85%D9%88%D8%AF%DB%8C-%D8%AE%D9%88%D8%A7%D9%86%D8%B3%D8%A7%D8%B1%DB%8C/ 301
 /tag/marzieh/ /singers/%D9%85%D8%B1%D8%B6%DB%8C%D9%87/ 301
 /tag/pouran/ /singers/%D9%BE%D9%88%D8%B1%D8%A7%D9%86/ 301
@@ -305,6 +306,6 @@
 /tag/%D9%87%D9%84%D8%A7%D9%84%DB%8C-%D8%AC%D8%BA%D8%AA%D8%A7%DB%8C%DB%8C/ /poets/%D9%87%D9%84%D8%A7%D9%84%DB%8C-%D8%AC%D8%BA%D8%AA%D8%A7%DB%8C%DB%8C/ 301
 /tag/%D9%BE%D8%B1%D9%88%DB%8C%D8%B2-%DB%8C%D8%A7%D8%AD%D9%82%DB%8C/ /players/%D9%BE%D8%B1%D9%88%DB%8C%D8%B2-%DB%8C%D8%A7%D8%AD%D9%82%DB%8C/ 301
 /tag/%D9%BE%D8%B1%D9%88%DB%8C%D9%86/ /singers/%D9%BE%D8%B1%D9%88%DB%8C%D9%86/ 301
-/tag/%DA%AF%D9%84%D9%BE%D8%A7/ /singers/%DA%AF%D9%84%D9%BE%D8%A7/ 301
+/tag/%DA%AF%D9%84%D9%BE%D8%A7/ /singers/d8%a7%da%a9%d8%a8%d8%b1%2d%da%af%d9%84%d9%be%d8%a7%db%8c%da%af%d8%a7%d9%86%db%8c/ 301
 /%D8%A8%D8%A7%DB%8C%DA%AF%D8%A7%D9%86%DB%8C-%DA%AF%D9%84%D9%87%D8%A7%DB%8C-%D8%AA%D8%A7%D8%B2%D9%87/ /programs/golhaye-tazeh/ 301
 /%D8%A8%D8%A7%DB%8C%DA%AF%D8%A7%D9%86%DB%8C-%DA%AF%D9%84%D9%87%D8%A7%DB%8C-%D8%B1%D9%86%DA%AF%D8%A7%D8%B1%D9%86%DA%AF/ /programs/golhaye-rangarang/ 301
