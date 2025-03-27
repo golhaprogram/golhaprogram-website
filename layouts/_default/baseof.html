@@ -32,16 +32,7 @@
   {{ $style := resources.Get "css/main.css" | css.Sass | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" blocking="render">
 
-  <!--
-    {{/* Isso Comments */}}
-    <script data-isso="//comments.golhaprogram.com/"
-            data-isso-css="true"
-            data-isso-lang="fa"
-            data-isso-max-comments-top="10"
-            data-isso-max-comments-nested="5"
-            src="//comments.golhaprogram.com/js/embed.min.js"></script>
--->
-
+  <!-- Comments -->
   <script defer src="https://cdn.commento.io/js/commento.js"></script>
 
 </head>
@@ -67,11 +58,6 @@
   {{ $js := resources.Get "js/main.js" | js.Build }}
   <script src="{{ $js.RelPermalink }}"></script>
 
-  <!--
-    {{/* Scripts */}}
-    {{ $js := resources.Get "js/main.js" | js.Build | resources.Minify | resources.Fingerprint }}
-    <script src="{{ $js.RelPermalink }}"></script>
--->
 </body>
 
 </html>
