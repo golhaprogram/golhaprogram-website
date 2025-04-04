@@ -57,3 +57,12 @@ To set up the project:
 npm init -y
 npm install -D postcss postcss-cli autoprefixer
 ```
+
+
+# Running
+
+To run the server locally:
+
+```
+hugo server --bind 0.0.0.0 --baseURL http://10.0.10.108:1313 --disableFastRender  --noHTTPCache --disableLiveReload
+```
