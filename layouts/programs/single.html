@@ -1,32 +1,12 @@
 {{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
 {{ define "main" }}
 
-{{ $filename := path.Base .File.LogicalName }}
-{{ $filenameNoExt := replace $filename ".md" "" }}
-
-{{ $section := path.Base .File.Dir }}
-{{ $prefix := "" }}
-{{ if eq $section "golhaye-rangarang" }}
-{{ $prefix = "GR" }}
-{{ else if eq $section "golhaye-tazeh" }}
-{{ $prefix = "GT" }}
-{{ else }}
-{{ $prefix = "UNKNOWN" }} <!-- Default case or error indicator -->
-{{ end }}
-
-
-<!-- 
-{{ $domain := replaceRE "^https?://[^.]+\\." "" .Site.BaseURL }}
-{{ $audioURL := printf "https://music.%s/%s_%s.mp3" $domain $prefix $filenameNoExt }}
--->
-
-{{ $audioURL := printf "https://music.golhaprogram.com/%s_%s.mp3" $prefix $filenameNoExt }}
-
-
 <article class="program">
   <header>
     <h1>{{ partial "program-title" . }}</h1>
   </header>
+
+  {{ $audioURL := partial "audio-url" . }}
 
   <div class="audio-player">
     <div class="audio-container">
@@ -34,7 +14,7 @@
         <source src="{{ $audioURL }}" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
-      <a href="{{ $audioURL }}" download="{{ $prefix }}_{{ $filenameNoExt }}.mp3" class="download-button" title="دانلود"
+      <a href="{{ $audioURL }}" download="{{ path.Base $audioURL }}" class="download-button" title="دانلود"
         onclick="event.preventDefault(); window.open(this.href, '_blank');">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -87,14 +67,6 @@
   <div class="content">
     {{ .Content }}
   </div>
-
-  <!--
-  <div class="comments">
-    <h3>نظرات</h3>
-    <div id="commento"></div>
-  </div>
-  -->
-
 
   {{ partial "comments.html" . }}
 

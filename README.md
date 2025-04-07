@@ -21,26 +21,90 @@ This is the source code for [golhaprogram.com](https://golhaprogram.com).
 
 The site is being deloyed via [netlify](https://app.netlify.com/sites/golhaprogram/deploys). The [content](content/programs) directory has all the files in markdown format.
 
-# Hugo
+## Architecture
 
-The website is being built via Hugo, these are the files that produce the pages:
+- **Static Site Generator**: [Hugo](https://gohugo.io/) generates the site from markdown content
+- **Hosting**: Deployed via [Netlify](https://www.netlify.com/)
+- **Media Storage**: Audio files hosted on [Backblaze B2](https://www.backblaze.com/b2/cloud-storage.html) at music.golhaprogram.com
+- **Comments**: [Remark42](https://remark42.com/) self-hosted on DigitalOcean
+- **CDN**: [Cloudflare](https://www.cloudflare.com/) for CDN and DNS management
+
+## Local Development
+
+### Prerequisites
+
+- [Hugo Extended](https://gohugo.io/installation/) (version 0.139.2 or higher)
+- Node.js (version 20 or higher)
+- npm (version 10 or higher)
+
+### Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/golhaprogram/golhaprogram-website.git
+   cd golhaprogram-website
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Visit <http://localhost:1313> to see your local development version.
+
+To run the server locally:
+
+```
+hugo server --bind 0.0.0.0 --baseURL http://10.0.10.108:1313 --disableFastRender  --noHTTPCache --disableLiveReload
+```
+
+### Build
+
+To build the production version:
+
+```bash
+npm run build
+```
+
+This will compile the SCSS, bundle JavaScript, and build the Hugo site.
+
+## Content Structure
+
+- **Programs**: Located in `content/programs/` with subdirectories for each program series
+- **Pages**: General pages are in `content/`
+- **Layouts**: Templates in `layouts/`
+- **Assets**: SCSS and JS in `assets/`
+
+## Important Partials
+
+- `layouts/partials/audio-url.html`: Generates audio URLs based on program metadata
+- `layouts/partials/program-title.html`: Formats program titles consistently
+- `layouts/partials/comments.html`: Integrates Remark42 comments
+- `layouts/partials/fa-number.html`: Converts numbers to Persian digits
 
 ```
 layouts/
-  programs/
-    list.html     # Used for /programs/ - lists all program types
-                  # (golhaye rangarang, golhaye tazeh, etc)
-    
-    section.html  # Used for /programs/golhaye-rangarang/ - lists all 
+programs/
+list.html # Used for /programs/ - lists all program types # (golhaye rangarang, golhaye tazeh, etc)
+
+    section.html  # Used for /programs/golhaye-rangarang/ - lists all
                   # programs within a specific type
-    
-    single.html   # Used for individual programs like 
+
+    single.html   # Used for individual programs like
                   # /programs/golhaye-rangarang/203
 
 content/
-  programs/
-    _index.md     # Main programs page content (uses list.html)
-    
+programs/
+\_index.md # Main programs page content (uses list.html)
+
     golhaye-rangarang/
       _index.md   # Section content (uses section.html)
       203.md      # Individual program (uses single.html)
@@ -48,21 +112,17 @@ content/
 
 ```
 
-# Setup
+## Deployment
 
-To set up the project:
+The site automatically deploys when changes are pushed to the main branch. The deployment configuration is in `netlify.toml`.
 
+## Audio Files
 
-```
-npm init -y
-npm install -D postcss postcss-cli autoprefixer
-```
+Audio files follow the naming convention: `{PREFIX}_{NUMBER}.mp3` where:
 
-
-# Running
-
-To run the server locally:
+- `PREFIX` is the program type code (GR, GT, GJ, YSG, GS)
+- `NUMBER` is the program number
 
 ```
-hugo server --bind 0.0.0.0 --baseURL http://10.0.10.108:1313 --disableFastRender  --noHTTPCache --disableLiveReload
+
 ```
