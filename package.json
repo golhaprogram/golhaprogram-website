@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "hugo server",
-    "build": "npm run build:js && hugo --minify",
+    "dev:beta": "hugo server -e beta",
+    "build": "npm run build:js && npm run build:sass && hugo --gc --minify",
+    "build:beta": "npm run build:js && npm run build:sass && hugo --gc --minify -e beta",
     "build:js": "esbuild assets/js/main.js --bundle --minify --outdir=static/js",
     "build:sass": "sass assets/sass/main.scss:static/css/main.css",
     "watch:sass": "sass --watch assets/sass/main.scss:static/css/main.css"
