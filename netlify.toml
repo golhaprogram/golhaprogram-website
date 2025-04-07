@@ -1,7 +1,7 @@
 # Base configuration for all branches
 [build]
 publish = "public"
-command = "hugo --gc --minify -e $HUGO_ENV"
+command = "chmod +x ./build.sh && ./build.sh"
 
 [build.environment]
 HUGO_VERSION = "0.139.2"
@@ -20,30 +20,18 @@ html = true
 includePaths = ["assets/css"]
 
 # Production context: main branch
-[context.production]
-command = "hugo --gc --minify -e production"
-
 [context.production.environment]
 HUGO_ENV = "production"
 
 # Beta context: beta branch
-[context.beta]
-command = "hugo --gc --minify -e beta"
-
 [context.beta.environment]
 HUGO_ENV = "beta"
 
 # Default context (for branch deploys)
-[context.branch-deploy]
-command = "hugo --gc --minify -e branch-deploy"
-
 [context.branch-deploy.environment]
 HUGO_ENV = "branch-deploy"
 
 # Default context (when deploying to PR)
-[context.deploy-preview]
-command = "hugo --gc --minify -e deploy-preview"
-
 [context.deploy-preview.environment]
 HUGO_ENV = "deploy-preview"
 
