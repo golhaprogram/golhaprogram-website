@@ -80,3 +80,9 @@ notAlternative = true
 
 [outputs]
 home = ["HTML", "JSON"]
+
+[params]
+# Common parameters
+commentsHost = "comments.golhaprogram.com"
+audioHost = "music.golhaprogram.com"
+environment = "production"
