@@ -1,7 +1,7 @@
 # Base configuration for all branches
 [build]
 publish = "public"
-command = "hugo --gc --minify -e production"
+command = "npm ci && hugo --gc --minify -e production"
 
 [build.environment]
 HUGO_VERSION = "0.139.2"
@@ -21,7 +21,7 @@ includePaths = ["assets/css"]
 
 # Production context: main branch
 [context.production]
-command = "npm run build:js && hugo --gc --minify --environment production"
+command = "npm ci && npm run build"
 
 [context.production.environment]
 HUGO_ENV = "production"
@@ -29,7 +29,7 @@ NODE_ENV = "production"
 
 # Beta context: beta branch
 [context.beta]
-command = "npm run build:js && hugo --gc --minify --environment beta"
+command = "npm ci && npm run build:beta"
 
 [context.beta.environment]
 HUGO_ENV = "beta"
@@ -37,7 +37,7 @@ NODE_ENV = "production"
 
 # Branch deploys (when pushing to a branch other than main or beta)
 [context.branch-deploy]
-command = "npm run build:js && hugo --gc --minify --environment beta"
+command = "npm ci && npm run build:beta"
 
 [context.branch-deploy.environment]
 HUGO_ENV = "beta"
@@ -48,7 +48,7 @@ skip_processing = false
 
 # Deploy Previews (when creating a pull request)
 [context.deploy-preview]
-command = "npm run build:js && hugo --gc --minify --environment beta"
+command = "npm ci && npm run build:beta"
 
 [context.deploy-preview.environment]
 HUGO_ENV = "beta"

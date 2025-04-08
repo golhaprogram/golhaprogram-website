@@ -9,9 +9,9 @@
     "dev:beta": "hugo server -e beta",
     "build": "npm run build:js && npm run build:sass && hugo --gc --minify",
     "build:beta": "npm run build:js && npm run build:sass && hugo --gc --minify -e beta",
-    "build:js": "esbuild assets/js/main.js --bundle --minify --outdir=static/js",
-    "build:sass": "sass assets/sass/main.scss:static/css/main.css",
-    "watch:sass": "sass --watch assets/sass/main.scss:static/css/main.css"
+    "build:js": "npx esbuild assets/js/main.js --bundle --minify --outdir=static/js",
+    "build:sass": "npx sass assets/sass/main.scss:static/css/main.css",
+    "watch:sass": "npx sass --watch assets/sass/main.scss:static/css/main.css"
   },
   "repository": {
     "type": "git",
