@@ -1,7 +1,7 @@
 # Base configuration for all branches
 [build]
 publish = "public"
-command = "chmod +x ./build.sh && ./build.sh"
+command = "hugo --gc --minify -e production"
 
 [build.environment]
 HUGO_VERSION = "0.139.2"
@@ -20,20 +20,43 @@ html = true
 includePaths = ["assets/css"]
 
 # Production context: main branch
+[context.production]
+command = "npm run build:js && hugo --gc --minify --environment production"
+
 [context.production.environment]
 HUGO_ENV = "production"
+NODE_ENV = "production"
 
 # Beta context: beta branch
+[context.beta]
+command = "npm run build:js && hugo --gc --minify --environment beta"
+
 [context.beta.environment]
 HUGO_ENV = "beta"
+NODE_ENV = "production"
 
-# Default context (for branch deploys)
+# Branch deploys (when pushing to a branch other than main or beta)
+[context.branch-deploy]
+command = "npm run build:js && hugo --gc --minify --environment beta"
+
 [context.branch-deploy.environment]
-HUGO_ENV = "branch-deploy"
+HUGO_ENV = "beta"
+NODE_ENV = "production"
 
-# Default context (when deploying to PR)
+[context.branch-deploy.processing]
+skip_processing = false
+
+# Deploy Previews (when creating a pull request)
+[context.deploy-preview]
+command = "npm run build:js && hugo --gc --minify --environment beta"
+
 [context.deploy-preview.environment]
-HUGO_ENV = "deploy-preview"
+HUGO_ENV = "beta"
+NODE_ENV = "production"
+
+[context.deploy-preview.processing]
+skip_processing = false
+
 
 # 404 page handling
 [[redirects]]
