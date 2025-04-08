@@ -1,4 +1,4 @@
-baseURL = "https://beta.golhaprogram.com"
+baseURL = "https://golhaprogram.com"
 title = "برنامه‌ی گلها"
 theme = "PaperMod"
 defaultContentLanguage = "fa"
@@ -40,7 +40,6 @@ announcer = "announcers"
 composers = "composers"
 arrangers = "arrangers"
 
-
 [menu]
 [[menu.main]]
 name = "خانه"
@@ -60,16 +59,8 @@ weight = 3
 [build]
 writeStats = true
 
-
 [build.buildStats]
 enable = true
-
-[build.processing]
-js = true
-html = true
-
-[build.processing.css]
-includePaths = ["assets/css"]
 
 [module]
 [[module.mounts]]
@@ -78,12 +69,8 @@ target = "assets"
 [module.hugoVersion]
 extended = true
 
-
 [minify]
 minifyOutput = true
-
-[minify.css]
-includePaths = ["assets/css"]
 
 [outputFormats.JSON]
 mediaType = "application/json"
