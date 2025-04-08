@@ -1,0 +1,20 @@
+{{- $page := . -}}
+{{- $audioHost := site.Params.audioHost -}}
+{{- $sections := split (trim $page.RelPermalink "/") "/" -}}
+{{- $programType := index $sections 1 -}}
+{{- $programNumber := index $sections (sub (len $sections) 1) -}}
+
+{{- $prefix := "" -}}
+{{- if eq $programType "golhaye-rangarang" -}}
+{{- $prefix = "GR" -}}
+{{- else if eq $programType "golhaye-tazeh" -}}
+{{- $prefix = "GT" -}}
+{{- else if eq $programType "golhaye-javidan" -}}
+{{- $prefix = "GJ" -}}
+{{- else if eq $programType "yek-shakhe-gol" -}}
+{{- $prefix = "YSG" -}}
+{{- else if eq $programType "golhaye-sahraee" -}}
+{{- $prefix = "GS" -}}
+{{- end -}}
+
+{{- printf "https://%s/%s_%s.mp3" $audioHost $prefix $programNumber -}}

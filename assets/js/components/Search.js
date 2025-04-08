@@ -1,8 +1,15 @@
 import Fuse from 'fuse.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+export function initializeSearch() {
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
+  
+  // If elements don't exist, return early
+  if (!searchInput || !searchResults) {
+    console.warn('Search elements not found in the DOM');
+    return;
+  }
+  
   let searchData;
   let fuse;
 
@@ -37,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
         minMatchCharLength: 2     // Minimum character length for a match
         //distance: 0 // Makes matching more strict
       });
+    })
+    .catch(err => {
+      console.error('Error fetching search index:', err);
     });
 
   // Handle search input
@@ -160,12 +170,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }).join('');
 
 
-    searchResults.style.display = 'block';
-  } else {
-    searchResults.innerHTML = '<div class="no-results">نتیجه‌ای یافت نشد</div>';
-    searchResults.style.display = 'block';
-  }
-
+        searchResults.style.display = 'block';
+      } else {
+        searchResults.innerHTML = '<div class="no-results">نتیجه‌ای یافت نشد</div>';
+        searchResults.style.display = 'block';
+      }
     }
   });
 
@@ -175,4 +184,4 @@ document.addEventListener('DOMContentLoaded', function() {
       searchResults.style.display = 'none';
     }
   });
-});
+}

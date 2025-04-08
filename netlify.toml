@@ -9,6 +9,14 @@
   HUGO_ENV = "production"
   HUGO_ENABLEGITINFO = "true"
 
+# Production context (main branch)
+[context.production]
+  command = "hugo --gc --minify -e production"
+
+# Beta context
+[context.beta]
+  command = "hugo --gc --minify -e beta"
+
 [[redirects]]
   from = "/*"
   to = "/404.html"

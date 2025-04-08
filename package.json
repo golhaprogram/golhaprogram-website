@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "hugo server",
-    "build": "npm run build:js && hugo --minify",
-    "build:js": "esbuild assets/js/main.js --bundle --minify --outdir=static/js",
-    "build:sass": "sass assets/sass/main.scss:static/css/main.css",
-    "watch:sass": "sass --watch assets/sass/main.scss:static/css/main.css"
+    "dev:beta": "hugo server -e beta",
+    "build": "npm run build:js && hugo --gc --minify",
+    "build:beta": "npm run build:js && hugo --gc --minify -e beta",
+    "build:js": "npx esbuild assets/js/main.js --bundle --minify --outdir=static/js"
   },
   "repository": {
     "type": "git",
