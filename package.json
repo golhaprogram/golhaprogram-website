@@ -7,11 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "hugo server",
     "dev:beta": "hugo server -e beta",
-    "build": "npm run build:js && npm run build:sass && hugo --gc --minify",
-    "build:beta": "npm run build:js && npm run build:sass && hugo --gc --minify -e beta",
-    "build:js": "npx esbuild assets/js/main.js --bundle --minify --outdir=static/js",
-    "build:sass": "npx sass assets/sass/main.scss:static/css/main.css",
-    "watch:sass": "npx sass --watch assets/sass/main.scss:static/css/main.css"
+    "build": "npm run build:js && hugo --gc --minify",
+    "build:beta": "npm run build:js && hugo --gc --minify -e beta",
+    "build:js": "npx esbuild assets/js/main.js --bundle --minify --outdir=static/js"
   },
   "repository": {
     "type": "git",
