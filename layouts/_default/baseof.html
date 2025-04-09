@@ -32,9 +32,6 @@
   {{ $style := resources.Get "css/main.css" | css.Sass | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" blocking="render">
 
-  <!-- Comments -->
-  <script defer src="https://cdn.commento.io/js/commento.js"></script>
-
 </head>
 
 <body dir="rtl">
