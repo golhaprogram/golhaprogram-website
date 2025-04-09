@@ -15,7 +15,7 @@
 
 # Beta context
 [context.beta]
-  command = "hugo --gc --minify -e beta --baseURL /"
+  command = "hugo --gc --minify -e beta"
 
 [context.beta.environment]
   HUGO_ENV = "beta"
