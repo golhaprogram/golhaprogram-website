@@ -17,6 +17,34 @@
 [context.beta]
   command = "hugo --gc --minify -e beta"
 
+[context.beta.environment]
+  HUGO_ENV = "beta"
+
+# Branch deploys (other than beta and production)
+[context.branch-deploy]
+  command = "hugo --gc --minify -e beta --baseURL /"
+
+[context.branch-deploy.environment]
+  HUGO_ENV = "beta"
+
+# Deploy previews (PRs)
+[context.deploy-preview]
+  command = "hugo --gc --minify -e beta --baseURL /"
+
+[context.deploy-preview.environment]
+  HUGO_ENV = "beta"
+
+# CORS headers for resources
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
 [[redirects]]
   from = "/*"
   to = "/404.html"
