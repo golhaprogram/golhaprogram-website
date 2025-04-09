@@ -34,6 +34,17 @@
 [context.deploy-preview.environment]
   HUGO_ENV = "beta"
 
+# CORS headers for resources
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
 [[redirects]]
   from = "/*"
   to = "/404.html"
