@@ -7,9 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "hugo server",
     "dev:beta": "hugo server -e beta",
-    "build": "npm run build:js && hugo --gc --minify",
-    "build:beta": "npm run build:js && hugo --gc --minify -e beta",
-    "build:js": "npx esbuild assets/js/main.js --bundle --minify --outdir=static/js"
+    "build": "hugo --gc --minify",
+    "build:beta": "hugo --gc --minify -e beta"
   },
   "repository": {
     "type": "git",
