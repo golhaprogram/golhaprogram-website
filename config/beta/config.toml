@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://beta.golhaprogram.com"
 
 [params]
 commentsHost = "comments.beta.golhaprogram.com"

@@ -39,11 +39,29 @@
   for = "/*.css"
   [headers.values]
     Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET"
+    Cache-Control = "public, max-age=31536000"
 
 [[headers]]
   for = "/*.js"
   [headers.values]
     Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET"
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET"
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET"
+    Cache-Control = "public, max-age=31536000"
 
 [[redirects]]
   from = "/*"
