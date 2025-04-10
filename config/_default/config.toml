@@ -84,5 +84,6 @@ home = ["HTML", "JSON"]
 [params]
 # Common parameters
 commentsHost = "comments.golhaprogram.com"
+commentsSiteId = "golhaprogram"
 audioHost = "music.golhaprogram.com"
 environment = "production"

@@ -2,4 +2,5 @@ baseURL = "https://golhaprogram.com"
 
 [params]
 commentsHost = "comments.golhaprogram.com"
+commentsSiteId = "golhaprogram"
 environment = "production"
