@@ -23,10 +23,17 @@
 -->
 
   {{/* Styles */}}
-  <!-- Vazir Font from CDN with local fallback -->
+  <!-- Vaziramatn Font from CDN with local fallback -->
+  <!--
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet"
     type="text/css">
+   -->
+
+  <!-- Sahel Font from CDN -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/font-face.css" rel="stylesheet"
+    type="text/css" />
 
   <!-- CSS -->
   {{ $style := resources.Get "css/main.css" | css.Sass | resources.Minify | resources.Fingerprint }}
