@@ -1,15 +1,14 @@
 <h3>دیدگاه‌ها</h3>
 
-<div id="remark42" class="3comments-section"></div>
+<div id="remark42" class="comments-section"></div>
 <script>
   var remark_config = {
-    host: "https://comments.golhaprogram.com",
+    host: "https://{{ .Site.Params.commentsHost }}",
     site_id: "golhaprogram",
     components: ["embed"],
     max_shown_comments: 10,
     theme: "light",
     locale: "fa"
-
   };
 
   (function (c) {
