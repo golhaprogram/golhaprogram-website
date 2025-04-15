@@ -1,6 +1,5 @@
 baseURL = "https://beta.golhaprogram.com"
 
-[params]
+[params.remark42]
 commentsHost = "comments-beta.golhaprogram.com"
 commentsSiteId = "golhaprogram"
-environment = "beta"
