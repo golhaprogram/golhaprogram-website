@@ -13,7 +13,7 @@
     <div class="singers">
       <h3>خوانندگان:</h3>
       {{ range .Params.singers }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /singers/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -22,7 +22,7 @@
     <div class="players">
       <h3>نوازندگان:</h3>
       {{ range .Params.players }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /players/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -31,7 +31,7 @@
     <div class="poets">
       <h3>شعرا:</h3>
       {{ range .Params.poets }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /poets/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -40,7 +40,7 @@
     <div class="announcers">
       <h3>گوینده:</h3>
       {{ range .Params.announcers }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /announcers/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
