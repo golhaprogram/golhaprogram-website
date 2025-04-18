@@ -1,6 +1,12 @@
 [![Hugo](https://img.shields.io/badge/Hugo-v0.139-ff4088?style=flat&logo=hugo&logoColor=white)](https://gohugo.io/)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b61dbce9-7c5c-470d-965a-cc96398cf91b/deploy-status)](https://app.netlify.com/sites/golhaprogram/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/45546953-eb4c-4e37-9a72-ecaf2f938b8c/deploy-status)](https://app.netlify.com/sites/golhaprogram/deploys)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.fa)
+[![remark42](https://img.shields.io/badge/Remark42-darkgreen)](https://remark42.com)
+[![Cloudflare](https://img.shields.io/badge/Cloudflare-%23F38020.svg?style=flat&logo=cloudflare&logoColor=white)](https://www.cloudflare.com/)
+[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=flat&logo=github&logoColor=white)](https://github.com/golhaprogram)
+[![DigitalOcean](https://img.shields.io/badge/DigitalOcean-%230167ff.svg?style=flat&logo=digitalOcean&logoColor=white)](https://www.digitalocean.com/)
+[![Docker](https://img.shields.io/badge/Docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Backblaze](https://img.shields.io/badge/Backblaze-%23E21E29.svg?style=flat&logo=backblaze&logoColor=white)](https://www.backblaze.com/)
 
 <!--
 https://img.shields.io/badge/LEFT-RIGHT-COLOR

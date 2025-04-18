@@ -1,75 +1,73 @@
 {{ define "main" }}
 
-{{ if eq hugo.Environment "development" }}
-  {{ partial "debug.html" . }}
-{{ end }}
+{{ partial "debug.html" . }}
 
 
 <div class="container" dir="rtl">
-    <div class="program-section">
-        <header class="program-section-header">
-            <h1>برنامه‌های گلها</h1>
-            {{ with .GetPage "/programs/" }}
-                {{ .Content }}
-            {{ end }}
-        </header>
+  <div class="program-section">
+    <header class="program-section-header">
+      <h1>برنامه‌های گلها</h1>
+      {{ with .GetPage "/programs/" }}
+      {{ .Content }}
+      {{ end }}
+    </header>
 
-        <div class="program-section-grid">
-            <div class="program-section-card">
-                <h2>
-                    <a href="/programs/golhaye-rangarang" class="card-title">گلهای رنگارنگ</a>
-                </h2>
-                {{ with .GetPage "/programs/golhaye-rangarang" }}
-                    {{ .Content }}
-                {{ end }}
-            </div>
+    <div class="program-section-grid">
+      <div class="program-section-card">
+        <h2>
+          <a href="/programs/golhaye-rangarang" class="card-title">گلهای رنگارنگ</a>
+        </h2>
+        {{ with .GetPage "/programs/golhaye-rangarang" }}
+        {{ .Content }}
+        {{ end }}
+      </div>
 
-            <div class="program-section-card">
-                <h2>
-                    <a href="/programs/golhaye-tazeh" class="card-title">گلهای تازه</a>
-                </h2>
-                {{ with .GetPage "/programs/golhaye-tazeh" }}
-                    {{ .Content }}
-                {{ end }}
-            </div>
+      <div class="program-section-card">
+        <h2>
+          <a href="/programs/golhaye-tazeh" class="card-title">گلهای تازه</a>
+        </h2>
+        {{ with .GetPage "/programs/golhaye-tazeh" }}
+        {{ .Content }}
+        {{ end }}
+      </div>
 
-            <div class="program-section-card">
-                <h2>
-                    <a href="/programs/golhaye-javidan" class="card-title">گلهای جاویدان</a>
-                </h2>
-                {{ with .GetPage "/programs/golhaye-javidan" }}
-                    {{ .Content }}
-                {{ end }}
-            </div>
+      <div class="program-section-card">
+        <h2>
+          <a href="/programs/golhaye-javidan" class="card-title">گلهای جاویدان</a>
+        </h2>
+        {{ with .GetPage "/programs/golhaye-javidan" }}
+        {{ .Content }}
+        {{ end }}
+      </div>
 
-            <div class="program-section-card">
-                <h2>
-                    <a href="/programs/golhaye-sahraee" class="card-title">گلهای صحرایی</a>
-                </h2>
-                {{ with .GetPage "/programs/golhaye-sahraee" }}
-                    {{ .Content }}
-                {{ end }}
-            </div>
+      <div class="program-section-card">
+        <h2>
+          <a href="/programs/golhaye-sahraee" class="card-title">گلهای صحرایی</a>
+        </h2>
+        {{ with .GetPage "/programs/golhaye-sahraee" }}
+        {{ .Content }}
+        {{ end }}
+      </div>
 
-            <div class="program-section-card">
-                <h2>
-                    <a href="/programs/yek-shakhe-gol" class="card-title">یک شاخه گل</a>
-                </h2>
-                {{ with .GetPage "/programs/yek-shakhe-gol" }}
-                    {{ .Content }}
-                {{ end }}
-            </div>
+      <div class="program-section-card">
+        <h2>
+          <a href="/programs/yek-shakhe-gol" class="card-title">یک شاخه گل</a>
+        </h2>
+        {{ with .GetPage "/programs/yek-shakhe-gol" }}
+        {{ .Content }}
+        {{ end }}
+      </div>
 
-            <div class="program-section-card">
-                <h2>
-                    <a href="/programs/barge-sabz" class="card-title">برگ سبز</a>
-                </h2>
-                {{ with .GetPage "/programs/barge-sabz" }}
-                    {{ .Content }}
-                {{ end }}
-            </div>
-        </div>
+      <div class="program-section-card">
+        <h2>
+          <a href="/programs/barge-sabz" class="card-title">برگ سبز</a>
+        </h2>
+        {{ with .GetPage "/programs/barge-sabz" }}
+        {{ .Content }}
+        {{ end }}
+      </div>
     </div>
+  </div>
 </div>
 
 {{ partial "tag-cloud.html" (dict "context" . "allPrograms" true "debug" true) }}
