@@ -1,8 +1,8 @@
 {{ define "main" }}
 <div class="home" dir="rtl" style="text-align: center; padding: 2rem;">
-    <h1>گلها</h1>
-    <div style="margin-top: 2rem;">
-        <a href="/programs/" style="
+  <h1>گلها</h1>
+  <div style="margin-top: 2rem;">
+    <a href="/programs/" style="
             display: inline-block;
             padding: 1rem 2rem;
             background-color: #4a5568;
@@ -10,11 +10,13 @@
             text-decoration: none;
             border-radius: 0.25rem;
             font-size: 1.25rem;">
-            برنامه‌های گلها
-        </a>
-    </div>
+      برنامه‌های گلها
+    </a>
+  </div>
 
-  <div> <p></p> </div>
+  <div>
+    <p></p>
+  </div>
   {{ partial "tag-cloud.html" (dict "context" . "allPrograms" true "debug" true) }}
 
 </div>

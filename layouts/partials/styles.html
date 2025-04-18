@@ -1,0 +1,3 @@
+<!-- CSS -->
+{{ $style := resources.Get "css/main.css" | css.Sass | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" blocking="render">

@@ -25,13 +25,14 @@
   {{ end }}
 
   <div class="performers-grid">
-    {{ range $term, $pages := .Data.Terms }}
+    {{ $sortedTerms := partial "persian-sort.html" . }}
+    {{ range $sortedTerms }}
     <div class="performer-card">
       <h2>
-        <a href="{{ $.RelPermalink }}{{ $term | urlize }}/" class="performer-name">{{ $term }}</a>
+        <a href="{{ $.RelPermalink }}{{ .term | urlize }}/" class="performer-name">{{ .term }}</a>
       </h2>
       <div class="performer-stats">
-        <span class="program-count">{{ len $pages }} برنامه</span>
+        <span class="program-count">{{ len .pages }} برنامه</span>
       </div>
     </div>
     {{ end }}

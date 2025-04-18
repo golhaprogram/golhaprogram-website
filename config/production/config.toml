@@ -1,5 +1,11 @@
 baseURL = "https://golhaprogram.com"
 
-[params]
+[params.remark42]
 commentsHost = "comments.golhaprogram.com"
-environment = "production"
+commentsSiteId = "golhaprogram"
+
+[params.plausible]
+enable = true
+domain = "golhaprogram.com"
+# Default script URL, can be changed for self-hosted instances
+scriptURL = "https://plausible.io/js/script.js"

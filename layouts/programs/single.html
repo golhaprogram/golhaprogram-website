@@ -6,32 +6,14 @@
     <h1>{{ partial "program-title" . }}</h1>
   </header>
 
-  {{ $audioURL := partial "audio-url" . }}
-
-  <div class="audio-player">
-    <div class="audio-container">
-      <audio controls>
-        <source src="{{ $audioURL }}" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      <a href="{{ $audioURL }}" download="{{ path.Base $audioURL }}" class="download-button" title="دانلود"
-        onclick="event.preventDefault(); window.open(this.href, '_blank');">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" y1="15" x2="12" y2="3" />
-        </svg>
-      </a>
-    </div>
-  </div>
+  {{ partial "audio-player.html" . }}
 
   <div class="performers">
     {{ if .Params.singers }}
     <div class="singers">
       <h3>خوانندگان:</h3>
       {{ range .Params.singers }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /singers/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -40,7 +22,7 @@
     <div class="players">
       <h3>نوازندگان:</h3>
       {{ range .Params.players }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /players/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -49,7 +31,7 @@
     <div class="poets">
       <h3>شعرا:</h3>
       {{ range .Params.poets }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /poets/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}
@@ -58,7 +40,7 @@
     <div class="announcers">
       <h3>گوینده:</h3>
       {{ range .Params.announcers }}
-      <span class="performer">{{ . }}</span>
+      <a href="{{ printf " /announcers/%s/" . | urlize }}" class="performer">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}

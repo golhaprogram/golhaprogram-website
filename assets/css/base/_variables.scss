@@ -1,17 +1,23 @@
 :root {
-    --primary-color: #2c3e50;
-    --primary-rgb: 44, 62, 80;  /* RGB values for primary color */
-    --secondary-color: #4095eb;
-    --secondary-rgb: 52, 73, 94;
-    --accent-color: #4095eb;   
-    --accent-dark: #1b4f85;   /* Darker shade for hover */
-    --accent-rgb: 142, 68, 173;
-    --background-color: #f8f9fa;
-    --background-accent: #cbd5e0;
-    --performer-bg: #f1f5f9;  /* Light gray-blue background */
-    --performer-border: #e2e8f0;  /* Slightly darker for border */
-    --text-color: #2c3e50;
-    --border-color: #e0e0e0;
-    --player-background: #ffffff;
-    --max-width: 800px;
+  /*--primary-font: 'Vaziramatn', Arial, sans-serif;*/
+  --primary-font: 'Sahel', Arial, sans-serif;
+  --primary-color: #2c3e50;
+  --primary-rgb: 44, 62, 80;
+  /* RGB values for primary color */
+  --secondary-color: #4095eb;
+  --secondary-rgb: 52, 73, 94;
+  --accent-color: #4095eb;
+  --accent-dark: #1b4f85;
+  /* Darker shade for hover */
+  --accent-rgb: 142, 68, 173;
+  --background-color: #f8f9fa;
+  --background-accent: #cbd5e0;
+  --performer-bg: #f1f5f9;
+  /* Light gray-blue background */
+  --performer-border: #e2e8f0;
+  /* Slightly darker for border */
+  --text-color: #2c3e50;
+  --border-color: #e0e0e0;
+  --player-background: #ffffff;
+  --max-width: 800px;
 }

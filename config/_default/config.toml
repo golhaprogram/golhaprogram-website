@@ -78,11 +78,22 @@ baseName = "index"
 isPlainText = true
 notAlternative = true
 
+[sitemap]
+changefreq = "monthly"
+filename = "sitemap.xml"
+priority = 0.5
+
+[outputFormats.Sitemap]
+mediaType = "application/xml"
+baseName = "sitemap"
+isHTML = false
+isPlainText = false
+noUgly = true
+rel = "sitemap"
+
 [outputs]
-home = ["HTML", "JSON"]
+home = ["HTML", "JSON", "RSS", "Sitemap"]
 
 [params]
 # Common parameters
-commentsHost = "comments.golhaprogram.com"
 audioHost = "music.golhaprogram.com"
-environment = "production"
