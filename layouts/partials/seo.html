@@ -3,6 +3,11 @@
 <meta name="description"
   content="{{ if .Description }}{{ .Description }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
 
+<!-- Robots control -->
+{{ if .Site.Params.noindex }}
+<meta name="robots" content="noindex, nofollow">
+{{ end }}
+
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ .Permalink }}">
 
