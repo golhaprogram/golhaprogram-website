@@ -1,73 +1,80 @@
 [build]
-  publish = "public"
-  command = "hugo --gc --minify"
+publish = "public"
+command = "hugo --gc --minify"
 
 [build.environment]
-  HUGO_VERSION = "0.139.2"
-  NODE_VERSION = "20"
-  NPM_VERSION = "10"
-  HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
+HUGO_VERSION = "0.139.2"
+NODE_VERSION = "20"
+NPM_VERSION = "10"
+HUGO_ENV = "production"
+HUGO_ENABLEGITINFO = "true"
 
 # Production context (main branch)
 [context.production]
-  command = "hugo --gc --minify -e production"
+command = "hugo --gc --minify -e production"
 
 # Beta context
 [context.beta]
-  command = "hugo --gc --minify -e beta"
+command = "hugo --gc --minify -e beta"
 
 [context.beta.environment]
-  HUGO_ENV = "beta"
+HUGO_ENV = "beta"
 
 # Branch deploys (other than beta and production)
 [context.branch-deploy]
-  command = "hugo --gc --minify -e beta --baseURL /"
+command = "hugo --gc --minify -e beta --baseURL /"
 
 [context.branch-deploy.environment]
-  HUGO_ENV = "beta"
+HUGO_ENV = "beta"
 
 # Deploy previews (PRs)
 [context.deploy-preview]
-  command = "hugo --gc --minify -e beta --baseURL /"
+command = "hugo --gc --minify -e beta --baseURL /"
 
 [context.deploy-preview.environment]
-  HUGO_ENV = "beta"
+HUGO_ENV = "beta"
 
 # CORS headers for resources
 [[headers]]
-  for = "/*.css"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET"
-    Cache-Control = "public, max-age=31536000"
+for = "/*.css"
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET"
+Cache-Control = "public, max-age=31536000"
 
 [[headers]]
-  for = "/*.js"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET"
-    Cache-Control = "public, max-age=31536000"
+for = "/*.js"
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET"
+Cache-Control = "public, max-age=31536000"
 
 [[headers]]
-  for = "/fonts/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET"
-    Cache-Control = "public, max-age=31536000"
+for = "/fonts/*"
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET"
+Cache-Control = "public, max-age=31536000"
 
 [[headers]]
-  for = "/images/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET"
-    Cache-Control = "public, max-age=31536000"
+for = "/images/*"
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET"
+Cache-Control = "public, max-age=31536000"
 
 [[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
+from = "https://www.golhaprogram.com/*"
+to = "https://golhaprogram.com/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "/*"
+to = "/404.html"
+status = 404
 
 [dev]
-  framework = "hugo"
-  targetPort = 1313
+framework = "hugo"
+targetPort = 1313
+
