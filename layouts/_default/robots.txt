@@ -1,0 +1,26 @@
+{{ if .Site.Params.noindex }}
+# Disallow all web crawlers for non-production environments
+User-agent: *
+Disallow: /
+
+# This is a test/staging environment and should not be indexed
+{{ else }}
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Block access to admin areas
+Disallow: /admin/
+
+# Allow access to resources
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /fonts/
+
+# Set crawl delay to prevent server overload
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: {{ .Site.BaseURL }}/sitemap.xml
+{{ end }}

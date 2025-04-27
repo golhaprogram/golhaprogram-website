@@ -23,12 +23,12 @@ weight = 1
 rtl = true
 
 [permalinks]
-programs = "/:section/:sections[last]/:filename/"
+programs = "/:section/:contentbasename/"
 singers = "/singers/:slug/"
 players = "/players/:slug/"
 poets = "/poets/:slug/"
 announcers = "/announcers/:slug/"
-composers = "/composers`/:slug/"
+composers = "/composers/:slug/"
 arrangers = "/arrangers/:slug/"
 
 [taxonomies]
@@ -92,8 +92,17 @@ noUgly = true
 rel = "sitemap"
 
 [outputs]
-home = ["HTML", "JSON", "RSS", "Sitemap"]
+home = ["HTML", "JSON", "RSS", "Sitemap", "ROBOTS"]
+
+[outputFormats.ROBOTS]
+mediatype = "text/plain"
+baseName = "robots"
+isPlainText = true
+notAlternative = true
 
 [params]
 # Common parameters
 audioHost = "music.golhaprogram.com"
+description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گلهای رنگارنگ، گلهای تازه، گلهای جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
+defaultImage = "/images/golha-og-image.jpg"  # Default image for social sharing
+twitter = "golhaprogram"  # Twitter username without @

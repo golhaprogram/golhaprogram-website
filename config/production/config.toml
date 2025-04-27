@@ -1,5 +1,8 @@
 baseURL = "https://golhaprogram.com"
 
+[params]
+noindex = false
+
 [params.remark42]
 commentsHost = "comments.golhaprogram.com"
 commentsSiteId = "golhaprogram"
