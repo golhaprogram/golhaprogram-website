@@ -2,6 +2,7 @@ baseURL = "https://golhaprogram.com"
 
 [params]
 noindex = false
+enableCSP = false  # Set to true to enable CSP, false to disable
 
 [params.remark42]
 commentsHost = "comments.golhaprogram.com"
