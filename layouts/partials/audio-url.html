@@ -17,4 +17,6 @@
 {{- $prefix = "GS" -}}
 {{- end -}}
 
-{{- printf "https://%s/%s_%s.mp3" $audioHost $prefix $programNumber -}}
+{{/* Preserve uppercase letters in program number */}}
+{{- $originalFilename := $page.File.ContentBaseName -}}
+{{- printf "https://%s/%s_%s.mp3" $audioHost $prefix $originalFilename -}}
