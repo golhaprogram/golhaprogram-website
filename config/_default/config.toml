@@ -93,6 +93,10 @@ rel = "sitemap"
 
 [outputs]
 home = ["HTML", "JSON", "RSS", "Sitemap", "ROBOTS"]
+page = ["HTML"]
+section = ["HTML"]
+taxonomyTerm = ["HTML"]
+taxonomy = ["HTML"]
 
 [outputFormats.ROBOTS]
 mediatype = "text/plain"
