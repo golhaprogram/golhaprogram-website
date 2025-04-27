@@ -103,3 +103,6 @@ notAlternative = true
 [params]
 # Common parameters
 audioHost = "music.golhaprogram.com"
+description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گلهای رنگارنگ، گلهای تازه، گلهای جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
+defaultImage = "/images/golha-og-image.jpg"  # Default image for social sharing
+twitter = "golhaprogram"  # Twitter username without @
