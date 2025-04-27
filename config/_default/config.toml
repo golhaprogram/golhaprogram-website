@@ -23,12 +23,12 @@ weight = 1
 rtl = true
 
 [permalinks]
-programs = "/:section/:sections[last]/:contentbasename/"
+programs = "/:section/:contentbasename/"
 singers = "/singers/:slug/"
 players = "/players/:slug/"
 poets = "/poets/:slug/"
 announcers = "/announcers/:slug/"
-composers = "/composers`/:slug/"
+composers = "/composers/:slug/"
 arrangers = "/arrangers/:slug/"
 
 [taxonomies]
