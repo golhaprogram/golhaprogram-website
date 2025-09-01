@@ -1,0 +1,154 @@
+name: Normalize Persian Text
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '**/*.markdown'
+  push:
+    branches: [main, master]
+    paths:
+      - '**/*.md'
+      - '**/*.markdown'
+
+jobs:
+  normalize-persian:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        # Important: fetch full history and use token for pushing
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Normalize Persian Text
+      id: normalize
+      run: |
+        # Create the normalizer script inline
+        cat > normalize.js << 'EOF'
+        const fs = require('fs');
+        const path = require('path');
+        
+        function normalizePersianText(text) {
+            return text
+                // Most common issues
+                .replace(/ك/g, 'ک')   // Arabic kaf to Persian kaf
+                .replace(/ي/g, 'ی')   // Arabic yeh to Persian yeh
+                
+                // Other Arabic letters commonly mixed up
+                .replace(/ؤ/g, 'و')   // Arabic waw with hamza to Persian waw
+                .replace(/إ/g, 'ا')   // Arabic alef with hamza below to Persian alef
+                .replace(/أ/g, 'ا')   // Arabic alef with hamza above to Persian alef
+                .replace(/آ/g, 'آ')   // Ensure consistent alef with madda (this is actually correct)
+                .replace(/ة/g, 'ه')   // Arabic teh marbuta to Persian heh
+                
+                // Numbers - Arabic-Indic to Persian
+                .replace(/٠/g, '۰')   // 0
+                .replace(/١/g, '۱')   // 1
+                .replace(/٢/g, '۲')   // 2
+                .replace(/٣/g, '۳')   // 3
+                .replace(/٤/g, '۴')   // 4
+                .replace(/٥/g, '۵')   // 5
+                .replace(/٦/g, '۶')   // 6
+                .replace(/٧/g, '۷')   // 7
+                .replace(/٨/g, '۸')   // 8
+                .replace(/٩/g, '۹')   // 9
+                
+                // Less common but still seen
+                .replace(/ء/g, 'ٔ')   // Arabic hamza to Persian hamza
+                .replace(/ئ/g, 'ئ')   // Ensure Persian yeh with hamza (this is correct)
+                .replace(/ؤ/g, 'ؤ');  // Persian waw with hamza (keep as is)
+        }
+        
+        function processFile(filePath) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const normalized = normalizePersianText(content);
+                if (content !== normalized) {
+                    fs.writeFileSync(filePath, normalized, 'utf8');
+                    console.log('✅ Normalized:', filePath);
+                    return true;
+                }
+                return false;
+            } catch (error) {
+                console.error('❌ Error processing', filePath, ':', error.message);
+                return false;
+            }
+        }
+        
+        // Find and process all markdown files
+        const { execSync } = require('child_process');
+        let files;
+        try {
+            files = execSync('find . -name "*.md" -o -name "*.markdown"', { encoding: 'utf8' })
+                .trim().split('\n').filter(f => f && f.length > 0);
+        } catch (error) {
+            console.log('No markdown files found or error occurred');
+            process.exit(0);
+        }
+        
+        if (files.length === 0) {
+            console.log('No markdown files found');
+            process.exit(0);
+        }
+        
+        console.log(`Found ${files.length} markdown files`);
+        
+        let changedFiles = [];
+        files.forEach(file => {
+            if (processFile(file)) {
+                changedFiles.push(file);
+            }
+        });
+        
+        if (changedFiles.length > 0) {
+            console.log(`\n🎉 Normalized ${changedFiles.length} files:`);
+            changedFiles.forEach(file => console.log(`  - ${file}`));
+            process.exit(1); // Signal that changes were made
+        } else {
+            console.log('✨ All files already normalized - no changes needed');
+            process.exit(0);
+        }
+        EOF
+        
+        node normalize.js
+    
+    - name: Commit and push changes
+      if: failure() # Only runs if normalization script found changes (exit 1)
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        
+        git add -A
+        
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+        
+        # Check if we're on a PR
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          # For PRs, push to the PR branch
+          git commit -m "🔄 Auto-normalize Persian text
+          
+          Converted Arabic letters to Persian equivalents:
+          - ك → ک (kaf)
+          - ي → ی (yeh)
+          - ؤ → و (waw)
+          - إ/أ → ا (alef)
+          - ة → ه (heh)
+          - Arabic-Indic numerals → Persian numerals
+          
+          This ensures consistent Persian typography across the site."
+          
+          git push origin HEAD:${{ github.head_ref }}
+        else
+          # For direct pushes to main/master
+          git commit -m "🔄 Auto-normalize Persian text [skip ci]"
+          git push
+        fi
