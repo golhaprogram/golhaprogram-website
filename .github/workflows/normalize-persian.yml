@@ -5,34 +5,63 @@ on:
     paths:
       - '**/*.md'
       - '**/*.markdown'
-  push:
-    branches: [main, master]
-    paths:
-      - '**/*.md'
-      - '**/*.markdown'
 
 jobs:
   normalize-persian:
     runs-on: ubuntu-latest
+    # Only run if PR is from same repository (not forks)
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
     steps:
     - uses: actions/checkout@v4
       with:
-        # Important: fetch full history and use token for pushing
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
+        ref: ${{ github.head_ref }}
     
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
     
+    - name: Get changed files
+      id: changed-files
+      run: |
+        # Get only the markdown files that were actually changed in this PR
+        git fetch origin ${{ github.base_ref }}
+        CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '\.(md|markdown)$' || true)
+        
+        if [ -z "$CHANGED_FILES" ]; then
+          echo "No markdown files changed in this PR"
+          echo "changed_files=" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+        
+        echo "Changed markdown files:"
+        echo "$CHANGED_FILES"
+        
+        # Convert to space-separated list for the next step
+        CHANGED_FILES_LIST=$(echo "$CHANGED_FILES" | tr '\n' ' ')
+        echo "changed_files=$CHANGED_FILES_LIST" >> $GITHUB_OUTPUT
+    
     - name: Normalize Persian Text
       id: normalize
+      if: steps.changed-files.outputs.changed_files != ''
       run: |
-        # Create the normalizer script inline
+        CHANGED_FILES="${{ steps.changed-files.outputs.changed_files }}"
+        
+        if [ -z "$CHANGED_FILES" ]; then
+          echo "No files to process"
+          exit 0
+        fi
+        
+        # Create the normalizer script
         cat > normalize.js << 'EOF'
         const fs = require('fs');
-        const path = require('path');
         
         function normalizePersianText(text) {
             return text
@@ -67,42 +96,43 @@ jobs:
         
         function processFile(filePath) {
             try {
+                if (!fs.existsSync(filePath)) {
+                    console.log('⚠️  File not found:', filePath);
+                    return false;
+                }
+                
                 const content = fs.readFileSync(filePath, 'utf8');
                 const normalized = normalizePersianText(content);
+                
                 if (content !== normalized) {
                     fs.writeFileSync(filePath, normalized, 'utf8');
                     console.log('✅ Normalized:', filePath);
                     return true;
+                } else {
+                    console.log('✨ Already normalized:', filePath);
+                    return false;
                 }
-                return false;
             } catch (error) {
                 console.error('❌ Error processing', filePath, ':', error.message);
                 return false;
             }
         }
         
-        // Find and process all markdown files
-        const { execSync } = require('child_process');
-        let files;
-        try {
-            files = execSync('find . -name "*.md" -o -name "*.markdown"', { encoding: 'utf8' })
-                .trim().split('\n').filter(f => f && f.length > 0);
-        } catch (error) {
-            console.log('No markdown files found or error occurred');
-            process.exit(0);
-        }
+        // Process only the files passed as arguments
+        const files = process.argv.slice(2).filter(f => f.trim().length > 0);
         
         if (files.length === 0) {
-            console.log('No markdown files found');
+            console.log('No files to process');
             process.exit(0);
         }
         
-        console.log(`Found ${files.length} markdown files`);
+        console.log(`Processing ${files.length} changed markdown files:`);
+        files.forEach(f => console.log(`  - ${f}`));
         
         let changedFiles = [];
         files.forEach(file => {
-            if (processFile(file)) {
-                changedFiles.push(file);
+            if (processFile(file.trim())) {
+                changedFiles.push(file.trim());
             }
         });
         
@@ -111,16 +141,20 @@ jobs:
             changedFiles.forEach(file => console.log(`  - ${file}`));
             process.exit(1); // Signal that changes were made
         } else {
-            console.log('✨ All files already normalized - no changes needed');
+            console.log('\n✨ All files already normalized - no changes needed');
             process.exit(0);
         }
         EOF
         
-        node normalize.js
+        # Run the script with only the changed files
+        node normalize.js $CHANGED_FILES
     
     - name: Commit and push changes
       if: failure() # Only runs if normalization script found changes (exit 1)
       run: |
+        # Clean up the temporary script
+        rm -f normalize.js
+        
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         
@@ -131,24 +165,22 @@ jobs:
           exit 0
         fi
         
-        # Check if we're on a PR
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          # For PRs, push to the PR branch
-          git commit -m "🔄 Auto-normalize Persian text
-          
-          Converted Arabic letters to Persian equivalents:
-          - ك → ک (kaf)
-          - ي → ی (yeh)
-          - ؤ → و (waw)
-          - إ/أ → ا (alef)
-          - ة → ه (heh)
-          - Arabic-Indic numerals → Persian numerals
-          
-          This ensures consistent Persian typography across the site."
-          
-          git push origin HEAD:${{ github.head_ref }}
-        else
-          # For direct pushes to main/master
-          git commit -m "🔄 Auto-normalize Persian text [skip ci]"
-          git push
-        fi
+        git commit -m "🔄 Auto-normalize Persian text
+        
+        Converted Arabic letters to Persian equivalents in changed files:
+        - ك → ک (kaf)
+        - ي → ی (yeh)
+        - ؤ → و (waw)
+        - إ/أ → ا (alef)
+        - ة → ه (heh)
+        - Arabic-Indic numerals → Persian numerals
+        
+        Only processed files modified in this PR."
+        
+        git push origin ${{ github.head_ref }}
+    
+    - name: Cleanup
+      if: always()
+      run: |
+        # Always clean up the temporary script
+        rm -f normalize.js
