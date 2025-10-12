@@ -16,4 +16,4 @@ scriptURL = "https://plausible.io/js/pa-r3J1GffenhOYfJaUkX1Ux.js"
 [params.umami]
 enable = true
 scriptURL = "https://cloud.umami.is/script.js"
-data-website-id = "88ad3b34-cf8e-4f6d-adce-f33cde48f580" 
+dataWebsiteId = "88ad3b34-cf8e-4f6d-adce-f33cde48f580" 
