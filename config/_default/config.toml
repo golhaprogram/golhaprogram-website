@@ -72,6 +72,9 @@ extended = true
 [minify]
 minifyOutput = true
 
+[minify.tdewolff.html]
+keepQuotes = true
+
 [outputFormats.JSON]
 mediaType = "application/json"
 baseName = "index"
