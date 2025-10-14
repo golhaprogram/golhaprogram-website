@@ -10,7 +10,6 @@ commentsSiteId = "golhaprogram"
 
 [params.plausible]
 enable = true
-domain = "golhaprogram.com"
 scriptURL = "https://plausible.io/js/pa-r3J1GffenhOYfJaUkX1Ux.js" 
 
 [params.umami]
