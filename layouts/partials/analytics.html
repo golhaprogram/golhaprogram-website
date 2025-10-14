@@ -1,11 +1,11 @@
 {{ if site.Params.plausible.enable }}
-<!-- Privacy-friendly analytics by Plausible -->
-<script async data-domain='{{ site.Params.plausible.domain }}' src='{{ site.Params.plausible.scriptURL }}'></script>
+<script async src="{{ site.Params.plausible.scriptURL }}"></script>
 <script>
   window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
   plausible.init()
 </script>
 {{ end }}
+
 
 {{ if site.Params.umami.enable }}
 <script defer src="{{ site.Params.umami.scriptURL }}" data-website-id="{{ site.Params.umami.dataWebsiteId }}"></script>
