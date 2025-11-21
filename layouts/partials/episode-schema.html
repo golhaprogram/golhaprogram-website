@@ -1,0 +1,136 @@
+{{- $page := . -}}
+{{- $audioUrl := partial "audio-url.html" . -}}
+
+{{/* Convert Persian numbers to English for alternateName */}}
+{{- $englishDigits := dict "۰" "0" "۱" "1" "۲" "2" "۳" "3" "۴" "4" "۵" "5" "۶" "6" "۷" "7" "۸" "8" "۹" "9" -}}
+{{- $programNumberEnglish := $page.Params.program_number -}}
+{{- range $persian, $english := $englishDigits -}}
+  {{- $programNumberEnglish = replace $programNumberEnglish $persian $english -}}
+{{- end -}}
+
+{{/* Convert program type for alternateName */}}
+{{- $programTypeEnglish := $page.Params.program_type -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای رنگارنگ" "Golhaye Rangarang" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای تازه" "Golhaye Tazeh" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای جاویدان" "Golhaye Javidan" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "یک شاخه گل" "Yek Shakhe Gol" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای صحرایی" "Golhaye Sahraee" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "برگ سبز" "Barge Sabz" -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Episode",
+  "name": "{{ $page.Params.program_type }} {{ $page.Params.program_number }}",
+  "alternateName": "{{ $programTypeEnglish }} {{ $programNumberEnglish }}",
+  "description": "{{ if $page.Description }}{{ $page.Description }}{{ else }}دانلود {{ $page.Params.program_type }} {{ $page.Params.program_number }} - آرشیو کامل برنامه‌های رادیو ایران{{ end }}",
+  "url": "{{ $page.Permalink }}",
+  "datePublished": "{{ $page.Date.Format "2006-01-02" }}",
+  {{- if $page.Params.date_aired }}
+  "dateCreated": "{{ $page.Params.date_aired }}",
+  {{- end }}
+  "partOfSeries": {
+    "@type": "CreativeWorkSeries",
+    "name": "{{ $page.Params.program_type }}",
+    "description": "مجموعه برنامه‌های {{ $page.Params.program_type }} از آرشیو رادیو ایران"
+  },
+  "associatedMedia": {
+    "@type": "AudioObject",
+    "name": "{{ $page.Params.program_type }} {{ $page.Params.program_number }}",
+    "contentUrl": "{{ $audioUrl }}",
+    "encodingFormat": "audio/mpeg",
+    "duration": "PT45M",
+    "inLanguage": "fa"
+  },
+  {{- $allPerformers := slice }}
+  {{- if $page.Params.singers }}
+    {{- range $page.Params.singers }}
+      {{- $allPerformers = $allPerformers | append . }}
+    {{- end }}
+  {{- end }}
+  {{- if $page.Params.players }}
+    {{- range $page.Params.players }}
+      {{- $allPerformers = $allPerformers | append . }}
+    {{- end }}
+  {{- end }}
+  {{- if $allPerformers }}
+  "byArtist": [
+    {{- range $i, $performer := $allPerformers -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Person",
+      "name": "{{ $performer }}"
+    }
+    {{- end }}
+  ],
+  {{- end }}
+  {{- if $page.Params.composers }}
+  "composer": [
+    {{- range $i, $composer := $page.Params.composers -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Person",
+      "name": "{{ $composer }}"
+    }
+    {{- end }}
+  ],
+  {{- end }}
+  {{- if $page.Params.arrangers }}
+  "arranger": [
+    {{- range $i, $arranger := $page.Params.arrangers -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Person",
+      "name": "{{ $arranger }}"
+    }
+    {{- end }}
+  ],
+  {{- end }}
+  {{- if $page.Params.announcers }}
+  "narrator": [
+    {{- range $i, $announcer := $page.Params.announcers -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Person",
+      "name": "{{ $announcer }}"
+    }
+    {{- end }}
+  ],
+  {{- end }}
+  {{- if $page.Params.poets }}
+  "lyricist": [
+    {{- range $i, $poet := $page.Params.poets -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Person",
+      "name": "{{ $poet }}"
+    }
+    {{- end }}
+  ],
+  "hasPart": [
+    {{- range $i, $poet := $page.Params.poets -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "CreativeWork",
+      "name": "شعر {{ $poet }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ $poet }}"
+      },
+      "inLanguage": "fa",
+      "genre": "شعر فارسی"
+    }
+    {{- end }}
+  ],
+  {{- end }}
+  "inLanguage": "fa",
+  "genre": [
+    "موسیقی کلاسیک ایرانی",
+    "رادیو"
+    {{- if $page.Params.dastgah }},
+    "{{ $page.Params.dastgah }}"
+    {{- end }}
+  ],
+  "keywords": "دانلود {{ $page.Params.program_type }}, {{ $page.Params.program_number }}, موسیقی کلاسیک ایرانی, رادیو ایران{{ if $page.Params.singers }}{{ range $page.Params.singers }}, {{ . }}{{ end }}{{ end }}{{ if $page.Params.poets }}{{ range $page.Params.poets }}, {{ . }}{{ end }}{{ end }}"
+}
+</script>

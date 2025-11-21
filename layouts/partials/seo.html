@@ -1,7 +1,7 @@
 <!-- layouts/partials/seo.html -->
 <!-- Meta description -->
 <meta name="description"
-  content="{{ if .Description }}{{ .Description }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+  content="{{ partial "program-meta-description.html" . }}">
 
 <!-- Robots control -->
 {{ if .Site.Params.noindex }}
@@ -13,9 +13,9 @@
 
 <!-- Open Graph tags -->
 <meta property="og:title"
-  content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+  content="{{ if .IsHome }}{{ .Site.Title }}{{ else if and (eq .Section "programs") .IsPage }}{{ partial "program-title" . }} | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
 <meta property="og:description"
-  content="{{ if .Description }}{{ .Description }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+  content="{{ partial "program-meta-description.html" . }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 {{ if .IsPage }}
@@ -36,9 +36,9 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title"
-  content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+  content="{{ if .IsHome }}{{ .Site.Title }}{{ else if and (eq .Section "programs") .IsPage }}{{ partial "program-title" . }} | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
 <meta name="twitter:description"
-  content="{{ if .Description }}{{ .Description }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+  content="{{ partial "program-meta-description.html" . }}">
 {{ with .Site.Params.twitter }}
 <meta name="twitter:site" content="@{{ . }}">
 {{ end }}
@@ -51,6 +51,8 @@
 {{ end }}
 
 <!-- JSON-LD structured data -->
+{{/* Skip Article schema for program pages - they use Episode schema instead */}}
+{{ if not (and (eq .Section "programs") .IsPage) }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,7 +65,8 @@
   "@type": "WebSite",
   "name": "{{ .Site.Title }}",
   {{ end }}
-  "description": "{{ if .Description }}{{ .Description }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}",
+  "description": "{{ partial "program-meta-description.html" . }}",
   "url": "{{ .Permalink }}"
 }
 </script>
+{{ end }}
