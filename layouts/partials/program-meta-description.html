@@ -1,6 +1,7 @@
 {{- $page := . -}}
 {{- if and (eq $page.Section "programs") $page.Params.program_type $page.Params.program_number -}}
-دانلود {{ $page.Params.program_type }} {{ $page.Params.program_number }}{{ if $page.Params.singers }} با صدای {{ delimit $page.Params.singers "، " }}{{ end }}{{ if $page.Params.dastgah }} در دستگاه {{ $page.Params.dastgah }}{{ end }}. آرشیو کامل برنامه‌های رادیو ایران با کیفیت بالا.{{ if $page.Params.poets }} شعرهای {{ delimit $page.Params.poets "، " }}.{{ end }}
+{{- $programTypePersian := replace $page.Params.program_type "-" " " -}}
+دانلود {{ $programTypePersian }} {{ $page.Params.program_number }}{{ if $page.Params.singers }} با صدای {{ delimit $page.Params.singers "، " }}{{ end }}{{ if $page.Params.dastgah }} در دستگاه {{ $page.Params.dastgah }}{{ end }}. آرشیو کامل برنامه‌های رادیو ایران با کیفیت بالا.{{ if $page.Params.poets }} شعرهای {{ delimit $page.Params.poets "، " }}.{{ end }}
 {{- else if $page.Description -}}
 {{ $page.Description }}
 {{- else if $page.Summary -}}
