@@ -51,6 +51,8 @@
 {{ end }}
 
 <!-- JSON-LD structured data -->
+{{/* Skip Article schema for program pages - they use Episode schema instead */}}
+{{ if not (and (eq .Section "programs") .IsPage) }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,7 +65,8 @@
   "@type": "WebSite",
   "name": "{{ .Site.Title }}",
   {{ end }}
-  "description": "{{ if .Description }}{{ .Description }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}",
+  "description": "{{ partial "program-meta-description.html" . }}",
   "url": "{{ .Permalink }}"
 }
 </script>
+{{ end }}
