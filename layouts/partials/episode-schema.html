@@ -8,22 +8,25 @@
   {{- $programNumberEnglish = replace $programNumberEnglish $persian $english -}}
 {{- end -}}
 
+{{/* Replace dashes with spaces in program type for display */}}
+{{- $programTypePersian := replace $page.Params.program_type "-" " " -}}
+
 {{/* Convert program type for alternateName */}}
 {{- $programTypeEnglish := $page.Params.program_type -}}
-{{- $programTypeEnglish = replace $programTypeEnglish "گلهای رنگارنگ" "Golhaye Rangarang" -}}
-{{- $programTypeEnglish = replace $programTypeEnglish "گلهای تازه" "Golhaye Tazeh" -}}
-{{- $programTypeEnglish = replace $programTypeEnglish "گلهای جاویدان" "Golhaye Javidan" -}}
-{{- $programTypeEnglish = replace $programTypeEnglish "یک شاخه گل" "Yek Shakhe Gol" -}}
-{{- $programTypeEnglish = replace $programTypeEnglish "گلهای صحرایی" "Golhaye Sahraee" -}}
-{{- $programTypeEnglish = replace $programTypeEnglish "برگ سبز" "Barge Sabz" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای-رنگارنگ" "Golhaye Rangarang" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای-تازه" "Golhaye Tazeh" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای-جاویدان" "Golhaye Javidan" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "یک-شاخه-گل" "Yek Shakhe Gol" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "گلهای-صحرایی" "Golhaye Sahraee" -}}
+{{- $programTypeEnglish = replace $programTypeEnglish "برگ-سبز" "Barge Sabz" -}}
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Episode",
-  "name": "{{ $page.Params.program_type }} {{ $page.Params.program_number }}",
+  "name": "{{ $programTypePersian }} {{ $page.Params.program_number }}",
   "alternateName": "{{ $programTypeEnglish }} {{ $programNumberEnglish }}",
-  "description": "{{ if $page.Description }}{{ $page.Description }}{{ else }}دانلود {{ $page.Params.program_type }} {{ $page.Params.program_number }} - آرشیو کامل برنامه‌های رادیو ایران{{ end }}",
+  "description": "{{ if $page.Description }}{{ $page.Description }}{{ else }}دانلود {{ $programTypePersian }} {{ $page.Params.program_number }} - آرشیو کامل برنامه‌های رادیو ایران{{ end }}",
   "url": "{{ $page.Permalink }}",
   "datePublished": "{{ $page.Date.Format "2006-01-02" }}",
   {{- if $page.Params.date_aired }}
@@ -31,12 +34,12 @@
   {{- end }}
   "partOfSeries": {
     "@type": "CreativeWorkSeries",
-    "name": "{{ $page.Params.program_type }}",
-    "description": "مجموعه برنامه‌های {{ $page.Params.program_type }} از آرشیو رادیو ایران"
+    "name": "{{ $programTypePersian }}",
+    "description": "مجموعه برنامه‌های {{ $programTypePersian }} از آرشیو رادیو ایران"
   },
   "associatedMedia": {
     "@type": "AudioObject",
-    "name": "{{ $page.Params.program_type }} {{ $page.Params.program_number }}",
+    "name": "{{ $programTypePersian }} {{ $page.Params.program_number }}",
     "contentUrl": "{{ $audioUrl }}",
     "encodingFormat": "audio/mpeg",
     "duration": "PT45M",
@@ -131,6 +134,6 @@
     "{{ $page.Params.dastgah }}"
     {{- end }}
   ],
-  "keywords": "دانلود {{ $page.Params.program_type }}, {{ $page.Params.program_number }}, موسیقی کلاسیک ایرانی, رادیو ایران{{ if $page.Params.singers }}{{ range $page.Params.singers }}, {{ . }}{{ end }}{{ end }}{{ if $page.Params.poets }}{{ range $page.Params.poets }}, {{ . }}{{ end }}{{ end }}"
+  "keywords": "دانلود {{ $programTypePersian }}, {{ $page.Params.program_number }}, موسیقی کلاسیک ایرانی, رادیو ایران{{ if $page.Params.singers }}{{ range $page.Params.singers }}, {{ . }}{{ end }}{{ end }}{{ if $page.Params.poets }}{{ range $page.Params.poets }}, {{ . }}{{ end }}{{ end }}"
 }
 </script>
