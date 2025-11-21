@@ -1,6 +1,6 @@
 # Golha Program Website
 
-[![Hugo](https://img.shields.io/badge/Hugo-v0.139-ff4088?style=flat&logo=hugo&logoColor=white)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-v0.147-ff4088?style=flat&logo=hugo&logoColor=white)](https://gohugo.io/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/45546953-eb4c-4e37-9a72-ecaf2f938b8c/deploy-status)](https://app.netlify.com/sites/golhaprogram/deploys)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/deed.fa)
 [![remark42](https://img.shields.io/badge/Remark42-darkgreen)](https://remark42.com)
@@ -42,7 +42,7 @@ The [content](content/programs) directory has all the files in markdown format.
 
 ### Prerequisites
 
-- [Hugo Extended](https://gohugo.io/installation/) (version 0.139.2 or higher)
+- [Hugo Extended](https://gohugo.io/installation/) (version 0.147.0 or higher)
 - Node.js (version 20 or higher)
 - npm (version 10 or higher)
 
@@ -98,6 +98,9 @@ This will compile the SCSS, bundle JavaScript, and build the Hugo site.
 
 - `layouts/partials/audio-url.html`: Generates audio URLs based on program metadata
 - `layouts/partials/program-title.html`: Formats program titles consistently
+- `layouts/partials/episode-schema.html`: Rich structured data (schema.org) for SEO
+- `layouts/partials/program-meta-description.html`: SEO-optimized meta descriptions
+- `layouts/partials/seo.html`: SEO tags for OpenGraph, Twitter, and search engines
 - `layouts/partials/comments.html`: Integrates Remark42 comments
 - `layouts/partials/fa-number.html`: Converts numbers to Persian digits
 
