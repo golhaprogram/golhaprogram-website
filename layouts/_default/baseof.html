@@ -4,11 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else if and (eq .Section "programs") .IsPage }}{{ partial "program-title" . }} | {{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
   {{ partial "csp.html" . }}
   {{ partial "debug.html" . }}
   {{ partial "seo.html" . }}
+
+  {{/* Add structured data for program pages */}}
+  {{ if and (eq .Section "programs") .IsPage }}
+    {{ partial "episode-schema.html" . }}
+  {{ end }}
+
   {{ partial "fonts.html" . }}
   {{ partial "styles.html" . }}
   {{ partial "analytics.html" . }}
