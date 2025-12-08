@@ -12,10 +12,6 @@
         <a href="{{ .RelPermalink }}">{{ partial "program-title" . }}</a>
       </h2>
       
-      {{ with .Params.dastgah }}
-      <p class="dastgah">دستگاه: {{ . }}</p>
-      {{ end }}
-      
       <div class="performers">
         {{ with .Params.singers }}
         <div class="singers">
