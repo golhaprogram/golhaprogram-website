@@ -137,29 +137,47 @@ export function initializeSearch() {
   let searchData = [];
   let fuse;
 
-  fetch('/index.json')
-    .then(response => response.json())
-    .then(data => {
-      searchData = data;
-      fuse = new Fuse(data.map(normalizeRecord), {
-        keys: SEARCH_KEYS,
-        includeScore: true,
-        includeMatches: true,
-        // Token search: each word of the query is matched separately, in any
-        // field, and every word must match (tokenMatch: 'all'). So
-        // "حمیرا شور" finds Homeyra's programs in Shur, and
-        // "گلهای رنگارنگ ۴۶۵" finds program 465.
-        useTokenSearch: true,
-        tokenMatch: 'all',
-        threshold: 0.15,
-        minMatchCharLength: 2,
+  // The index (~1.1 MB, ~260 KB compressed) is only downloaded once the
+  // visitor shows interest in searching, not on every page view.
+  let loading = null;
+  function loadIndex() {
+    if (loading) return loading;
+    loading = fetch('/index.json')
+      .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      })
+      .then(data => {
+        searchData = data;
+        fuse = new Fuse(data.map(normalizeRecord), {
+          keys: SEARCH_KEYS,
+          includeScore: true,
+          includeMatches: true,
+          // Token search: each word of the query is matched separately, in
+          // any field, and every word must match (tokenMatch: 'all'). So
+          // "حمیرا شور" finds Homeyra's programs in Shur, and
+          // "گلهای رنگارنگ ۴۶۵" finds program 465.
+          useTokenSearch: true,
+          tokenMatch: 'all',
+          threshold: 0.15,
+          minMatchCharLength: 2,
+        });
+        // If the visitor typed while the index was loading, run it now.
+        if (searchInput.value.trim()) runSearch();
+      })
+      .catch(err => {
+        console.error('Error fetching search index:', err);
+        loading = null; // allow a retry on the next interaction
       });
-      // If the visitor typed before the index loaded, run their query now.
-      if (searchInput.value.trim()) runSearch();
-    })
-    .catch(err => {
-      console.error('Error fetching search index:', err);
-    });
+    return loading;
+  }
+
+  // Start loading as early as possible in the interaction: on touch/click
+  // or keyboard focus, before the first character is typed.
+  searchInput.addEventListener('pointerdown', loadIndex, { passive: true });
+  searchInput.addEventListener('focus', loadIndex);
+  // A browser may restore the box's text on back/forward navigation.
+  if (searchInput.value.trim()) loadIndex();
 
   function runSearch() {
     const query = searchInput.value.trim();
@@ -185,6 +203,7 @@ export function initializeSearch() {
 
   let timer;
   searchInput.addEventListener('input', function () {
+    loadIndex();
     clearTimeout(timer);
     timer = setTimeout(runSearch, DEBOUNCE_MS);
   });
