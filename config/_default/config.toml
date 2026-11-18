@@ -112,3 +112,13 @@ audioHost = "music.golhaprogram.com"
 description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گلهای رنگارنگ، گلهای تازه، گلهای جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
 defaultImage = "/images/golha-og-image.jpg"                                                                                                                                     # Default image for social sharing
 twitter = "golhaprogram"                                                                                                                                                        # Twitter username without @
+
+# Temporary tip above the search box. Hidden automatically after `expires`
+# (and per visitor once they close it). Change `id` for a new tip so it shows
+# again to visitors who closed the previous one.
+[params.searchTip]
+enable = true
+id = "multiword-2026-11"
+expires = "2026-12-18"
+text = "حالا می‌توانید چند واژه را با هم جستجو کنید، مثلاً"
+example = "حمیرا یاحقی افتتاح"

@@ -101,6 +101,28 @@ function renderResult(result, query) {
 `;
 }
 
+// Optional dismissible tip above the search box (see params.searchTip).
+function setupSearchTip(searchInput) {
+  const tip = document.querySelector('.search-tip');
+  if (!tip) return;
+  const key = 'searchTipDismissed:' + tip.dataset.tipId;
+  const expires = Date.parse(tip.dataset.expires);
+  let dismissed = false;
+  try { dismissed = localStorage.getItem(key) === '1'; } catch (e) { /* storage unavailable */ }
+  if (dismissed || (expires && Date.now() > expires)) return;
+  tip.hidden = false;
+
+  tip.querySelector('.search-tip-close')?.addEventListener('click', () => {
+    tip.hidden = true;
+    try { localStorage.setItem(key, '1'); } catch (e) { /* storage unavailable */ }
+  });
+  tip.querySelector('.search-tip-example')?.addEventListener('click', (e) => {
+    searchInput.value = e.currentTarget.textContent.trim();
+    searchInput.dispatchEvent(new Event('input'));
+    searchInput.focus();
+  });
+}
+
 export function initializeSearch() {
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
@@ -109,6 +131,8 @@ export function initializeSearch() {
   if (!searchInput || !searchResults) {
     return;
   }
+
+  setupSearchTip(searchInput);
 
   let searchData = [];
   let fuse;

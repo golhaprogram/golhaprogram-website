@@ -1,4 +1,12 @@
 <div class="search-container">
-  <input type="text" id="search-input" placeholder="جستجو..." aria-label="جستجو">
+  {{- with site.Params.searchTip }}
+  {{- if and .enable (now.Before (time.AsTime .expires)) }}
+  <div class="search-tip" data-tip-id="{{ .id }}" data-expires="{{ .expires }}" hidden>
+    <span>{{ .text }} <span class="search-tip-quote">«<button type="button" class="search-tip-example">{{ .example }}</button>»</span>.</span>
+    <button type="button" class="search-tip-close" aria-label="بستن">✕</button>
+  </div>
+  {{- end }}
+  {{- end }}
+  <input type="text" id="search-input" placeholder="خواننده، شاعر، دستگاه، شماره برنامه…" aria-label="جستجو">
   <div id="search-results" class="search-results"></div>
 </div>
