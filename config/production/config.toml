@@ -8,10 +8,6 @@ enableCSP = false  # Set to true to enable CSP, false to disable
 commentsHost = "comments.golhaprogram.com"
 commentsSiteId = "golhaprogram"
 
-[params.plausible]
-enable = true
-scriptURL = "https://plausible.io/js/pa-r3J1GffenhOYfJaUkX1Ux.js" 
-
 [params.umami]
 enable = true
 scriptURL = "https://cloud.umami.is/script.js"
