@@ -4,8 +4,6 @@ import { initializeSearch } from './components/Search.js';
 
 // Main initialization function
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded - initializing components');
-  
   // Initialize tag cloud
   try {
     initializeTagCloud();

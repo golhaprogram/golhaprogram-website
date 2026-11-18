@@ -4,7 +4,7 @@ command = "hugo --gc --minify"
 
 [build.environment]
 HUGO_VERSION = "0.147.0"
-NODE_VERSION = "20"
+NODE_VERSION = "22"
 NPM_VERSION = "10"
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"
@@ -63,16 +63,19 @@ Access-Control-Allow-Origin = "*"
 Access-Control-Allow-Methods = "GET"
 Cache-Control = "public, max-age=31536000"
 
+# Basic security headers for every response
+[[headers]]
+for = "/*"
+[headers.values]
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+X-Frame-Options = "SAMEORIGIN"
+
 [[redirects]]
 from = "https://www.golhaprogram.com/*"
 to = "https://golhaprogram.com/:splat"
 status = 301
 force = true
-
-[[redirects]]
-from = "/*"
-to = "/404.html"
-status = 404
 
 [dev]
 framework = "hugo"
