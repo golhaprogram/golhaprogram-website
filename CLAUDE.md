@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build:beta` - Build with beta environment configuration
 
 ### Dependencies
-- `npm install` - Install all Node.js dependencies (PostCSS, Sass, esbuild, etc.)
+- `npm install` - Install Node.js dependencies (only fuse.js, used by search). Sass and JS bundling are done by Hugo Extended itself.
 
 ## Architecture Overview
 
