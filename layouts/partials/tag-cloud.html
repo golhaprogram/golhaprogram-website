@@ -90,11 +90,6 @@
   {{ end }}
 {{ end }}
 
-<!-- Debug final data -->
-<pre style="display:none">
-Data structure:
-{{ printf "%#v" $performersData }}
-</pre>
 
 <div 
   data-tag-cloud 
@@ -102,6 +97,3 @@ Data structure:
   {{ with .context.Params.program_type }}data-program-type="{{ . }}"{{ end }}
 ></div>
 
-{{ $opts := dict "targetPath" "js/main.js" "minify" true }}
-{{ $js := resources.Get "js/main.js" | js.Build $opts | fingerprint }}
-<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
