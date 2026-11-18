@@ -104,3 +104,46 @@
     }
   }
 }
+
+.search-tip {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--performer-bg);
+  border: 1px solid var(--performer-border);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  direction: rtl;
+
+  &[hidden] {
+    display: none;
+  }
+
+  button {
+    font: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .search-tip-quote {
+    white-space: nowrap;
+  }
+
+  .search-tip-example {
+    color: var(--accent-dark);
+    text-decoration: underline;
+  }
+
+  .search-tip-close {
+    color: #888;
+    line-height: 1;
+    padding: 0.2rem;
+  }
+}
