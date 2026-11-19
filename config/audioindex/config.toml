@@ -1,0 +1,14 @@
+# Hugo environment used only by the audio-metadata GitHub workflows:
+#   hugo -e audioindex -d /tmp/audioindex
+# It writes audio-index.json, listing each program file with its MP3 URL as
+# built by layouts/partials/audio-url.html, so the naming rule lives in one
+# place. Netlify never builds this environment, so the file is not published.
+
+[outputFormats.AudioIndex]
+mediaType = "application/json"
+baseName = "audio-index"
+isPlainText = true
+notAlternative = true
+
+[outputs]
+home = ["AudioIndex"]

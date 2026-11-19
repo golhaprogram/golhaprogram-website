@@ -1,0 +1,7 @@
+{{- /* Program file -> MP3 URL, for scripts/audio_metadata.py.
+       Only built in the "audioindex" environment (config/audioindex). */ -}}
+{{- $out := slice -}}
+{{- range where site.RegularPages "Section" "programs" -}}
+  {{- $out = $out | append (dict "file" .File.Path "url" (partial "audio-url.html" .)) -}}
+{{- end -}}
+{{- $out | jsonify (dict "indent" "  ") -}}
