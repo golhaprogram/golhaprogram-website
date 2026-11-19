@@ -7,6 +7,11 @@
     site_id: "{{ .Site.Params.remark42.commentsSiteId }}",
     components: ["embed"],
     max_shown_comments: 10,
+    // Always light: our remark42 (Oct 2024 build) doesn't coordinate its iframe's
+    // color scheme with dark host pages, and some browsers (Android Chrome)
+    // then paint a white backdrop behind it. In dark mode the comments sit on a
+    // light card instead (see _comments.scss). Newer remark42 versions handle
+    // dark host pages; after upgrading, theme can follow prefers-color-scheme.
     theme: "light",
     locale: "fa"
   };
@@ -19,4 +24,5 @@
       (d.head || d.body).appendChild(s);
     }
   })(remark_config.components || ['embed']);
+
 </script>

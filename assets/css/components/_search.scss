@@ -8,7 +8,7 @@
     width: 100%;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--input-border);
     border-radius: 4px;
     direction: rtl;
     font-family: inherit;
@@ -19,11 +19,11 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
-    border: 1px solid #ddd;
+    background: var(--surface-color);
+    border: 1px solid var(--input-border);
     border-top: none;
     border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
     z-index: 100;
     max-height: 400px;
     overflow-y: auto;
@@ -32,7 +32,7 @@
 
     .search-result-item {
       padding: 0.75rem 1rem;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--divider-color);
 
       &:last-child {
         border-bottom: none;
@@ -44,7 +44,7 @@
         display: block;
 
         &:hover {
-          color: #007acc;
+          color: var(--search-link-hover);
         }
       }
 
@@ -55,7 +55,7 @@
 
       .search-meta {
         font-size: 0.85rem;
-        color: #666;
+        color: var(--text-muted);
 
         span {
           display: inline-block;
@@ -71,13 +71,13 @@
     .no-results {
       padding: 1rem;
       text-align: center;
-      color: #666;
+      color: var(--text-muted);
     }
 
     .match-highlights {
       margin-top: 0.5rem;
       padding: 0.5rem;
-      background-color: #f9f9f9;
+      background-color: var(--surface-muted);
       border-radius: 4px;
       font-size: 0.85rem;
 
@@ -91,12 +91,13 @@
         }
 
         strong {
-          color: #555;
+          color: var(--text-label);
           margin-left: 0.25rem;
         }
 
         mark {
-          background-color: #ffeb3b;
+          background-color: var(--mark-bg);
+          color: var(--mark-color);
           padding: 0 2px;
           border-radius: 2px;
         }
@@ -142,8 +143,21 @@
   }
 
   .search-tip-close {
-    color: #888;
+    color: var(--text-faint);
     line-height: 1;
     padding: 0.2rem;
+  }
+}
+
+/* Dark theme: use the site's surface colors instead of the browser's default
+   dark form-field gray. (Light mode keeps the browser default, as before.) */
+@media (prefers-color-scheme: dark) {
+  .search-container #search-input {
+    background: var(--surface-color);
+    color: var(--text-color);
+
+    &::placeholder {
+      color: var(--text-faint);
+    }
   }
 }
