@@ -6,6 +6,11 @@ on:
       - '**/*.md'
       - '**/*.markdown'
 
+# Shared with audio-metadata.yml so the two never push to a branch at once.
+concurrency:
+  group: pr-autofix-${{ github.head_ref }}
+  cancel-in-progress: false
+
 jobs:
   normalize-persian:
     runs-on: ubuntu-latest

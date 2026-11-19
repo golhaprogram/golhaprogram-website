@@ -1,0 +1,73 @@
+name: Audio metadata
+
+# For PRs that add or change program files: fill in audio_bytes and
+# audio_duration for any program missing them, and commit to the PR branch.
+# Fails if a program's MP3 isn't on music.golhaprogram.com yet. Upload it,
+# then re-run this job.
+
+on:
+  pull_request:
+    paths:
+      - 'content/programs/**/*.md'
+
+# Shared with normalize-persian.yml so the two never push to a branch at once.
+concurrency:
+  group: pr-autofix-${{ github.head_ref }}
+  cancel-in-progress: false
+
+jobs:
+  audio-metadata:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Find changed program files
+        id: changed
+        run: |
+          git fetch -q origin ${{ github.base_ref }}
+          FILES=$(git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD -- 'content/programs/**/*.md' \
+                  | grep -v '/_index\.md$' | tr '\n' ' ' || true)
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "Changed program files: ${FILES:-none}"
+
+      - uses: peaceiris/actions-hugo@v3
+        if: steps.changed.outputs.files != ''
+        with:
+          hugo-version: '0.147.0'
+          extended: true
+
+      - name: Install ffprobe
+        if: steps.changed.outputs.files != ''
+        run: command -v ffprobe || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
+
+      - name: Measure MP3s
+        if: steps.changed.outputs.files != ''
+        run: |
+          hugo -e audioindex -d /tmp/audioindex --quiet
+          python3 scripts/audio_metadata.py --index /tmp/audioindex/audio-index.json \
+            --report /tmp/report.md ${{ steps.changed.outputs.files }} || echo "FAILED=1" >> "$GITHUB_ENV"
+          cat /tmp/report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit
+        if: steps.changed.outputs.files != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/programs
+          if git diff --cached --quiet; then echo "Nothing to commit"; else
+            git commit -q -m "Add audio size and duration"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+
+      - name: Fail if any MP3 is missing
+        if: env.FAILED == '1'
+        run: |
+          echo "::error::Some MP3s could not be measured. See the job summary; upload them and re-run this job."
+          exit 1

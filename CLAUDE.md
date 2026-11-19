@@ -78,7 +78,11 @@ singers: ["حمیرا"]
 players: ["پرویز یاحقی"]
 poets: ["حافظ", "مجمر زواره ای"]
 announcers: ["فیروزه امیرمعز"]
+audio_bytes: 23456789    # added automatically, see below
+audio_duration: 1834     # seconds, added automatically
 ```
+
+`audio_bytes` and `audio_duration` describe the program's MP3 and are filled in by `scripts/audio_metadata.py`, never by hand. On a PR that adds or changes a program, `.github/workflows/audio-metadata.yml` measures the MP3 (HEAD request + ffprobe) and commits the two lines to the PR branch; it fails if the MP3 isn't on `music.golhaprogram.com` yet. `audio-metadata-backfill.yml` (run by hand) does the same for every program and opens a PR. Both get each program's MP3 URL from `audio-index.json`, built with `hugo -e audioindex` (config/audioindex) from `layouts/partials/audio-url.html`, so the naming rule stays in one place.
 
 ### Persian Language Features
 - RTL text direction support
