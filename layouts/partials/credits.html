@@ -16,16 +16,14 @@
   <div class="credit-row credit-{{ .role.key }}">
     <dt>{{ $label }}</dt>
     <dd>
-      {{- range .terms }}
-      <a href="{{ .RelPermalink }}" class="performer">{{ .LinkTitle }}</a>
-      {{- end }}
+      {{- range $i, $t := .terms }}{{ if $i }}<span class="sep">، </span>{{ end }}<a href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>{{ end -}}
     </dd>
   </div>
   {{- end }}
   {{- with $page.Params.mode }}
   <div class="credit-row credit-mode">
     <dt>گوشه</dt>
-    <dd><span class="performer performer-plain">{{ . }}</span></dd>
+    <dd>{{ . }}</dd>
   </div>
   {{- end }}
 </dl>

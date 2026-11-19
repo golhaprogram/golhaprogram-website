@@ -1,65 +1,50 @@
-// Program credits (layouts/partials/credits.html)
+// Program credits (layouts/partials/credits.html): set like liner notes,
+// plain text with the role in bold and names as simple links.
 .credits {
-  margin: 1rem 0 1.5rem;
-  padding: 0.75rem 1rem;
-  background: var(--background-color);
-  border-right: 3px solid var(--border-color);
-  border-radius: 4px;
+  margin: 1.25rem auto 1.75rem;
+  padding: 0;
+  max-width: 34rem;
   direction: rtl;
-  text-align: right;
+  text-align: center;
+  line-height: 1.9;
 
   .credit-row {
-    display: grid;
-    grid-template-columns: 7.5rem 1fr;
-    align-items: baseline;
-    gap: 0.5rem;
-    padding: 0.35rem 0;
+    margin: 0;
+  }
 
-    & + .credit-row {
-      border-top: 1px solid var(--performer-border);
-    }
+  dt,
+  dd {
+    display: inline;
+    margin: 0;
   }
 
   dt {
-    margin: 0;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #5a6b7b;
+    font-weight: 700;
+    color: var(--text-color);
+
+    &::after {
+      content: ": ";
+    }
   }
 
   dd {
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+    color: var(--text-color);
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--accent-color);
+        border-bottom-color: currentColor;
+      }
+    }
   }
 
-  .performer {
-    margin: 0;
-    padding: 0.2rem 0.55rem;
-    font-size: 0.9rem;
-  }
-
-  .performer-plain:hover {
-    transform: none;
-    box-shadow: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .credits {
-    padding: 0.5rem 0.75rem;
-
-    .credit-row {
-      grid-template-columns: 5.5rem 1fr;
-    }
-
-    dt {
-      font-size: 0.8rem;
-    }
-
-    .performer {
-      font-size: 0.85rem;
-    }
+  .sep {
+    color: #8a96a3;
   }
 }
