@@ -1,35 +1,30 @@
 #!/bin/bash
+# Regenerate the site icons from the SVG sources. Run from the repo root.
+#   static/favicon.svg            small/tab-size design (zoomed tulips)
+#   scripts/app-icon.svg          large design, rounded tile (Android/manifest)
+#   scripts/apple-touch-icon.svg  large design, full-bleed square (iOS masks it)
+# Requires: rsvg-convert (librsvg) and ImageMagick.
+# After changing the icon, bump ?v= in layouts/partials/favicon.html and
+# static/site.webmanifest so browsers refresh their cached copies.
+set -euo pipefail
 
-# Check if ImageMagick is installed
-if ! command -v convert &>/dev/null; then
-  echo "This script requires ImageMagick. Please install it first."
-  echo "For Ubuntu/Debian: sudo apt-get install imagemagick"
-  echo "For macOS: brew install imagemagick"
-  exit 1
-fi
+for cmd in rsvg-convert convert; do
+  command -v "$cmd" >/dev/null || { echo "Missing $cmd (install librsvg2-bin / imagemagick)"; exit 1; }
+done
 
-# Base directory
-BASE_DIR="$(pwd)/static"
-SVG_FILE="$BASE_DIR/favicon.svg"
+S=static
+SMALL="$S/favicon.svg"
+APP=scripts/app-icon.svg
+APPLE=scripts/apple-touch-icon.svg
+TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
 
-# Create required favicon sizes
-convert -background none -size 16x16 "$SVG_FILE" "$BASE_DIR/favicon-16x16.png"
-convert -background none -size 32x32 "$SVG_FILE" "$BASE_DIR/favicon-32x32.png"
-convert -background none -size 180x180 "$SVG_FILE" "$BASE_DIR/apple-touch-icon.png"
-convert -background none -size 192x192 "$SVG_FILE" "$BASE_DIR/android-chrome-192x192.png"
-convert -background none -size 512x512 "$SVG_FILE" "$BASE_DIR/android-chrome-512x512.png"
+rsvg-convert -w 16  -h 16  "$SMALL" -o "$S/favicon-16x16.png"
+rsvg-convert -w 32  -h 32  "$SMALL" -o "$S/favicon-32x32.png"
+rsvg-convert -w 48  -h 48  "$SMALL" -o "$TMP/48.png"
+convert "$S/favicon-16x16.png" "$S/favicon-32x32.png" "$TMP/48.png" "$S/favicon.ico"
 
-## Create a basic OG image with some text
-#convert -size 1200x630 xc:white \
-#    -gravity center \
-#    -pointsize 72 \
-#    -font Arial \
-#    -draw "text 0,0 'برنامه‌های گلها'" \
-#    -pointsize 36 \
-#    -draw "text 0,100 'آرشیو موسیقی و شعر ایران'" \
-#    -draw "image over 540,265 120,120 '$SVG_FILE'" \
-#    "$BASE_DIR/images/golha-og-image.jpg"
+rsvg-convert -w 180 -h 180 "$APPLE" -o "$S/apple-touch-icon.png"
+rsvg-convert -w 192 -h 192 "$APP"   -o "$S/android-chrome-192x192.png"
+rsvg-convert -w 512 -h 512 "$APP"   -o "$S/android-chrome-512x512.png"
 
-echo "All favicon images have been generated in the static directory"
-echo "Remember to customize the OG image with proper branding later"
-
+echo "Icons regenerated in $S/"
