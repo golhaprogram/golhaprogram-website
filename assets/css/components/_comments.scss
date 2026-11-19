@@ -7,3 +7,13 @@
     text-align: center;
     box-sizing: border-box;
 }
+
+/* remark42's iframe document doesn't declare a color scheme. When our page
+   is in dark mode, Chrome paints an opaque white backdrop behind iframes
+   whose scheme differs from the page, which put remark42's dark-theme (light)
+   text on white. Matching the iframe's own scheme keeps it transparent; the
+   dark/light look comes from remark42's theme (set in comments.html). */
+#remark42 iframe,
+.comments-section iframe {
+  color-scheme: light;
+}
