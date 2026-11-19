@@ -55,44 +55,44 @@
 .tag-cloud-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0.5rem 0;
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.45rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem 1.1rem;
+  line-height: 1.25;
 }
 
+// Size and emphasis come from --w (0 = rarest, 1 = most frequent), set inline.
 .tag-cloud-item {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: 999px;
-  background: var(--performer-bg);
-  border: 1px solid var(--performer-border);
-  color: var(--primary-color);
+  --w: 0;
+  display: inline-block;
+  font-size: calc(0.85rem + var(--w) * 1.5rem);
+  color: var(--accent-dark);
+  opacity: calc(0.6 + var(--w) * 0.4);
   text-decoration: none;
-  line-height: 1.5;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+  transition: opacity 0.15s ease, color 0.15s ease;
 
-  &:hover {
-    background: #fff;
-    border-color: var(--accent-color);
-    color: var(--accent-dark);
+  &.band-2 { font-weight: 500; }
+  &.band-3 { font-weight: 700; color: var(--primary-color); }
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
-
-  // size by how often the name appears (log scale, 1 = rare, 5 = most)
-  &.tier-1 { font-size: 0.85rem; }
-  &.tier-2 { font-size: 0.95rem; }
-  &.tier-3 { font-size: 1.05rem; }
-  &.tier-4 { font-size: 1.2rem; }
-  &.tier-5 { font-size: 1.35rem; font-weight: 600; }
 }
 
 .tag-cloud-count {
-  font-size: 0.7rem;
+  font-size: 0.55em;
   font-weight: normal;
-  color: #7a8794;
+  margin-right: 0.15em;
+  color: #8a96a3;
+  vertical-align: super;
 }
 
 .tag-cloud-all {
@@ -112,8 +112,11 @@
     padding: 0.3rem 0.65rem;
   }
 
+  .tag-cloud-list {
+    gap: 0.3rem 0.8rem;
+  }
+
   .tag-cloud-item {
-    &.tier-4 { font-size: 1.1rem; }
-    &.tier-5 { font-size: 1.2rem; }
+    font-size: calc(0.8rem + var(--w) * 1.05rem);
   }
 }
