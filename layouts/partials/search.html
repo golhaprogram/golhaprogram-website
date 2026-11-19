@@ -5,6 +5,18 @@
     <span>{{ .text }} <span class="search-tip-quote">«<button type="button" class="search-tip-example">{{ .example }}</button>»</span>.</span>
     <button type="button" class="search-tip-close" aria-label="بستن">✕</button>
   </div>
+  {{- /* Decide right here, before the first paint, whether to show the tip.
+         Showing it later from main.js pushed the page down after it had
+         appeared (PageSpeed "layout shift"). Search.js wires up its buttons. */}}
+  <script>
+    (function (t) {
+      try {
+        if (localStorage.getItem('searchTipDismissed:' + t.dataset.tipId) === '1') return;
+      } catch (e) {}
+      var x = Date.parse(t.dataset.expires);
+      if (!x || Date.now() <= x) t.hidden = false;
+    })(document.currentScript.previousElementSibling);
+  </script>
   {{- end }}
   {{- end }}
   <input type="text" id="search-input" placeholder="خواننده، شاعر، دستگاه، شماره برنامه…" aria-label="جستجو">
