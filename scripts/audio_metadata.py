@@ -32,10 +32,10 @@ USER_AGENT = "golhaprogram-audio-metadata/1.0 (+https://golhaprogram.com)"
 def split_front_matter(text):
     """Return (front_matter_lines, rest) or None if there is no YAML front matter."""
     lines = text.splitlines(keepends=True)
-    if not lines or lines[0].rstrip("\r\n") != "---":
+    if not lines or lines[0].strip() != "---":  # Hugo allows trailing spaces
         return None
     for i in range(1, len(lines)):
-        if lines[i].rstrip("\r\n") == "---":
+        if lines[i].strip() == "---":
             return lines[: i], lines[i:]
     return None
 
