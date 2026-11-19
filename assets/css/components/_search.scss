@@ -68,6 +68,45 @@
       }
     }
 
+    // Links to matching artist pages, above the program results.
+    .search-artists {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--divider-color);
+      background: var(--surface-muted);
+    }
+
+    .search-artist {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--input-border);
+      border-radius: 999px;
+      background: var(--surface-color);
+      color: inherit;
+      text-decoration: none;
+      font-size: 0.95rem;
+
+      &:hover,
+      &:focus-visible {
+        border-color: currentColor;
+        color: var(--search-link-hover);
+      }
+    }
+
+    .search-artist-role,
+    .search-artist-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .search-artist-name {
+      font-weight: bold;
+    }
+
     .no-results {
       padding: 1rem;
       text-align: center;

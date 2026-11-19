@@ -1,0 +1,14 @@
+{{- /* One entry per taxonomy term: name, role label, URL, program count.
+       Roles and labels come from data/roles.yaml, in that order. */ -}}
+{{- $out := slice -}}
+{{- range site.Data.roles -}}
+  {{- $role := . -}}
+  {{- with index site.Taxonomies .key -}}
+    {{- range .ByCount -}}
+      {{- with .Page -}}
+        {{- $out = $out | append (dict "n" .Title "r" $role.one "u" .RelPermalink "c" (len .Pages)) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $out | jsonify -}}

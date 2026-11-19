@@ -32,6 +32,7 @@ const FIELD_LABELS = {
 };
 
 const MAX_RESULTS = 10;
+const MAX_ARTISTS = 3;
 const MAX_SNIPPETS = 3;
 const DEBOUNCE_MS = 150;
 
@@ -101,6 +102,41 @@ function renderResult(result, query) {
 `;
 }
 
+const FA_DIGITS = '۰۱۲۳۴۵۶۷۸۹';
+const faNum = n => String(n).replace(/\d/g, d => FA_DIGITS[d]);
+
+// Artist (and dastgah) pages whose name matches the query, shown as links
+// above the program results. A name matches when the whole query is the
+// start of the name or of one of its words ("هاید" → هایده, "یاحقی" →
+// پرویز یاحقی), or, for a multi-word query, when one of its words is a whole
+// name ("حمیرا یاحقی" → حمیرا). Exact names come first, then the most
+// programs.
+function findArtists(terms, query) {
+  const q = normalizeFa(query).trim().replace(/\s+/g, ' ');
+  if (q.length < 3) return [];
+  const words = new Set(q.split(' ').filter(w => w.length > 1));
+  const hits = [];
+  for (const t of terms) {
+    const exact = t.norm === q;
+    if (exact || t.norm.startsWith(q) || t.norm.includes(' ' + q) ||
+        (words.size > 1 && words.has(t.norm))) {
+      hits.push({ t, exact });
+    }
+  }
+  hits.sort((a, b) => (b.exact - a.exact) || (b.t.c - a.t.c));
+  return hits.slice(0, MAX_ARTISTS).map(h => h.t);
+}
+
+function renderArtists(artists) {
+  if (!artists.length) return '';
+  return `<div class="search-artists">${artists.map(t => `
+    <a class="search-artist" href="${escapeHtml(t.u)}">
+      <span class="search-artist-role">${escapeHtml(t.r)}</span>
+      <span class="search-artist-name">${escapeHtml(t.n)}</span>
+      <span class="search-artist-count">${faNum(t.c)} برنامه</span>
+    </a>`).join('')}</div>`;
+}
+
 // Optional dismissible tip above the search box (see params.searchTip).
 function setupSearchTip(searchInput) {
   const tip = document.querySelector('.search-tip');
@@ -135,6 +171,7 @@ export function initializeSearch() {
   setupSearchTip(searchInput);
 
   let searchData = [];
+  let terms = [];
   let fuse;
 
   // The index (~1.1 MB, ~260 KB compressed) is only downloaded once the
@@ -142,6 +179,14 @@ export function initializeSearch() {
   let loading = null;
   function loadIndex() {
     if (loading) return loading;
+    // Artist links are a bonus: if this small file fails, search still works.
+    fetch('/search-terms.json')
+      .then(r => (r.ok ? r.json() : []))
+      .then(data => {
+        terms = data.map(t => ({ ...t, norm: normalizeFa(t.n) }));
+        if (fuse && searchInput.value.trim()) runSearch();
+      })
+      .catch(() => {});
     loading = fetch('/index.json')
       .then(response => {
         if (!response.ok) throw new Error('HTTP ' + response.status);
@@ -193,10 +238,11 @@ export function initializeSearch() {
       .search(normalizeFa(query), { limit: MAX_RESULTS })
       .map(r => ({ ...r, item: searchData[r.refIndex] }));
 
+    const artists = renderArtists(findArtists(terms, query));
     if (results.length > 0) {
-      searchResults.innerHTML = results.map(r => renderResult(r, query)).join('');
+      searchResults.innerHTML = artists + results.map(r => renderResult(r, query)).join('');
     } else {
-      searchResults.innerHTML = '<div class="no-results">نتیجه‌ای یافت نشد</div>';
+      searchResults.innerHTML = artists + '<div class="no-results">نتیجه‌ای یافت نشد</div>';
     }
     searchResults.style.display = 'block';
   }
