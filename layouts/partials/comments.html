@@ -2,12 +2,13 @@
 
 <div id="remark42" class="comments-section"></div>
 <script>
+  var darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
   var remark_config = {
     host: "https://{{ .Site.Params.remark42.commentsHost }}",
     site_id: "{{ .Site.Params.remark42.commentsSiteId }}",
     components: ["embed"],
     max_shown_comments: 10,
-    theme: "light",
+    theme: darkQuery && darkQuery.matches ? "dark" : "light",
     locale: "fa"
   };
 
@@ -19,4 +20,13 @@
       (d.head || d.body).appendChild(s);
     }
   })(remark_config.components || ['embed']);
+
+  // Follow system theme changes while the page is open.
+  if (darkQuery && darkQuery.addEventListener) {
+    darkQuery.addEventListener('change', function (e) {
+      if (window.REMARK42 && window.REMARK42.changeTheme) {
+        window.REMARK42.changeTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
 </script>

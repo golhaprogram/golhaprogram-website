@@ -32,11 +32,11 @@ body {
 .programs-table th,
 .programs-table td {
   padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--input-border);
 }
 
 .programs-table thead {
-  background-color: #f8f8f8;
+  background-color: var(--surface-muted-2);
 }
 
 /* Clickable Row Styles */
@@ -47,8 +47,8 @@ body {
 }
 
 .clickable-row:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: var(--tint-color);
+  box-shadow: 0 2px 8px var(--shadow-color-strong);
   transform: translateY(-2px);
 
 }
@@ -95,7 +95,7 @@ body {
 
   .clickable-row:hover {
     transform: translateY(-1px);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px var(--shadow-color);
   }
 
   /* Program Cards */
@@ -157,12 +157,12 @@ body {
     top: 100%;
     right: 0;
     left: 0;
-    background: white;
+    background: var(--surface-color);
     display: none;
     flex-direction: column;
     padding: 0;
     margin: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--shadow-color);
   }
 
   .main-nav-links li {
