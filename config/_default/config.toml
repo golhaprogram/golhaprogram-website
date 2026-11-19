@@ -88,6 +88,14 @@ baseName = "index"
 isPlainText = true
 notAlternative = true
 
+# Artist/dastgah names with their page URLs and program counts, so search
+# can link straight to an artist's page (see assets/js/components/Search.js).
+[outputFormats.SearchTerms]
+mediaType = "application/json"
+baseName = "search-terms"
+isPlainText = true
+notAlternative = true
+
 [sitemap]
 changefreq = "monthly"
 filename = "sitemap.xml"
@@ -102,7 +110,7 @@ noUgly = true
 rel = "sitemap"
 
 [outputs]
-home = ["HTML", "JSON", "RSS", "Sitemap", "ROBOTS"]
+home = ["HTML", "JSON", "SearchTerms", "RSS", "Sitemap", "ROBOTS"]
 page = ["HTML"]
 section = ["HTML"]
 taxonomy = ["HTML"]
