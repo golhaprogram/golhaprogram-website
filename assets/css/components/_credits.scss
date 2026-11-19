@@ -1,0 +1,88 @@
+// Program credits (layouts/partials/credits.html): set like liner notes,
+// plain text with the role in bold and names as simple links.
+.credits {
+  margin: 1.25rem auto 1.75rem;
+  padding: 0;
+  max-width: 34rem;
+  direction: rtl;
+  text-align: center;
+  line-height: 1.9;
+
+  .credit-row {
+    margin: 0;
+  }
+
+  dt,
+  dd {
+    display: inline;
+    margin: 0;
+  }
+
+  dt {
+    font-weight: 700;
+    color: var(--text-color);
+
+    &::after {
+      content: ": ";
+    }
+  }
+
+  dd {
+    color: var(--text-color);
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--accent-color);
+        border-bottom-color: currentColor;
+      }
+    }
+  }
+
+  .sep {
+    color: var(--text-faint);
+  }
+}
+
+// Artist / dastgah pages (layouts/_default/taxonomy.html): a list of programs,
+// each with the same credits block as the program page.
+.taxonomy-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0.25rem;
+  }
+}
+
+.taxonomy-meta {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.taxonomy-list {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.program-item {
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border-color);
+
+  h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.15rem;
+  }
+
+  .credits {
+    margin: 0.25rem auto 0;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+}

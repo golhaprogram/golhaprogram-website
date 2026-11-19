@@ -13,9 +13,11 @@
 @import "components/_navigation.scss";
 @import "components/_audio-player.scss";
 @import "components/_performers.scss";
+@import "components/_credits.scss";
 @import "components/_comments.scss";
 @import "components/_tables.scss";
 @import 'components/_taxonomy.scss';
+@import 'components/_tag-cloud.scss';
 @import 'components/search';
 
 /* Layouts */
