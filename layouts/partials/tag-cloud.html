@@ -2,7 +2,7 @@
        Rendered as plain HTML (crawlable links that always match Hugo's term
        pages); assets/js/components/TagCloud.js only switches tabs.
        Called as: partial "tag-cloud.html" (dict "context" .) */ -}}
-{{- $limit := 40 -}}
+{{- $limit := 60 -}}
 {{- $tabs := slice -}}
 {{- range where site.Data.roles "cloud" true -}}
   {{- $t := index site.Taxonomies .key -}}
@@ -24,11 +24,18 @@
   {{- $max := (index $tab.terms 0).Count }}
   <div class="tag-cloud-panel" role="tabpanel" id="tc-panel-{{ $tab.role.key }}"
     aria-labelledby="tc-tab-{{ $tab.role.key }}"{{ if ne $i 0 }} hidden{{ end }}>
-    {{- /* Take the most frequent names, then show them in Persian alphabetical
+    {{- /* Then show them in Persian alphabetical
            order: sizes still vary (so it reads as a cloud) but names are easy to
            find. --w is 0..1 on a log scale. */ -}}
+    {{- /* Show up to $limit names without splitting a tie: if the list is longer,
+           keep only names more frequent than the first name past the limit. */ -}}
+    {{- $shown := $tab.terms -}}
+    {{- if gt (len $tab.terms) $limit -}}
+      {{- $cut := (index $tab.terms $limit).Count -}}
+      {{- $shown = where $tab.terms "Count" "gt" $cut -}}
+    {{- end -}}
     {{- $items := slice -}}
-    {{- range first $limit $tab.terms -}}
+    {{- range $shown -}}
       {{- $w := 1.0 -}}
       {{- if gt $max 1 -}}{{- $w = div (math.Log .Count) (math.Log $max) -}}{{- end -}}
       {{- $items = $items | append (dict "k" (partial "fa-sort-key" .Page.LinkTitle) "page" .Page "count" .Count "w" $w) -}}
@@ -39,7 +46,7 @@
       <li><a href="{{ .page.RelPermalink }}" class="tag-cloud-item band-{{ $band }}" style="--w:{{ printf "%.2f" .w }}" title="{{ partial "fa-number" .count }} برنامه">{{ .page.LinkTitle }}<sup class="tag-cloud-count">{{ partial "fa-number" .count }}</sup></a></li>
       {{- end }}
     </ul>
-    {{- if gt (len $tab.terms) $limit }}
+    {{- if lt (len $shown) (len $tab.terms) }}
     <a class="tag-cloud-all" href="{{ (site.GetPage (printf "/%s" $tab.role.key)).RelPermalink }}">همه‌ی {{ $tab.role.list }} ({{ partial "fa-number" (len $tab.terms) }}) ←</a>
     {{- end }}
   </div>
