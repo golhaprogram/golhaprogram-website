@@ -11,6 +11,22 @@ document.addEventListener('DOMContentLoaded', function() {
     console.error('Error initializing tag cloud:', err);
   }
   
+  // Header menus (<details>): one open at a time; close on outside tap/Esc.
+  try {
+    const menus = document.querySelectorAll('.nav-menu');
+    menus.forEach(m => m.addEventListener('toggle', () => {
+      if (m.open) menus.forEach(o => { if (o !== m) o.open = false; });
+    }));
+    document.addEventListener('click', e => {
+      menus.forEach(m => { if (m.open && !m.contains(e.target)) m.open = false; });
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') menus.forEach(m => { m.open = false; });
+    });
+  } catch (err) {
+    console.error('Error initializing header menus:', err);
+  }
+
   // Initialize search
   try {
     initializeSearch();

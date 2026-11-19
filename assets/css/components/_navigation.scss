@@ -1,181 +1,158 @@
+// Slim site header (layouts/partials/navigation.html): mark + name on the
+// right, three menu items on the left, the same on phones and desktops.
+
+// body is a centered flex column; let the header bar span the full width
+// and keep the search box centered under it.
+body > header {
+  width: 100%;
+}
+
+.site-navigation {
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
 .main-nav {
-    background: var(--surface-color);
-    box-shadow: 0 2px 4px var(--shadow-color);
-    position: relative;
-    width: 100%;
-    z-index: 1000;
+  background: var(--surface-color);
+  border-bottom: 1px solid var(--divider-color);
+  position: relative;
+  width: 100%;
+  z-index: 1000;
 
-    &-container {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 4rem;
-    }
+  &-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.25rem;
+  }
 
-    &-logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--text-color);
-        text-decoration: none;
-        
-        &:hover {
-            color: var(--primary-color);
-        }
-    }
+  &-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
-    &-links {
-        display: flex;
-        gap: 1.5rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
+    > li {
+      position: relative;
     }
-
-    .nav-item {
-        position: relative;
-        
-        &.has-dropdown:hover .dropdown-menu {
-            display: block;
-        }
-    }
-
-    .nav-link {
-        color: var(--text-color);
-        text-decoration: none;
-        padding: 0.5rem;
-        transition: color 0.2s ease;
-        
-        &:hover, &.active {
-            color: var(--accent-color);
-        }
-    }
-
-    .dropdown-menu {
-        list-style: none;
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0; // RTL support
-        background: var(--surface-color);
-        min-width: 200px;
-        box-shadow: 0 2px 4px var(--shadow-color);
-        border-radius: 4px;
-        padding: 0.5rem 0;
-        
-        .dropdown-item {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: var(--text-color);
-            text-decoration: none;
-            
-            &:hover {
-                background: var(--background-color);
-                color: var(--secondary-color);
-            }
-        }
-    }
-
-    // Mobile menu toggle
-    &-toggle {
-        display: none;
-        
-        &-label {
-            display: none;
-            cursor: pointer;
-            
-            span {
-                display: block;
-                width: 24px;
-                height: 2px;
-                background: var(--text-color);
-                position: relative;
-                transition: all 0.2s ease;
-                
-                &::before, &::after {
-                    content: '';
-                    position: absolute;
-                    width: 24px;
-                    height: 2px;
-                    background: var(--text-color);
-                    transition: all 0.2s ease;
-                }
-                
-                &::before { top: -8px; }
-                &::after { bottom: -8px; }
-            }
-        }
-    }
+  }
 }
 
-// Mobile styles
-@media (max-width: 768px) {
-    .main-nav {
-        &-toggle-label {
-            display: block;
-        }
-        
-        &-toggle:checked ~ .main-nav-links {
-            display: flex;
-        }
-        
-        &-links {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            left: 0;
-            background: var(--surface-color);
-            padding: 1rem;
-            box-shadow: 0 2px 4px var(--shadow-color);
-            
-            .nav-item {
-                width: 100%;
-            }
-            
-            .nav-link {
-                display: block;
-                padding: 0.75rem 0;
-            }
-            
-            .dropdown-menu {
-                position: static;
-                box-shadow: none;
-                display: none;
-                padding-right: 1rem;
-            }
-            
-            .has-dropdown:hover .dropdown-menu {
-                display: none;
-            }
-            
-            .has-dropdown.active .dropdown-menu {
-                display: block;
-            }
-        }
-    }
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  img {
+    display: block;
+    border-radius: 6px;
+  }
 }
 
-// RTL specific adjustments
-[dir="rtl"] .main-nav {
-    .dropdown-menu {
-        right: 0;
-        left: auto;
+.main-nav .nav-link {
+  display: block;
+  padding: 0.5rem 0.6rem;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+
+  &.active {
+    color: var(--accent-color);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--accent-color);
     }
-    
-    @media (max-width: 768px) {
-        &-links {
-            right: 0;
-            left: 0;
-            text-align: right;
-            
-            .dropdown-menu {
-                padding-right: 1rem;
-                padding-left: 0;
-            }
-        }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+}
+
+// <details> menus: hide the default marker, add a small chevron.
+.nav-menu {
+  > summary {
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
     }
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 0.35em;
+      height: 0.35em;
+      margin-inline-start: 0.4em;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: translateY(-0.2em) rotate(45deg); // points down
+      transition: transform 0.15s ease;
+    }
+  }
+
+  &[open] > summary {
+    color: var(--accent-color);
+
+    &::after {
+      transform: translateY(0.05em) rotate(-135deg);
+    }
+  }
+}
+
+.main-nav .dropdown-menu {
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  // Menus sit at the left (end) side of the RTL header, so anchor them to
+  // the item's left edge to keep them on screen on narrow phones.
+  left: 0;
+  right: auto;
+  margin: 0;
+  min-width: 11rem;
+  padding: 0.35rem 0;
+  background: var(--surface-color);
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+
+  .dropdown-item {
+    display: block;
+    padding: 0.55rem 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background: var(--surface-muted);
+      color: var(--accent-color);
+    }
+  }
+
+  .dropdown-all {
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--divider-color);
+  }
 }
