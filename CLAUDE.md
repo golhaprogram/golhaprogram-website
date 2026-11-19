@@ -64,7 +64,7 @@ Audio URLs are automatically generated using program metadata:
 
 ### Environment Configuration
 - **Production**: Uses `config/production/config.toml`, deployed to golhaprogram.com
-- **Beta**: Uses `config/beta/config.toml`, deployed to beta branch
+- **Beta** (test environment): `config/beta/config.toml`, used by Netlify deploy previews and branch deploys: noindex, comments from `comments-beta.golhaprogram.com`. There is no standalone beta site anymore.
 - **Development**: Uses `config/development/config.toml` for local work
 
 ### Content Structure Pattern
@@ -87,7 +87,7 @@ announcers: ["فیروزه امیرمعز"]
 - Tag aliases system in `data/tag_aliases.yaml` for name normalization
 
 ### Deployment
-- **Netlify**: Automatic deployment on push to main/beta branches
+- **Netlify**: Production deploys on push to `main`; every PR gets a deploy preview
 - **Hugo Version**: Pinned to v0.147.0 in production
 - **Build Context**: Different Hugo environments for production, beta, and preview deployments
 

@@ -13,14 +13,8 @@ HUGO_ENABLEGITINFO = "true"
 [context.production]
 command = "hugo --gc --minify -e production"
 
-# Beta context
-[context.beta]
-command = "hugo --gc --minify -e beta"
-
-[context.beta.environment]
-HUGO_ENV = "beta"
-
-# Branch deploys (other than beta and production)
+# Branch deploys and deploy previews use the "beta" Hugo environment
+# (config/beta): noindex, and comments from comments-beta.golhaprogram.com.
 [context.branch-deploy]
 command = "hugo --gc --minify -e beta --baseURL /"
 
