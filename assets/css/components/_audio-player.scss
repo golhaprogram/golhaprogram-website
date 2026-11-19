@@ -59,3 +59,11 @@
   width: 18px;
   height: 18px;
 }
+
+/* With color-scheme dark, the system colors flip (ButtonText becomes light),
+   so the icon must follow ButtonFace instead of staying white. */
+@media (prefers-color-scheme: dark) {
+  .download-button svg {
+    color: ButtonFace;
+  }
+}
