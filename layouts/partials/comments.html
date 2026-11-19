@@ -2,13 +2,17 @@
 
 <div id="remark42" class="comments-section"></div>
 <script>
-  var darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
   var remark_config = {
     host: "https://{{ .Site.Params.remark42.commentsHost }}",
     site_id: "{{ .Site.Params.remark42.commentsSiteId }}",
     components: ["embed"],
     max_shown_comments: 10,
-    theme: darkQuery && darkQuery.matches ? "dark" : "light",
+    // Always light: our remark42 (Oct 2024 build) doesn't coordinate its iframe's
+    // color scheme with dark host pages, and some browsers (Android Chrome)
+    // then paint a white backdrop behind it. In dark mode the comments sit on a
+    // light card instead (see _comments.scss). Newer remark42 versions handle
+    // dark host pages; after upgrading, theme can follow prefers-color-scheme.
+    theme: "light",
     locale: "fa"
   };
 
@@ -21,12 +25,4 @@
     }
   })(remark_config.components || ['embed']);
 
-  // Follow system theme changes while the page is open.
-  if (darkQuery && darkQuery.addEventListener) {
-    darkQuery.addEventListener('change', function (e) {
-      if (window.REMARK42 && window.REMARK42.changeTheme) {
-        window.REMARK42.changeTheme(e.matches ? 'dark' : 'light');
-      }
-    });
-  }
 </script>
