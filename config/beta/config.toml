@@ -1,4 +1,7 @@
-baseURL = "https://beta.golhaprogram.com"
+# Test environment used by Netlify deploy previews and branch deploys
+# (they override baseURL), and by `npm run dev:beta`.
+# The standalone beta.golhaprogram.com site was retired in Nov 2026.
+baseURL = "/"
 
 [params]
 noindex = true
