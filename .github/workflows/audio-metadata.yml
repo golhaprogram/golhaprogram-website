@@ -50,7 +50,8 @@ jobs:
       - name: Measure MP3s
         if: steps.changed.outputs.files != ''
         run: |
-          hugo -e audioindex -d /tmp/audioindex --quiet
+          npm ci --no-audit --no-fund   # Hugo also renders pages, whose JS imports fuse.js
+          hugo -e audioindex -d /tmp/audioindex
           python3 scripts/audio_metadata.py --index /tmp/audioindex/audio-index.json \
             --report /tmp/report.md ${{ steps.changed.outputs.files }} || echo "FAILED=1" >> "$GITHUB_ENV"
           cat /tmp/report.md >> "$GITHUB_STEP_SUMMARY"
