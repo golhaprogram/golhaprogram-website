@@ -1,0 +1,17 @@
+{{- /* Returns a string that sorts in Persian alphabetical order:
+       each character becomes a 2-digit code in Persian letter order
+       (آ ا ب پ ت … ک گ … ی), so پ/چ/ژ/گ/ک/ی sort correctly. Spaces, ZWNJ
+       and hyphens sort before any letter; Arabic ي/ك sort as ی/ک. */ -}}
+{{- $o := dict
+  " " 1 "-" 1 "‌" 1
+  "آ" 10 "ا" 11 "أ" 11 "إ" 11 "ب" 12 "پ" 13 "ت" 14 "ث" 15 "ج" 16 "چ" 17
+  "ح" 18 "خ" 19 "د" 20 "ذ" 21 "ر" 22 "ز" 23 "ژ" 24 "س" 25 "ش" 26 "ص" 27
+  "ض" 28 "ط" 29 "ظ" 30 "ع" 31 "غ" 32 "ف" 33 "ق" 34 "ک" 35 "ك" 35 "گ" 36
+  "ل" 37 "م" 38 "ن" 39 "و" 40 "ؤ" 40 "ه" 41 "ة" 41 "ی" 42 "ي" 42 "ى" 42
+  "ئ" 42 "ء" 43
+-}}
+{{- $key := "k" -}}  {{- /* letter prefix: keeps Hugo's sort from treating the key as a number */ -}}
+{{- range split (string .) "" -}}
+  {{- $key = printf "%s%02d" $key (index $o . | default 90) -}}
+{{- end -}}
+{{- return $key -}}

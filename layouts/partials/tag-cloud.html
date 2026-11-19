@@ -24,14 +24,14 @@
   {{- $max := (index $tab.terms 0).Count }}
   <div class="tag-cloud-panel" role="tabpanel" id="tc-panel-{{ $tab.role.key }}"
     aria-labelledby="tc-tab-{{ $tab.role.key }}"{{ if ne $i 0 }} hidden{{ end }}>
-    {{- /* Take the most frequent names, then mix them in a stable pseudo-random
-           order (by hash of the name) so big and small names interleave like a
-           cloud instead of reading as a ranked list. --w is 0..1 on a log scale. */ -}}
+    {{- /* Take the most frequent names, then show them in Persian alphabetical
+           order: sizes still vary (so it reads as a cloud) but names are easy to
+           find. --w is 0..1 on a log scale. */ -}}
     {{- $items := slice -}}
     {{- range first $limit $tab.terms -}}
       {{- $w := 1.0 -}}
       {{- if gt $max 1 -}}{{- $w = div (math.Log .Count) (math.Log $max) -}}{{- end -}}
-      {{- $items = $items | append (dict "k" (md5 .Page.LinkTitle) "page" .Page "count" .Count "w" $w) -}}
+      {{- $items = $items | append (dict "k" (partial "fa-sort-key" .Page.LinkTitle) "page" .Page "count" .Count "w" $w) -}}
     {{- end }}
     <ul class="tag-cloud-list">
       {{- range sort $items "k" }}
