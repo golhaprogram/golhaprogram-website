@@ -21,7 +21,7 @@
   padding: 0.35rem 0.8rem;
   border: 1px solid var(--performer-border);
   border-radius: 999px;
-  background: #fff;
+  background: var(--surface-color);
   color: var(--text-color);
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
@@ -33,10 +33,11 @@
   &[aria-selected="true"] {
     background: var(--primary-color);
     border-color: var(--primary-color);
-    color: #fff;
+    color: var(--surface-color);
 
     .tag-cloud-tab-count {
-      color: rgba(255, 255, 255, 0.75);
+      color: inherit;
+      opacity: 0.7;
     }
   }
 
@@ -48,7 +49,7 @@
 
 .tag-cloud-tab-count {
   font-size: 0.8em;
-  color: #7a8794;
+  color: var(--text-faint);
   margin-right: 0.15rem;
 }
 
@@ -91,7 +92,7 @@
   font-size: 0.55em;
   font-weight: normal;
   margin-right: 0.15em;
-  color: #8a96a3;
+  color: var(--text-faint);
   vertical-align: super;
 }
 
