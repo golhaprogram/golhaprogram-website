@@ -17,18 +17,11 @@
   {{ end }}
 
   <header class="term-header">
-    {{ if eq .Data.Plural "players" }}
-      <h1>برنامه‌های نوازنده: {{ .Title }}</h1>
-    {{ else if eq .Data.Plural "singers" }}
-      <h1>برنامه‌های خواننده: {{ .Title }}</h1>
-    {{ else if eq .Data.Plural "poets" }}
-      <h1>برنامه‌های شاعر: {{ .Title }}</h1>
-    {{ else if eq .Data.Plural "announcers" }}
-      <h1>برنامه‌های گوینده: {{ .Title }}</h1>
-    {{ else if eq .Data.Plural "composers" }}
-      <h1>برنامه‌های آهنگساز: {{ .Title }}</h1>
-    {{ else if eq .Data.Plural "arranger" }}
-      <h1>برنامه‌های تنظیم کننده: {{ .Title }}</h1>
+    {{ $plural := .Data.Plural }}
+    {{ with index (where site.Data.roles "key" $plural) 0 }}
+      <h1>برنامه‌های {{ .one }}: {{ $.Title }}</h1>
+    {{ else }}
+      <h1>{{ .Title }}</h1>
     {{ end }}
     <div class="program-count">{{ partial "fa-number" (len .Pages)}} برنامه </div>
   </header>

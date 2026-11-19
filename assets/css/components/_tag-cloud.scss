@@ -1,0 +1,119 @@
+// Home / programs tag cloud (layouts/partials/tag-cloud.html)
+.tag-cloud {
+  max-width: var(--max-width);
+  margin: 2.5rem auto 1.5rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.tag-cloud-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tag-cloud-tab {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--performer-border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: var(--performer-bg);
+  }
+
+  &[aria-selected="true"] {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+
+    .tag-cloud-tab-count {
+      color: rgba(255, 255, 255, 0.75);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+}
+
+.tag-cloud-tab-count {
+  font-size: 0.8em;
+  color: #7a8794;
+  margin-right: 0.15rem;
+}
+
+.tag-cloud-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 0.5rem;
+}
+
+.tag-cloud-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: var(--performer-bg);
+  border: 1px solid var(--performer-border);
+  color: var(--primary-color);
+  text-decoration: none;
+  line-height: 1.5;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: #fff;
+    border-color: var(--accent-color);
+    color: var(--accent-dark);
+  }
+
+  // size by how often the name appears (log scale, 1 = rare, 5 = most)
+  &.tier-1 { font-size: 0.85rem; }
+  &.tier-2 { font-size: 0.95rem; }
+  &.tier-3 { font-size: 1.05rem; }
+  &.tier-4 { font-size: 1.2rem; }
+  &.tier-5 { font-size: 1.35rem; font-weight: 600; }
+}
+
+.tag-cloud-count {
+  font-size: 0.7rem;
+  font-weight: normal;
+  color: #7a8794;
+}
+
+.tag-cloud-all {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--accent-dark);
+}
+
+@media (max-width: 480px) {
+  .tag-cloud {
+    margin-top: 2rem;
+  }
+
+  .tag-cloud-tab {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .tag-cloud-item {
+    &.tier-4 { font-size: 1.1rem; }
+    &.tier-5 { font-size: 1.2rem; }
+  }
+}

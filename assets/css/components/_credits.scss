@@ -1,0 +1,65 @@
+// Program credits (layouts/partials/credits.html)
+.credits {
+  margin: 1rem 0 1.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--background-color);
+  border-right: 3px solid var(--border-color);
+  border-radius: 4px;
+  direction: rtl;
+  text-align: right;
+
+  .credit-row {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+
+    & + .credit-row {
+      border-top: 1px solid var(--performer-border);
+    }
+  }
+
+  dt {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #5a6b7b;
+  }
+
+  dd {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .performer {
+    margin: 0;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.9rem;
+  }
+
+  .performer-plain:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .credits {
+    padding: 0.5rem 0.75rem;
+
+    .credit-row {
+      grid-template-columns: 5.5rem 1fr;
+    }
+
+    dt {
+      font-size: 0.8rem;
+    }
+
+    .performer {
+      font-size: 0.85rem;
+    }
+  }
+}

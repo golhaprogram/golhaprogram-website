@@ -1,0 +1,32 @@
+{{- /* Program credits: one row per role (see data/roles.yaml), label on the
+       right, linked names beside it. Links come from Hugo's taxonomy pages,
+       so they always match the real URLs. */ -}}
+{{- $page := . -}}
+{{- $rows := slice -}}
+{{- range site.Data.roles -}}
+  {{- $terms := $page.GetTerms .key -}}
+  {{- if $terms -}}
+    {{- $rows = $rows | append (dict "role" . "terms" $terms) -}}
+  {{- end -}}
+{{- end -}}
+{{- with $rows }}
+<dl class="credits">
+  {{- range . }}
+  {{- $label := cond (gt (len .terms) 1) .role.many .role.one }}
+  <div class="credit-row credit-{{ .role.key }}">
+    <dt>{{ $label }}</dt>
+    <dd>
+      {{- range .terms }}
+      <a href="{{ .RelPermalink }}" class="performer">{{ .LinkTitle }}</a>
+      {{- end }}
+    </dd>
+  </div>
+  {{- end }}
+  {{- with $page.Params.mode }}
+  <div class="credit-row credit-mode">
+    <dt>گوشه</dt>
+    <dd><span class="performer performer-plain">{{ . }}</span></dd>
+  </div>
+  {{- end }}
+</dl>
+{{- end }}

@@ -30,15 +30,22 @@ poets = "/poets/:slug/"
 announcers = "/announcers/:slug/"
 composers = "/composers/:slug/"
 arrangers = "/arrangers/:slug/"
+lyricists = "/lyricists/:slug/"
+conductors = "/conductors/:slug/"
+dastgah = "/dastgah/:slug/"
 
 [taxonomies]
-dastgah = "dastgahs"
+# Front-matter keys are the right-hand (plural) names. dastgah is singular in
+# the program files, so its taxonomy is named "dastgah" (pages under /dastgah/).
+dastgah = "dastgah"
 singer = "singers"
 poet = "poets"
 player = "players"
 announcer = "announcers"
 composers = "composers"
 arrangers = "arrangers"
+lyricist = "lyricists"
+conductor = "conductors"
 
 [menu]
 [[menu.main]]

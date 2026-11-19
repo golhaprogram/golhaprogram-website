@@ -7,43 +7,7 @@
 
   {{ partial "audio-player.html" . }}
 
-  <div class="performers">
-    {{ if .Params.singers }}
-    <div class="singers">
-      <h3>خوانندگان:</h3>
-      {{ range .Params.singers }}
-      <a href="{{ printf " /singers/%s/" . | urlize }}" class="performer">{{ . }}</a>
-      {{ end }}
-    </div>
-    {{ end }}
-
-    {{ if .Params.players }}
-    <div class="players">
-      <h3>نوازندگان:</h3>
-      {{ range .Params.players }}
-      <a href="{{ printf " /players/%s/" . | urlize }}" class="performer">{{ . }}</a>
-      {{ end }}
-    </div>
-    {{ end }}
-
-    {{ if .Params.poets }}
-    <div class="poets">
-      <h3>شعرا:</h3>
-      {{ range .Params.poets }}
-      <a href="{{ printf " /poets/%s/" . | urlize }}" class="performer">{{ . }}</a>
-      {{ end }}
-    </div>
-    {{ end }}
-
-    {{ if .Params.announcers }}
-    <div class="announcers">
-      <h3>گوینده:</h3>
-      {{ range .Params.announcers }}
-      <a href="{{ printf " /announcers/%s/" . | urlize }}" class="performer">{{ . }}</a>
-      {{ end }}
-    </div>
-    {{ end }}
-  </div>
+  {{ partial "credits.html" . }}
 
   <div class="content">
     {{ .Content }}

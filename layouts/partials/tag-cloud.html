@@ -1,99 +1,43 @@
-{{/* layouts/partials/tag-cloud.html */}}
-
-{{ $performersData := dict 
-    "singers" dict 
-    "players" dict 
-    "poets" dict 
-    "announcers" dict 
-    "composers" dict
-    "arrangers" dict
-}}
-
-<!-- Process all pages -->
-{{ range site.Pages }}
-  <!-- Process singers -->
-  {{ range .Params.singers }}
-    {{ $name := . }}
-    {{ $currentCount := 0 }}
-    {{ if isset (index $performersData "singers") $name }}
-      {{ $currentCount = index (index $performersData "singers") $name }}
-    {{ end }}
-    {{ $newCount := add $currentCount 1 }}
-    {{ $categoryDict := index $performersData "singers" }}
-    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
-    {{ $performersData = merge $performersData (dict "singers" $categoryDict) }}
-  {{ end }}
-
-  <!-- Process players -->
-  {{ range .Params.players }}
-    {{ $name := . }}
-    {{ $currentCount := 0 }}
-    {{ if isset (index $performersData "players") $name }}
-      {{ $currentCount = index (index $performersData "players") $name }}
-    {{ end }}
-    {{ $newCount := add $currentCount 1 }}
-    {{ $categoryDict := index $performersData "players" }}
-    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
-    {{ $performersData = merge $performersData (dict "players" $categoryDict) }}
-  {{ end }}
-
-  <!-- Process poets -->
-  {{ range .Params.poets }}
-    {{ $name := . }}
-    {{ $currentCount := 0 }}
-    {{ if isset (index $performersData "poets") $name }}
-      {{ $currentCount = index (index $performersData "poets") $name }}
-    {{ end }}
-    {{ $newCount := add $currentCount 1 }}
-    {{ $categoryDict := index $performersData "poets" }}
-    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
-    {{ $performersData = merge $performersData (dict "poets" $categoryDict) }}
-  {{ end }}
-
-  <!-- Process announcers -->
-  {{ range .Params.announcers }}
-    {{ $name := . }}
-    {{ $currentCount := 0 }}
-    {{ if isset (index $performersData "announcers") $name }}
-      {{ $currentCount = index (index $performersData "announcers") $name }}
-    {{ end }}
-    {{ $newCount := add $currentCount 1 }}
-    {{ $categoryDict := index $performersData "announcers" }}
-    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
-    {{ $performersData = merge $performersData (dict "announcers" $categoryDict) }}
-  {{ end }}
-
-  <!-- Process composers -->
-  {{ range .Params.composers }}
-    {{ $name := . }}
-    {{ $currentCount := 0 }}
-    {{ if isset (index $performersData "composers") $name }}
-      {{ $currentCount = index (index $performersData "composers") $name }}
-    {{ end }}
-    {{ $newCount := add $currentCount 1 }}
-    {{ $categoryDict := index $performersData "composers" }}
-    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
-    {{ $performersData = merge $performersData (dict "composers" $categoryDict) }}
-  {{ end }}
-
-  <!-- Process arrangers -->
-  {{ range .Params.arrangers }}
-    {{ $name := . }}
-    {{ $currentCount := 0 }}
-    {{ if isset (index $performersData "arrangers") $name }}
-      {{ $currentCount = index (index $performersData "arrangers") $name }}
-    {{ end }}
-    {{ $newCount := add $currentCount 1 }}
-    {{ $categoryDict := index $performersData "arrangers" }}
-    {{ $categoryDict = merge $categoryDict (dict $name $newCount) }}
-    {{ $performersData = merge $performersData (dict "arrangers" $categoryDict) }}
-  {{ end }}
-{{ end }}
-
-
-<div 
-  data-tag-cloud 
-  data-performers='{{ $performersData | jsonify }}'
-  {{ with .context.Params.program_type }}data-program-type="{{ . }}"{{ end }}
-></div>
-
+{{- /* Tag cloud: one tab per role with cloud: true in data/roles.yaml.
+       Rendered as plain HTML (crawlable links that always match Hugo's term
+       pages); assets/js/components/TagCloud.js only switches tabs.
+       Called as: partial "tag-cloud.html" (dict "context" .) */ -}}
+{{- $limit := 40 -}}
+{{- $tabs := slice -}}
+{{- range where site.Data.roles "cloud" true -}}
+  {{- $t := index site.Taxonomies .key -}}
+  {{- if $t -}}{{- $tabs = $tabs | append (dict "role" . "terms" $t.ByCount) -}}{{- end -}}
+{{- end -}}
+{{- with $tabs }}
+<section class="tag-cloud" data-tag-cloud aria-label="هنرمندان و دستگاه‌ها">
+  <div class="tag-cloud-tabs" role="tablist">
+    {{- range $i, $tab := . }}
+    <button type="button" role="tab" class="tag-cloud-tab"
+      id="tc-tab-{{ $tab.role.key }}" aria-controls="tc-panel-{{ $tab.role.key }}"
+      aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"
+      {{- if ne $i 0 }} tabindex="-1"{{ end }}>
+      {{ $tab.role.list }} <span class="tag-cloud-tab-count">{{ partial "fa-number" (len $tab.terms) }}</span>
+    </button>
+    {{- end }}
+  </div>
+  {{- range $i, $tab := . }}
+  {{- $max := (index $tab.terms 0).Count }}
+  <div class="tag-cloud-panel" role="tabpanel" id="tc-panel-{{ $tab.role.key }}"
+    aria-labelledby="tc-tab-{{ $tab.role.key }}"{{ if ne $i 0 }} hidden{{ end }}>
+    <ul class="tag-cloud-list">
+      {{- range first $limit $tab.terms }}
+      {{- /* size tier 1–5 on a log scale relative to the most frequent name */ -}}
+      {{- $tier := 1 -}}
+      {{- if gt $max 1 -}}
+        {{- $tier = add 1 (int (math.Floor (mul 4.0 (div (math.Log .Count) (math.Log $max))))) -}}
+      {{- end }}
+      <li><a href="{{ .Page.RelPermalink }}" class="tag-cloud-item tier-{{ $tier }}">{{ .Page.LinkTitle }}<span class="tag-cloud-count">{{ partial "fa-number" .Count }}</span></a></li>
+      {{- end }}
+    </ul>
+    {{- if gt (len $tab.terms) $limit }}
+    <a class="tag-cloud-all" href="{{ (site.GetPage (printf "/%s" $tab.role.key)).RelPermalink }}">همه‌ی {{ $tab.role.list }} ({{ partial "fa-number" (len $tab.terms) }}) ←</a>
+    {{- end }}
+  </div>
+  {{- end }}
+</section>
+{{- end }}
