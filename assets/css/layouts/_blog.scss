@@ -190,3 +190,47 @@
 .air-dates-chart figcaption {
   text-align: center !important;
 }
+
+/* Evidence table on phones: one card per program. The program, date, kind
+   and certainty share a line; the evidence gets the full width below. */
+@media (max-width: 640px) {
+  .air-dates-evidence {
+    thead {
+      display: none;
+    }
+
+    tbody,
+    tr,
+    td {
+      display: block;
+    }
+
+    tr {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--divider-color);
+    }
+
+    td {
+      border: none;
+      padding: 0;
+    }
+
+    td:not(.basis) {
+      display: inline;
+    }
+
+    td:not(.basis):not(:nth-child(4))::after {
+      content: " · ";
+      color: var(--text-faint);
+    }
+
+    .num {
+      font-weight: 700;
+    }
+
+    .basis {
+      margin-top: 0.3rem;
+      line-height: 1.8;
+    }
+  }
+}
