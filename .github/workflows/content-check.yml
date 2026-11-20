@@ -35,6 +35,19 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
+      - name: Use the base branch's tools if this branch predates them
+        run: |
+          # GitHub runs this workflow as it is after merging the PR into the base
+          # branch, but the checkout is the PR branch alone, which may be older and
+          # lack the files this job runs.
+          git fetch -q origin ${{ github.base_ref }}
+          for f in scripts/check_content.py data/roles.yaml; do
+            if [ ! -e "$f" ]; then
+              git checkout -q origin/${{ github.base_ref }} -- "$f" && git reset -q -- "$f"
+              echo "Using $f from ${{ github.base_ref }}"
+            fi
+          done
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

@@ -28,6 +28,19 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
 
+      - name: Use the base branch's tools if this branch predates them
+        run: |
+          # GitHub runs this workflow as it is after merging the PR into the base
+          # branch, but the checkout is the PR branch alone, which may be older and
+          # lack the files this job runs.
+          git fetch -q origin ${{ github.base_ref }}
+          for f in scripts/audio_metadata.py config/audioindex layouts/_default/home.audioindex.json; do
+            if [ ! -e "$f" ]; then
+              git checkout -q origin/${{ github.base_ref }} -- "$f" && git reset -q -- "$f"
+              echo "Using $f from ${{ github.base_ref }}"
+            fi
+          done
+
       - name: Find changed program files
         id: changed
         run: |
