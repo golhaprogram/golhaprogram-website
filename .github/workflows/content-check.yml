@@ -1,0 +1,72 @@
+name: Content check
+
+# On PRs that add or change program files: fix formatting automatically
+# (committed to the PR branch), then fail with a clear message for real
+# problems: broken front matter, missing fields, a program_number that
+# doesn't match the file name, a name listed twice, unknown fields...
+# See scripts/check_content.py for the full list.
+#
+# Only the changed files are checked, so old problems elsewhere don't block
+# a PR. A PR that changes the checker itself or data/roles.yaml checks
+# every program instead (report only, no fixes).
+
+on:
+  pull_request:
+    paths:
+      - 'content/programs/**/*.md'
+      - 'scripts/check_content.py'
+      - 'data/roles.yaml'
+
+# Shared with the other workflows that push to PR branches, so they take turns.
+concurrency:
+  group: pr-autofix-${{ github.head_ref }}
+  cancel-in-progress: false
+
+jobs:
+  content-check:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet pyyaml
+
+      - name: Find changed files
+        id: changed
+        run: |
+          git fetch -q origin ${{ github.base_ref }}
+          CHANGED=$(git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD)
+          FILES=$(echo "$CHANGED" | grep -E '^content/programs/.+\.md$' | grep -v '/_index\.md$' | tr '\n' ' ' || true)
+          if echo "$CHANGED" | grep -qE '^(scripts/check_content\.py|data/roles\.yaml)$'; then
+            echo "all=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+
+      - name: Fix formatting
+        if: steps.changed.outputs.files != ''
+        run: |
+          python3 scripts/check_content.py --fix ${{ steps.changed.outputs.files }} > /dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/programs
+          if ! git diff --cached --quiet; then
+            git commit -q -m "Fix program file formatting"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+
+      - name: Check changed programs
+        if: steps.changed.outputs.files != '' && steps.changed.outputs.all != 'true'
+        run: python3 scripts/check_content.py ${{ steps.changed.outputs.files }}
+
+      - name: Check all programs
+        if: steps.changed.outputs.all == 'true'
+        run: python3 scripts/check_content.py
