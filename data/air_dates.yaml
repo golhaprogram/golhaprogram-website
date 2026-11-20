@@ -323,6 +323,11 @@ golhaye-rangarang:
     status: confirmed
     basis: "529 and 529B released in summer 1349 — Mahasti's song list (Persian Wikipedia, via Amir)"
     basis_fa: "۵۲۹ و ۵۲۹ب در تابستان ۱۳۴۹ منتشر شدند؛ پخش پیش از آن بوده است."
+  - program: "531"
+    date: "1349-05"               # Mordad 1349, around Constitution Day
+    status: likely
+    basis: "Constitution Day (14 Mordad) or the following weeks: Aref's constitutional tasnif «ناله‌ی مرغ اسیر این همه بهر وطن است… جامه‌ای کو نشود غرقه به خون بهر وطن، بِدر آن جامه که ننگ تن و کم از کفن است». Amir: related, possibly a little after 14 Mordad (e.g. 20 Mordad). The estimates had it in Shahrivar 1349."
+    basis_fa: "جشن مشروطیت (۱۴ مرداد) یا هفته‌های پس از آن: تصنیف «ناله‌ی مرغ اسیر این همه بهر وطن است… جامه‌ای کو نشود غرقه به خون بهر وطن» از عارف."
   - program: "545"
     date: "1350-06"               # summer 1350 (upper bound)
     kind: released_by

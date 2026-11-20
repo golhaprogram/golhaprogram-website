@@ -1391,199 +1391,199 @@
   precision_days: 0
   fixed: true
 '517':
-  estimate: '1349-01-10'
-  gregorian: '1970-03-30'
+  estimate: '1349-01-08'
+  gregorian: '1970-03-28'
   precision_days: 9
   fixed: false
 '518':
-  estimate: '1349-01-19'
-  gregorian: '1970-04-08'
-  precision_days: 18
+  estimate: '1349-01-16'
+  gregorian: '1970-04-05'
+  precision_days: 17
   fixed: false
 '519':
-  estimate: '1349-01-28'
-  gregorian: '1970-04-17'
-  precision_days: 27
+  estimate: '1349-01-24'
+  gregorian: '1970-04-13'
+  precision_days: 26
   fixed: false
 '520':
-  estimate: '1349-02-06'
-  gregorian: '1970-04-26'
-  precision_days: 36
+  estimate: '1349-01-31'
+  gregorian: '1970-04-20'
+  precision_days: 34
   fixed: false
 '521':
-  estimate: '1349-02-15'
-  gregorian: '1970-05-05'
-  precision_days: 46
+  estimate: '1349-02-08'
+  gregorian: '1970-04-28'
+  precision_days: 43
   fixed: false
 521B:
-  estimate: '1349-02-24'
-  gregorian: '1970-05-14'
-  precision_days: 55
+  estimate: '1349-02-16'
+  gregorian: '1970-05-06'
+  precision_days: 51
   fixed: false
 '522':
-  estimate: '1349-03-02'
-  gregorian: '1970-05-23'
-  precision_days: 64
+  estimate: '1349-02-24'
+  gregorian: '1970-05-14'
+  precision_days: 60
   fixed: false
 '523':
-  estimate: '1349-03-12'
-  gregorian: '1970-06-02'
-  precision_days: 73
+  estimate: '1349-02-31'
+  gregorian: '1970-05-21'
+  precision_days: 68
   fixed: false
 '524':
-  estimate: '1349-03-21'
-  gregorian: '1970-06-11'
-  precision_days: 82
+  estimate: '1349-03-08'
+  gregorian: '1970-05-29'
+  precision_days: 77
   fixed: false
 '525':
-  estimate: '1349-03-30'
-  gregorian: '1970-06-20'
-  precision_days: 91
+  estimate: '1349-03-16'
+  gregorian: '1970-06-06'
+  precision_days: 70
   fixed: false
 '526':
-  estimate: '1349-04-08'
-  gregorian: '1970-06-29'
-  precision_days: 100
+  estimate: '1349-03-23'
+  gregorian: '1970-06-13'
+  precision_days: 63
   fixed: false
 '527':
-  estimate: '1349-04-17'
-  gregorian: '1970-07-08'
-  precision_days: 110
+  estimate: '1349-03-31'
+  gregorian: '1970-06-21'
+  precision_days: 56
   fixed: false
 '528':
-  estimate: '1349-04-26'
-  gregorian: '1970-07-17'
-  precision_days: 119
+  estimate: '1349-04-08'
+  gregorian: '1970-06-29'
+  precision_days: 49
   fixed: false
 '529':
-  estimate: '1349-05-04'
-  gregorian: '1970-07-26'
-  precision_days: 128
+  estimate: '1349-04-16'
+  gregorian: '1970-07-07'
+  precision_days: 43
   fixed: false
 529B:
-  estimate: '1349-05-13'
-  gregorian: '1970-08-04'
-  precision_days: 137
-  fixed: false
-'530':
-  estimate: '1349-05-23'
-  gregorian: '1970-08-14'
-  precision_days: 146
-  fixed: false
-530B:
-  estimate: '1349-06-01'
-  gregorian: '1970-08-23'
-  precision_days: 155
-  fixed: false
-'531':
-  estimate: '1349-06-10'
-  gregorian: '1970-09-01'
-  precision_days: 164
-  fixed: false
-'532':
-  estimate: '1349-06-19'
-  gregorian: '1970-09-10'
-  precision_days: 173
-  fixed: false
-'533':
-  estimate: '1349-06-28'
-  gregorian: '1970-09-19'
-  precision_days: 182
-  fixed: false
-'534':
-  estimate: '1349-07-06'
-  gregorian: '1970-09-28'
-  precision_days: 173
-  fixed: false
-'535':
-  estimate: '1349-07-15'
-  gregorian: '1970-10-07'
-  precision_days: 164
-  fixed: false
-'536':
-  estimate: '1349-07-24'
-  gregorian: '1970-10-16'
-  precision_days: 155
-  fixed: false
-'537':
-  estimate: '1349-08-04'
-  gregorian: '1970-10-26'
-  precision_days: 146
-  fixed: false
-'538':
-  estimate: '1349-08-13'
-  gregorian: '1970-11-04'
-  precision_days: 137
-  fixed: false
-'539':
-  estimate: '1349-08-22'
-  gregorian: '1970-11-13'
-  precision_days: 128
-  fixed: false
-'540':
-  estimate: '1349-09-01'
-  gregorian: '1970-11-22'
-  precision_days: 119
-  fixed: false
-'541':
-  estimate: '1349-09-10'
-  gregorian: '1970-12-01'
-  precision_days: 110
-  fixed: false
-541B:
-  estimate: '1349-09-19'
-  gregorian: '1970-12-10'
-  precision_days: 100
-  fixed: false
-'542':
-  estimate: '1349-09-28'
-  gregorian: '1970-12-19'
-  precision_days: 91
-  fixed: false
-'543':
-  estimate: '1349-10-07'
-  gregorian: '1970-12-28'
-  precision_days: 82
-  fixed: false
-'544':
-  estimate: '1349-10-17'
-  gregorian: '1971-01-07'
-  precision_days: 73
-  fixed: false
-'545':
-  estimate: '1349-10-26'
-  gregorian: '1971-01-16'
-  precision_days: 64
-  fixed: false
-545B:
-  estimate: '1349-11-05'
-  gregorian: '1971-01-25'
-  precision_days: 55
-  fixed: false
-'546':
-  estimate: '1349-11-14'
-  gregorian: '1971-02-03'
-  precision_days: 46
-  fixed: false
-'547':
-  estimate: '1349-11-23'
-  gregorian: '1971-02-12'
+  estimate: '1349-04-23'
+  gregorian: '1970-07-14'
   precision_days: 36
   fixed: false
+'530':
+  estimate: '1349-04-31'
+  gregorian: '1970-07-22'
+  precision_days: 29
+  fixed: false
+530B:
+  estimate: '1349-05-08'
+  gregorian: '1970-07-30'
+  precision_days: 22
+  fixed: false
+'531':
+  estimate: '1349-05-16'
+  gregorian: '1970-08-07'
+  precision_days: 15
+  fixed: true
+'532':
+  estimate: '1349-05-26'
+  gregorian: '1970-08-17'
+  precision_days: 25
+  fixed: false
+'533':
+  estimate: '1349-06-05'
+  gregorian: '1970-08-27'
+  precision_days: 34
+  fixed: false
+'534':
+  estimate: '1349-06-15'
+  gregorian: '1970-09-06'
+  precision_days: 44
+  fixed: false
+'535':
+  estimate: '1349-06-26'
+  gregorian: '1970-09-17'
+  precision_days: 53
+  fixed: false
+'536':
+  estimate: '1349-07-05'
+  gregorian: '1970-09-27'
+  precision_days: 63
+  fixed: false
+'537':
+  estimate: '1349-07-15'
+  gregorian: '1970-10-07'
+  precision_days: 73
+  fixed: false
+'538':
+  estimate: '1349-07-25'
+  gregorian: '1970-10-17'
+  precision_days: 82
+  fixed: false
+'539':
+  estimate: '1349-08-06'
+  gregorian: '1970-10-28'
+  precision_days: 92
+  fixed: false
+'540':
+  estimate: '1349-08-16'
+  gregorian: '1970-11-07'
+  precision_days: 101
+  fixed: false
+'541':
+  estimate: '1349-08-26'
+  gregorian: '1970-11-17'
+  precision_days: 111
+  fixed: false
+541B:
+  estimate: '1349-09-07'
+  gregorian: '1970-11-28'
+  precision_days: 120
+  fixed: false
+'542':
+  estimate: '1349-09-17'
+  gregorian: '1970-12-08'
+  precision_days: 110
+  fixed: false
+'543':
+  estimate: '1349-09-27'
+  gregorian: '1970-12-18'
+  precision_days: 99
+  fixed: false
+'544':
+  estimate: '1349-10-07'
+  gregorian: '1970-12-28'
+  precision_days: 88
+  fixed: false
+'545':
+  estimate: '1349-10-18'
+  gregorian: '1971-01-08'
+  precision_days: 77
+  fixed: false
+545B:
+  estimate: '1349-10-28'
+  gregorian: '1971-01-18'
+  precision_days: 66
+  fixed: false
+'546':
+  estimate: '1349-11-08'
+  gregorian: '1971-01-28'
+  precision_days: 55
+  fixed: false
+'547':
+  estimate: '1349-11-18'
+  gregorian: '1971-02-07'
+  precision_days: 44
+  fixed: false
 '548':
-  estimate: '1349-12-02'
-  gregorian: '1971-02-21'
-  precision_days: 27
+  estimate: '1349-11-29'
+  gregorian: '1971-02-18'
+  precision_days: 33
   fixed: false
 '549':
-  estimate: '1349-12-11'
-  gregorian: '1971-03-02'
-  precision_days: 18
+  estimate: '1349-12-09'
+  gregorian: '1971-02-28'
+  precision_days: 22
   fixed: false
 '550':
-  estimate: '1349-12-20'
-  gregorian: '1971-03-11'
-  precision_days: 9
+  estimate: '1349-12-19'
+  gregorian: '1971-03-10'
+  precision_days: 11
   fixed: false
 '551':
   estimate: '1350-01-01'
