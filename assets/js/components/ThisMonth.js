@@ -52,7 +52,7 @@ export function initializeThisMonth() {
     if (!items.length) return;
 
     section.querySelectorAll('.tm-month').forEach(s => { s.textContent = MONTHS[now.m - 1]; });
-    const years = [...new Set(items.map(p => p.y))].sort((a, b) => a - b);
+    const years = [...new Set(items.map(p => p.y))].sort((a, b) => b - a); // latest year first
 
     const weekList = section.querySelector('.tm-week-list');
     years.forEach(y => {
