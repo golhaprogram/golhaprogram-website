@@ -65,6 +65,11 @@ golhaye-rangarang:
     basis_fa: "تصنیف «خاموش»، آخرین ساخته‌ی روح‌الله خالقی، در آذر ۱۳۳۹ ساخته و در این برنامه ضبط شد."
 
   # --- 1342-1346 ---------------------------------------------------------
+  - program: "246"
+    date: "1340-03"               # Khordad 1340
+    status: possible              # interpretive: not used as a fixed point
+    basis: "Amir: Aref's «پیام دوشم از پیر می‌فروش آمد / بنوش باده که یک ملتی به جوش آمد / برای فتح جوانان جنگجو جامی…» may echo Ordibehesht 1340: the teachers' strike and Khanali's killing, the fall of Sharif-Emami, Amini, and the National Front rally at Jalaliyeh (28 Ordibehesht). The song itself dates from the Constitutional era, so the link is interpretive. The estimates already put 246 at mid-Khordad 1340. Only program with this tasnif."
+    basis_fa: "«بنوش باده که یک ملتی به جوش آمد» از عارف، شاید هم‌زمان با فضای اردیبهشت ۱۳۴۰ (اعتصاب معلمان، سقوط دولت شریف‌امامی، روی کار آمدن امینی و تجمع جبهه‌ی ملی در جلالیه). تصنیف از دوره‌ی مشروطه است و این پیوند برداشت ماست، نه سند."
   - program: "250"
     date: "1340-04"               # 1961-06 or later (composed)
     kind: not_before
