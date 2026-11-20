@@ -13,65 +13,140 @@
     }
 }
 
-// Grid of performer cards
-.performers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
+// Name list (layouts/_default/terms.html): compact columns, count beside each name.
+.terms-header {
+    text-align: center;
+
+    h1 {
+        margin-bottom: 0.25rem !important;
+    }
 }
 
-// Individual performer card
-.performer-card {
+.terms-summary {
+    text-align: center;
+    color: var(--text-muted);
+    margin: 0 0 1.5rem;
+}
+
+.terms-list {
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.75rem;
+        padding: 0.3rem 0;
+        border-bottom: 1px solid var(--divider-color);
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+
+            &:hover,
+            &:focus-visible {
+                color: var(--accent-color);
+            }
+        }
+    }
+
+    .count {
+        flex-shrink: 0;
+        color: var(--text-muted);
+        font-size: 0.85em;
+    }
+}
+
+// The ten names with the most programs, as a two-column ranked list.
+.terms-top {
     background: var(--surface-color);
     border-radius: 8px;
-    padding: 1.5rem;
     box-shadow: 0 2px 4px var(--shadow-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px var(--shadow-color);
-    }
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
 
     h2 {
-        margin: 0;
-        font-size: 1.2rem;
-        text-align: center;
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+        text-align: right !important;
     }
 
-    .performer-name {
-        color: var(--primary-color);
-        text-decoration: none;
+    ol {
+        margin: 0;
+        padding-inline-start: 1.5rem;
+        columns: 2 14rem;
+        column-gap: 2rem;
+        list-style-type: persian;
+    }
 
-        &:hover {
-            text-decoration: underline;
+    li {
+        display: list-item;
+        break-inside: avoid;
+
+        a {
+            font-weight: 700;
+        }
+
+        .count {
+            float: left;
         }
     }
 }
 
-// Stats section in performer card
-.performer-stats {
-    margin-top: 1rem;
-    text-align: center;
-    color: var(--secondary-color);
-    font-size: 0.9rem;
+// Letter index for long lists.
+.letter-index {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+
+    a {
+        min-width: 2rem;
+        padding: 0.2rem 0.4rem;
+        text-align: center;
+        border-radius: 4px;
+        background: var(--performer-bg);
+        color: var(--accent-dark);
+        text-decoration: none;
+    }
 }
 
+// Everyone, alphabetically, in as many columns as fit.
+.terms-columns {
+    columns: 3 13rem;
+    column-gap: 2rem;
+    background: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    padding: 1rem 1.25rem;
+}
+
+.letter-group {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    scroll-margin-top: 4rem;
+
+    h2 {
+        margin: 0 0 0.25rem;
+        font-size: 1rem;
+        color: var(--accent-dark);
+        text-align: right !important;
+        border-bottom: 2px solid var(--background-accent);
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+// Responsive adjustments
+
+
+// Pill with a count (also used on series pages: «تعداد برنامه‌ها»).
 .program-count {
     background: var(--performer-bg);
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
     display: inline-block;
-}
-
-// Responsive adjustments
-@media (max-width: 768px) {
-    .performers-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
-    }
-    
-    .performer-card {
-        padding: 1rem;
-    }
 }

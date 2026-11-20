@@ -1,34 +1,55 @@
 {{ define "main" }}
+{{- /* A role's list page (/singers/, /poets/, …): the most frequent names
+       first, then everyone alphabetically under letter headings, in compact
+       columns. Long lists get a letter index to jump around. */ -}}
+{{- $role := index (where site.Data.roles "key" .Data.Plural) 0 -}}
+{{- $sorted := partial "persian-sort.html" . -}}
+{{- $base := .RelPermalink -}}
+
+{{- /* name, url, count, and the letter it's filed under (آ goes with ا). */ -}}
+{{- $terms := slice -}}
+{{- range $sorted -}}
+  {{- $letter := substr .term 0 1 -}}
+  {{- if eq $letter "آ" }}{{ $letter = "ا" }}{{ end -}}
+  {{- $terms = $terms | append (dict "name" .term "url" (printf "%s%s/" $base (.term | urlize)) "count" (len .pages) "letter" $letter) -}}
+{{- end -}}
+{{- $letters := slice -}}
+{{- range $terms }}{{ if not (in $letters .letter) }}{{ $letters = $letters | append .letter }}{{ end }}{{ end -}}
+
 <div class="terms-list" dir="rtl">
-  {{ if hugo.IsServer }}
-  <div style="background: #f0f0f0; padding: 1rem; margin: 1rem; font-family: monospace;">
-    Template: terms.html<br>
-    Kind: {{ .Kind }}<br>
-    Data.Plural: {{ .Data.Plural }}<br>
-    Number of Terms: {{ len .Data.Terms }}<br>
-    Terms: {{ range $key, $value := .Data.Terms }}{{ $key }}, {{ end }}
-  </div>
-  {{ end }}
+  <header class="terms-header">
+    <h1>{{ with $role }}فهرست {{ .list }}{{ else }}{{ $.Title }}{{ end }}</h1>
+    <p class="terms-summary">{{ partial "fa-number" (len $terms) }} {{ with $role }}{{ .one }}{{ else }}نام{{ end }}</p>
+  </header>
 
-  {{ $plural := .Data.Plural }}
-  {{ with index (where site.Data.roles "key" $plural) 0 }}
-    <h1>فهرست {{ .list }}</h1>
-  {{ else }}
-    <h1>{{ .Title }}</h1>
-  {{ end }}
+  {{- if gt (len $terms) 12 }}
+  <section class="terms-top">
+    <h2>بیشترین برنامه</h2>
+    <ol>
+      {{- range first 10 (sort $terms "count" "desc") }}
+      <li><a href="{{ .url }}">{{ .name }}</a><span class="count">{{ partial "fa-number" .count }}</span></li>
+      {{- end }}
+    </ol>
+  </section>
+  {{- end }}
 
-  <div class="performers-grid">
-    {{ $sortedTerms := partial "persian-sort.html" . }}
-    {{ range $sortedTerms }}
-    <div class="performer-card">
-      <h2>
-        <a href="{{ $.RelPermalink }}{{ .term | urlize }}/" class="performer-name">{{ .term }}</a>
-      </h2>
-      <div class="performer-stats">
-        <span class="program-count">{{ len .pages }} برنامه</span>
-      </div>
-    </div>
-    {{ end }}
+  {{- if gt (len $terms) 40 }}
+  <nav class="letter-index" aria-label="فهرست حروف">
+    {{- range $i, $l := $letters }}<a href="#letter-{{ $i }}">{{ $l }}</a>{{ end -}}
+  </nav>
+  {{- end }}
+
+  <div class="terms-columns">
+    {{- range $i, $l := $letters }}
+    <section class="letter-group" id="letter-{{ $i }}">
+      <h2>{{ $l }}</h2>
+      <ul>
+        {{- range where $terms "letter" $l }}
+        <li><a href="{{ .url }}">{{ .name }}</a><span class="count" title="{{ partial "fa-number" .count }} برنامه">{{ partial "fa-number" .count }}</span></li>
+        {{- end }}
+      </ul>
+    </section>
+    {{- end }}
   </div>
 </div>
 {{ end }}
