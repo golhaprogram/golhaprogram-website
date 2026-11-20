@@ -6,7 +6,7 @@
 {{- $sy := div (sub $H (add $T $B)) (sub $y1 $y0) -}}
 {{- $est := site.Data.air_date_estimates -}}
 <figure class="air-dates-chart">
-<svg viewBox="0 0 {{ $W }} {{ $H }}" role="img" dir="ltr" aria-label="سال تقریبی پخش هر برنامهٔ گلهای رنگارنگ بر حسب شمارهٔ برنامه">
+<svg viewBox="0 0 {{ $W }} {{ $H }}" role="img" dir="ltr" aria-label="سال تقریبی پخش هر برنامه‌ی گلهای رنگارنگ بر حسب شماره‌ی برنامه">
   <g class="grid">
   {{- range seq 1335 1352 }}
     {{- $y := add $T (mul (sub $y1 (float .)) $sy) }}
@@ -18,7 +18,7 @@
     <line x1="{{ $x }}" x2="{{ $x }}" y1="{{ $T }}" y2="{{ sub $H $B }}"/>
     <text class="xlab" x="{{ $x }}" y="{{ add (sub $H $B) 18 }}">{{ partial "fa-number" . }}</text>
   {{- end }}
-  <text class="axis-title" x="{{ div (add $L (sub $W $R)) 2 }}" y="{{ sub $H 6 }}">شمارهٔ برنامه</text>
+  <text class="axis-title" x="{{ div (add $L (sub $W $R)) 2 }}" y="{{ sub $H 6 }}">شماره‌ی برنامه</text>
   </g>
   <g class="estimates">
   {{- range $p, $v := $est }}{{ if not $v.fixed }}

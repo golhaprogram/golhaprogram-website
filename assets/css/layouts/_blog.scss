@@ -156,3 +156,37 @@
     margin-top: 0;
   }
 }
+
+/* Posts are prose, not poetry: right-aligned, unlike program lyrics. */
+.post,
+.blog {
+  h1,
+  h2,
+  h3,
+  .content h2,
+  .content h3,
+  .content,
+  .content p,
+  .content div,
+  .content li {
+    text-align: right !important; /* base/_base.scss centres h1-h3 and .content with !important */
+  }
+
+  .content p {
+    margin: 0 0 1rem;
+    padding: 0;
+    max-width: none;
+  }
+
+  ol {
+    list-style-type: persian;
+  }
+
+  li {
+    margin-bottom: 0.4rem;
+  }
+}
+
+.air-dates-chart figcaption {
+  text-align: center !important;
+}
