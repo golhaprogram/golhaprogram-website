@@ -7,7 +7,9 @@ Reads data/air_dates.yaml and assumes programs aired in number order:
      become points too (about six weeks later) unless they're out of order or
      would mean more than MAX_PER_MONTH programs a month (then the piece
      probably waited before airing, and the date stays a lower bound).
-  2. Programs between two fixed points are spaced evenly between them.
+  2. Programs between two fixed points are placed on a smooth monotone curve
+     through them (PCHIP), so the pace changes gradually rather than jumping
+     at a dated program.
      Programs after the last one continue at the pace of the last stretch.
   3. not_before / released_by bounds then push estimates later or earlier,
      and the result is kept in number order.
@@ -134,6 +136,28 @@ def main():
     xs = sorted(points)
 
     # 2. Interpolate between fixed points; extrapolate at the ends.
+    # Monotone cubic (PCHIP, Fritsch-Carlson) through the fixed points, so the
+    # pace changes smoothly across a dated program instead of jumping there,
+    # and programs stay in number order.
+    day = {x: (points[x][0] - points[xs[0]][0]).days for x in xs}
+    h = [xs[i + 1] - xs[i] for i in range(len(xs) - 1)]
+    slope = [(day[xs[i + 1]] - day[xs[i]]) / h[i] for i in range(len(xs) - 1)]
+    m = [slope[0]] + [0.0] * (len(xs) - 2) + [slope[-1]]
+    for i in range(1, len(xs) - 1):
+        if slope[i - 1] > 0 and slope[i] > 0:
+            w1, w2 = 2 * h[i] + h[i - 1], h[i] + 2 * h[i - 1]
+            m[i] = (w1 + w2) / (w1 / slope[i - 1] + w2 / slope[i])
+
+    def pchip(x):
+        """Days after the first fixed point, for x between two fixed points;
+        returned relative to the fixed point just below x."""
+        i = max(j for j in range(len(xs) - 1) if xs[j] < x)
+        t = (x - xs[i]) / h[i]
+        h00, h10 = (1 + 2 * t) * (1 - t) ** 2, t * (1 - t) ** 2
+        h01, h11 = t * t * (3 - 2 * t), t * t * (t - 1)
+        y = (h00 * day[xs[i]] + h10 * h[i] * m[i] + h01 * day[xs[i + 1]] + h11 * h[i] * m[i + 1])
+        return y - day[xs[i]]
+
     def interpolate(x):
         if x in points:
             return points[x][0], points[x][1]
@@ -147,7 +171,7 @@ def main():
             return est, points[base][1] + abs(rate * (x - base))
         t = (x - lo) / (hi - lo)
         gap = (points[hi][0] - points[lo][0]).days
-        est = points[lo][0] + timedelta(days=gap * t)
+        est = points[lo][0] + timedelta(days=pchip(x))
         # Precision: half the gap at most, less near either fixed point.
         prec = min(t, 1 - t) * gap + (points[lo][1] * (1 - t) + points[hi][1] * t)
         return est, prec
