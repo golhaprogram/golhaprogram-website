@@ -95,7 +95,7 @@ def main():
             points[key(e["program"])] = (mid(a, b), (b - a).days / 2)
     for e in sorted(entries, key=lambda e: key(e["program"])):
         x = key(e["program"])
-        if e.get("kind") != "not_before" or x in points:
+        if e.get("kind") != "not_before" or x in points or e.get("point") is False:
             continue
         a, _ = span(e["date"])
         guess = a + timedelta(days=COMPOSE_LAG)
