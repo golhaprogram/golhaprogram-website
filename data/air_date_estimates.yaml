@@ -216,104 +216,104 @@
   precision_days: 45
   fixed: true
 '238':
-  estimate: '1339-10-28'
-  gregorian: '1961-01-18'
-  precision_days: 57
+  estimate: '1339-11-03'
+  gregorian: '1961-01-23'
+  precision_days: 59
   fixed: false
 '239':
-  estimate: '1339-11-10'
-  gregorian: '1961-01-30'
-  precision_days: 70
+  estimate: '1339-11-21'
+  gregorian: '1961-02-10'
+  precision_days: 73
   fixed: false
 '240':
-  estimate: '1339-11-23'
-  gregorian: '1961-02-12'
-  precision_days: 82
+  estimate: '1339-12-08'
+  gregorian: '1961-02-27'
+  precision_days: 86
   fixed: false
 '241':
-  estimate: '1339-12-05'
-  gregorian: '1961-02-24'
-  precision_days: 95
+  estimate: '1339-12-26'
+  gregorian: '1961-03-17'
+  precision_days: 100
   fixed: false
 241B:
-  estimate: '1339-12-18'
-  gregorian: '1961-03-09'
-  precision_days: 107
-  fixed: false
-241C:
-  estimate: '1340-01-01'
-  gregorian: '1961-03-21'
-  precision_days: 120
-  fixed: false
-'242':
   estimate: '1340-01-14'
   gregorian: '1961-04-03'
-  precision_days: 132
+  precision_days: 114
   fixed: false
-'243':
-  estimate: '1340-01-26'
-  gregorian: '1961-04-15'
-  precision_days: 145
+241C:
+  estimate: '1340-02-01'
+  gregorian: '1961-04-21'
+  precision_days: 128
   fixed: false
-'244':
-  estimate: '1340-02-08'
-  gregorian: '1961-04-28'
-  precision_days: 145
-  fixed: false
-'245':
-  estimate: '1340-02-20'
-  gregorian: '1961-05-10'
-  precision_days: 132
-  fixed: false
-245B:
-  estimate: '1340-03-02'
-  gregorian: '1961-05-23'
-  precision_days: 120
-  fixed: false
-'246':
-  estimate: '1340-03-14'
-  gregorian: '1961-06-04'
+'242':
+  estimate: '1340-02-19'
+  gregorian: '1961-05-09'
   precision_days: 107
   fixed: false
+'243':
+  estimate: '1340-03-05'
+  gregorian: '1961-05-26'
+  precision_days: 85
+  fixed: false
+'244':
+  estimate: '1340-03-23'
+  gregorian: '1961-06-13'
+  precision_days: 64
+  fixed: false
+'245':
+  estimate: '1340-04-09'
+  gregorian: '1961-06-30'
+  precision_days: 43
+  fixed: false
+245B:
+  estimate: '1340-04-27'
+  gregorian: '1961-07-18'
+  precision_days: 21
+  fixed: false
+'246':
+  estimate: '1340-05-14'
+  gregorian: '1961-08-05'
+  precision_days: 0
+  fixed: true
 246B:
-  estimate: '1340-03-27'
-  gregorian: '1961-06-17'
-  precision_days: 95
+  estimate: '1340-05-25'
+  gregorian: '1961-08-16'
+  precision_days: 12
   fixed: false
 '247':
-  estimate: '1340-04-08'
-  gregorian: '1961-06-29'
-  precision_days: 82
+  estimate: '1340-06-06'
+  gregorian: '1961-08-28'
+  precision_days: 23
   fixed: false
 '248':
-  estimate: '1340-04-21'
-  gregorian: '1961-07-12'
-  precision_days: 70
+  estimate: '1340-06-18'
+  gregorian: '1961-09-09'
+  precision_days: 35
   fixed: false
 '249':
-  estimate: '1340-05-02'
-  gregorian: '1961-07-24'
-  precision_days: 57
+  estimate: '1340-06-29'
+  gregorian: '1961-09-20'
+  precision_days: 47
   fixed: false
 '250':
-  estimate: '1340-05-15'
-  gregorian: '1961-08-06'
-  precision_days: 45
-  fixed: true
+  estimate: '1340-07-10'
+  gregorian: '1961-10-02'
+  precision_days: 59
+  fixed: false
 '251':
-  estimate: '1340-06-05'
-  gregorian: '1961-08-27'
+  estimate: '1340-07-22'
+  gregorian: '1961-10-14'
   precision_days: 59
   fixed: false
 '252':
-  estimate: '1340-06-26'
-  gregorian: '1961-09-17'
-  precision_days: 73
+  estimate: '1340-08-04'
+  gregorian: '1961-10-26'
+  precision_days: 47
   fixed: false
 '254':
-  estimate: '1340-08-08'
-  gregorian: '1961-10-30'
-  precision_days: 58
+  estimate: '1340-08-27'
+  gregorian: '1961-11-18'
+  precision_days: 23
   fixed: false
 '256':
   estimate: '1340-09-21'

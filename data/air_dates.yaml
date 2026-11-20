@@ -66,10 +66,10 @@ golhaye-rangarang:
 
   # --- 1342-1346 ---------------------------------------------------------
   - program: "246"
-    date: "1340-03"               # Khordad 1340
-    status: possible              # interpretive: not used as a fixed point
-    basis: "Amir: Aref's «پیام دوشم از پیر می‌فروش آمد / بنوش باده که یک ملتی به جوش آمد / برای فتح جوانان جنگجو جامی…» may echo Ordibehesht 1340: the teachers' strike and Khanali's killing, the fall of Sharif-Emami, Amini, and the National Front rally at Jalaliyeh (28 Ordibehesht). The song itself dates from the Constitutional era, so the link is interpretive. The estimates already put 246 at mid-Khordad 1340. Only program with this tasnif."
-    basis_fa: "«بنوش باده که یک ملتی به جوش آمد» از عارف، شاید هم‌زمان با فضای اردیبهشت ۱۳۴۰ (اعتصاب معلمان، سقوط دولت شریف‌امامی، روی کار آمدن امینی و تجمع جبهه‌ی ملی در جلالیه). تصنیف از دوره‌ی مشروطه است و این پیوند برداشت ماست، نه سند."
+    date: "1340-05-14"            # 1961-08-05, Constitution Day
+    status: likely
+    basis: "Constitution Day (14 Mordad). 246 and 246B are almost all Aref, the poet of the Constitutional Revolution, and both have «از خون جوانان وطن لاله دمیده» with Elaheh; 246 also «پیام دوشم از پیر می‌فروش آمد… یک ملتی به جوش آمد». Bijan Taraqqi recalls Pirnia asking him to replace «از خون جوانان وطن»; Taraqqi refused and suggested recording the tasnif and broadcasting it on the morning of the Constitution celebration, which Pirnia did (parand.se, via Amir). The year is the timeline's: 246 falls between Nowruz 1340 (241C) and Khaleghi's piece in 250 (composed Tir 1340). Replaces Amir's earlier Ordibehesht 1340 reading."
+    basis_fa: "جشن مشروطیت (۱۴ مرداد): ۲۴۶ و ۲۴۶ب تقریباً همه از عارف‌اند و هر دو «از خون جوانان وطن لاله دمیده» را با صدای الهه دارند. به روایت بیژن ترقی، داوود پیرنیا خواست شعر این تصنیف عوض شود؛ ترقی نپذیرفت و پیشنهاد کرد تصنیف ضبط و صبح جشن مشروطیت پخش شود، و همین کار شد. سال را از جای برنامه در گاه‌شمار برآورد کرده‌ایم."
   - program: "250"
     date: "1340-04"               # 1961-06 or later (composed)
     kind: not_before
