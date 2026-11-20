@@ -20,6 +20,12 @@
     </dd>
   </div>
   {{- end }}
+  {{- with $page.Params.date_aired }}
+  <div class="credit-row credit-aired">
+    <dt>تاریخ پخش</dt>
+    <dd>{{ partial "fa-month-year" . }}<a class="estimate-mark" href="/blog/air-dates/" title="تاریخ تقریبی است؛ چگونه برآورد شده؟" aria-label="تاریخ تقریبی؛ توضیح">*</a></dd>
+  </div>
+  {{- end }}
   {{- with $page.Params.mode }}
   <div class="credit-row credit-mode">
     <dt>گوشه</dt>

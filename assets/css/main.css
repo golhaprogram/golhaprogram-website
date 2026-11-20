@@ -25,6 +25,7 @@
 @import "layouts/_programs.scss";
 @import "layouts/_program-section.scss";
 @import "layouts/_content.scss";
+@import "layouts/_blog.scss";
 
 /* Utils */
 @import "utils/_responsive.scss";

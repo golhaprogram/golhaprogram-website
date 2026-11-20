@@ -126,6 +126,11 @@ def check(path, types, fix):
         except ValueError:
             errors.append(f"date {date!r} is not YYYY-MM-DD")
 
+    aired = fm.get("date_aired")
+    if aired not in (None, "") and not re.fullmatch(r"1[23]\d\d-(0[1-9]|1[0-2])", str(aired)):
+        errors.append(f"date_aired {aired!r} should be a Solar Hijri year and month, like \"1346-08\" "
+                      "(set by scripts/estimate_air_dates.py --write)")
+
     for key in ROLES:
         value = fm.get(key)
         if value is None:

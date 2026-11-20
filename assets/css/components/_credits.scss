@@ -86,3 +86,12 @@
     line-height: 1.8;
   }
 }
+
+// Estimated air date: the asterisk links to the post explaining the estimate.
+.credits .credit-aired .estimate-mark {
+  margin-inline-start: 0.1em;
+  font-weight: 700;
+  border-bottom: none;
+  vertical-align: super;
+  font-size: 0.8em;
+}

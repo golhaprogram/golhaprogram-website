@@ -1,0 +1,14 @@
+{{- /* Solar Hijri "YYYY[-MM[-DD]]" -> fractional year (the middle of a
+       year or month when that's all we know), for plotting. */ -}}
+{{- $p := split (string .) "-" -}}
+{{- $y := float (index $p 0) -}}
+{{- if eq (len $p) 1 -}}{{- $y = add $y 0.5 -}}
+{{- else -}}
+  {{- $m := float (strings.TrimLeft "0" (index $p 1)) -}}
+  {{- if eq (len $p) 2 -}}{{- $y = add $y (div (sub $m 0.5) 12.0) -}}
+  {{- else -}}
+    {{- $d := float (strings.TrimLeft "0" (index $p 2)) -}}
+    {{- $y = add $y (div (sub $m 1.0) 12.0) (div (sub $d 1.0) 365.0) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $y -}}

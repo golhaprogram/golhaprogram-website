@@ -6,9 +6,11 @@ on:
       - '**/*.md'
       - '**/*.markdown'
 
-# Shared with audio-metadata.yml so the two never push to a branch at once.
+# One run at a time per PR for this workflow. (Not shared with the other
+# workflows: GitHub keeps only one waiting run per group and cancels the rest.)
+# Several workflows may push to the same branch, so pushes rebase and retry.
 concurrency:
-  group: pr-autofix-${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: false
 
 jobs:
@@ -75,9 +77,8 @@ jobs:
                 .replace(/ي/g, 'ی')   // Arabic yeh to Persian yeh
                 
                 // Other Arabic letters commonly mixed up
-                .replace(/ؤ/g, 'و')   // Arabic waw with hamza to Persian waw
-                .replace(/إ/g, 'ا')   // Arabic alef with hamza below to Persian alef
-                .replace(/أ/g, 'ا')   // Arabic alef with hamza above to Persian alef
+                // (No ؤ/أ/إ rules: مؤسسان، تأثیر، مسأله are correct Persian, and
+                // turning them into و/ا changed real words.)
                 .replace(/آ/g, 'آ')   // Ensure consistent alef with madda (this is actually correct)
                 .replace(/ة/g, 'ه')   // Arabic teh marbuta to Persian heh
                 
@@ -191,14 +192,16 @@ jobs:
         Converted Arabic letters to Persian equivalents in changed files:
         - ك → ک (kaf)
         - ي → ی (yeh)
-        - ؤ → و (waw)
-        - إ/أ → ا (alef)
         - ة → ه (heh)
         - Arabic-Indic numerals → Persian numerals
         
         Only processed files modified in this PR."
         
-        git push origin ${{ github.head_ref }}
+        for i in 1 2 3 4 5; do
+          git pull -q --rebase origin ${{ github.head_ref }} && git push -q origin ${{ github.head_ref }} && break
+          echo "Push failed, retrying ($i)"; sleep $((i * 5))
+          [ $i = 5 ] && exit 1
+        done
     
     - name: Cleanup
       if: always()

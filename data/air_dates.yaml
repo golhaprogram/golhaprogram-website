@@ -1,0 +1,412 @@
+# Estimated air dates for Golha-ye Rangarang, worked out from programs made
+# for a known occasion ("anchors"). No archive has real air dates; these are
+# estimates and must be shown as such («حدود …»).
+#
+# Programs seem to have aired in number order, so programs between two
+# anchors can be spaced evenly between them.
+#
+#   program:  file name (without .md)
+#   date:     Solar Hijri YYYY-MM-DD (Gregorian in the comment)
+#   status:   confirmed | likely | possible   (possible = needs Amir's review)
+#   kind:     aired (default)
+#             released_by — a record release or listing date; the broadcast
+#                           was on or before it (upper bound)
+#             not_before  — e.g. when a piece in it was composed; the broadcast
+#                           was on or after it (lower bound), often soon after.
+#                           point: false = never treat it as "aired soon after"
+#   basis:    why (notes, English)
+#   basis_fa: why, in Persian: shown on the site (/blog/air-dates/)
+
+golhaye-rangarang:
+  # --- 1335-1342 ---------------------------------------------------------
+  - program: "100"
+    date: "1335-01-01"            # 1956-03-21: Golha began; Rangarang came after
+    kind: not_before
+    point: false                  # a series start, not a composition date
+    status: confirmed
+    basis: "Amir: Golha-ye Rangarang starts at 100 (Ali Tajvidi also calls 100 the first, Hamshahri). Golha-ye Javidan, the first series, began 1 Farvardin 1335 (21 Mar 1956, Lewisohn); Rangarang came 'after some time'. Its month now follows from 135 (Nowruz 1336) and 174 (Dey 1336)."
+    basis_fa: "گلهای رنگارنگ از برنامه‌ی ۱۰۰ آغاز شد (به گفته‌ی علی تجویدی). نخستین برنامه‌ی گلها، گلهای جاویدان، در ۱ فروردین ۱۳۳۵ پخش شد و گلهای رنگارنگ «پس از مدتی» آمد."
+  - program: "135"
+    date: "1336-01-01"            # 1957-03-21, Nowruz
+    status: likely
+    basis: "Amir: «طرب ای دل که نوبهار آمد / از صبا بوی زلف یار آمد»; 134 also spring: «باد بهار می‌رسد جلوه نسترن نگر». Not on our site."
+    basis_fa: "«طرب ای دل که نوبهار آمد»؛ برنامه‌ی ۱۳۴ هم بهاری است: «باد بهار می‌رسد جلوه‌ی نسترن نگر». برنامه‌ی نوروز ۱۳۳۶."
+  - program: "174"
+    date: "1336-10"               # Dey 1336, right after Saba's death
+    status: confirmed
+    basis: "Amir: memorial for Abolhasan Saba: «شب جمعه بیست و نهم آذر بود که… سالکی به نام ابوالحسن صبا… پای به عرصهٔ زندگانی جاویدان نهاد», «بگریم خون که ناگه صبا رفت». Saba died the night before Friday 29 Azar 1336 (20 Dec 1957). 172 is the last program in our files with Saba playing. Not on our site."
+    basis_fa: "در سوگ ابوالحسن صبا: «شب جمعه بیست و نهم آذر بود که… سالکی به نام ابوالحسن صبا… پای به عرصه‌ی زندگانی جاوید نهاد». صبا شب جمعه ۲۹ آذر ۱۳۳۶ درگذشت."
+  - program: "209B"
+    date: "1338-01-01"            # 1959-03-21, Nowruz
+    status: likely
+    basis: "Amir: 209 and 209B are spring/Nowruz programs (209 «نوبهار است بیا تا به چمن روی کنیم»; 209B has 7 spring words). The whole spring run is 205–212 (Amir): 205, 206 and 209 share «نوبهار است بیا تا به چمن روی کنیم», 212 «درخت غنچه برآورد و بلبلان مستند». The next Nowruz cluster is 224B/224C, a year later."
+    basis_fa: "برنامه‌های ۲۰۵ تا ۲۱۲ بهاری‌اند («نوبهار است بیا تا به چمن روی کنیم»)؛ ۲۰۹ب برنامه‌ی نوروز ۱۳۳۸."
+  - program: "216"
+    date: "1337"                  # 1958-03 to 1959-03
+    status: possible              # Amir: weak source; not used as a fixed point
+    basis: "Amir: the tasnif «من از روز ازل» (Mahjubi, Rahi, Segah) was performed in Golha-ye Rangarang 195 and 216, in 1337. Our 216 has it, sung by Banan. Also: Habibollah Badiei joined Golha in 1337 (Amir), and 216 is the first of our programs with his name (none of 100–215 have it)."
+    basis_fa: "تصنیف «من از روز ازل» در برنامه‌های ۱۹۵ و ۲۱۶ در سال ۱۳۳۷؛ حبیب‌الله بدیعی هم در ۱۳۳۷ به گلها پیوست. منبع ضعیف؛ در برآورد به کار نمی‌رود."
+
+  - program: "219B"
+    date: "1338-09-21"            # 1959-12-12, Azerbaijan Day
+    status: likely
+    basis: "Azerbaijan Day (21 Azar): «آهنگ آذربایجان کن… ای قبله‌ی آزادگان، وی خاک آذربادگان، فرخنده باد ایام تو… آشفته‌خاطر دشمن دون شد». Found after Amir's note on 329; the estimates already put 219B in late Aban 1338."
+    basis_fa: "سالروز آذربایجان (۲۱ آذر): «ای خاک آذربادگان، فرخنده باد ایام تو… آشفته‌خاطر دشمن دون شد»."
+  - program: "224B"
+    date: "1339-01-01"            # 1960-03-21, Nowruz
+    status: likely
+    basis: "Amir: 224B and 224C fit Nowruz/spring (9 and 8 spring words, «چون نسیم نوبهار بر آشیانم کن گذر»). One year after 209B; 237 (composed Azar 1339) comes after."
+    basis_fa: "۲۲۴ب و ۲۲۴ث بهاری‌اند («چون نسیم نوبهار بر آشیانم کن گذر»)؛ برنامه‌ی نوروز ۱۳۳۹."
+  - program: "237"
+    date: "1339-09"               # Azar 1339 (composed; lower bound)
+    kind: not_before
+    status: likely
+    basis: "Khaleghi's last composition, the tasnif «خاموش» (Mahur, Rahi, sung by Banan, Golha orchestra under Khaleghi with Ma'rufi on piano), composed Azar 1339 per the rkac.com list, and recorded in Golha-ye Rangarang 237 (Persian Wikipedia, via Amir). Our 237 matches: Mahur, Banan, Khaleghi and Ma'rufi, «گهی خاموش و حیران»."
+    basis_fa: "تصنیف «خاموش»، آخرین ساخته‌ی روح‌الله خالقی، در آذر ۱۳۳۹ ساخته و در این برنامه ضبط شد."
+
+  # --- 1342-1346 ---------------------------------------------------------
+  - program: "246"
+    date: "1340-05-14"            # 1961-08-05, Constitution Day
+    status: likely
+    basis: "Constitution Day (14 Mordad). 246 and 246B are almost all Aref, the poet of the Constitutional Revolution, and both have «از خون جوانان وطن لاله دمیده» with Elaheh; 246 also «پیام دوشم از پیر می‌فروش آمد… یک ملتی به جوش آمد». Bijan Taraqqi recalls Pirnia asking him to replace «از خون جوانان وطن»; Taraqqi refused and suggested recording the tasnif and broadcasting it on the morning of the Constitution celebration, which Pirnia did (parand.se, via Amir). The year is the timeline's: 246 falls between Nowruz 1340 (241C) and Khaleghi's piece in 250 (composed Tir 1340). Replaces Amir's earlier Ordibehesht 1340 reading."
+    basis_fa: "جشن مشروطیت (۱۴ مرداد): ۲۴۶ و ۲۴۶ب تقریباً همه از عارف‌اند و هر دو «از خون جوانان وطن لاله دمیده» را با صدای الهه دارند. به روایت بیژن ترقی، داوود پیرنیا خواست شعر این تصنیف عوض شود؛ ترقی نپذیرفت و پیشنهاد کرد تصنیف ضبط و صبح جشن مشروطیت پخش شود، و همین کار شد. سال را از جای برنامه در گاه‌شمار برآورد کرده‌ایم."
+  - program: "250"
+    date: "1340-04"               # 1961-06 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1340/04 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در تیر ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "251"
+    date: "1340-04"               # 1961-06 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1340/04 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در تیر ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "256"
+    date: "1340-08"               # 1961-10 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1340/08 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در آبان ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "256"
+    date: "1340-09-21"            # 1961-12-12, Azerbaijan Day
+    status: likely
+    basis: "Azerbaijan Day (21 Azar): Aref's «چه آذرها به جان از عشق آذربایجان دارم», the same line as 329. Its Khaleghi piece was composed in Aban 1340, a month before; the estimates already put 256 at mid-Azar 1340."
+    basis_fa: "سالروز آذربایجان (۲۱ آذر): «چه آذرها به جان از عشق آذربایجان دارم» از عارف، همان شعر برنامه‌ی ۳۲۹. قطعه‌ی خالقی این برنامه یک ماه پیش از آن، در آبان ۱۳۴۰، ساخته شده است."
+  - program: "258"
+    date: "1340-11"               # 1962-01 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1340/11 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در بهمن ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "259"
+    date: "1340-10"               # 1961-12 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1340/10 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در دی ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "261"
+    date: "1340-12"               # 1962-02 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1340/12 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در اسفند ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "267"
+    date: "1340-09"               # 1961-11 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1340/09 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در آذر ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "280"
+    date: "1341-05"               # 1962-07 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1341/05 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در مرداد ۱۳۴۱ ساخته شده است (فهرست آثار خالقی)."
+  - program: "296"
+    date: "1341-05"               # 1962-07 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1341/05 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در مرداد ۱۳۴۱ ساخته شده است (فهرست آثار خالقی)."
+  - program: "311"
+    date: "1341-12"               # 1963-02 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1341/12 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در اسفند ۱۳۴۱ ساخته شده است (فهرست آثار خالقی)."
+  - program: "316"
+    date: "1342-05"               # 1963-07 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1342/05 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در مرداد ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "322"
+    date: "1342-06"               # 1963-08 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1342/06 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در شهریور ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "328"
+    date: "1342-07"               # 1963-09 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1342/07 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در مهر ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "329"
+    date: "1342-09-21"            # 1963-12-12, Azerbaijan Day (a Thursday)
+    status: likely
+    basis: "Amir: 21 Azar, anniversary of Azerbaijan's return: «چه آذرها به جان از عشق آذربایجان دارم… تا نام ایران در جهان باد، پاینده آذربایجان باد». The estimates already put 329 at 2 Dey 1342."
+    basis_fa: "سالروز بازپس‌گیری آذربایجان (۲۱ آذر): «چه آذرها به جان از عشق آذربایجان دارم… تا نام ایران در جهان باد، پاینده آذربایجان باد»."
+  - program: "331"
+    date: "1342-09"               # 1963-11 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1342/09 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در آذر ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "333"
+    date: "1342-10"               # 1963-12 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1342/10 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در دی ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "337"
+    date: ""                      # undated event
+    status: possible
+    basis: "Amir: «بازآمد، بازآمد، گل من ز سفر بازآمد» was made for the Shah and Farah's reconciliation after she left Iran upset (per Mansoureh Pirnia, Radio Farda interview). No date for the event. Amir: no trip by Farah to Europe, or return, is recorded for winter 1342, where the estimates put 337."
+    basis_fa: "«بازآمد، گل من ز سفر بازآمد» برای آشتی شاه و فرح ساخته شد (به روایت منصوره پیرنیا). تاریخ رویداد معلوم نیست: در زمستان ۱۳۴۲، که برآورد ما برای این برنامه است، سفر یا بازگشتی از اروپا برای فرح ثبت نشده است."
+  - program: "338"
+    date: "1342-11"               # 1964-01 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1342/11 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در بهمن ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "346"
+    date: "1343-01-01"            # 1964-03-21, Nowruz
+    status: possible
+    basis: "«ز کوی یار می‌آید نسیم باد نوروزی»"
+    basis_fa: "«ز کوی یار می‌آید نسیم باد نوروزی». احتمالاً نوروز ۱۳۴۳."
+  - program: "346"
+    date: "1342-12"               # 1964-02 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1342/12 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در اسفند ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "351"
+    date: "1343-01"               # 1964-03 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1343/01 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در فروردین ۱۳۴۳ ساخته شده است (فهرست آثار خالقی)."
+  - program: "358"
+    date: "1343-04"               # 1964-06 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1343/04 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در تیر ۱۳۴۳ ساخته شده است (فهرست آثار خالقی)."
+  - program: "359"
+    date: "1343-03"               # 1964-05 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1343/03 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در خرداد ۱۳۴۳ ساخته شده است (فهرست آثار خالقی)."
+  - program: "362"
+    date: "1343-06"               # 1964-08 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1343/06 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در شهریور ۱۳۴۳ ساخته شده است (فهرست آثار خالقی)."
+  - program: "370"
+    date: "1344-01-01"            # 1965-03-21, Nowruz
+    status: possible
+    basis: "«عَلَم دولت نوروز به صحرا برخاست»; 371 also «عید آمد، عید آمد»"
+    basis_fa: "«عَلَم دولت نوروز به صحرا برخاست»؛ ۳۷۱: «عید آمد». احتمالاً نوروز ۱۳۴۴."
+  - program: "371"
+    date: "1343-10"               # 1964-12 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1343/10 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در دی ۱۳۴۳ ساخته شده است (فهرست آثار خالقی)."
+  - program: "378"
+    date: "1344-01"               # 1965-03 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1344/01 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در فروردین ۱۳۴۴ ساخته شده است (فهرست آثار خالقی)."
+  - program: "383"
+    date: "1343-03"               # 1964-05 or later (composed)
+    kind: not_before
+    status: confirmed
+    basis: "A Khaleghi piece in it was composed 1343/03 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
+    basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در خرداد ۱۳۴۳ ساخته شده است (فهرست آثار خالقی)."
+  - program: "398"
+    date: "1345-01-01"            # 1966-03-21, Nowruz
+    status: likely
+    basis: "Nowruz throughout: «چو گشت از روی تو دل‌شاد نوروز… جهان در بزم نوروزی نشسته است»"
+    basis_fa: "سراسر نوروزی: «جهان در بزم نوروزی نشسته است». نوروز ۱۳۴۵."
+  - program: "405"
+    date: "1345"                  # ~1966
+    status: likely
+    basis: "Amir: the last program recorded under Davud Pirnia. He left after the 1345 inspection by the Ministry of Information (Donya-e-Eqtesad); Radio Farda says he ran Golha for eleven years, until 1346. Recorded, not necessarily aired, then."
+    basis_fa: "آخرین برنامه‌ای که زیر نظر داوود پیرنیا ضبط شد. پیرنیا پس از بازرسی وزارت اطلاعات در ۱۳۴۵ از گلها کناره گرفت."
+  - program: "420"
+    date: "1345-10-22"            # 1967-01-12, Thursday
+    status: confirmed
+    basis: "«آن که دلم را» (Mahasti): broadcast on Golha, Thursday 22 Dey 1345 — Mahasti's song list (Persian Wikipedia, via Amir). The weekday matches."
+    basis_fa: "«آن که دلم را» با صدای مهستی، پخش‌شده در پنجشنبه ۲۲ دی ۱۳۴۵. تنها تاریخ پخش دقیقی که داریم."
+  - program: "425"
+    date: "1345-12"               # ~1967-03, the Nowruz program, aired before Nowruz
+    status: likely
+    basis: "«شادند جهانیان به نوروز و به عید… عید من و نوروز من امروز تویی»; 427 «بهار آمد و فروردین است». 428 aired in winter 1345, so 425–427 aired in late Esfand 1345, just before Nowruz."
+    basis_fa: "«شادند جهانیان به نوروز و به عید». چون ۴۲۸ هنوز در زمستان پخش شده، این برنامه در اسفند ۱۳۴۵ پیش از نوروز پخش شده است."
+  - program: "428"
+    date: "1345-12"               # winter 1345, after 22 Dey (420)
+    status: confirmed
+    basis: "Broadcast on Golha in winter 1345 — Mahasti's song list (Persian Wikipedia, via Amir)"
+    basis_fa: "پخش‌شده در زمستان ۱۳۴۵."
+  - program: "429"
+    date: "1346-01"               # ~1967-03/04, around Nowruz 1346
+    status: likely
+    basis: "Amir: 423–429 all have a spring theme (spring words jump in 423–429, then drop in 430). With 420 on 22 Dey and 428 in winter 1345, the block runs through Esfand 1345 and ends around Nowruz 1346."
+    basis_fa: "برنامه‌های ۴۲۳ تا ۴۲۹ همه بهاری‌اند؛ ۴۲۹ حدود نوروز ۱۳۴۶."
+  - program: "439"
+    date: "1346-05-28"            # 1967-08-19
+    status: likely
+    basis: "«عید همایون… شهنشاه جاوید و پاینده باد، ولیعهد والاگهر زنده باد… دل شاه‌بانو فرحناک باد». Amir: 28 Mordad 1346, opening of the third Constituent Assembly, which made Farah regent; a prayer for the Shah, the Shahbanu and the crown prince together fits that day (28 Mordad was also the yearly royalist celebration of 1332). The assembly met in 1346 (ensani.ir); the exact opening date is per Amir. Nine slots before 448 (4 Aban 1346), about weekly, which fits."
+    basis_fa: "«عید همایون… شهنشاه جاوید و پاینده باد، ولیعهد والاگهر زنده باد… دل شاه‌بانو فرحناک باد». دعای هم‌زمان برای شاه، شهبانو و ولیعهد با گشایش مجلس مؤسسان سوم در ۲۸ مرداد ۱۳۴۶ می‌خواند، که شهبانو فرح را نایب‌السلطنه کرد."
+  - program: "448"
+    date: "1346-08-04"            # 1967-10-26, coronation and the Shah's birthday
+    status: likely
+    basis: "«مبارک باد تاج پادشاهی… شاهنشه آریامهر»; also «آفرین خدا به شهبانو که ولیعهد نازپرور زاد» (Amir): the coronation (4 Aban) or the crown prince's birthday (9 Aban), the same week. 449 also «به شاهنشه آریامهر ما»"
+    basis_fa: "«مبارک باد تاج پادشاهی»؛ «آفرین خدا به شهبانو که ولیعهد نازپرور زاد». تاجگذاری (۴ آبان) یا زادروز ولیعهد (۹ آبان) ۱۳۴۶."
+
+  # --- 1347-1351 ---------------------------------------------------------
+  - program: "461"
+    date: "1347-01-01"            # 1968-03-21, Nowruz
+    status: possible
+    basis: "«گل بختم به پیروزی، شکفت از باد نوروزی»"
+    basis_fa: "«گل بختم به پیروزی، شکفت از باد نوروزی». احتمالاً نوروز ۱۳۴۷."
+  - program: "470"
+    date: "1347-01-01"            # in 1347 (Hayedeh's first year): a lower bound only
+    kind: not_before
+    point: false
+    status: likely
+    basis: "Hayedeh's first program: her career began in 1347 with «آزاده» (Tajvidi, on Rahi Moayyeri's last poem) with the Golha orchestra (Persian Wikipedia via last.fm). 470 is her first in our files and contains «آزاده‌ام من». Matches Amir's note that 470 is tied to Rahi."
+    basis_fa: "نخستین برنامه‌ی هایده: «آزاده»، ساخته‌ی علی تجویدی بر آخرین سروده‌ی رهی معیری، در ۱۳۴۷."
+  - program: "474"
+    date: "1347-06"               # Shahrivar 1347, after the earthquake of 9 Shahrivar
+    status: likely
+    basis: "Moeini Kermanshahi's «خشم طبیعت» (Pouran), written after the Khorasan earthquake of 1347: «روز و شب دست دعا می‌برم سوی خدا… قلب عالم را ز خشم خود ملرزان… اشک چشم کودکان را کن نگاهی» (via Amir). The Dasht-e Bayaz earthquake struck on 31 Aug 1968 = 9 Shahrivar 1347 (Wikipedia, IRIS). The estimates had 474 in early Mehr 1347."
+    basis_fa: "ترانه‌ی «خشم طبیعت» از معینی کرمانشاهی با صدای پوران، سروده پس از زلزله‌ی دشت بیاض در جنوب خراسان (۹ شهریور ۱۳۴۷): «قلب عالم را ز خشم خود ملرزان… اشک چشم کودکان را کن نگاهی»."
+  - program: "482"
+    date: "1347-08-04"            # 1968-10-26, the Shah's birthday
+    status: possible
+    basis: "«نوید جشن خسروانه… از دولت شاه و شاهزاده… عید است»"
+    basis_fa: "«نوید جشن خسروانه… از دولت شاه و شاهزاده». احتمالاً زادروز شاه، ۴ آبان ۱۳۴۷."
+  - program: "484"
+    date: "1347-12"               # winter 1347 (upper bound)
+    kind: released_by
+    status: confirmed
+    basis: "«شب بود و من سر در گریبان»: published winter 1347 — Mahasti's song list (Persian Wikipedia, via Amir). 485 aired in Aban/Azar 1347, so this is the release, after broadcast."
+    basis_fa: "«شب بود و من سر در گریبان» در زمستان ۱۳۴۷ منتشر شد؛ پخش پیش از آن بوده است."
+  - program: "485"
+    date: "1347-08-30"            # ~1968-11-21, the week after Rahi's death
+    status: confirmed
+    basis: "Announcer: «روز جمعه‌ی گذشته، شادروان رهی معیری… از میان ما رفت». Rahi died 24 Aban 1347 (Friday 15 Nov 1968)."
+    basis_fa: "گوینده: «روز جمعه‌ی گذشته، شادروان رهی معیری… از میان ما رفت». رهی در ۲۴ آبان ۱۳۴۷ درگذشت."
+  - program: "493"
+    date: "1348-01-01"            # 1969-03-21, Nowruz
+    status: possible
+    basis: "«عید است و دارد هر کسی، عزم تماشای دگر»"
+    basis_fa: "«عید است و دارد هر کسی عزم تماشای دگر». احتمالاً نوروز ۱۳۴۸."
+  - program: "516"
+    date: "1349-01-01"            # 1970-03-21, Nowruz
+    status: likely
+    basis: "«روز نوروز است، سرو گلعذار من کجاست»; 520, 522, 523 «نوبهار آمد». Its song «جدایی تو» is listed under new records of the week in Ettela'at, 7 Khordad 1349 — Mahasti's song list (Persian Wikipedia, via Amir)."
+    basis_fa: "«روز نوروز است، سرو گلعذار من کجاست». ترانه‌ی «جدایی تو» از این برنامه در ۷ خرداد ۱۳۴۹ در «صفحات جدید هفته» روزنامه‌ی اطلاعات آمده است."
+  - program: "529"
+    date: "1349-06"               # summer 1349 (upper bound)
+    kind: released_by
+    status: confirmed
+    basis: "529 and 529B released in summer 1349 — Mahasti's song list (Persian Wikipedia, via Amir)"
+    basis_fa: "۵۲۹ و ۵۲۹ب در تابستان ۱۳۴۹ منتشر شدند؛ پخش پیش از آن بوده است."
+  - program: "531"
+    date: "1349-05"               # Mordad 1349, around Constitution Day
+    status: likely
+    basis: "Constitution Day (14 Mordad) or the following weeks: Aref's constitutional tasnif «ناله‌ی مرغ اسیر این همه بهر وطن است… جامه‌ای کو نشود غرقه به خون بهر وطن، بِدر آن جامه که ننگ تن و کم از کفن است». Amir: related, possibly a little after 14 Mordad (e.g. 20 Mordad). The estimates had it in Shahrivar 1349."
+    basis_fa: "جشن مشروطیت (۱۴ مرداد) یا هفته‌های پس از آن: تصنیف «ناله‌ی مرغ اسیر این همه بهر وطن است… جامه‌ای کو نشود غرقه به خون بهر وطن» از عارف."
+  - program: "545"
+    date: "1350-06"               # summer 1350 (upper bound)
+    kind: released_by
+    status: confirmed
+    basis: "545 and 545B released in summer 1350 — Mahasti's song list (Persian Wikipedia, via Amir). 551 aired at Nowruz 1350, so 545 aired before that."
+    basis_fa: "۵۴۵ و ۵۴۵ب در تابستان ۱۳۵۰ منتشر شدند؛ پخش پیش از آن بوده است."
+  - program: "551"
+    date: "1350-01-01"            # 1971-03-21, Nowruz
+    status: likely
+    basis: "«روز عید است مگر، یا شب نوروز، امشب»; 550 «چون درخت فروردین، پرشکوفه شد جانم»"
+    basis_fa: "«روز عید است مگر، یا شب نوروز، امشب». نوروز ۱۳۵۰."
+  - program: "557"
+    date: "1350-06-30"            # 1971-09-21, three weeks before the celebrations
+    status: likely
+    basis: "Cyrus: «ای کوروش بزرگ… بنیان‌گزار کاخ شهنشاهی عجم»; 558 same theme. Amir: the run didn't air all at once. With B parts as separate weekly programs, 557–561 is seven programs, so about three weeks before and after the celebrations (20 Mehr)."
+    basis_fa: "«ای کوروش بزرگ…». برنامه‌های ۵۵۷ تا ۵۶۱ در هفته‌های پیش و پس از جشن‌های ۲۵۰۰ ساله."
+  - program: "559"
+    date: "1350-07-20"            # 1971-10-12, 2500-year celebrations
+    status: confirmed
+    basis: "Amir; «سال کوروش بوَد امسال… جشن شاهنشهی کشور ایران باشد». 560 also about Cyrus."
+    basis_fa: "«سال کوروش بوَد امسال… جشن شاهنشهی کشور ایران باشد». هفته‌ی آغاز جشن‌های ۲۵۰۰ ساله (۲۰ مهر ۱۳۵۰)."
+  - program: "560"
+    date: "1350-09"               # autumn 1350 (upper bound)
+    kind: released_by
+    status: confirmed
+    basis: "«راه کوروش» («بگذار تا از سینهٔ سنگینت ای کوه»): released autumn 1350 — Mahasti's song list (Persian Wikipedia, via Amir)"
+    basis_fa: "«راه کوروش» در پاییز ۱۳۵۰ منتشر شد."
+  - program: "561"
+    date: "1350-08-11"            # 1971-11-02, three weeks after
+    status: likely
+    basis: "«در جشن با شکوه ما، ایران چو گلستان شد… جهان به کام ولیعهد باد و شهبانو»"
+    basis_fa: "«در جشن با شکوه ما، ایران چو گلستان شد». حدود سه هفته پس از آغاز جشن‌ها."
+  - program: "571"
+    date: "1351-01-01"            # 1972-03-21, Nowruz
+    status: confirmed
+    basis: "Amir; «رسید موکب نوروز… عید آمد و آفاق پر از برگ و نوا کرد»"
+    basis_fa: "«رسید موکب نوروز… عید آمد». نوروز ۱۳۵۱."
+  - program: "576"
+    date: "1351-06"               # summer 1351 (upper bound)
+    kind: released_by
+    status: confirmed
+    basis: "Released summer 1351 — Mahasti's song list (Persian Wikipedia, via Amir)"
+    basis_fa: "در تابستان ۱۳۵۱ منتشر شد؛ پخش پیش از آن بوده است."
+
+# When performers joined Golha. A program they appear in can't be earlier.
+# first_program = their first appearance in our Golha-ye Rangarang files.
+performers:
+  - name: "حبیب‌الله بدیعی"
+    joined: "1337"
+    first_program: "216"
+    source: "Amir"
+  - name: "اکبر گلپایگانی"
+    joined: "1337"
+    first_program: "225"
+    source: "Ecoiran: joined Golha in 1337 at Pirnia's invitation (started in Golha-ye Javidan)"
+  - name: "مهستی"
+    joined: "~1344"
+    first_program: "420"
+    source: "Started about three years before Hayedeh (1347), per Persian Wikipedia via last.fm"
+  - name: "محمدرضا شجریان"
+    joined: "1346-07"
+    first_program: "472"
+    source: "First broadcast in autumn 1346, Barg-e Sabz 216 (Tejarat News)"
+  - name: "هایده"
+    joined: "1347"
+    first_program: "470"
+    source: "Career began in 1347 with «آزاده» (Persian Wikipedia via last.fm)"
+  - name: "فخری نیکزاد"
+    joined: "1347"
+    first_program: "578"
+    source: "Radio announcer from 1347 (Hamshahri)"
+  - name: "الهه"
+    joined: "~1340?"
+    first_program: "241"
+    source: "English Wikipedia: discovered by Pirnia at 27 (born 1934, so ~1961/1340). Fits 237 being in 1339 or later."
