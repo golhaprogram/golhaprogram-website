@@ -5,8 +5,7 @@
 // month (days 1-7, 8-14, 15-21, 22-end) picks a program by its position among
 // that year's programs for the month: with four programs, one per week; with
 // two, the first for weeks 1-2 and the second for weeks 3-4; week 1 is always
-// the first and week 4 always the last. A program dated to the day that falls
-// within three days of today is picked instead and marked «همین هفته».
+// the first and week 4 always the last.
 // The whole month is listed under a collapsed «همه‌ی برنامه‌های …».
 
 const MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور',
@@ -36,16 +35,11 @@ function programItem(p, now, withYear) {
   }
   li.appendChild(el('a', { href: p.url }, p.title));
   if (p.singers) li.appendChild(el('span', { class: 'tm-singers' }, ` · ${p.singers}`));
-  if (p.exact && Math.abs(p.exact - now.d) <= 3) {
-    li.appendChild(el('span', { class: 'tm-week' }, 'همین هفته'));
-  }
   return li;
 }
 
 // The program for this week among one year's programs (already in order).
 function pickForWeek(programs, now) {
-  const exact = programs.find(p => p.exact && Math.abs(p.exact - now.d) <= 3);
-  if (exact) return exact;
   const week = Math.min(4, Math.floor((now.d - 1) / 7) + 1);
   return programs[Math.round(((week - 1) * (programs.length - 1)) / 3)];
 }
