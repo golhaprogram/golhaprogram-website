@@ -84,6 +84,9 @@ audio_duration: 1834     # seconds, added automatically
 
 `audio_bytes` and `audio_duration` describe the program's MP3 and are filled in by `scripts/audio_metadata.py`, never by hand. On a PR that adds or changes a program, `.github/workflows/audio-metadata.yml` measures the MP3 (HEAD request + ffprobe) and commits the two lines to the PR branch; it fails if a newly added program's MP3 isn't on `music.golhaprogram.com` yet (an edited program only gets a warning). `audio-metadata-backfill.yml` (run by hand) does the same for every program and opens a PR. Both get each program's MP3 URL from `audio-index.json`, built with `hugo -e audioindex` (config/audioindex) from `layouts/partials/audio-url.html`, so the naming rule stays in one place.
 
+### Content checks
+`scripts/check_content.py` checks program files; `.github/workflows/content-check.yml` runs it on every PR that adds or changes one. It fixes formatting by itself (trailing spaces in front matter, blank lines in front matter, line endings, final newline) and commits that to the PR. It fails on real problems: invalid front matter; missing `program_type`, `program_number`, `dastgah` or `singers`; a `program_number` that doesn't match the file name (`209B.md` ↔ `۲۰۹ب`, `275C.md` ↔ `۲۷۵ث`); a `program_type` that doesn't match the series folder; unknown fields; and names that are listed twice or have extra spaces. A missing `date` is only a warning. Run it locally with `python3 scripts/check_content.py [--fix] [FILE...]`. Allowed fields are the roles in `data/roles.yaml` plus those listed at the top of the script.
+
 ### Persian Language Features
 - RTL text direction support
 - Persian number conversion utilities
