@@ -77,9 +77,8 @@ jobs:
                 .replace(/ي/g, 'ی')   // Arabic yeh to Persian yeh
                 
                 // Other Arabic letters commonly mixed up
-                .replace(/ؤ/g, 'و')   // Arabic waw with hamza to Persian waw
-                .replace(/إ/g, 'ا')   // Arabic alef with hamza below to Persian alef
-                .replace(/أ/g, 'ا')   // Arabic alef with hamza above to Persian alef
+                // (No ؤ/أ/إ rules: مؤسسان، تأثیر، مسأله are correct Persian, and
+                // turning them into و/ا changed real words.)
                 .replace(/آ/g, 'آ')   // Ensure consistent alef with madda (this is actually correct)
                 .replace(/ة/g, 'ه')   // Arabic teh marbuta to Persian heh
                 
@@ -193,8 +192,6 @@ jobs:
         Converted Arabic letters to Persian equivalents in changed files:
         - ك → ک (kaf)
         - ي → ی (yeh)
-        - ؤ → و (waw)
-        - إ/أ → ا (alef)
         - ة → ه (heh)
         - Arabic-Indic numerals → Persian numerals
         
