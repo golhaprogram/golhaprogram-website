@@ -21,11 +21,19 @@ golhaye-rangarang:
     date: "1335"                  # ~1956-57, start of the series; month unknown
     status: likely
     basis: "Amir: Golha-ye Rangarang starts at 100 (Ali Tajvidi also calls 100 the first, Hamshahri). Golha-ye Javidan, the first series, began 1 Farvardin 1335 (21 Mar 1956, Lewisohn); Rangarang came 'after some time', no date given. At ~1/week, 100 → 216 (1337) puts 100 in 1335 or early 1336."
+  - program: "209B"
+    date: "1338-01-01"            # 1959-03-21, Nowruz
+    status: likely
+    basis: "Amir: 209 and 209B are spring/Nowruz programs (209 «نوبهار است بیا تا به چمن روی کنیم»; 209B has 7 spring words). The next Nowruz cluster is 224B/224C, a year later."
   - program: "216"
     date: "1337"                  # 1958-03 to 1959-03
     status: possible              # Amir: weak source; not used as a fixed point
     basis: "Amir: the tasnif «من از روز ازل» (Mahjubi, Rahi, Segah) was performed in Golha-ye Rangarang 195 and 216, in 1337. Our 216 has it, sung by Banan. Also: Habibollah Badiei joined Golha in 1337 (Amir), and 216 is the first of our programs with his name (none of 100–215 have it)."
 
+  - program: "224B"
+    date: "1339-01-01"            # 1960-03-21, Nowruz
+    status: likely
+    basis: "Amir: 224B and 224C fit Nowruz/spring (9 and 8 spring words, «چون نسیم نوبهار بر آشیانم کن گذر»). One year after 209B; 237 (composed Azar 1339) comes after."
   - program: "237"
     date: "1339-09"               # Azar 1339 (composed; lower bound)
     kind: not_before
