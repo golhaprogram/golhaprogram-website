@@ -18,9 +18,18 @@
 golhaye-rangarang:
   # --- 1335-1342 ---------------------------------------------------------
   - program: "100"
-    date: "1335"                  # ~1956-57, start of the series; month unknown
+    date: "1335-01-01"            # 1956-03-21: Golha began; Rangarang came after
+    kind: not_before
+    status: confirmed
+    basis: "Amir: Golha-ye Rangarang starts at 100 (Ali Tajvidi also calls 100 the first, Hamshahri). Golha-ye Javidan, the first series, began 1 Farvardin 1335 (21 Mar 1956, Lewisohn); Rangarang came 'after some time'. Its month now follows from 135 (Nowruz 1336) and 174 (Dey 1336)."
+  - program: "135"
+    date: "1336-01-01"            # 1957-03-21, Nowruz
     status: likely
-    basis: "Amir: Golha-ye Rangarang starts at 100 (Ali Tajvidi also calls 100 the first, Hamshahri). Golha-ye Javidan, the first series, began 1 Farvardin 1335 (21 Mar 1956, Lewisohn); Rangarang came 'after some time', no date given. At ~1/week, 100 → 216 (1337) puts 100 in 1335 or early 1336."
+    basis: "Amir: «طرب ای دل که نوبهار آمد / از صبا بوی زلف یار آمد»; 134 also spring: «باد بهار می‌رسد جلوه نسترن نگر». Not on our site."
+  - program: "174"
+    date: "1336-10"               # Dey 1336, right after Saba's death
+    status: confirmed
+    basis: "Amir: memorial for Abolhasan Saba: «شب جمعه بیست و نهم آذر بود که… سالکی به نام ابوالحسن صبا… پای به عرصهٔ زندگانی جاویدان نهاد», «بگریم خون که ناگه صبا رفت». Saba died the night before Friday 29 Azar 1336 (20 Dec 1957). 172 is the last program in our files with Saba playing. Not on our site."
   - program: "209B"
     date: "1338-01-01"            # 1959-03-21, Nowruz
     status: likely
