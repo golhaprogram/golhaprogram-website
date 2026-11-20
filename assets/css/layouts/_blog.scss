@@ -1,0 +1,158 @@
+/* Blog (layouts/blog): list of posts and single posts. */
+.blog,
+.post {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  box-sizing: border-box;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.9;
+
+  h1 {
+    margin-top: 0;
+    line-height: 1.5;
+  }
+
+  h2 {
+    margin-top: 2rem;
+  }
+
+  ol,
+  ul {
+    padding-inline-start: 1.5rem;
+  }
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--divider-color);
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+    color: var(--text-muted);
+  }
+}
+
+/* Air-dates post: chart, evidence table, programs by year. */
+.air-dates-chart {
+  margin: 1.5rem 0;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .grid line {
+    stroke: var(--divider-color);
+    stroke-width: 1;
+  }
+
+  text {
+    font-family: var(--primary-font);
+    font-size: 12px;
+    fill: var(--text-muted);
+  }
+
+  .ylab {
+    text-anchor: end;
+  }
+
+  .xlab,
+  .axis-title {
+    text-anchor: middle;
+  }
+
+  .estimates circle {
+    fill: var(--text-faint);
+    opacity: 0.55;
+  }
+
+  .anchors circle {
+    fill: var(--accent-color);
+    stroke: var(--surface-color);
+    stroke-width: 1;
+  }
+
+  .anchors circle.offsite {
+    fill: var(--surface-color);
+    stroke: var(--accent-color);
+    stroke-width: 2;
+  }
+
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .key {
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 50%;
+    margin-inline: 0.75em 0.3em;
+    vertical-align: middle;
+  }
+
+  .key-anchor { background: var(--accent-color); }
+  .key-offsite { border: 2px solid var(--accent-color); box-sizing: border-box; }
+  .key-estimate { background: var(--text-faint); opacity: 0.55; }
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.air-dates-evidence {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  th,
+  td {
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--divider-color);
+    vertical-align: top;
+    text-align: right;
+  }
+
+  th {
+    white-space: nowrap;
+  }
+
+  .num,
+  .date {
+    white-space: nowrap;
+  }
+
+  .status-possible {
+    color: var(--text-muted);
+  }
+}
+
+.air-dates-by-year {
+  h3 {
+    margin-bottom: 0.25rem;
+  }
+
+  .count {
+    font-weight: normal;
+    font-size: 0.85em;
+    color: var(--text-muted);
+  }
+
+  p {
+    margin-top: 0;
+  }
+}

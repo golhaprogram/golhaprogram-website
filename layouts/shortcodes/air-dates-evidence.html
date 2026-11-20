@@ -1,0 +1,32 @@
+{{- /* Table of every dated program, from data/air_dates.yaml (basis_fa). */ -}}
+{{- $kinds := dict "aired" "پخش" "not_before" "نه پیش از" "released_by" "نه پس از" -}}
+{{- $status := dict "confirmed" "قطعی" "likely" "محتمل" "possible" "احتمالی" -}}
+{{- $suffix := dict "B" "ب" "C" "ث" -}}
+<div class="table-scroll">
+<table class="air-dates-evidence">
+  <thead>
+    <tr><th>برنامه</th><th>تاریخ</th><th>نوع</th><th>اطمینان</th><th>شاهد</th></tr>
+  </thead>
+  <tbody>
+  {{- range index site.Data.air_dates "golhaye-rangarang" }}
+    {{- $m := findRESubmatch `^(\d+)([A-Z]?)$` .program 1 -}}
+    {{- $num := printf "%s%s" (partial "fa-number" (index (index $m 0) 1)) (index $suffix (index (index $m 0) 2) | default "") -}}
+    {{- $page := site.GetPage (printf "/programs/golhaye-rangarang/%s" .program) -}}
+    {{- $kind := .kind | default "aired" }}
+    <tr class="status-{{ .status }}">
+      <td class="num">{{ if $page }}<a href="{{ $page.RelPermalink }}">{{ $num }}</a>{{ else }}{{ $num }}{{ end }}</td>
+      <td class="date">
+        {{- with .date -}}
+          {{- $p := split . "-" -}}
+          {{- if eq (len $p) 3 }}{{ partial "fa-number" (int (strings.TrimLeft "0" (index $p 2))) }} {{ end -}}
+          {{- partial "fa-month-year" . -}}
+        {{- else -}}—{{- end -}}
+      </td>
+      <td>{{ index $kinds $kind }}</td>
+      <td>{{ index $status .status }}</td>
+      <td class="basis">{{ .basis_fa }}</td>
+    </tr>
+  {{- end }}
+  </tbody>
+</table>
+</div>

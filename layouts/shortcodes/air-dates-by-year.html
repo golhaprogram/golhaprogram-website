@@ -1,0 +1,21 @@
+{{- /* Every program on the site, grouped by estimated air year. */ -}}
+{{- $suffix := dict "B" "ب" "C" "ث" -}}
+{{- $byYear := dict -}}
+{{- range $p, $v := site.Data.air_date_estimates -}}
+  {{- $y := substr $v.estimate 0 4 -}}
+  {{- $byYear = merge $byYear (dict $y ((index $byYear $y | default slice) | append $p)) -}}
+{{- end -}}
+<div class="air-dates-by-year">
+{{- range $y, $ps := $byYear }}
+  <section>
+    <h3>{{ partial "fa-number" $y }} <span class="count">({{ partial "fa-number" (len $ps) }} برنامه)</span></h3>
+    <p>
+    {{- range $i, $p := $ps }}{{ if $i }}، {{ end }}
+      {{- $m := index (findRESubmatch `^(\d+)([A-Z]?)$` $p 1) 0 -}}
+      {{- $label := printf "%s%s" (partial "fa-number" (index $m 1)) (index $suffix (index $m 2) | default "") -}}
+      {{- with site.GetPage (printf "/programs/golhaye-rangarang/%s" $p) }}<a href="{{ .RelPermalink }}">{{ $label }}</a>{{ else }}{{ $label }}{{ end -}}
+    {{- end }}
+    </p>
+  </section>
+{{- end }}
+</div>

@@ -1,0 +1,72 @@
+name: Air dates
+
+# On PRs that change the dated programs (data/air_dates.yaml), the estimator,
+# or add Golha-ye Rangarang programs: re-estimate every program's air date and
+# commit data/air_date_estimates.yaml and the date_aired fields to the PR.
+# Fails if the estimator reports a contradiction (e.g. a program estimated
+# before a performer in it joined Golha).
+
+on:
+  pull_request:
+    paths:
+      - 'data/air_dates.yaml'
+      - 'scripts/estimate_air_dates.py'
+      - 'content/programs/golhaye-rangarang/*.md'
+
+# Shared with the other workflows that push to PR branches, so they take turns.
+concurrency:
+  group: pr-autofix-${{ github.head_ref }}
+  cancel-in-progress: false
+
+jobs:
+  air-dates:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Use the base branch's tools if this branch predates them
+        run: |
+          # GitHub runs this workflow as it is after merging the PR into the base
+          # branch, but the checkout is the PR branch alone, which may be older and
+          # lack the files this job runs.
+          git fetch -q origin ${{ github.base_ref }}
+          for f in scripts/estimate_air_dates.py data/air_dates.yaml; do
+            if [ ! -e "$f" ]; then
+              git checkout -q origin/${{ github.base_ref }} -- "$f" && git reset -q -- "$f"
+              echo "Using $f from ${{ github.base_ref }}"
+            fi
+          done
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet pyyaml jdatetime
+
+      - name: Estimate air dates
+        run: |
+          python3 scripts/estimate_air_dates.py --write | tee /tmp/estimate.log
+          echo '```' >> "$GITHUB_STEP_SUMMARY"; cat /tmp/estimate.log >> "$GITHUB_STEP_SUMMARY"; echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/air_date_estimates.yaml content/programs/golhaye-rangarang
+          if git diff --cached --quiet; then echo "Nothing to commit"; else
+            git commit -q -m "Update estimated air dates"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+
+      - name: Fail on contradictions
+        run: |
+          if grep -q '^PROBLEM:' /tmp/estimate.log; then
+            grep '^PROBLEM:' /tmp/estimate.log | sed 's/^/::error::/'
+            exit 1
+          fi

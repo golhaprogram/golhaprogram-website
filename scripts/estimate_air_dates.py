@@ -14,8 +14,10 @@ Reads data/air_dates.yaml and assumes programs aired in number order:
 
 Writes data/air_date_estimates.yaml and prints a summary. Each estimate has
 a precision in days: roughly how far it is from the nearest fixed point.
+With --write it also sets date_aired: "YYYY-MM" (Solar Hijri year and month)
+in each program's front matter; program pages show it as approximate.
 
-  scripts/estimate_air_dates.py [--check]   # --check: only report problems
+  scripts/estimate_air_dates.py [--check | --write]
 """
 
 import argparse
@@ -70,9 +72,28 @@ def to_fa(g):
     return f"{fa.year}-{fa.month:02d}-{fa.day:02d}"
 
 
+def write_date_aired(path, value):
+    """Set date_aired in the front matter, keeping everything else as is."""
+    text = path.read_text(encoding="utf-8")
+    lines = text.split("\n")
+    end = next(i for i in range(1, len(lines)) if lines[i].strip() == "---")
+    line = f'date_aired: "{value}"'
+    for i in range(1, end):
+        if lines[i].startswith("date_aired:"):
+            if lines[i] == line:
+                return False
+            lines[i] = line
+            break
+    else:
+        lines.insert(end, line)
+    path.write_text("\n".join(lines), encoding="utf-8")
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--check", action="store_true")
+    ap.add_argument("--check", action="store_true", help="only report problems")
+    ap.add_argument("--write", action="store_true", help="also set date_aired in program files")
     args = ap.parse_args()
 
     data = yaml.safe_load((ROOT / "data" / "air_dates.yaml").read_text(encoding="utf-8"))
@@ -180,6 +201,13 @@ def main():
               "# Do not edit: change the anchors and re-run.\n")
     (ROOT / "data" / "air_date_estimates.yaml").write_text(
         header + yaml.safe_dump(out, allow_unicode=True, sort_keys=False), encoding="utf-8")
+
+    if args.write:
+        changed = 0
+        for p, v in out.items():
+            if write_date_aired(ROOT / "content" / "programs" / SERIES / f"{p}.md", v["estimate"][:7]):
+                changed += 1
+        print(f"date_aired updated in {changed} file(s)")
 
     precs = sorted(v["precision_days"] for v in out.values())
     print(f"{len(out)} programs, {sum(v['fixed'] for v in out.values())} fixed points, "

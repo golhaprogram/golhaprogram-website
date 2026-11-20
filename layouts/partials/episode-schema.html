@@ -29,8 +29,11 @@
   "description": "{{ if $page.Description }}{{ $page.Description }}{{ else }}دانلود {{ $programTypePersian }} {{ $page.Params.program_number }} - آرشیو کامل برنامه‌های رادیو ایران{{ end }}",
   "url": "{{ $page.Permalink }}",
   "datePublished": "{{ $page.Date.Format "2006-01-02" }}",
-  {{- if $page.Params.date_aired }}
-  "dateCreated": "{{ $page.Params.date_aired }}",
+  {{- /* Estimated air month, in Gregorian (date_aired itself is Solar Hijri). */ -}}
+  {{- if eq (path.Base $page.File.Dir) "golhaye-rangarang" }}
+  {{- with index site.Data.air_date_estimates $page.File.ContentBaseName }}
+  "dateCreated": "{{ substr .gregorian 0 7 }}",
+  {{- end }}
   {{- end }}
   "partOfSeries": {
     "@type": "CreativeWorkSeries",
