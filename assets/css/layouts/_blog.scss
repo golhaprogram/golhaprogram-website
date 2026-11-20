@@ -234,3 +234,82 @@
     }
   }
 }
+
+/* «این ماه در گلهای رنگارنگ» (home page and series page). */
+.this-month {
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  direction: rtl;
+  text-align: right !important;
+
+  h2,
+  h3 {
+    text-align: right !important;
+  }
+
+  h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.3rem;
+  }
+
+  .this-month-intro {
+    margin: 0 0 1rem;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  .estimate-mark {
+    font-weight: 700;
+    vertical-align: super;
+    font-size: 0.8em;
+    text-decoration: none;
+  }
+
+  h3 {
+    margin: 1rem 0 0.25rem;
+    font-size: 1.05rem;
+  }
+
+  .tm-ago,
+  .tm-singers {
+    font-weight: normal;
+    color: var(--text-muted);
+    font-size: 0.9em;
+  }
+
+  ul {
+    margin: 0;
+    padding-inline-start: 1.25rem;
+    line-height: 1.9;
+  }
+
+}
+
+.this-month {
+  .tm-week-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--divider-color);
+    }
+  }
+
+  .tm-year-label {
+    font-weight: 700;
+  }
+
+  .tm-all {
+    margin-top: 1rem;
+
+    summary {
+      cursor: pointer;
+      color: var(--accent-color);
+    }
+  }
+}

@@ -1,6 +1,7 @@
 // Import our component modules
 import { initializeTagCloud } from './components/TagCloud.js';
 import { initializeSearch } from './components/Search.js';
+import { initializeThisMonth } from './components/ThisMonth.js';
 
 // Main initialization function
 document.addEventListener('DOMContentLoaded', function() {
@@ -25,6 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   } catch (err) {
     console.error('Error initializing header menus:', err);
+  }
+
+  // «این ماه در گلهای رنگارنگ» (home page and the series page)
+  try {
+    initializeThisMonth();
+  } catch (err) {
+    console.error('Error initializing this-month:', err);
   }
 
   // Initialize search

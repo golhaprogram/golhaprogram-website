@@ -70,6 +70,8 @@
   </div>
 </div>
 
+{{ if .IsHome }}{{ partial "this-month.html" . }}{{ end }}
+
 {{ partial "tag-cloud.html" (dict "context" . "allPrograms" true "debug" true) }}
 
 {{ end }}
