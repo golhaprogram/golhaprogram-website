@@ -87,6 +87,9 @@ def main():
     ap.add_argument("--content", default="content", help="Hugo content directory")
     ap.add_argument("--force", action="store_true", help="re-measure even if fields exist")
     ap.add_argument("--report", help="write a Markdown summary to this file")
+    ap.add_argument("--fail-only-for", metavar="FILES",
+                    help="space-separated files: exit 1 only if one of these has a problem "
+                         "(others are reported as warnings)")
     ap.add_argument("files", nargs="*", help="limit to these program files")
     args = ap.parse_args()
 
@@ -139,6 +142,9 @@ def main():
             lines += [f"- `{p}`: {u} ({e})" for p, u, e in problems]
         Path(args.report).write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+    if args.fail_only_for is not None:
+        strict = {Path(f).resolve() for f in args.fail_only_for.split()}
+        problems = [p for p in problems if Path(p[0]).resolve() in strict]
     sys.exit(1 if problems else 0)
 
 

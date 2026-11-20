@@ -94,7 +94,8 @@ jobs:
                 .replace(/٩/g, '۹')   // 9
                 
                 // Less common but still seen
-                .replace(/ء/g, 'ٔ')   // Arabic hamza to Persian hamza
+                // (No ء rule: standalone hamza is correct Persian, e.g. علاءالدوله, جزء;
+                // turning it into the combining mark ٔ broke those words.)
                 .replace(/ئ/g, 'ئ')   // Ensure Persian yeh with hamza (this is correct)
                 .replace(/ؤ/g, 'ؤ');  // Persian waw with hamza (keep as is)
         }
