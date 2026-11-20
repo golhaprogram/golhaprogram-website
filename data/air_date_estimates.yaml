@@ -1031,184 +1031,184 @@
   precision_days: 0
   fixed: true
 '449':
-  estimate: '1346-08-18'
-  gregorian: '1967-11-09'
-  precision_days: 23
+  estimate: '1346-08-16'
+  gregorian: '1967-11-07'
+  precision_days: 13
   fixed: false
 '450':
-  estimate: '1346-09-03'
-  gregorian: '1967-11-24'
-  precision_days: 46
+  estimate: '1346-08-28'
+  gregorian: '1967-11-19'
+  precision_days: 26
   fixed: false
 '451':
-  estimate: '1346-09-18'
-  gregorian: '1967-12-09'
-  precision_days: 70
+  estimate: '1346-09-10'
+  gregorian: '1967-12-01'
+  precision_days: 38
   fixed: false
 '452':
-  estimate: '1346-10-03'
-  gregorian: '1967-12-24'
-  precision_days: 93
+  estimate: '1346-09-22'
+  gregorian: '1967-12-13'
+  precision_days: 51
   fixed: false
 '453':
-  estimate: '1346-10-18'
-  gregorian: '1968-01-08'
-  precision_days: 116
+  estimate: '1346-10-04'
+  gregorian: '1967-12-25'
+  precision_days: 64
   fixed: false
 '454':
-  estimate: '1346-11-03'
-  gregorian: '1968-01-23'
-  precision_days: 139
+  estimate: '1346-10-17'
+  gregorian: '1968-01-07'
+  precision_days: 77
   fixed: false
 '455':
-  estimate: '1346-11-18'
-  gregorian: '1968-02-07'
-  precision_days: 163
+  estimate: '1346-10-29'
+  gregorian: '1968-01-19'
+  precision_days: 89
   fixed: false
 '456':
-  estimate: '1346-12-03'
-  gregorian: '1968-02-22'
-  precision_days: 186
+  estimate: '1346-11-11'
+  gregorian: '1968-01-31'
+  precision_days: 102
   fixed: false
 '457':
-  estimate: '1346-12-18'
-  gregorian: '1968-03-08'
-  precision_days: 209
+  estimate: '1346-11-23'
+  gregorian: '1968-02-12'
+  precision_days: 115
   fixed: false
 '458':
-  estimate: '1347-01-03'
-  gregorian: '1968-03-23'
-  precision_days: 232
+  estimate: '1346-12-05'
+  gregorian: '1968-02-24'
+  precision_days: 128
   fixed: false
 '459':
-  estimate: '1347-01-18'
-  gregorian: '1968-04-07'
-  precision_days: 256
+  estimate: '1346-12-18'
+  gregorian: '1968-03-08'
+  precision_days: 140
   fixed: false
 '460':
-  estimate: '1347-02-02'
-  gregorian: '1968-04-22'
-  precision_days: 249
+  estimate: '1346-12-30'
+  gregorian: '1968-03-20'
+  precision_days: 153
   fixed: false
 '461':
-  estimate: '1347-02-17'
-  gregorian: '1968-05-07'
-  precision_days: 242
-  fixed: false
-'462':
-  estimate: '1347-03-01'
-  gregorian: '1968-05-22'
-  precision_days: 235
-  fixed: false
-'463':
-  estimate: '1347-03-16'
-  gregorian: '1968-06-06'
-  precision_days: 229
-  fixed: false
-'464':
-  estimate: '1347-03-31'
-  gregorian: '1968-06-21'
-  precision_days: 222
-  fixed: false
-'465':
-  estimate: '1347-04-15'
-  gregorian: '1968-07-06'
-  precision_days: 215
-  fixed: false
-'466':
-  estimate: '1347-04-30'
-  gregorian: '1968-07-21'
-  precision_days: 209
-  fixed: false
-'467':
-  estimate: '1347-05-14'
-  gregorian: '1968-08-05'
-  precision_days: 202
-  fixed: false
-'468':
-  estimate: '1347-05-29'
-  gregorian: '1968-08-20'
-  precision_days: 195
-  fixed: false
-'469':
-  estimate: '1347-06-13'
-  gregorian: '1968-09-04'
-  precision_days: 189
-  fixed: false
-'470':
-  estimate: '1347-06-28'
-  gregorian: '1968-09-19'
-  precision_days: 182
-  fixed: true
-'471':
-  estimate: '1347-07-01'
-  gregorian: '1968-09-23'
-  precision_days: 174
-  fixed: false
-'472':
-  estimate: '1347-07-05'
-  gregorian: '1968-09-27'
+  estimate: '1347-01-12'
+  gregorian: '1968-04-01'
   precision_days: 166
   fixed: false
+'462':
+  estimate: '1347-01-24'
+  gregorian: '1968-04-13'
+  precision_days: 154
+  fixed: false
+'463':
+  estimate: '1347-02-05'
+  gregorian: '1968-04-25'
+  precision_days: 143
+  fixed: false
+'464':
+  estimate: '1347-02-18'
+  gregorian: '1968-05-08'
+  precision_days: 131
+  fixed: false
+'465':
+  estimate: '1347-02-30'
+  gregorian: '1968-05-20'
+  precision_days: 120
+  fixed: false
+'466':
+  estimate: '1347-03-11'
+  gregorian: '1968-06-01'
+  precision_days: 108
+  fixed: false
+'467':
+  estimate: '1347-03-23'
+  gregorian: '1968-06-13'
+  precision_days: 96
+  fixed: false
+'468':
+  estimate: '1347-04-04'
+  gregorian: '1968-06-25'
+  precision_days: 85
+  fixed: false
+'469':
+  estimate: '1347-04-17'
+  gregorian: '1968-07-08'
+  precision_days: 73
+  fixed: false
+'470':
+  estimate: '1347-04-29'
+  gregorian: '1968-07-20'
+  precision_days: 61
+  fixed: false
+'471':
+  estimate: '1347-05-10'
+  gregorian: '1968-08-01'
+  precision_days: 50
+  fixed: false
+'472':
+  estimate: '1347-05-22'
+  gregorian: '1968-08-13'
+  precision_days: 38
+  fixed: false
 '473':
-  estimate: '1347-07-09'
-  gregorian: '1968-10-01'
-  precision_days: 158
+  estimate: '1347-06-03'
+  gregorian: '1968-08-25'
+  precision_days: 27
   fixed: false
 '474':
-  estimate: '1347-07-13'
-  gregorian: '1968-10-05'
-  precision_days: 150
-  fixed: false
+  estimate: '1347-06-16'
+  gregorian: '1968-09-07'
+  precision_days: 15
+  fixed: true
 '475':
-  estimate: '1347-07-18'
-  gregorian: '1968-10-10'
-  precision_days: 142
+  estimate: '1347-06-22'
+  gregorian: '1968-09-13'
+  precision_days: 20
   fixed: false
 '476':
-  estimate: '1347-07-22'
-  gregorian: '1968-10-14'
-  precision_days: 134
+  estimate: '1347-06-29'
+  gregorian: '1968-09-20'
+  precision_days: 26
   fixed: false
 '477':
-  estimate: '1347-07-26'
-  gregorian: '1968-10-18'
-  precision_days: 126
+  estimate: '1347-07-05'
+  gregorian: '1968-09-27'
+  precision_days: 31
   fixed: false
 '478':
-  estimate: '1347-07-30'
-  gregorian: '1968-10-22'
-  precision_days: 114
+  estimate: '1347-07-12'
+  gregorian: '1968-10-04'
+  precision_days: 37
   fixed: false
 '479':
-  estimate: '1347-08-04'
-  gregorian: '1968-10-26'
-  precision_days: 98
+  estimate: '1347-07-19'
+  gregorian: '1968-10-11'
+  precision_days: 42
   fixed: false
 '480':
-  estimate: '1347-08-09'
-  gregorian: '1968-10-31'
-  precision_days: 82
+  estimate: '1347-07-25'
+  gregorian: '1968-10-17'
+  precision_days: 41
   fixed: false
 '481':
-  estimate: '1347-08-13'
-  gregorian: '1968-11-04'
-  precision_days: 65
-  fixed: false
-'482':
-  estimate: '1347-08-17'
-  gregorian: '1968-11-08'
-  precision_days: 49
-  fixed: false
-'483':
-  estimate: '1347-08-21'
-  gregorian: '1968-11-12'
+  estimate: '1347-08-02'
+  gregorian: '1968-10-24'
   precision_days: 33
   fixed: false
-'484':
-  estimate: '1347-08-25'
-  gregorian: '1968-11-16'
+'482':
+  estimate: '1347-08-09'
+  gregorian: '1968-10-31'
+  precision_days: 25
+  fixed: false
+'483':
+  estimate: '1347-08-16'
+  gregorian: '1968-11-07'
   precision_days: 16
+  fixed: false
+'484':
+  estimate: '1347-08-23'
+  gregorian: '1968-11-14'
+  precision_days: 8
   fixed: false
 '485':
   estimate: '1347-08-30'

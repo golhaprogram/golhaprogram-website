@@ -287,10 +287,17 @@ golhaye-rangarang:
     basis: "«گل بختم به پیروزی، شکفت از باد نوروزی»"
     basis_fa: "«گل بختم به پیروزی، شکفت از باد نوروزی». احتمالاً نوروز ۱۳۴۷."
   - program: "470"
-    date: "1347"                  # ~1968, before Rahi's death in Aban
+    date: "1347-01-01"            # in 1347 (Hayedeh's first year): a lower bound only
+    kind: not_before
+    point: false
     status: likely
     basis: "Hayedeh's first program: her career began in 1347 with «آزاده» (Tajvidi, on Rahi Moayyeri's last poem) with the Golha orchestra (Persian Wikipedia via last.fm). 470 is her first in our files and contains «آزاده‌ام من». Matches Amir's note that 470 is tied to Rahi."
     basis_fa: "نخستین برنامه‌ی هایده: «آزاده»، ساخته‌ی علی تجویدی بر آخرین سروده‌ی رهی معیری، در ۱۳۴۷."
+  - program: "474"
+    date: "1347-06"               # Shahrivar 1347, after the earthquake of 9 Shahrivar
+    status: likely
+    basis: "Moeini Kermanshahi's «خشم طبیعت» (Pouran), written after the Khorasan earthquake of 1347: «روز و شب دست دعا می‌برم سوی خدا… قلب عالم را ز خشم خود ملرزان… اشک چشم کودکان را کن نگاهی» (via Amir). The Dasht-e Bayaz earthquake struck on 31 Aug 1968 = 9 Shahrivar 1347 (Wikipedia, IRIS). The estimates had 474 in early Mehr 1347."
+    basis_fa: "ترانه‌ی «خشم طبیعت» از معینی کرمانشاهی با صدای پوران، سروده پس از زلزله‌ی دشت بیاض در جنوب خراسان (۹ شهریور ۱۳۴۷): «قلب عالم را ز خشم خود ملرزان… اشک چشم کودکان را کن نگاهی»."
   - program: "482"
     date: "1347-08-04"            # 1968-10-26, the Shah's birthday
     status: possible
