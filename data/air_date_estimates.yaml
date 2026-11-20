@@ -931,99 +931,99 @@
   precision_days: 15
   fixed: true
 '430':
-  estimate: '1346-01-26'
-  gregorian: '1967-04-15'
-  precision_days: 24
+  estimate: '1346-01-28'
+  gregorian: '1967-04-17'
+  precision_days: 26
   fixed: false
 '431':
-  estimate: '1346-02-05'
-  gregorian: '1967-04-25'
-  precision_days: 34
+  estimate: '1346-02-09'
+  gregorian: '1967-04-29'
+  precision_days: 37
   fixed: false
 '432':
-  estimate: '1346-02-15'
-  gregorian: '1967-05-05'
-  precision_days: 43
+  estimate: '1346-02-22'
+  gregorian: '1967-05-12'
+  precision_days: 48
   fixed: false
 '433':
-  estimate: '1346-02-25'
-  gregorian: '1967-05-15'
-  precision_days: 53
+  estimate: '1346-03-03'
+  gregorian: '1967-05-24'
+  precision_days: 59
   fixed: false
 '434':
-  estimate: '1346-03-05'
-  gregorian: '1967-05-26'
-  precision_days: 62
-  fixed: false
-'435':
   estimate: '1346-03-15'
   gregorian: '1967-06-05'
-  precision_days: 72
+  precision_days: 70
+  fixed: false
+'435':
+  estimate: '1346-03-28'
+  gregorian: '1967-06-18'
+  precision_days: 69
   fixed: false
 '436':
-  estimate: '1346-03-25'
-  gregorian: '1967-06-15'
-  precision_days: 81
-  fixed: false
-'437':
-  estimate: '1346-04-04'
-  gregorian: '1967-06-25'
-  precision_days: 91
-  fixed: false
-437B:
-  estimate: '1346-04-14'
-  gregorian: '1967-07-05'
-  precision_days: 100
-  fixed: false
-'438':
-  estimate: '1346-04-25'
-  gregorian: '1967-07-16'
-  precision_days: 110
-  fixed: false
-'439':
-  estimate: '1346-05-04'
-  gregorian: '1967-07-26'
-  precision_days: 99
-  fixed: false
-'440':
-  estimate: '1346-05-14'
-  gregorian: '1967-08-05'
-  precision_days: 88
-  fixed: false
-'441':
-  estimate: '1346-05-24'
-  gregorian: '1967-08-15'
-  precision_days: 77
-  fixed: false
-'442':
-  estimate: '1346-06-03'
-  gregorian: '1967-08-25'
-  precision_days: 66
-  fixed: false
-'443':
-  estimate: '1346-06-14'
-  gregorian: '1967-09-05'
+  estimate: '1346-04-09'
+  gregorian: '1967-06-30'
   precision_days: 55
   fixed: false
-'444':
-  estimate: '1346-06-24'
-  gregorian: '1967-09-15'
-  precision_days: 44
+'437':
+  estimate: '1346-04-21'
+  gregorian: '1967-07-12'
+  precision_days: 41
   fixed: false
-'445':
+437B:
+  estimate: '1346-05-03'
+  gregorian: '1967-07-25'
+  precision_days: 27
+  fixed: false
+'438':
+  estimate: '1346-05-15'
+  gregorian: '1967-08-06'
+  precision_days: 14
+  fixed: false
+'439':
+  estimate: '1346-05-28'
+  gregorian: '1967-08-19'
+  precision_days: 0
+  fixed: true
+'440':
+  estimate: '1346-06-04'
+  gregorian: '1967-08-26'
+  precision_days: 8
+  fixed: false
+'441':
+  estimate: '1346-06-12'
+  gregorian: '1967-09-03'
+  precision_days: 15
+  fixed: false
+'442':
+  estimate: '1346-06-19'
+  gregorian: '1967-09-10'
+  precision_days: 23
+  fixed: false
+'443':
+  estimate: '1346-06-27'
+  gregorian: '1967-09-18'
+  precision_days: 30
+  fixed: false
+'444':
   estimate: '1346-07-03'
   gregorian: '1967-09-25'
-  precision_days: 33
+  precision_days: 30
+  fixed: false
+'445':
+  estimate: '1346-07-11'
+  gregorian: '1967-10-03'
+  precision_days: 23
   fixed: false
 '446':
-  estimate: '1346-07-13'
-  gregorian: '1967-10-05'
-  precision_days: 22
+  estimate: '1346-07-18'
+  gregorian: '1967-10-10'
+  precision_days: 15
   fixed: false
 '447':
-  estimate: '1346-07-23'
-  gregorian: '1967-10-15'
-  precision_days: 11
+  estimate: '1346-07-26'
+  gregorian: '1967-10-18'
+  precision_days: 8
   fixed: false
 '448':
   estimate: '1346-08-04'

@@ -250,10 +250,10 @@ golhaye-rangarang:
     basis: "Amir: 423–429 all have a spring theme (spring words jump in 423–429, then drop in 430). With 420 on 22 Dey and 428 in winter 1345, the block runs through Esfand 1345 and ends around Nowruz 1346."
     basis_fa: "برنامه‌های ۴۲۳ تا ۴۲۹ همه بهاری‌اند؛ ۴۲۹ حدود نوروز ۱۳۴۶."
   - program: "439"
-    date: "1346"                  # 1967, occasion unknown
-    status: possible
-    basis: "«عید همایون… شهنشاه جاوید و پاینده باد، ولیعهد والاگهر زنده باد… دل شاه‌بانو فرحناک باد». Amir: the crown prince's birthday (born 9 Aban 1339). Open question: 9 Aban 1345 (then 425 and earlier Nowruz anchors move one year back, and 439→448 is a slow year) or another occasion in 1346. 405 (Pirnia's last, ~1345) favours 1346."
-    basis_fa: "«عید همایون… شهنشاه جاوید و پاینده باد، ولیعهد والاگهر زنده باد». کدام جشن؟ هنوز معلوم نیست."
+    date: "1346-05-28"            # 1967-08-19
+    status: likely
+    basis: "«عید همایون… شهنشاه جاوید و پاینده باد، ولیعهد والاگهر زنده باد… دل شاه‌بانو فرحناک باد». Amir: 28 Mordad 1346, opening of the third Constituent Assembly, which made Farah regent; a prayer for the Shah, the Shahbanu and the crown prince together fits that day (28 Mordad was also the yearly royalist celebration of 1332). The assembly met in 1346 (ensani.ir); the exact opening date is per Amir. Nine slots before 448 (4 Aban 1346), about weekly, which fits."
+    basis_fa: "«عید همایون… شهنشاه جاوید و پاینده باد، ولیعهد والاگهر زنده باد… دل شاه‌بانو فرحناک باد». دعای هم‌زمان برای شاه، شهبانو و ولیعهد با گشایش مجلس مؤسسان سوم در ۲۸ مرداد ۱۳۴۶ می‌خواند، که شهبانو فرح را نایب‌السلطنه کرد."
   - program: "448"
     date: "1346-08-04"            # 1967-10-26, coronation and the Shah's birthday
     status: likely
