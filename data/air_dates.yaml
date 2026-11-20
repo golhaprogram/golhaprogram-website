@@ -47,6 +47,11 @@ golhaye-rangarang:
     basis: "Amir: the tasnif «من از روز ازل» (Mahjubi, Rahi, Segah) was performed in Golha-ye Rangarang 195 and 216, in 1337. Our 216 has it, sung by Banan. Also: Habibollah Badiei joined Golha in 1337 (Amir), and 216 is the first of our programs with his name (none of 100–215 have it)."
     basis_fa: "تصنیف «من از روز ازل» در برنامه‌های ۱۹۵ و ۲۱۶ در سال ۱۳۳۷؛ حبیب‌الله بدیعی هم در ۱۳۳۷ به گلها پیوست. منبع ضعیف؛ در برآورد به کار نمی‌رود."
 
+  - program: "219B"
+    date: "1338-09-21"            # 1959-12-12, Azerbaijan Day
+    status: likely
+    basis: "Azerbaijan Day (21 Azar): «آهنگ آذربایجان کن… ای قبله‌ی آزادگان، وی خاک آذربادگان، فرخنده باد ایام تو… آشفته‌خاطر دشمن دون شد». Found after Amir's note on 329; the estimates already put 219B in late Aban 1338."
+    basis_fa: "سالروز آذربایجان (۲۱ آذر): «ای خاک آذربادگان، فرخنده باد ایام تو… آشفته‌خاطر دشمن دون شد»."
   - program: "224B"
     date: "1339-01-01"            # 1960-03-21, Nowruz
     status: likely
@@ -78,6 +83,11 @@ golhaye-rangarang:
     status: confirmed
     basis: "A Khaleghi piece in it was composed 1340/08 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
     basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در آبان ۱۳۴۰ ساخته شده است (فهرست آثار خالقی)."
+  - program: "256"
+    date: "1340-09-21"            # 1961-12-12, Azerbaijan Day
+    status: likely
+    basis: "Azerbaijan Day (21 Azar): Aref's «چه آذرها به جان از عشق آذربایجان دارم», the same line as 329. Its Khaleghi piece was composed in Aban 1340, a month before; the estimates already put 256 at mid-Azar 1340."
+    basis_fa: "سالروز آذربایجان (۲۱ آذر): «چه آذرها به جان از عشق آذربایجان دارم» از عارف، همان شعر برنامه‌ی ۳۲۹. قطعه‌ی خالقی این برنامه یک ماه پیش از آن، در آبان ۱۳۴۰، ساخته شده است."
   - program: "258"
     date: "1340-11"               # 1962-01 or later (composed)
     kind: not_before
@@ -138,6 +148,11 @@ golhaye-rangarang:
     status: confirmed
     basis: "A Khaleghi piece in it was composed 1342/07 — Khaleghi's works list with composition month/year (rkac.com, archived 2020, via Amir)"
     basis_fa: "یکی از قطعه‌های این برنامه، ساخته‌ی روح‌الله خالقی، در مهر ۱۳۴۲ ساخته شده است (فهرست آثار خالقی)."
+  - program: "329"
+    date: "1342-09-21"            # 1963-12-12, Azerbaijan Day (a Thursday)
+    status: likely
+    basis: "Amir: 21 Azar, anniversary of Azerbaijan's return: «چه آذرها به جان از عشق آذربایجان دارم… تا نام ایران در جهان باد، پاینده آذربایجان باد». The estimates already put 329 at 2 Dey 1342."
+    basis_fa: "سالروز بازپس‌گیری آذربایجان (۲۱ آذر): «چه آذرها به جان از عشق آذربایجان دارم… تا نام ایران در جهان باد، پاینده آذربایجان باد»."
   - program: "331"
     date: "1342-09"               # 1963-11 or later (composed)
     kind: not_before
