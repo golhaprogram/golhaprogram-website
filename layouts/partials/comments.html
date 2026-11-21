@@ -17,7 +17,7 @@
   (function (c) {
     for (var i = 0; i < c.length; i++) {
       var d = document, s = d.createElement('script');
-      s.src = remark_config.host + '/web/' + c[i] + '.js';
+      s.src = remark_config.host + '/web/' + c[i] + '.js{{ with .Site.Params.remark42.commentsVersion }}?v={{ . }}{{ end }}';
       s.defer = true;
       (d.head || d.body).appendChild(s);
     }

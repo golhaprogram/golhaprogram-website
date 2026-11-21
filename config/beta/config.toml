@@ -9,3 +9,6 @@ noindex = true
 [params.remark42]
 commentsHost = "comments-beta.golhaprogram.com"
 commentsSiteId = "golhaprogram"
+# remark42 server version; added to embed.js as ?v= so browsers fetch the
+# new script after an upgrade. Bump it with each remark42 upgrade.
+commentsVersion = "1.16"
