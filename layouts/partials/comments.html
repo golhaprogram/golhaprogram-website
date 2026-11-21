@@ -7,12 +7,10 @@
     site_id: "{{ .Site.Params.remark42.commentsSiteId }}",
     components: ["embed"],
     max_shown_comments: 10,
-    // Always light: our remark42 (Oct 2024 build) doesn't coordinate its iframe's
-    // color scheme with dark host pages, and some browsers (Android Chrome)
-    // then paint a white backdrop behind it. In dark mode the comments sit on a
-    // light card instead (see _comments.scss). Newer remark42 versions handle
-    // dark host pages; after upgrading, theme can follow prefers-color-scheme.
-    theme: "light",
+    // Follow the visitor's light/dark setting. remark42 v1.16 fixed the white
+    // backdrop its iframe used to get on dark pages, so the light-card
+    // workaround is gone. The listener below switches if the setting changes.
+    theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
     locale: "fa"
   };
 
@@ -24,5 +22,13 @@
       (d.head || d.body).appendChild(s);
     }
   })(remark_config.components || ['embed']);
+
+  try {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      if (window.REMARK42 && window.REMARK42.changeTheme) {
+        window.REMARK42.changeTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  } catch (e) {}
 
 </script>

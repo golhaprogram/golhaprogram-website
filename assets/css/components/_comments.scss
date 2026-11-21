@@ -7,21 +7,3 @@
     text-align: center;
     box-sizing: border-box;
 }
-
-/* Dark mode: remark42 stays on its light theme (see comments.html), so give
-   it a light card. This reads correctly whether the browser paints the
-   iframe transparent or with an opaque white backdrop. */
-@media (prefers-color-scheme: dark) {
-  #remark42 {
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 0.75rem;
-    color-scheme: light;
-
-    /* No empty white bar if the comments script hasn't loaded (e.g. previews,
-       or the comments server is down): remark42 adds its iframe when it loads. */
-    &:empty {
-      display: none;
-    }
-  }
-}
