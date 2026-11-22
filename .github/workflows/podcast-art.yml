@@ -1,0 +1,52 @@
+name: Podcast art
+
+# Renders the podcast cover images (scripts/podcast_art.py) and uploads them to
+# Backblaze B2, under music.golhaprogram.com/art/. Runs after changes reach
+# main; only images that aren't online yet are rendered (an image's name is a
+# fingerprint of what is drawn on it, so a changed program gets a new image).
+#
+# Needs repository secrets: B2_KEY_ID, B2_APPLICATION_KEY, B2_BUCKET,
+# B2_S3_ENDPOINT (e.g. https://s3.us-west-004.backblazeb2.com).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/programs/**'
+      - 'data/air_date_estimates.yaml'
+      - 'layouts/partials/podcast-art.html'
+      - 'scripts/podcast_art.py'
+      - 'scripts/podcast-art/**'
+      - 'config/_default/config.toml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  art:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.147.0'
+          extended: true
+
+      - name: Install tools
+        run: |
+          npm ci --no-audit --no-fund   # Hugo also renders pages, whose JS imports fuse.js
+          pip install --quiet playwright boto3 pillow
+
+      - name: Render and upload
+        env:
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_BUCKET: ${{ secrets.B2_BUCKET }}
+          B2_S3_ENDPOINT: ${{ secrets.B2_S3_ENDPOINT }}
+          CHROME: /usr/bin/google-chrome
+        run: |
+          hugo -e audioindex -d /tmp/audioindex
+          python3 scripts/podcast_art.py --index /tmp/audioindex/art-index.json --out /tmp/art --upload

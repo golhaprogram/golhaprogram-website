@@ -1,0 +1,14 @@
+{{- /* Every podcast cover image (show and episodes) with the text drawn on it,
+       for scripts/podcast_art.py. Only built in the "audioindex" environment. */ -}}
+{{- $out := slice -}}
+{{- range where site.Sections "Section" "programs" -}}
+  {{- range .Sections -}}
+    {{- if .Params.podcast -}}
+      {{- $out = $out | append (partial "podcast-art.html" .) -}}
+      {{- range .RegularPages -}}
+        {{- $out = $out | append (partial "podcast-art.html" .) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $out | jsonify (dict "indent" "  ") -}}

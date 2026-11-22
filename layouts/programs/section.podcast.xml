@@ -1,0 +1,78 @@
+{{- /* Podcast feed of one series: /programs/<series>/podcast.xml.
+       Built for sections whose _index.md has `outputs: [HTML, Podcast]` and a
+       `podcast:` block.
+
+       Serial show (itunes:type serial): apps list it oldest first, by
+       itunes:episode, which is the program's place in number order (B and C
+       parts get their own numbers). The episode date is the estimated air
+       date (data/air_date_estimates.yaml, see /blog/air-dates/), falling back
+       to the date the program was posted. Programs without a measured MP3
+       (audio_bytes) are left out. */ -}}
+{{- $sec := . -}}
+{{- $cfg := .Params.podcast -}}
+{{- $show := partial "podcast-art.html" . -}}
+{{- $items := slice -}}
+{{- range .RegularPages -}}
+  {{- if .Params.audio_bytes -}}
+    {{- $items = $items | append (dict "x" (partial "program-x" .File.ContentBaseName) "page" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- $items = sort $items "x" -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+  <title>{{ $cfg.title }}</title>
+  <link>{{ .Permalink }}</link>
+  <atom:link href="{{ with .OutputFormats.Get "Podcast" }}{{ .Permalink }}{{ end }}" rel="self" type="application/rss+xml"/>
+  <description>{{ $cfg.description }}</description>
+  <language>fa</language>
+  <copyright>golhaprogram.com</copyright>
+  <itunes:author>{{ site.Params.podcast.author }}</itunes:author>
+  <itunes:owner>
+    <itunes:name>{{ site.Params.podcast.author }}</itunes:name>
+    <itunes:email>{{ site.Params.podcast.email }}</itunes:email>
+  </itunes:owner>
+  <itunes:image href="{{ $show.url }}"/>
+  <image><url>{{ $show.url }}</url><title>{{ $cfg.title }}</title><link>{{ .Permalink }}</link></image>
+  <itunes:category text="Music"><itunes:category text="Music History"/></itunes:category>
+  <itunes:explicit>false</itunes:explicit>
+  <itunes:type>serial</itunes:type>
+  <podcast:locked>no</podcast:locked>
+  {{- range $i, $it := $items }}
+  {{- with $it.page }}
+  {{- $num := .Params.program_number }}
+  {{- $singers := delimit (.Params.singers | default slice) "، " }}
+  {{- $title := printf "برنامه‌ی %s — %s" $num $singers }}
+  {{- with .Params.dastgah }}{{ $title = printf "%s (%s)" $title . }}{{ end }}
+  {{- $date := .Date }}
+  {{- with index site.Data.air_date_estimates .File.ContentBaseName }}{{ $date = time.AsTime .gregorian }}{{ end }}
+  {{- /* Credits, one line per role (data/roles.yaml), then the aired month. */ -}}
+  {{- $page := . }}
+  {{- $lines := slice }}
+  {{- range $r := site.Data.roles }}
+    {{- with $page.Param $r.key }}{{ if reflect.IsSlice . }}
+      {{- $lines = $lines | append (printf "%s: %s" (cond (gt (len .) 1) $r.many $r.one) (delimit . "، ")) }}{{ end }}
+    {{- end }}
+  {{- end }}
+  {{- with .Params.dastgah }}{{ $lines = $lines | append (printf "دستگاه: %s" .) }}{{ end }}
+  {{- with .Params.date_aired }}{{ $lines = $lines | append (printf "تاریخ پخش: %s" (partial "fa-month-year" .)) }}{{ end }}
+  <item>
+    <title>{{ $title }}</title>
+    <link>{{ .Permalink }}</link>
+    <guid isPermaLink="true">{{ .Permalink }}</guid>
+    <pubDate>{{ $date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+    <description>{{ delimit $lines "\n" }}{{ printf "\n\nشعرها و نظرها: %s" .Permalink }}</description>
+    <content:encoded>{{ printf "<p>%s</p>%s<p><a href=\"%s\">%s</a></p>" (delimit $lines "<br>") .Content .Permalink .Permalink | transform.XMLEscape | safeHTML }}</content:encoded>
+    <enclosure url="{{ partial "audio-url.html" . }}" length="{{ .Params.audio_bytes }}" type="audio/mpeg"/>
+    {{- with .Params.audio_duration }}
+    <itunes:duration>{{ . }}</itunes:duration>
+    {{- end }}
+    <itunes:episode>{{ add $i 1 }}</itunes:episode>
+    <itunes:episodeType>full</itunes:episodeType>
+    <itunes:image href="{{ (partial "podcast-art.html" .).url }}"/>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  {{- end }}
+  {{- end }}
+</channel>
+</rss>

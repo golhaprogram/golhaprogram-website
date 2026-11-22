@@ -10,5 +10,13 @@ baseName = "audio-index"
 isPlainText = true
 notAlternative = true
 
+# Also art-index.json: every podcast cover image with the text drawn on it,
+# for scripts/podcast_art.py (see layouts/partials/podcast-art.html).
+[outputFormats.ArtIndex]
+mediaType = "application/json"
+baseName = "art-index"
+isPlainText = true
+notAlternative = true
+
 [outputs]
-home = ["AudioIndex"]
+home = ["AudioIndex", "ArtIndex"]
