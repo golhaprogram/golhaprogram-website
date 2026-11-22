@@ -41,7 +41,7 @@
 
 .clickable-row:hover {
   background-color: var(--tint-color);
-  box-shadow: 10 2px 8px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 2px 8px var(--shadow-color); /* was "10 2px 8px": no unit, so browsers dropped it */
   transform: translateY(-2px);
   text-decoration: underline;
   text-decoration-color: currentColor; /* was an undefined variable, which resolved to the text color */

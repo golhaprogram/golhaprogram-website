@@ -13,4 +13,9 @@
 @font-face{font-family:Sahel;src:url({{ $dir }}Sahel.woff2) format("woff2");font-weight:normal;font-display:swap}
 @font-face{font-family:Sahel;src:url({{ $dir }}Sahel-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
 @font-face{font-family:Sahel;src:url({{ $dir }}Sahel-Bold.woff2) format("woff2");font-weight:bold;font-display:swap}
+{{- /* Ask for Sahel at first paint. main.css loads async, so until it arrives
+       nothing used the preloaded fonts (Firefox: "preloaded but not used"),
+       and the first paint fell back to the default font. Keep in sync with
+       --primary-font in _variables.scss. */}}
+body{font-family:Sahel,Arial,sans-serif}
 </style>
