@@ -19,7 +19,7 @@ const MAP = {
   'ة': 'ه', 'ۀ': 'ه',                 // teh marbuta / heh with yeh above → heh
   'أ': 'ا', 'إ': 'ا', 'ٱ': 'ا', 'آ': 'ا', // alef variants (incl. madda) → alef
   'ؤ': 'و',                           // waw with hamza → waw
-  '-': ' ', '_': ' ',                 // slug separators (e.g. گلهای-رنگارنگ) → space
+  '-': ' ', '_': ' ',                 // slug separators (e.g. گل‌های-رنگارنگ) → space
   '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4',
   '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', // Persian digits
   '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4',

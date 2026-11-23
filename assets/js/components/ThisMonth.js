@@ -1,4 +1,4 @@
-// «این هفته در گلهای رنگارنگ» (layouts/partials/this-month.html).
+// «این هفته در گل‌های رنگارنگ» (layouts/partials/this-month.html).
 //
 // For each year, picks the program that aired at about this point of the
 // current Solar month. Programs aired in number order, so the week of the

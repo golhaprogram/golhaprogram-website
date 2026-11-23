@@ -1,5 +1,5 @@
 baseURL = "https://golhaprogram.com"
-title = "برنامه‌ی گلها"
+title = "برنامه‌ی گل‌ها"
 theme = "PaperMod"
 defaultContentLanguage = "fa"
 
@@ -131,7 +131,7 @@ notAlternative = true
 [params]
 # Common parameters
 audioHost = "music.golhaprogram.com"
-description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گلهای رنگارنگ، گلهای تازه، گلهای جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
+description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گل‌های رنگارنگ، گل‌های تازه، گل‌های جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
 defaultImage = "/images/golha-og-image.jpg"                                                                                                                                     # Default image for social sharing
 twitter = "golhaprogram"                                                                                                                                                        # Twitter username without @
 
@@ -139,7 +139,7 @@ twitter = "golhaprogram"                                                        
 # `podcast:` block). artVersion: bump it when the cover design changes, so
 # every cover image gets a new name and is rendered again.
 [params.podcast]
-author = "برنامه‌ی گلها"
+author = "برنامه‌ی گل‌ها"
 email = "podcast@golhaprogram.com"
 artVersion = "1"
 

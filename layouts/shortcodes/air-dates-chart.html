@@ -6,7 +6,7 @@
 {{- $sy := div (sub $H (add $T $B)) (sub $y1 $y0) -}}
 {{- $est := site.Data.air_date_estimates -}}
 <figure class="air-dates-chart">
-<svg viewBox="0 0 {{ $W }} {{ $H }}" role="img" dir="ltr" aria-label="سال تقریبی پخش هر برنامه‌ی گلهای رنگارنگ بر حسب شماره‌ی برنامه">
+<svg viewBox="0 0 {{ $W }} {{ $H }}" role="img" dir="ltr" aria-label="سال تقریبی پخش هر برنامه‌ی گل‌های رنگارنگ بر حسب شماره‌ی برنامه">
   <g class="grid">
   {{- range seq 1335 1352 }}
     {{- $y := add $T (mul (sub $y1 (float .)) $sy) }}

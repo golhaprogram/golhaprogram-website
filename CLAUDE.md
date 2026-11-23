@@ -29,7 +29,7 @@ This is a Hugo-based static site for golhaprogram.com, a Persian classical music
 ### Content Architecture
 - **Programs**: Each radio program is a markdown file in `content/programs/{series-name}/{episode-number}.md`
 - **Series Types**:
-  - `golhaye-rangarang` (گلهای رنگارنگ) - Main series with 570+ episodes
+  - `golhaye-rangarang` (گل‌های رنگارنگ) - Main series with 570+ episodes
   - `golhaye-tazeh`, `golhaye-javidan`, `yek-shakhe-gol`, `golhaye-sahraee`, `barge-sabz`
 - **Audio Files**: Hosted externally at `music.golhaprogram.com` with pattern `{PREFIX}_{NUMBER}.mp3`
 - **Metadata**: Rich front matter including singers, poets, players, announcers, dastgah (musical mode)
@@ -71,7 +71,7 @@ Audio URLs are automatically generated using program metadata:
 Each program markdown file follows this front matter structure:
 ```yaml
 date: "2025-09-09"
-program_type: "گلهای-رنگارنگ"
+program_type: "گل‌های-رنگارنگ"
 program_number: "۵۷۰"
 dastgah: "شور"
 singers: ["حمیرا"]

@@ -63,7 +63,7 @@ def html(item):
         deco = rosette(500, 500, 430, 16, t["accent"], .16) + rosette(500, 500, 250, 12, t["accent"], .12)
         body = f"""<div class="series" style="font-size:112px">{item['series']}</div>
 <div class="rule"></div>
-<div class="label" style="font-size:44px">برنامه‌ی گلها · رادیو ایران</div>"""
+<div class="label" style="font-size:44px">برنامه‌ی گل‌ها · رادیو ایران</div>"""
     else:
         deco = rosette(500, 470, 300, 16, t["accent"], .13)
         num = item["number"]

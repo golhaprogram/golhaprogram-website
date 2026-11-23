@@ -1,5 +1,5 @@
 ---
-title: "گلهای رنگارنگ {{ .Name }}"
+title: "گل‌های رنگارنگ {{ .Name }}"
 date: {{ .Date }}
 program_type: "golhaye-rangarang"
 program_number: "{{ .Name }}"

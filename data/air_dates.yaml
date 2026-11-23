@@ -25,7 +25,7 @@ golhaye-rangarang:
     point: false                  # a series start, not a composition date
     status: confirmed
     basis: "Amir: Golha-ye Rangarang starts at 100 (Ali Tajvidi also calls 100 the first, Hamshahri). Golha-ye Javidan, the first series, began 1 Farvardin 1335 (21 Mar 1956, Lewisohn); Rangarang came 'after some time'. Its month now follows from 135 (Nowruz 1336) and 174 (Dey 1336)."
-    basis_fa: "گلهای رنگارنگ از برنامه‌ی ۱۰۰ آغاز شد (به گفته‌ی علی تجویدی). نخستین برنامه‌ی گلها، گلهای جاویدان، در ۱ فروردین ۱۳۳۵ پخش شد و گلهای رنگارنگ «پس از مدتی» آمد."
+    basis_fa: "گل‌های رنگارنگ از برنامه‌ی ۱۰۰ آغاز شد (به گفته‌ی علی تجویدی). نخستین برنامه‌ی گل‌ها، گل‌های جاویدان، در ۱ فروردین ۱۳۳۵ پخش شد و گل‌های رنگارنگ «پس از مدتی» آمد."
   - program: "135"
     date: "1336-01-01"            # 1957-03-21, Nowruz
     status: likely
@@ -45,7 +45,7 @@ golhaye-rangarang:
     date: "1337"                  # 1958-03 to 1959-03
     status: possible              # Amir: weak source; not used as a fixed point
     basis: "Amir: the tasnif «من از روز ازل» (Mahjubi, Rahi, Segah) was performed in Golha-ye Rangarang 195 and 216, in 1337. Our 216 has it, sung by Banan. Also: Habibollah Badiei joined Golha in 1337 (Amir), and 216 is the first of our programs with his name (none of 100–215 have it)."
-    basis_fa: "تصنیف «من از روز ازل» در برنامه‌های ۱۹۵ و ۲۱۶ در سال ۱۳۳۷؛ حبیب‌الله بدیعی هم در ۱۳۳۷ به گلها پیوست. منبع ضعیف؛ در برآورد به کار نمی‌رود."
+    basis_fa: "تصنیف «من از روز ازل» در برنامه‌های ۱۹۵ و ۲۱۶ در سال ۱۳۳۷؛ حبیب‌الله بدیعی هم در ۱۳۳۷ به گل‌ها پیوست. منبع ضعیف؛ در برآورد به کار نمی‌رود."
 
   - program: "219B"
     date: "1338-09-21"            # 1959-12-12, Azerbaijan Day
@@ -248,7 +248,7 @@ golhaye-rangarang:
     date: "1345"                  # ~1966
     status: likely
     basis: "Amir: the last program recorded under Davud Pirnia. He left after the 1345 inspection by the Ministry of Information (Donya-e-Eqtesad); Radio Farda says he ran Golha for eleven years, until 1346. Recorded, not necessarily aired, then."
-    basis_fa: "آخرین برنامه‌ای که زیر نظر داوود پیرنیا ضبط شد. پیرنیا پس از بازرسی وزارت اطلاعات در ۱۳۴۵ از گلها کناره گرفت."
+    basis_fa: "آخرین برنامه‌ای که زیر نظر داوود پیرنیا ضبط شد. پیرنیا پس از بازرسی وزارت اطلاعات در ۱۳۴۵ از گل‌ها کناره گرفت."
   - program: "420"
     date: "1345-10-22"            # 1967-01-12, Thursday
     status: confirmed
