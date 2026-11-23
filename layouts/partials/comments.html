@@ -2,6 +2,7 @@
 
 <div id="remark42" class="comments-section"></div>
 <script>
+  var remarkDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   var remark_config = {
     host: "https://{{ .Site.Params.remark42.commentsHost }}",
     site_id: "{{ .Site.Params.remark42.commentsSiteId }}",
@@ -10,8 +11,24 @@
     // Follow the visitor's light/dark setting. remark42 v1.16 fixed the white
     // backdrop its iframe used to get on dark pages, so the light-card
     // workaround is gone. The listener below switches if the setting changes.
-    theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-    locale: "fa"
+    theme: remarkDark ? 'dark' : 'light',
+    locale: "fa",
+    // Dark mode: paint remark42's surfaces with our palette (_variables.scss)
+    // instead of its neutral grays. Only for dark: --color7 is also the text
+    // color in its light theme. The widget reads these once at load, so a
+    // light/dark switch with the page open keeps them until a reload.
+    // The teal accent and text colors can't be set this way: remark42 defines
+    // them on body.dark, which beats values set on <html>.
+    // __colors__ is the name v1.16 understands; v1.18 calls it
+    // custom_properties but still accepts this one.
+    __colors__: remarkDark ? {
+      '--color7': '#212a34',   // form panel, toolbar (was #333)     = --surface-muted
+      '--color8': '#1a2129',   // text box, dropdowns (was #262626)  = --surface-color
+      '--color22': '#222b35',  // inputs (was #2d2d2c)               = --hover-color
+      '--color18': '#2a333e',  // dividers (was #383838)             = --divider-color
+      '--color19': '#2a333e',  // pinned comments (was #404040)    
+      '--color36': '#2f3a46'   // comment borders (was #575757)      = --border-color
+    } : {}
   };
 
   (function (c) {
