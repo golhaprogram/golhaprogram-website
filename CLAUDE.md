@@ -76,7 +76,7 @@ program_number: "۵۷۰"
 dastgah: "شور"
 singers: ["حمیرا"]
 players: ["پرویز یاحقی"]
-poets: ["حافظ", "مجمر زواره ای"]
+poets: ["حافظ", "مجمر زواره‌ای"]
 announcers: ["فیروزه امیرمعز"]
 audio_bytes: 23456789    # added automatically, see below
 audio_duration: 1834     # seconds, added automatically
