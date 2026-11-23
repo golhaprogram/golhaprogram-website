@@ -1,10 +1,18 @@
 name: Normalize Persian Text
 
+# On PRs that change content, scripts/persian_spelling.py:
+#  - fixes what is unambiguous and commits it to the PR (Arabic ك/ي/ة and
+#    digits, گلها → گل‌ها، ه‌ی/ۀ → هٔ، ها/‌اند with a space, نمی with a space,
+#    hamza in words like تأثیر/سؤال, double spaces);
+#  - leaves a warning on changed lines a person should look at (می + space,
+#    می written solid: the verb prefix or wine?). Warnings never fail the run.
+# See "Persian spelling" in CLAUDE.md.
+
 on:
   pull_request:
     paths:
-      - '**/*.md'
-      - '**/*.markdown'
+      - 'content/**/*.md'
+      - 'scripts/persian_spelling.py'
 
 # One run at a time per PR for this workflow. (Not shared with the other
 # workflows: GitHub keeps only one waiting run per group and cancels the rest.)
@@ -18,193 +26,46 @@ jobs:
     runs-on: ubuntu-latest
     # Only run if PR is from same repository (not forks)
     if: github.event.pull_request.head.repo.full_name == github.repository
-    
+
     permissions:
       contents: write
       pull-requests: write
-    
+
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
         ref: ${{ github.head_ref }}
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+
+    - uses: actions/setup-python@v5
       with:
-        node-version: '22'
-    
-    - name: Get changed files
-      id: changed-files
+        python-version: '3.12'
+
+    - name: Fix and check Persian spelling
       run: |
-        # Get only the markdown files that were actually changed in this PR
-        git fetch origin ${{ github.base_ref }}
-        CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '\.(md|markdown)$' || true)
-        
-        if [ -z "$CHANGED_FILES" ]; then
-          echo "No markdown files changed in this PR"
-          echo "changed_files=" >> $GITHUB_OUTPUT
-          exit 0
-        fi
-        
-        echo "Changed markdown files:"
-        echo "$CHANGED_FILES"
-        
-        # Convert to space-separated list for the next step
-        CHANGED_FILES_LIST=$(echo "$CHANGED_FILES" | tr '\n' ' ')
-        echo "changed_files=$CHANGED_FILES_LIST" >> $GITHUB_OUTPUT
-    
-    - name: Normalize Persian Text
-      id: normalize
-      if: steps.changed-files.outputs.changed_files != ''
+        git fetch -q origin ${{ github.base_ref }}
+        mapfile -t FILES < <(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD -- 'content/**/*.md' 'content/*.md')
+        if [ ${#FILES[@]} -eq 0 ]; then echo "No content files changed"; exit 0; fi
+        python3 scripts/persian_spelling.py --fix --github --base origin/${{ github.base_ref }} "${FILES[@]}" | tee /tmp/spelling.log
+        {
+          echo "### Persian spelling"
+          grep -E '^(fixed|[0-9]+ file)' /tmp/spelling.log || true
+          n=$(grep -c '^::warning' /tmp/spelling.log || true)
+          [ "$n" != "0" ] && echo "$n changed line(s) to check by hand: see the annotations on the PR's Files tab."
+        } >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Commit and push fixes
       run: |
-        CHANGED_FILES="${{ steps.changed-files.outputs.changed_files }}"
-        
-        if [ -z "$CHANGED_FILES" ]; then
-          echo "No files to process"
-          exit 0
-        fi
-        
-        # Create the normalizer script
-        cat > normalize.js << 'EOF'
-        const fs = require('fs');
-        
-        function normalizePersianText(text) {
-            return text
-                // Most common issues
-                .replace(/ك/g, 'ک')   // Arabic kaf to Persian kaf
-                .replace(/ي/g, 'ی')   // Arabic yeh to Persian yeh
-                
-                // Other Arabic letters commonly mixed up
-                // (No ؤ/أ/إ rules: مؤسسان، تأثیر، مسأله are correct Persian, and
-                // turning them into و/ا changed real words.)
-                .replace(/آ/g, 'آ')   // Ensure consistent alef with madda (this is actually correct)
-                .replace(/ة/g, 'ه')   // Arabic teh marbuta to Persian heh
-                
-                // Numbers - Arabic-Indic to Persian
-                .replace(/٠/g, '۰')   // 0
-                .replace(/١/g, '۱')   // 1
-                .replace(/٢/g, '۲')   // 2
-                .replace(/٣/g, '۳')   // 3
-                .replace(/٤/g, '۴')   // 4
-                .replace(/٥/g, '۵')   // 5
-                .replace(/٦/g, '۶')   // 6
-                .replace(/٧/g, '۷')   // 7
-                .replace(/٨/g, '۸')   // 8
-                .replace(/٩/g, '۹')   // 9
-                
-                // Less common but still seen
-                // (No ء rule: standalone hamza is correct Persian, e.g. علاءالدوله, جزء;
-                // turning it into the combining mark ٔ broke those words.)
-                .replace(/ئ/g, 'ئ')   // Ensure Persian yeh with hamza (this is correct)
-                .replace(/ؤ/g, 'ؤ');  // Persian waw with hamza (keep as is)
-        }
-        
-        function processFile(filePath) {
-            try {
-                if (!fs.existsSync(filePath)) {
-                    console.log('⚠️  File not found:', filePath);
-                    return false;
-                }
-                
-                const content = fs.readFileSync(filePath, 'utf8');
-                const normalized = normalizePersianText(content);
-                
-                if (content !== normalized) {
-                    fs.writeFileSync(filePath, normalized, 'utf8');
-                    console.log('✅ Normalized:', filePath);
-                    return true;
-                } else {
-                    console.log('✨ Already normalized:', filePath);
-                    return false;
-                }
-            } catch (error) {
-                console.error('❌ Error processing', filePath, ':', error.message);
-                return false;
-            }
-        }
-        
-        // Process only the files passed as arguments
-        const files = process.argv.slice(2).filter(f => f.trim().length > 0);
-        
-        if (files.length === 0) {
-            console.log('No files to process');
-            process.exit(0);
-        }
-        
-        console.log(`Processing ${files.length} changed markdown files:`);
-        files.forEach(f => console.log(`  - ${f}`));
-        
-        let changedFiles = [];
-        files.forEach(file => {
-            if (processFile(file.trim())) {
-                changedFiles.push(file.trim());
-            }
-        });
-        
-        if (changedFiles.length > 0) {
-            console.log(`\n🎉 Normalized ${changedFiles.length} files:`);
-            changedFiles.forEach(file => console.log(`  - ${file}`));
-            
-            // Write a flag file to indicate changes were made
-            require('fs').writeFileSync('changes-made.flag', 'true');
-            console.log('\n📝 Changes detected - will commit and push');
-        } else {
-            console.log('\n✨ All files already normalized - no changes needed');
-        }
-        
-        process.exit(0); // Always exit successfully
-        EOF
-        
-        # Run the script with only the changed files
-        node normalize.js $CHANGED_FILES
-    
-    - name: Check if changes were made
-      id: check-changes
-      run: |
-        if [ -f "changes-made.flag" ]; then
-          echo "changes_made=true" >> $GITHUB_OUTPUT
-          echo "📝 Changes detected - will commit them"
-        else
-          echo "changes_made=false" >> $GITHUB_OUTPUT
-          echo "✨ No changes needed"
-        fi
-    
-    - name: Commit and push changes
-      if: steps.check-changes.outputs.changes_made == 'true'
-      run: |
-        # Clean up the temporary script and flag file
-        rm -f normalize.js changes-made.flag
-        
+        if git diff --quiet; then echo "No changes"; exit 0; fi
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        
-        git add -A
-        
-        if git diff --cached --quiet; then
-          echo "No changes to commit"
-          exit 0
-        fi
-        
-        git commit -m "🔄 Auto-normalize Persian text
-        
-        Converted Arabic letters to Persian equivalents in changed files:
-        - ك → ک (kaf)
-        - ي → ی (yeh)
-        - ة → ه (heh)
-        - Arabic-Indic numerals → Persian numerals
-        
-        Only processed files modified in this PR."
-        
+        git commit -qam "🔄 Fix Persian spelling
+
+        By scripts/persian_spelling.py (see Persian spelling in CLAUDE.md),
+        only in files changed in this PR."
         for i in 1 2 3 4 5; do
           git pull -q --rebase origin ${{ github.head_ref }} && git push -q origin ${{ github.head_ref }} && break
           echo "Push failed, retrying ($i)"; sleep $((i * 5))
           [ $i = 5 ] && exit 1
         done
-    
-    - name: Cleanup
-      if: always()
-      run: |
-        # Always clean up temporary files
-        rm -f normalize.js changes-made.flag
