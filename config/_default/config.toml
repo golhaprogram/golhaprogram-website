@@ -1,5 +1,5 @@
 baseURL = "https://golhaprogram.com"
-title = "برنامه‌ی گل‌ها"
+title = "برنامهٔ گل‌ها"
 theme = "PaperMod"
 defaultContentLanguage = "fa"
 
@@ -139,9 +139,9 @@ twitter = "golhaprogram"                                                        
 # `podcast:` block). artVersion: bump it when the cover design changes, so
 # every cover image gets a new name and is rendered again.
 [params.podcast]
-author = "برنامه‌ی گل‌ها"
+author = "برنامهٔ گل‌ها"
 email = "podcast@golhaprogram.com"
-artVersion = "1"
+artVersion = "2"
 
 # Temporary tip above the search box. Hidden automatically after `expires`
 # (and per visitor once they close it). Change `id` for a new tip so it shows

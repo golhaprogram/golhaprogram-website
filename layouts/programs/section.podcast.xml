@@ -42,7 +42,7 @@
   {{- with $it.page }}
   {{- $num := .Params.program_number }}
   {{- $singers := delimit (.Params.singers | default slice) "، " }}
-  {{- $title := printf "برنامه‌ی %s — %s" $num $singers }}
+  {{- $title := printf "برنامهٔ %s — %s" $num $singers }}
   {{- with .Params.dastgah }}{{ $title = printf "%s (%s)" $title . }}{{ end }}
   {{- $date := .Date }}
   {{- with index site.Data.air_date_estimates .File.ContentBaseName }}{{ $date = time.AsTime .gregorian }}{{ end }}

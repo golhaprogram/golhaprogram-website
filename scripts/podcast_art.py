@@ -63,7 +63,7 @@ def html(item):
         deco = rosette(500, 500, 430, 16, t["accent"], .16) + rosette(500, 500, 250, 12, t["accent"], .12)
         body = f"""<div class="series" style="font-size:112px">{item['series']}</div>
 <div class="rule"></div>
-<div class="label" style="font-size:44px">برنامه‌ی گل‌ها · رادیو ایران</div>"""
+<div class="label" style="font-size:44px">برنامهٔ گل‌ها · رادیو ایران</div>"""
     else:
         deco = rosette(500, 470, 300, 16, t["accent"], .13)
         num = item["number"]
@@ -76,7 +76,7 @@ def html(item):
         size = 64 if len(s) < 20 else 54 if len(s) < 34 else 46 if len(s) < 44 else 40
         month = f'<div class="label month">{item["month"]}</div>' if item["month"] else ""
         body = f"""<div class="series" style="font-size:84px">{item['series']}</div>
-<div class="label" style="font-size:44px;margin-top:6px">برنامه‌ی</div>
+<div class="label" style="font-size:44px;margin-top:6px">برنامهٔ</div>
 <div class="num">{num_html}</div>
 <div class="rule"></div>
 <div class="singers" style="font-size:{size}px">{names}</div>{month}"""
