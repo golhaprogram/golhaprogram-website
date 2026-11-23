@@ -1,4 +1,4 @@
-{{- /* «این هفته در گلهای رنگارنگ»: for each year, the program that aired at
+{{- /* «این هفته در گل‌های رنگارنگ»: for each year, the program that aired at
        about this point of the reader's current Solar month (see ThisMonth.js
        for how the week picks a program), plus a collapsed list of the whole
        month. The date is only known in the browser, so this outputs the data
@@ -13,11 +13,11 @@
   {{- end -}}
 {{- end -}}
 <section class="this-month" hidden>
-  <h2>این هفته در گلهای رنگارنگ</h2>
-  <p class="this-month-intro">در هر سال، برنامه‌ای که حدوداً در همین هفته‌ی <span class="tm-month"></span> پخش شده است<a class="estimate-mark" href="/blog/air-dates/" title="تاریخ‌ها تقریبی است؛ چگونه برآورد شده؟">*</a></p>
+  <h2>این هفته در گل‌های رنگارنگ</h2>
+  <p class="this-month-intro">در هر سال، برنامه‌ای که حدوداً در همین هفتهٔ <span class="tm-month"></span> پخش شده است<a class="estimate-mark" href="/blog/air-dates/" title="تاریخ‌ها تقریبی است؛ چگونه برآورد شده؟">*</a></p>
   <ul class="tm-week-list"></ul>
   <details class="tm-all">
-    <summary>همه‌ی برنامه‌های <span class="tm-month"></span></summary>
+    <summary>همهٔ برنامه‌های <span class="tm-month"></span></summary>
     <div class="tm-list"></div>
   </details>
   <script type="application/json" class="tm-data">{{ $items | jsonify | safeJS }}</script>

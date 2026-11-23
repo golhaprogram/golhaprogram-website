@@ -201,7 +201,7 @@ export function initializeSearch() {
           // Token search: each word of the query is matched separately, in
           // any field, and every word must match (tokenMatch: 'all'). So
           // "حمیرا شور" finds Homeyra's programs in Shur, and
-          // "گلهای رنگارنگ ۴۶۵" finds program 465.
+          // "گل‌های رنگارنگ ۴۶۵" finds program 465.
           useTokenSearch: true,
           tokenMatch: 'all',
           threshold: 0.15,

@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.error('Error initializing header menus:', err);
   }
 
-  // «این ماه در گلهای رنگارنگ» (home page and the series page)
+  // «این ماه در گل‌های رنگارنگ» (home page and the series page)
   try {
     initializeThisMonth();
   } catch (err) {

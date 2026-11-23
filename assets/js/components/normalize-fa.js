@@ -19,12 +19,24 @@ const MAP = {
   'ة': 'ه', 'ۀ': 'ه',                 // teh marbuta / heh with yeh above → heh
   'أ': 'ا', 'إ': 'ا', 'ٱ': 'ا', 'آ': 'ا', // alef variants (incl. madda) → alef
   'ؤ': 'و',                           // waw with hamza → waw
-  '-': ' ', '_': ' ',                 // slug separators (e.g. گلهای-رنگارنگ) → space
+  '-': ' ', '_': ' ',                 // slug separators (e.g. گل‌های-رنگارنگ) → space
   '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4',
   '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9', // Persian digits
   '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4',
   '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', // Arabic-Indic digits
 };
+
+// Ezafe after a silent heh is written «خانهٔ» on the site (U+0654, removed
+// above), but most people type «خانه‌ی» (heh, ZWNJ, yeh). So a yeh is also
+// removed when it follows heh + ZWNJ and ends the word: «خانه‌ی» → «خانه»,
+// the same as «خانهٔ» and «خانۀ». «الهی», «ماهی» (no ZWNJ) are untouched.
+const HEH = /[هةۀ]/;
+const YEH = /[یيى]/;
+const LETTER = /\p{L}/u;
+function isEzafeYeh(src, i) {
+  return YEH.test(src[i]) && src[i - 1] === '‌' && HEH.test(src[i - 2] ?? '') &&
+    !LETTER.test(src[i + 1] ?? '') && src[i + 1] !== '‌';
+}
 
 // Returns { text, map } where map[i] is the index in `input` of text[i].
 export function normalizeWithMap(input) {
@@ -33,7 +45,7 @@ export function normalizeWithMap(input) {
   const map = [];
   for (let i = 0; i < src.length; i++) {
     const ch = src[i];
-    if (REMOVE.test(ch)) continue;
+    if (REMOVE.test(ch) || isEzafeYeh(src, i)) continue;
     const mapped = MAP[ch] ?? ch;
     const lower = mapped.toLowerCase();
     text += lower.length === 1 ? lower : mapped; // keep 1:1 so the map stays valid
@@ -66,7 +78,11 @@ export function highlight(original, query) {
     let pos;
     while ((pos = text.indexOf(term, from)) !== -1) {
       const start = map[pos];
-      const end = map[pos + term.length - 1];
+      // Also cover characters normalization dropped right after the match
+      // (hamza above, harakat, ZWNJ + ezafe yeh), so a combining mark is never
+      // split from its letter by </mark>.
+      const next = pos + term.length;
+      const end = next < map.length ? map[next] - 1 : src.length - 1;
       for (let k = start; k <= end; k++) marked[k] = true;
       from = pos + term.length;
     }

@@ -27,7 +27,17 @@ on:
       - 'scripts/podcast_art.py'
       - 'scripts/podcast-art/**'
       - '.github/workflows/podcast-art.yml'
+  # Run by hand (Actions → Podcast art → Run workflow, on main) to also remove
+  # images the feed no longer uses: "list" only prints them, "delete" deletes
+  # them with all their B2 versions. Wait a few days after a redesign, so
+  # podcast apps have fetched the new feed first.
   workflow_dispatch:
+    inputs:
+      prune:
+        description: 'Unused images under art/'
+        type: choice
+        options: [none, list, delete]
+        default: none
 
 concurrency:
   group: ${{ github.workflow }}
@@ -61,6 +71,18 @@ jobs:
           python3 scripts/podcast_art.py --index /tmp/audioindex/art-index.json --out /tmp/art --upload \
             | tee /tmp/art.log
           echo "$(grep -c '^uploaded' /tmp/art.log || true) images uploaded" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prune unused images
+        if: github.event_name == 'workflow_dispatch' && inputs.prune != 'none' && github.ref == 'refs/heads/main'
+        env:
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_APPLICATION_KEY: ${{ secrets.B2_APPLICATION_KEY }}
+          B2_BUCKET: ${{ secrets.B2_BUCKET }}
+          B2_S3_ENDPOINT: ${{ secrets.B2_S3_ENDPOINT }}
+        run: |
+          python3 scripts/podcast_art.py --index /tmp/audioindex/art-index.json --prune \
+            ${{ inputs.prune == 'delete' && '--delete' || '' }} | tee /tmp/prune.log
+          grep '^prune:' /tmp/prune.log >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-artifact@v4
         with:

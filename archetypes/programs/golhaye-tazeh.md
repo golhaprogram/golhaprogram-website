@@ -1,5 +1,5 @@
 ---
-title: "گلهای تازه {{ .Name }}"
+title: "گل‌های تازه {{ .Name }}"
 date: {{ .Date }}
 program_type: "golhaye-tazeh"
 program_number: "{{ .Name }}"

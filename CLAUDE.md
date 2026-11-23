@@ -29,7 +29,7 @@ This is a Hugo-based static site for golhaprogram.com, a Persian classical music
 ### Content Architecture
 - **Programs**: Each radio program is a markdown file in `content/programs/{series-name}/{episode-number}.md`
 - **Series Types**:
-  - `golhaye-rangarang` (گلهای رنگارنگ) - Main series with 570+ episodes
+  - `golhaye-rangarang` (گل‌های رنگارنگ) - Main series with 570+ episodes
   - `golhaye-tazeh`, `golhaye-javidan`, `yek-shakhe-gol`, `golhaye-sahraee`, `barge-sabz`
 - **Audio Files**: Hosted externally at `music.golhaprogram.com` with pattern `{PREFIX}_{NUMBER}.mp3`
 - **Metadata**: Rich front matter including singers, poets, players, announcers, dastgah (musical mode)
@@ -71,12 +71,12 @@ Audio URLs are automatically generated using program metadata:
 Each program markdown file follows this front matter structure:
 ```yaml
 date: "2025-09-09"
-program_type: "گلهای-رنگارنگ"
+program_type: "گل‌های-رنگارنگ"
 program_number: "۵۷۰"
 dastgah: "شور"
 singers: ["حمیرا"]
 players: ["پرویز یاحقی"]
-poets: ["حافظ", "مجمر زواره ای"]
+poets: ["حافظ", "مجمر زواره‌ای"]
 announcers: ["فیروزه امیرمعز"]
 audio_bytes: 23456789    # added automatically, see below
 audio_duration: 1834     # seconds, added automatically
@@ -93,13 +93,21 @@ No archive has broadcast dates, so they are estimated. `data/air_dates.yaml` lis
 ### Podcast
 Each series can have a podcast feed at `/programs/<series>/podcast.xml` (only Golha-ye Rangarang so far): its `_index.md` has `outputs: ["HTML", "Podcast"]` and a `podcast:` block (prefix, title, cover text and colour theme). `layouts/programs/section.podcast.xml` builds a serial show: episodes in number order (`itunes:episode`), dated by the estimated air date (`data/air_date_estimates.yaml`), with `audio_bytes`/`audio_duration` for the enclosure; programs without `audio_bytes` are left out. Owner email and author are in `[params.podcast]`. `/podcast/` (content/podcast.md) tells listeners how to subscribe.
 
-Cover images (one for the show, one per episode) are rendered by `scripts/podcast_art.py` (Chrome via Playwright, Sahel font) and stored on B2 under `music.golhaprogram.com/art/`. `layouts/partials/podcast-art.html` decides what's drawn and names each image with a fingerprint of that text (singers, number, aired month, `artVersion`), so a changed program gets a new image URL and apps refresh it. `.github/workflows/podcast-art.yml` runs on pushes to main and renders and uploads only images not online yet (needs B2 secrets). To redesign every cover, change the script and bump `params.podcast.artVersion`.
+Cover images (one for the show, one per episode) are rendered by `scripts/podcast_art.py` (Chrome via Playwright, Sahel font) and stored on B2 under `music.golhaprogram.com/art/`. `layouts/partials/podcast-art.html` decides what's drawn and names each image with a fingerprint of that text (singers, number, aired month, `artVersion`), so a changed program gets a new image URL and apps refresh it. `.github/workflows/podcast-art.yml` runs on pushes to main and renders and uploads only images not online yet (needs B2 secrets). To redesign every cover, change the script and bump `params.podcast.artVersion`. Old images are not deleted automatically: a few days later, run the workflow by hand on main with `prune: list` to see the images the feed no longer uses, then `prune: delete` to remove them with all their B2 versions (`podcast_art.py --prune [--delete]`; it refuses while any current image is missing from the bucket).
 
 ### Persian Language Features
 - RTL text direction support
 - Persian number conversion utilities
 - Preserves Persian characters in URLs
 - Tag aliases system in `data/tag_aliases.yaml` for name normalization
+
+### Persian spelling
+Text follows the Farhangestan's دستور خط فارسی:
+- ZWNJ (nim-fasele), never a space: گل‌ها، می‌رود، نمی‌شود، خانه‌ها، افتاده‌ام، خانه‌ای، بزرگ‌تر.
+- Ezafe after a silent ه is «هٔ» (ه + U+0654): برنامهٔ ۵۷۰، گوشهٔ میخانه. Not «ه‌ی».
+- Hamza seat by the preceding vowel: تأثیر، مؤثر، سؤال، رئیس، مسئله، جرئت.
+- In lyrics, «می» meaning wine stays a separate word (می نوش، می باید خورد), and so do the negative imperatives (میارید، میامیز). Only the verb prefix is joined.
+- Renaming a performer changes their taxonomy URL: add a 301 to `static/_redirects`.
 
 ### Deployment
 - **Netlify**: Production deploys on push to `main`; every PR gets a deploy preview

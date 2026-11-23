@@ -47,7 +47,7 @@
       {{- end }}
     </ul>
     {{- if lt (len $shown) (len $tab.terms) }}
-    <a class="tag-cloud-all" href="{{ (site.GetPage (printf "/%s" $tab.role.key)).RelPermalink }}">همه‌ی {{ $tab.role.list }} ({{ partial "fa-number" (len $tab.terms) }}) ←</a>
+    <a class="tag-cloud-all" href="{{ (site.GetPage (printf "/%s" $tab.role.key)).RelPermalink }}">همهٔ {{ $tab.role.list }} ({{ partial "fa-number" (len $tab.terms) }}) ←</a>
     {{- end }}
   </div>
   {{- end }}

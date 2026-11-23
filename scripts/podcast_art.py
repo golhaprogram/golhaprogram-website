@@ -6,6 +6,7 @@ The list of images comes from Hugo (layouts/partials/podcast-art.html):
     hugo -e audioindex -d /tmp/audioindex      # writes art-index.json
     python3 scripts/podcast_art.py --index /tmp/audioindex/art-index.json --out /tmp/art
     python3 scripts/podcast_art.py --index ... --upload     # render missing + upload
+    python3 scripts/podcast_art.py --index ... --prune [--delete]   # remove unused images
 
 Each image's name ends in a fingerprint of what is drawn on it, so an image
 whose name already exists on music.golhaprogram.com is up to date and is
@@ -63,7 +64,7 @@ def html(item):
         deco = rosette(500, 500, 430, 16, t["accent"], .16) + rosette(500, 500, 250, 12, t["accent"], .12)
         body = f"""<div class="series" style="font-size:112px">{item['series']}</div>
 <div class="rule"></div>
-<div class="label" style="font-size:44px">برنامه‌ی گلها · رادیو ایران</div>"""
+<div class="label" style="font-size:44px">برنامهٔ گل‌ها · رادیو ایران</div>"""
     else:
         deco = rosette(500, 470, 300, 16, t["accent"], .13)
         num = item["number"]
@@ -76,7 +77,7 @@ def html(item):
         size = 64 if len(s) < 20 else 54 if len(s) < 34 else 46 if len(s) < 44 else 40
         month = f'<div class="label month">{item["month"]}</div>' if item["month"] else ""
         body = f"""<div class="series" style="font-size:84px">{item['series']}</div>
-<div class="label" style="font-size:44px;margin-top:6px">برنامه‌ی</div>
+<div class="label" style="font-size:44px;margin-top:6px">برنامهٔ</div>
 <div class="num">{num_html}</div>
 <div class="rule"></div>
 <div class="singers" style="font-size:{size}px">{names}</div>{month}"""
@@ -148,15 +149,70 @@ def exists(url):
         return False
 
 
+def b2():
+    import boto3
+    return boto3.client("s3", endpoint_url=os.environ["B2_S3_ENDPOINT"],
+                        aws_access_key_id=os.environ["B2_KEY_ID"],
+                        aws_secret_access_key=os.environ["B2_APPLICATION_KEY"])
+
+
+def prune(names, delete):
+    """Delete every file under art/ whose name is not in `names` (the images
+    the feed uses now), with all its B2 versions: a plain S3 delete on B2
+    only hides a file and keeps paying for it. Without `delete`, only lists.
+
+    Refuses if any image in `names` is missing from the bucket, so it can't
+    run before the new images are uploaded, or against a broken index."""
+    s3, bucket = b2(), os.environ["B2_BUCKET"]
+    versions = {}   # key -> [version ids, including hide markers]
+    live = set()
+    for page in s3.get_paginator("list_object_versions").paginate(Bucket=bucket, Prefix="art/"):
+        for v in page.get("Versions", []):
+            versions.setdefault(v["Key"], []).append(v["VersionId"])
+            if v["IsLatest"]:
+                live.add(v["Key"])
+        for m in page.get("DeleteMarkers", []):
+            versions.setdefault(m["Key"], []).append(m["VersionId"])
+            if m["IsLatest"]:
+                live.discard(m["Key"])
+
+    wanted = {"art/" + n for n in names}
+    missing = wanted - live
+    if not wanted or missing:
+        sys.exit(f"prune: not pruning, {len(missing)} of {len(wanted)} current images are not in the bucket "
+                 f"(e.g. {sorted(missing)[:3]}); run --upload first")
+    stale = sorted(k for k in versions if k not in wanted)
+    nver = sum(len(versions[k]) for k in stale)
+    print(f"prune: {len(wanted)} images in use, {len(stale)} unused ({nver} file versions)")
+    for k in stale:
+        print(("deleting " if delete else "would delete ") + k)
+    if not delete:
+        return
+    objs = [{"Key": k, "VersionId": vid} for k in stale for vid in versions[k]]
+    for n in range(0, len(objs), 1000):    # DeleteObjects takes at most 1000
+        res = s3.delete_objects(Bucket=bucket, Delete={"Objects": objs[n:n + 1000], "Quiet": True})
+        for e in res.get("Errors", []):
+            print("error", e.get("Key"), e.get("Code"), e.get("Message"))
+    print(f"prune: deleted {len(stale)} images")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--index", required=True, help="art-index.json from hugo -e audioindex")
     ap.add_argument("--out", default=None, help="directory for the images (default: a temp dir)")
     ap.add_argument("--upload", action="store_true", help="upload to B2 the images not online yet")
     ap.add_argument("--only", nargs="*", help="only these image names or program numbers (testing)")
+    ap.add_argument("--prune", action="store_true",
+                    help="list the images under art/ that the feed no longer uses (needs B2 credentials)")
+    ap.add_argument("--delete", action="store_true", help="with --prune: actually delete them")
     args = ap.parse_args()
 
     items = json.loads(Path(args.index).read_text(encoding="utf-8"))
+    if args.prune:
+        if args.only or args.upload:
+            sys.exit("--prune runs on its own, on the full index")
+        prune([i["name"] for i in items], args.delete)
+        return
     if args.only:
         items = [i for i in items if i["name"] in args.only or i["name"].split("_", 1)[1].split("-")[0] in args.only]
     if args.upload:
@@ -171,10 +227,7 @@ def main():
     asyncio.run(render(items, out))
 
     if args.upload:
-        import boto3
-        s3 = boto3.client("s3", endpoint_url=os.environ["B2_S3_ENDPOINT"],
-                          aws_access_key_id=os.environ["B2_KEY_ID"],
-                          aws_secret_access_key=os.environ["B2_APPLICATION_KEY"])
+        s3 = b2()
         for i in items:
             s3.upload_file(str(out / i["name"]), os.environ["B2_BUCKET"], "art/" + i["name"],
                            ExtraArgs={"ContentType": "image/jpeg",

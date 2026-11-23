@@ -1,4 +1,4 @@
-// «این هفته در گلهای رنگارنگ» (layouts/partials/this-month.html).
+// «این هفته در گل‌های رنگارنگ» (layouts/partials/this-month.html).
 //
 // For each year, picks the program that aired at about this point of the
 // current Solar month. Programs aired in number order, so the week of the
@@ -6,7 +6,7 @@
 // that year's programs for the month: with four programs, one per week; with
 // two, the first for weeks 1-2 and the second for weeks 3-4; week 1 is always
 // the first and week 4 always the last.
-// The whole month is listed under a collapsed «همه‌ی برنامه‌های …».
+// The whole month is listed under a collapsed «همهٔ برنامه‌های …».
 
 const MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور',
   'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
