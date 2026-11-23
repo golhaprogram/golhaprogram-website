@@ -101,6 +101,14 @@ Cover images (one for the show, one per episode) are rendered by `scripts/podcas
 - Preserves Persian characters in URLs
 - Tag aliases system in `data/tag_aliases.yaml` for name normalization
 
+### Persian spelling
+Text follows the Farhangestan's دستور خط فارسی:
+- ZWNJ (nim-fasele), never a space: گل‌ها، می‌رود، نمی‌شود، خانه‌ها، افتاده‌ام، خانه‌ای، بزرگ‌تر.
+- Ezafe after a silent ه is «هٔ» (ه + U+0654): برنامهٔ ۵۷۰، گوشهٔ میخانه. Not «ه‌ی».
+- Hamza seat by the preceding vowel: تأثیر، مؤثر، سؤال، رئیس، مسئله، جرئت.
+- In lyrics, «می» meaning wine stays a separate word (می نوش، می باید خورد), and so do the negative imperatives (میارید، میامیز). Only the verb prefix is joined.
+- Renaming a performer changes their taxonomy URL: add a 301 to `static/_redirects`.
+
 ### Deployment
 - **Netlify**: Production deploys on push to `main`; every PR gets a deploy preview
 - **Hugo Version**: Pinned to v0.147.0 in production
