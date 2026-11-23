@@ -24,6 +24,12 @@
   {{ partial "styles.html" . }}
   {{ partial "analytics.html" . }}
   {{ partial "favicon.html" . }}
+  {{- /* Podcast feed autodiscovery, on every page: feed readers and some
+         podcast apps find the feeds from any page address. */}}
+  {{- range where site.Sections "Section" "programs" }}{{ range $series := .Sections }}
+  {{- with .OutputFormats.Get "Podcast" }}
+  <link rel="alternate" type="application/rss+xml" title="{{ $series.Title }} (پادکست)" href="{{ .Permalink }}">
+  {{- end }}{{ end }}{{ end }}
 
 </head>
 

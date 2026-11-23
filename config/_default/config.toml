@@ -109,6 +109,13 @@ isPlainText = false
 noUgly = true
 rel = "sitemap"
 
+# Podcast feed of a series: /programs/<series>/podcast.xml
+[outputFormats.Podcast]
+mediaType = "application/rss+xml"
+baseName = "podcast"
+rel = "alternate"
+noUgly = true
+
 [outputs]
 home = ["HTML", "JSON", "SearchTerms", "RSS", "Sitemap", "ROBOTS"]
 page = ["HTML"]
@@ -127,6 +134,14 @@ audioHost = "music.golhaprogram.com"
 description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گلهای رنگارنگ، گلهای تازه، گلهای جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
 defaultImage = "/images/golha-og-image.jpg"                                                                                                                                     # Default image for social sharing
 twitter = "golhaprogram"                                                                                                                                                        # Twitter username without @
+
+# Podcast feeds (one per series; a series has one when its _index.md has a
+# `podcast:` block). artVersion: bump it when the cover design changes, so
+# every cover image gets a new name and is rendered again.
+[params.podcast]
+author = "برنامه‌ی گلها"
+email = "podcast@golhaprogram.com"
+artVersion = "1"
 
 # Temporary tip above the search box. Hidden automatically after `expires`
 # (and per visitor once they close it). Change `id` for a new tip so it shows

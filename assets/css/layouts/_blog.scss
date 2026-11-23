@@ -313,3 +313,16 @@
     }
   }
 }
+
+/* Code blocks (e.g. the feed URL on /podcast/): left-to-right, wrap long URLs. */
+.post pre {
+  direction: ltr;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}

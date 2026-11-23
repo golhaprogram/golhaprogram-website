@@ -1,0 +1,29 @@
+{{- /* Podcast cover image for a program page, or the show cover for a series
+       section page (one that has `podcast:` in its _index.md).
+
+       Returns a dict: the text drawn on the image, plus `name` and `url`.
+       The name ends in a fingerprint of everything drawn, so when anything on
+       the image changes (singers, the estimated month, the design version in
+       params.podcast.artVersion) the image gets a new URL, and podcast apps,
+       which cache artwork by URL, fetch the new one.
+
+       scripts/podcast_art.py renders and uploads the images listed in
+       art-index.json (hugo -e audioindex); it never computes names itself. */ -}}
+{{- $p := . -}}
+{{- $sec := cond $p.IsSection $p $p.Parent -}}
+{{- $cfg := $sec.Params.podcast -}}
+{{- $fields := dict "kind" "show" "series" $cfg.art_title "theme" $cfg.art_theme -}}
+{{- $base := "show" -}}
+{{- if not $p.IsSection -}}
+  {{- $month := "" -}}
+  {{- with $p.Params.date_aired }}{{ $month = partial "fa-month-year" . }}{{ end -}}
+  {{- $fields = merge $fields (dict
+        "kind" "episode"
+        "number" $p.Params.program_number
+        "singers" (delimit ($p.Params.singers | default slice) "، ")
+        "month" $month) -}}
+  {{- $base = $p.File.ContentBaseName -}}
+{{- end -}}
+{{- $hash := substr (sha1 (printf "%s|%s" site.Params.podcast.artVersion (jsonify $fields))) 0 8 -}}
+{{- $name := printf "%s_%s-%s.jpg" $cfg.prefix $base $hash -}}
+{{- return merge $fields (dict "name" $name "url" (printf "https://%s/art/%s" site.Params.audioHost $name)) -}}
