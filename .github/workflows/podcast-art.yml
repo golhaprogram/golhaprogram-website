@@ -18,6 +18,15 @@ on:
       - 'scripts/podcast_art.py'
       - 'scripts/podcast-art/**'
       - 'config/_default/config.toml'
+  # Also on PRs that change the covers themselves, to test rendering and
+  # upload before merging. Safe: names are fingerprints, so a PR can only add
+  # new files, never overwrite one that's in use.
+  pull_request:
+    paths:
+      - 'layouts/partials/podcast-art.html'
+      - 'scripts/podcast_art.py'
+      - 'scripts/podcast-art/**'
+      - '.github/workflows/podcast-art.yml'
   workflow_dispatch:
 
 concurrency:
@@ -49,4 +58,12 @@ jobs:
           CHROME: /usr/bin/google-chrome
         run: |
           hugo -e audioindex -d /tmp/audioindex
-          python3 scripts/podcast_art.py --index /tmp/audioindex/art-index.json --out /tmp/art --upload
+          python3 scripts/podcast_art.py --index /tmp/audioindex/art-index.json --out /tmp/art --upload \
+            | tee /tmp/art.log
+          echo "$(grep -c '^uploaded' /tmp/art.log || true) images uploaded" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: podcast-art
+          path: /tmp/art/*.jpg
+          if-no-files-found: ignore

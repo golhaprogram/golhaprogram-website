@@ -32,10 +32,18 @@ ROOT = Path(__file__).resolve().parent.parent
 SAHEL = ROOT / "static/fonts/sahel-3.4.0"
 LATIN = ROOT / "scripts/podcast-art/Vazirmatn-Regular.woff2"
 SIZE = {"show": 3000, "episode": 1400}  # px; Apple: 1400-3000 square
+# One colour theme per series (art_theme in the series' _index.md).
+#   bg: background (dark), accent: title, frame and rule, text: number and
+#   singers, muted: small labels.
 THEMES = {
-    "teal": {"bg": "radial-gradient(circle at 50% 42%, #1f4a4f 0%, #12302f 55%, #0b1f1f 100%)",
-             "gold": "#d6b26a", "title": "#e2bd6b", "text": "#fbf3df", "muted": "#d9c79e"},
+    "rangarang": {"bg": ("#2b1d3d", "#160e22"), "accent": "#f0a7b5", "text": "#fbf1f3", "muted": "#d8bfd0"},
+    "tazeh":     {"bg": ("#174247", "#0a2326"), "accent": "#8fdad3", "text": "#effbf9", "muted": "#b7d7d3"},
+    "javidan":   {"bg": ("#1d2b4d", "#0d1428"), "accent": "#a9c4f0", "text": "#f1f5fc", "muted": "#bfcbe0"},
+    "shakhe":    {"bg": ("#4a1622", "#24090f"), "accent": "#f3b48a", "text": "#fdf2ec", "muted": "#e4c2b4"},
+    "sahraee":   {"bg": ("#4a3317", "#22160a"), "accent": "#ecc985", "text": "#fdf6e8", "muted": "#e0cca6"},
+    "sabz":      {"bg": ("#24401f", "#0f1d0d"), "accent": "#c4e08a", "text": "#f4faea", "muted": "#c7d6b3"},
 }
+PATTERN = False  # the faint petal rosette behind the text
 
 
 def rosette(cx, cy, r, n, color, op):
@@ -50,13 +58,14 @@ def rosette(cx, cy, r, n, color, op):
 
 def html(item):
     t = THEMES[item["theme"]]
+    bg = f"radial-gradient(circle at 50% 42%, {t['bg'][0]} 0%, {t['bg'][1]} 100%)"
     if item["kind"] == "show":
-        deco = rosette(500, 500, 430, 16, t["gold"], .16) + rosette(500, 500, 250, 12, t["gold"], .12)
+        deco = rosette(500, 500, 430, 16, t["accent"], .16) + rosette(500, 500, 250, 12, t["accent"], .12)
         body = f"""<div class="series" style="font-size:112px">{item['series']}</div>
 <div class="rule"></div>
 <div class="label" style="font-size:44px">برنامه‌ی گلها · رادیو ایران</div>"""
     else:
-        deco = rosette(500, 470, 300, 16, t["gold"], .13)
+        deco = rosette(500, 470, 300, 16, t["accent"], .13)
         num = item["number"]
         digits = num.rstrip("ابپتثج")
         suffix = num[len(digits):]
@@ -71,6 +80,8 @@ def html(item):
 <div class="num">{num_html}</div>
 <div class="rule"></div>
 <div class="singers" style="font-size:{size}px">{names}</div>{month}"""
+    if not PATTERN:
+        deco = ""
     return f"""<!doctype html><html dir="rtl"><head><meta charset="utf-8"><style>
 @font-face{{font-family:Sahel;src:url({(SAHEL / 'Sahel.woff2').as_uri()});font-weight:400}}
 @font-face{{font-family:Sahel;src:url({(SAHEL / 'Sahel-SemiBold.woff2').as_uri()});font-weight:600}}
@@ -78,18 +89,18 @@ def html(item):
 @font-face{{font-family:Latin;src:url({LATIN.as_uri()})}}
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{width:1000px;height:1000px;overflow:hidden}}
-.c{{position:relative;width:1000px;height:1000px;background:{t['bg']};color:{t['text']};font-family:Sahel;
+.c{{position:relative;width:1000px;height:1000px;background:{bg};color:{t['text']};font-family:Sahel;
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}}
 svg{{position:absolute;inset:0}}
-.frame{{position:absolute;inset:34px;border:3px solid {t['gold']}8c;border-radius:6px}}
-.frame2{{position:absolute;inset:46px;border:1px solid {t['gold']}59;border-radius:4px}}
-.series{{font-weight:900;color:{t['title']};line-height:1.4;position:relative}}
+.frame{{position:absolute;inset:34px;border:3px solid {t['accent']}8c;border-radius:6px}}
+.frame2{{position:absolute;inset:46px;border:1px solid {t['accent']}59;border-radius:4px}}
+.series{{font-weight:900;color:{t['accent']};line-height:1.4;position:relative}}
 .num{{font-weight:900;font-size:250px;line-height:1;position:relative}}
-.suffix{{font-size:110px;color:{t['title']};margin-right:18px}}
+.suffix{{font-size:110px;color:{t['accent']};margin-right:18px}}
 .label{{font-weight:400;color:{t['muted']};position:relative}}
 .month{{font-size:38px;margin-top:14px}}
 .singers{{font-weight:700;position:relative;max-width:840px;line-height:1.5}}
-.rule{{width:180px;height:3px;background:{t['gold']};opacity:.8;position:relative;margin:22px 0}}
+.rule{{width:180px;height:3px;background:{t['accent']};opacity:.8;position:relative;margin:22px 0}}
 .foot{{position:absolute;bottom:64px;font:26px Latin;color:{t['text']}b3;direction:ltr}}
 </style></head><body><div class="c">
 <svg viewBox="0 0 1000 1000">{deco}</svg><div class="frame"></div><div class="frame2"></div>
