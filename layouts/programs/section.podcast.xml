@@ -60,7 +60,8 @@
     <title>{{ $title }}</title>
     <link>{{ .Permalink }}</link>
     <guid isPermaLink="true">{{ .Permalink }}</guid>
-    <pubDate>{{ $date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+    {{- /* Noon in Tehran, so the day shows the same in every time zone. */}}
+    <pubDate>{{ $date.Format "Mon, 02 Jan 2006" }} 12:00:00 +0330</pubDate>
     <description>{{ delimit $lines "\n" }}{{ printf "\n\nشعرها و نظرها: %s" .Permalink }}</description>
     <content:encoded>{{ printf "<p>%s</p>%s<p><a href=\"%s\">%s</a></p>" (delimit $lines "<br>") .Content .Permalink .Permalink | transform.XMLEscape | safeHTML }}</content:encoded>
     <enclosure url="{{ partial "audio-url.html" . }}" length="{{ .Params.audio_bytes }}" type="audio/mpeg"/>
