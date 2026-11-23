@@ -109,6 +109,8 @@ Text follows the Farhangestan's دستور خط فارسی:
 - In lyrics, «می» meaning wine stays a separate word (می نوش، می باید خورد), and so do the negative imperatives (میارید، میامیز). Only the verb prefix is joined.
 - Renaming a performer changes their taxonomy URL: add a 301 to `static/_redirects`.
 
+`scripts/persian_spelling.py` holds these rules. On every PR that changes content, `.github/workflows/normalize-persian.yml` runs it on the changed files: the unambiguous fixes (Arabic ك/ي/ة and digits, گلها، ه‌ی/ۀ → هٔ، ها/‌اند/نمی with a space, a list of hamza words, double spaces) are committed to the PR; «می» + space and «می» written solid get a warning on the changed line, since only a person can tell the verb prefix from می (wine). Word-level fixes never touch front matter names (that would move a taxonomy page). Run it locally with `python3 scripts/persian_spelling.py [--fix] FILE...`.
+
 ### Deployment
 - **Netlify**: Production deploys on push to `main`; every PR gets a deploy preview
 - **Hugo Version**: Pinned to v0.147.0 in production
