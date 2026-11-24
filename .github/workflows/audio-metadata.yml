@@ -2,6 +2,7 @@ name: Audio metadata
 
 # For PRs that add or change program files: fill in audio_bytes and
 # audio_duration for any program missing them, and commit to the PR branch.
+# Programs that already have both are skipped without installing anything.
 # Fails if a newly added program's MP3 isn't on music.golhaprogram.com yet
 # (edited programs only get a warning in the summary). Upload it, then re-run.
 
@@ -51,9 +52,16 @@ jobs:
                   | grep -v '/_index\.md$' | tr '\n' ' ' || true)
           ADDED=$(git diff --name-only --diff-filter=A origin/${{ github.base_ref }}...HEAD -- 'content/programs/**/*.md' \
                   | grep -v '/_index\.md$' | tr '\n' ' ' || true)
-          echo "files=$FILES" >> "$GITHUB_OUTPUT"
-          echo "added=$ADDED" >> "$GITHUB_OUTPUT"
           echo "Changed program files: ${FILES:-none}"
+          # Only programs still missing a field need measuring; skip the rest
+          # so a text-only edit doesn't install Hugo/ffmpeg for nothing.
+          NEED=""
+          for f in $FILES; do
+            grep -q '^audio_bytes:' "$f" && grep -q '^audio_duration:' "$f" || NEED="$NEED $f"
+          done
+          echo "files=${NEED# }" >> "$GITHUB_OUTPUT"
+          echo "added=$ADDED" >> "$GITHUB_OUTPUT"
+          echo "Programs to measure: ${NEED:- none}"
 
       - uses: peaceiris/actions-hugo@v3
         if: steps.changed.outputs.files != ''
