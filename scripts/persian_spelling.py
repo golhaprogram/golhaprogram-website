@@ -58,7 +58,7 @@ WORD_FIXES = [
      "زان", "زآن → زان"),
     # …written as one word with که/چه («زانکه», «زانچه», not «زان‌که»), but
     # «زان دم» (دم is a noun: "from that moment")
-    (re.compile(r"(?<!" + L + r")(?<!\u200c)زان\u200c(که|چه)" + NL), r"زان\1", "زان‌که → زانکه"),
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)زان[\u200c ](که|چه)" + NL), r"زان\1", "زان که / زان‌که → زانکه"),
     (re.compile(r"(?<!" + L + r")(?<!\u200c)زاندم" + NL), "زان دم", "زاندم → زان دم"),
     # «ز» (= از) before a noun stands apart, as in «ز دست»: «زآتش» → «ز آتش».
     # Not the merged «زان/زانکه/زین/کز/وز», nor «زآن…» (the pronoun آن).
