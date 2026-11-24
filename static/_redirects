@@ -1,3 +1,18 @@
+# Old WordPress podcast feeds (PowerPress) -> the new Golha-ye Rangarang feed.
+# Podcast apps and feed readers still poll these; a permanent redirect makes
+# them follow and store the new address.
+/feed/podcast/        /programs/golhaye-rangarang/podcast.xml  301
+/feed/podcast         /programs/golhaye-rangarang/podcast.xml  301
+/feed/                /programs/golhaye-rangarang/podcast.xml  301
+/feed                 /programs/golhaye-rangarang/podcast.xml  301
+/rss/                 /programs/golhaye-rangarang/podcast.xml  301
+/  feed=podcast       /programs/golhaye-rangarang/podcast.xml  301
+/  feed=rss2          /programs/golhaye-rangarang/podcast.xml  301
+# Artwork named in the old feed, for apps that haven't re-read a feed yet.
+# Points to the current show cover; temporary (302) because the cover's name
+# changes when params.podcast.artVersion is bumped.
+/wp-content/plugins/powerpress/rss_default.jpg  https://music.golhaprogram.com/art/GR_show-62e32c55.jpg  302
+
 /2011/10/25/%DA%AF%D9%84%D9%87%D8%A7%DB%8C-%D8%AA%D8%A7%D8%B2%D9%87-%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-%DB%8C-%D8%B4%D9%85%D8%A7%D8%B1%D9%87-%DB%B1%DB%B1%DB%B1-%D9%85%D8%A7%D9%87%D9%88%D8%B1/ /programs/golhaye-tazeh/111/ 301
 /2010/09/28/%DA%AF%D9%84%D9%87%D8%A7%DB%8C-%D8%AA%D8%A7%D8%B2%D9%87-%DB%B1%DB%B2%DB%B3-%D9%87%D9%85%D8%A7%DB%8C%D9%88%D9%86/ /programs/golhaye-tazeh/123/ 301
 /2011/05/28/%DA%AF%D9%84%D9%87%D8%A7%DB%8C-%D8%AA%D8%A7%D8%B2%D9%87-%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-%DB%8C-%D8%B4%D9%85%D8%A7%D8%B1%D9%87-%DB%B1%DB%B3%DB%B8-%D8%A8%DB%8C%D8%A7%D8%AA-%D8%A7%D8%B5%D9%81/ /programs/golhaye-tazeh/138/ 301
