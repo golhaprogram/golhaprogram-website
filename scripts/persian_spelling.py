@@ -53,10 +53,26 @@ WORD_FIXES = [
     # (not after the words به، که، چه: «به امید», «که اند…»)
     (re.compile(r"(?<!(?<!" + L + r")[بکچ]ه)(?<=" + L + r"ه) (ام|ات|اش|ایم|اید|اند)" + NL),
      ZWNJ + r"\1", "‌ام/‌اند after ه"),
+    # «از آن» shortened is the merged «زان», «زانکه», «زانچه»: not «زآن» / «ز آن».
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)ز ?آن(?=(?:\u200c?(?:که|چه)|ک|دم)?" + NL + ")"),
+     "زان", "زآن → زان"),
+    # …written as one word with که/چه («زانکه», «زانچه», not «زان‌که»), but
+    # «زان دم» (دم is a noun: "from that moment")
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)زان[\u200c ](که|چه)" + NL), r"زان\1", "زان که / زان‌که → زانکه"),
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)زاندم" + NL), "زان دم", "زاندم → زان دم"),
+    # «ز» (= از) before a noun stands apart, as in «ز دست»: «زآتش» → «ز آتش».
+    # Not the merged «زان/زانکه/زین/کز/وز», nor «زآن…» (the pronoun آن).
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)ز(?=آ)(?!آن)"), "ز ", "ز joined to آ"),
     # نمی is always the verb prefix (unlike می, which can be wine)
     (re.compile(r"(?<!" + L + r")(?<!\u200c)نمی (?=" + L + ")"), "نمی" + ZWNJ, "نمی with a space"),
     (re.compile(r"(?<!" + L + r")(?<!\u200c)(" + "|".join(sorted(HAMZA, key=len, reverse=True)) + ")" + NL),
      lambda m: HAMZA[m.group(1)], "hamza"),
+    # a nim-fasele does nothing next to a space or another nim-fasele
+    (re.compile(r"\u200c+(?= )| (?:\u200c)+|\u200c(?=\u200c)"), lambda m: " " if m.group(0).startswith(" ") else "", "stray nim-fasele"),
+    # a space after ، and ؛ between words: «تو،توبه» → «تو، توبه»
+    (re.compile(r"(?<=" + L + r")([،؛])(?=" + L + ")"), r"\1 ", "space after ،"),
+    # no space before Persian punctuation: «بوَد ، زانکه» → «بوَد، زانکه»
+    (re.compile(r"(?<=\S) +(?=[،؛؟])"), "", "space before ، ؛ ؟"),
     # two spaces between words (not the trailing two that end a lyric line)
     (re.compile(r"(?<=\S)  +(?=\S)"), " ", "double space"),
 ]
