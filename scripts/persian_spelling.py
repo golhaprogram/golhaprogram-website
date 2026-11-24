@@ -53,6 +53,9 @@ WORD_FIXES = [
     # (not after the words به، که، چه: «به امید», «که اند…»)
     (re.compile(r"(?<!(?<!" + L + r")[بکچ]ه)(?<=" + L + r"ه) (ام|ات|اش|ایم|اید|اند)" + NL),
      ZWNJ + r"\1", "‌ام/‌اند after ه"),
+    # «ز» (= از) before a noun stands apart, as in «ز دست»: «زآتش» → «ز آتش».
+    # Not the merged «زان/زانکه/زین/کز/وز», nor «زآن…» (the pronoun آن).
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)ز(?=آ)(?!آن)"), "ز ", "ز joined to آ"),
     # نمی is always the verb prefix (unlike می, which can be wine)
     (re.compile(r"(?<!" + L + r")(?<!\u200c)نمی (?=" + L + ")"), "نمی" + ZWNJ, "نمی with a space"),
     (re.compile(r"(?<!" + L + r")(?<!\u200c)(" + "|".join(sorted(HAMZA, key=len, reverse=True)) + ")" + NL),
