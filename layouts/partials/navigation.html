@@ -1,105 +1,44 @@
-{{ $currentPage := . }}
+{{- /* Slim site header: the site's mark and name (links home) on the right,
+       the menu on the left. «برنامه‌ها» and «هنرمندان» are <details> menus,
+       so they open on tap with no JavaScript; main.js only closes an open
+       menu when another opens or the visitor taps elsewhere. */ -}}
+{{- $section := .Section -}}
 <div class="main-nav-container">
+  <a href="{{ site.Home.RelPermalink }}" class="site-brand" aria-label="گل‌ها: صفحه اصلی">
+    <img src="/favicon.svg?v=2" alt="" width="28" height="28">
+    <span>گل‌ها</span>
+  </a>
 
-    {{/* Mobile Menu Toggle */}}
-    <input type="checkbox" id="nav-toggle" class="main-nav-toggle" aria-label="منوی موبایل">
-    <label for="nav-toggle" class="main-nav-toggle-label">
-        <span></span>
-    </label>
-
-    {{/* Navigation Links */}}
-    <ul class="main-nav-links">
-
-        {{/* Logo/Home Link */}}
-        <li class="nav-item">
-            <a href="{{ .Site.Home.RelPermalink }}" class="nav-link">
-                خانه
-            </a>
-        </li>
-
-        {{/* Programs Dropdown */}}
-        <li class="nav-item has-dropdown">
-            <a class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
-                برنامه‌ها
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="/programs/golhaye-rangarang" class="dropdown-item">
-                        گلهای رنگارنگ
-                    </a>
-                </li>
-                <li>
-                    <a href="/programs/golhaye-tazeh" class="dropdown-item">
-                        گلهای تازه
-                    </a>
-                </li>
-                <li>
-                    <a href="/programs/golhaye-javidan" class="dropdown-item">
-                        گلهای جاویدان
-                    </a>
-                </li>
-                <li>
-                    <a href="/programs/golhaye-sahraee" class="dropdown-item">
-                        گلهای صحرایی
-                    </a>
-                </li>
-                <li>
-                    <a href="/programs/yek-shakhe-gol" class="dropdown-item">
-                        یک شاخه گل
-                    </a>
-                </li>
-                <li>
-                    <a href="/programs/barge-sabz" class="dropdown-item">
-                        برگ سبز  
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        {{/* Artists Dropdown */}}
-        <li class="nav-item has-dropdown">
-            <a class="nav-link {{ if eq .Section "programs" }}active{{ end }}">
-                 هنرمندان
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="/singers" class="dropdown-item">
-                        خوانندگان
-                    </a>
-                </li>
-                <li>
-                    <a href="/composers/" class="dropdown-item">
-                        آهنگسازان
-                    </a>
-                </li>
-                <li>
-                    <a href="/arrangers/" class="dropdown-item">
-                        تنظیم کنندگان
-                    </a>
-                </li>
-                <li>
-                    <a href="/players/" class="dropdown-item">
-                        نوازندگان
-                    </a>
-                </li>
-                <li>
-                    <a href="/poets/" class="dropdown-item">
-                        شاعران
-                    </a>
-                </li>
-                <li>
-                    <a href="/announcers/" class="dropdown-item">
-                        گویندگان
-                    </a>
-                </li>
-            </ul>
-        </li>
-        
-        {{/* Other Navigation Links */}}
-        <li class="nav-item">
-            <a href="/about/" class="nav-link {{ if eq .Section "about" }}active{{ end }}">
-                درباره
-            </a>
-        </li>
-    </ul>
+  <ul class="main-nav-links">
+    <li>
+      <details class="nav-menu">
+        <summary class="nav-link{{ if eq $section "programs" }} active{{ end }}">برنامه‌ها</summary>
+        <ul class="dropdown-menu">
+          <li><a href="/programs/golhaye-rangarang/" class="dropdown-item">گل‌های رنگارنگ</a></li>
+          <li><a href="/programs/golhaye-tazeh/" class="dropdown-item">گل‌های تازه</a></li>
+          <li><a href="/programs/golhaye-javidan/" class="dropdown-item">گل‌های جاویدان</a></li>
+          <li><a href="/programs/golhaye-sahraee/" class="dropdown-item">گل‌های صحرایی</a></li>
+          <li><a href="/programs/yek-shakhe-gol/" class="dropdown-item">یک شاخه گل</a></li>
+          <li><a href="/programs/barge-sabz/" class="dropdown-item">برگ سبز</a></li>
+          <li class="dropdown-all"><a href="/programs/" class="dropdown-item">همه برنامه‌ها</a></li>
+        </ul>
+      </details>
+    </li>
+    <li>
+      <details class="nav-menu">
+        <summary class="nav-link{{ if in (slice "singers" "composers" "arrangers" "players" "poets" "announcers" "lyricists" "conductors" "dastgah") $section }} active{{ end }}">هنرمندان</summary>
+        <ul class="dropdown-menu">
+          {{- range site.Data.roles }}
+          <li><a href="/{{ .key }}/" class="dropdown-item">{{ .list }}</a></li>
+          {{- end }}
+        </ul>
+      </details>
+    </li>
+    <li>
+      <a href="/blog/" class="nav-link{{ if eq $section "blog" }} active{{ end }}">وبلاگ</a>
+    </li>
+    <li>
+      <a href="/about/" class="nav-link{{ if eq $section "about" }} active{{ end }}">درباره</a>
+    </li>
+  </ul>
 </div>

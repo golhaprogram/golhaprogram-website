@@ -2,21 +2,68 @@
 
 <div id="remark42" class="comments-section"></div>
 <script>
-  var remark_config = {
-    host: "https://{{ .Site.Params.remark42.commentsHost }}",
-    site_id: "{{ .Site.Params.remark42.commentsSiteId }}",
-    components: ["embed"],
-    max_shown_comments: 10,
-    theme: "light",
-    locale: "fa"
-  };
+  (function () {
+    var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  (function (c) {
-    for (var i = 0; i < c.length; i++) {
-      var d = document, s = d.createElement('script');
-      s.src = remark_config.host + '/web/' + c[i] + '.js';
-      s.defer = true;
-      (d.head || d.body).appendChild(s);
+    // Dark mode: paint remark42's surfaces with our own palette instead of its
+    // neutral grays. Values are read from the CSS variables in _variables.scss,
+    // so they follow any change there. Only in dark mode: remark42's --color7 is
+    // also its text color in the light theme. The widget reads them once at
+    // load, so a light/dark switch with the page open keeps them until reload.
+    // remark42 variable -> our variable
+    var PALETTE = {
+      '--color7': '--surface-muted',   // form panel, toolbar
+      '--color8': '--surface-color',   // text box, dropdowns
+      '--color22': '--hover-color',    // inputs
+      '--color18': '--divider-color',  // dividers
+      '--color19': '--divider-color',  // pinned comments
+      '--color36': '--border-color'    // comment borders
+    };
+
+    function ours(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
-  })(remark_config.components || ['embed']);
+
+    function start() {
+      var colors = {};
+      if (dark) {
+        for (var k in PALETTE) {
+          var v = ours(PALETTE[k]);
+          if (v) colors[k] = v;
+        }
+      }
+      window.remark_config = {
+        host: "https://{{ .Site.Params.remark42.commentsHost }}",
+        site_id: "{{ .Site.Params.remark42.commentsSiteId }}",
+        components: ["embed"],
+        max_shown_comments: 10,
+        // Follow the visitor's light/dark setting; the listener below switches
+        // if the setting changes.
+        theme: dark ? 'dark' : 'light',
+        locale: "fa",
+        custom_properties: colors
+      };
+
+      var s = document.createElement('script');
+      s.src = remark_config.host + '/web/embed.js{{ with .Site.Params.remark42.commentsVersion }}?v={{ . }}{{ end }}';
+      s.defer = true;
+      (document.head || document.body).appendChild(s);
+    }
+
+    // main.css loads asynchronously (partials/styles.html), so our variables
+    // may not exist yet. Wait for them, up to 3 s, then load comments anyway.
+    var tries = 0;
+    (function wait() {
+      if (ours('--surface-color') || ++tries > 30) start();
+      else setTimeout(wait, 100);
+    })();
+
+    try {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        if (window.REMARK42 && window.REMARK42.changeTheme) {
+          window.REMARK42.changeTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    } catch (e) {}
+  })();
 </script>

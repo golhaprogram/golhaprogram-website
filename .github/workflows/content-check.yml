@@ -1,0 +1,91 @@
+name: Content check
+
+# On PRs that add or change program files: fix formatting automatically
+# (committed to the PR branch), then fail with a clear message for real
+# problems: broken front matter, missing fields, a program_number that
+# doesn't match the file name, a name listed twice, unknown fields...
+# See scripts/check_content.py for the full list.
+#
+# Only the changed files are checked, so old problems elsewhere don't block
+# a PR. A PR that changes the checker itself or data/roles.yaml checks
+# every program instead (report only, no fixes).
+
+on:
+  pull_request:
+    paths:
+      - 'content/programs/**/*.md'
+      - 'scripts/check_content.py'
+      - 'data/roles.yaml'
+
+# One run at a time per PR for this workflow. (Not shared with the other
+# workflows: GitHub keeps only one waiting run per group and cancels the rest.)
+# Several workflows may push to the same branch, so pushes rebase and retry.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: false
+
+jobs:
+  content-check:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Use the base branch's tools if this branch predates them
+        run: |
+          # GitHub runs this workflow as it is after merging the PR into the base
+          # branch, but the checkout is the PR branch alone, which may be older and
+          # lack the files this job runs.
+          git fetch -q origin ${{ github.base_ref }}
+          for f in scripts/check_content.py data/roles.yaml; do
+            if [ ! -e "$f" ]; then
+              git checkout -q origin/${{ github.base_ref }} -- "$f" && git reset -q -- "$f"
+              echo "Using $f from ${{ github.base_ref }}"
+            fi
+          done
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet pyyaml
+
+      - name: Find changed files
+        id: changed
+        run: |
+          git fetch -q origin ${{ github.base_ref }}
+          CHANGED=$(git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD)
+          FILES=$(echo "$CHANGED" | grep -E '^content/programs/.+\.md$' | grep -v '/_index\.md$' | tr '\n' ' ' || true)
+          if echo "$CHANGED" | grep -qE '^(scripts/check_content\.py|data/roles\.yaml)$'; then
+            echo "all=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+
+      - name: Fix formatting
+        if: steps.changed.outputs.files != ''
+        run: |
+          python3 scripts/check_content.py --fix ${{ steps.changed.outputs.files }} > /dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/programs
+          if ! git diff --cached --quiet; then
+            git commit -q -m "Fix program file formatting"
+            for i in 1 2 3 4 5; do
+              git pull -q --rebase origin ${{ github.head_ref }} && git push -q origin HEAD:${{ github.head_ref }} && break
+              echo "Push failed, retrying ($i)"; sleep $((i * 5))
+              [ $i = 5 ] && exit 1
+            done
+          fi
+
+      - name: Check changed programs
+        if: steps.changed.outputs.files != '' && steps.changed.outputs.all != 'true'
+        run: python3 scripts/check_content.py ${{ steps.changed.outputs.files }}
+
+      - name: Check all programs
+        if: steps.changed.outputs.all == 'true'
+        run: python3 scripts/check_content.py

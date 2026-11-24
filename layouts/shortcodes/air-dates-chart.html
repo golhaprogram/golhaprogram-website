@@ -1,0 +1,50 @@
+{{- /* Estimated air year by program number: data/air_date_estimates.yaml for
+       the programs on the site, plus dated programs that aren't on it. */ -}}
+{{- $W := 720.0 }}{{ $H := 420.0 }}{{ $L := 52.0 }}{{ $R := 12.0 }}{{ $T := 12.0 }}{{ $B := 44.0 -}}
+{{- $x0 := 95.0 }}{{ $x1 := 590.0 }}{{ $y0 := 1335.0 }}{{ $y1 := 1352.0 -}}
+{{- $sx := div (sub $W (add $L $R)) (sub $x1 $x0) -}}
+{{- $sy := div (sub $H (add $T $B)) (sub $y1 $y0) -}}
+{{- $est := site.Data.air_date_estimates -}}
+<figure class="air-dates-chart">
+<svg viewBox="0 0 {{ $W }} {{ $H }}" role="img" dir="ltr" aria-label="سال تقریبی پخش هر برنامهٔ گل‌های رنگارنگ بر حسب شمارهٔ برنامه">
+  <g class="grid">
+  {{- range seq 1335 1352 }}
+    {{- $y := add $T (mul (sub $y1 (float .)) $sy) }}
+    <line x1="{{ $L }}" x2="{{ sub $W $R }}" y1="{{ $y }}" y2="{{ $y }}"/>
+    {{- if eq (mod . 2) 1 }}<text class="ylab" x="{{ sub $L 6 }}" y="{{ add $y 4 }}">{{ partial "fa-number" . }}</text>{{ end }}
+  {{- end }}
+  {{- range seq 100 50 550 }}
+    {{- $x := add $L (mul (sub (float .) $x0) $sx) }}
+    <line x1="{{ $x }}" x2="{{ $x }}" y1="{{ $T }}" y2="{{ sub $H $B }}"/>
+    <text class="xlab" x="{{ $x }}" y="{{ add (sub $H $B) 18 }}">{{ partial "fa-number" . }}</text>
+  {{- end }}
+  <text class="axis-title" x="{{ div (add $L (sub $W $R)) 2 }}" y="{{ sub $H 6 }}">شمارهٔ برنامه</text>
+  </g>
+  <g class="estimates">
+  {{- range $p, $v := $est }}{{ if not $v.fixed }}
+    {{- $x := add $L (mul (sub (partial "program-x" $p) $x0) $sx) }}
+    {{- $y := add $T (mul (sub $y1 (partial "air-date-year" $v.estimate)) $sy) }}
+    <circle cx="{{ $x }}" cy="{{ $y }}" r="2.6"><title>{{ $p }}: {{ partial "fa-month-year" (substr $v.estimate 0 7) }}</title></circle>
+  {{- end }}{{ end }}
+  </g>
+  <g class="anchors">
+  {{- range $p, $v := $est }}{{ if $v.fixed }}
+    {{- $x := add $L (mul (sub (partial "program-x" $p) $x0) $sx) }}
+    {{- $y := add $T (mul (sub $y1 (partial "air-date-year" $v.estimate)) $sy) }}
+    <circle cx="{{ $x }}" cy="{{ $y }}" r="4.5"><title>{{ $p }}: {{ partial "fa-month-year" (substr $v.estimate 0 7) }}</title></circle>
+  {{- end }}{{ end }}
+  {{- range index site.Data.air_dates "golhaye-rangarang" }}
+    {{- if and .date (not (index $est .program)) (eq (.kind | default "aired") "aired") (in (slice "confirmed" "likely") .status) }}
+    {{- $x := add $L (mul (sub (partial "program-x" .program) $x0) $sx) }}
+    {{- $y := add $T (mul (sub $y1 (partial "air-date-year" .date)) $sy) }}
+    <circle class="offsite" cx="{{ $x }}" cy="{{ $y }}" r="4.5"><title>{{ .program }}: {{ partial "fa-month-year" (substr .date 0 7) }}</title></circle>
+    {{- end }}
+  {{- end }}
+  </g>
+</svg>
+<figcaption>
+  <span class="key key-anchor"></span> برنامه‌های تاریخ‌دار
+  <span class="key key-offsite"></span> تاریخ‌دار، بی‌متن در این سایت
+  <span class="key key-estimate"></span> برآوردشده
+</figcaption>
+</figure>

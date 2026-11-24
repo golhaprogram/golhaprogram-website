@@ -11,6 +11,10 @@
         </div>
     </header>
 
+    {{- if eq .File.Dir "programs/golhaye-rangarang/" }}
+    {{ partial "this-month.html" . }}
+    {{- end }}
+
     <!-- Programs Table -->
     <div class="programs-table-container">
         <table class="programs-table">

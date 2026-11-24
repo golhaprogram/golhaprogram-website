@@ -30,10 +30,10 @@
   }
 
   &-card {
-    background: white;
+    background: var(--surface-color);
     border-radius: 0.5rem;
     padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px var(--shadow-color);
     transition: box-shadow 0.2s;
 
     .card-title {
@@ -47,7 +47,7 @@
 
     &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 12px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 12px 10px var(--shadow-color);
         border-color: var(--background-accent);
 
         .card-title {

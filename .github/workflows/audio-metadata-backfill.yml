@@ -1,0 +1,47 @@
+name: Audio metadata backfill
+
+# Run by hand (Actions tab -> "Audio metadata backfill" -> Run workflow).
+# Measures every program missing audio_bytes/audio_duration and opens one PR.
+# Tick "force" to re-measure every program, e.g. after replacing many MP3s.
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Re-measure programs that already have the fields'
+        type: boolean
+        default: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.147.0'
+          extended: true
+
+      - name: Install ffprobe
+        run: command -v ffprobe || (sudo apt-get update -q && sudo apt-get install -y -q ffmpeg)
+
+      - name: Measure MP3s
+        run: |
+          npm ci --no-audit --no-fund   # Hugo also renders pages, whose JS imports fuse.js
+          hugo -e audioindex -d /tmp/audioindex
+          python3 scripts/audio_metadata.py --index /tmp/audioindex/audio-index.json \
+            --report /tmp/report.md ${{ inputs.force && '--force' || '' }} || true
+          cat /tmp/report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: audio-metadata-backfill
+          commit-message: Add audio size and duration to program files
+          title: Add audio size and duration to program files
+          body-path: /tmp/report.md
+          add-paths: content/programs

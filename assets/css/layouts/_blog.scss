@@ -1,0 +1,328 @@
+/* Blog (layouts/blog): list of posts and single posts. */
+.blog,
+.post {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  box-sizing: border-box;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.9;
+
+  h1 {
+    margin-top: 0;
+    line-height: 1.5;
+  }
+
+  h2 {
+    margin-top: 2rem;
+  }
+
+  ol,
+  ul {
+    padding-inline-start: 1.5rem;
+  }
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--divider-color);
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+    color: var(--text-muted);
+  }
+}
+
+/* Air-dates post: chart, evidence table, programs by year. */
+.air-dates-chart {
+  margin: 1.5rem 0;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .grid line {
+    stroke: var(--divider-color);
+    stroke-width: 1;
+  }
+
+  text {
+    font-family: var(--primary-font);
+    font-size: 12px;
+    fill: var(--text-muted);
+  }
+
+  .ylab {
+    text-anchor: end;
+  }
+
+  .xlab,
+  .axis-title {
+    text-anchor: middle;
+  }
+
+  .estimates circle {
+    fill: var(--text-faint);
+    opacity: 0.55;
+  }
+
+  .anchors circle {
+    fill: var(--accent-color);
+    stroke: var(--surface-color);
+    stroke-width: 1;
+  }
+
+  .anchors circle.offsite {
+    fill: var(--surface-color);
+    stroke: var(--accent-color);
+    stroke-width: 2;
+  }
+
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .key {
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 50%;
+    margin-inline: 0.75em 0.3em;
+    vertical-align: middle;
+  }
+
+  .key-anchor { background: var(--accent-color); }
+  .key-offsite { border: 2px solid var(--accent-color); box-sizing: border-box; }
+  .key-estimate { background: var(--text-faint); opacity: 0.55; }
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.air-dates-evidence {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  th,
+  td {
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--divider-color);
+    vertical-align: top;
+    text-align: right;
+  }
+
+  th {
+    white-space: nowrap;
+  }
+
+  .num,
+  .date {
+    white-space: nowrap;
+  }
+
+  .status-possible {
+    color: var(--text-muted);
+  }
+}
+
+.air-dates-by-year {
+  h3 {
+    margin-bottom: 0.25rem;
+  }
+
+  .count {
+    font-weight: normal;
+    font-size: 0.85em;
+    color: var(--text-muted);
+  }
+
+  p {
+    margin-top: 0;
+  }
+}
+
+/* Posts are prose, not poetry: right-aligned, unlike program lyrics. */
+.post,
+.blog {
+  h1,
+  h2,
+  h3,
+  .content h2,
+  .content h3,
+  .content,
+  .content p,
+  .content div,
+  .content li {
+    text-align: right !important; /* base/_base.scss centres h1-h3 and .content with !important */
+  }
+
+  .content p {
+    margin: 0 0 1rem;
+    padding: 0;
+    max-width: none;
+  }
+
+  ol {
+    list-style-type: persian;
+  }
+
+  li {
+    margin-bottom: 0.4rem;
+  }
+}
+
+.air-dates-chart figcaption {
+  text-align: center !important;
+}
+
+/* Evidence table on phones: one card per program. The program, date, kind
+   and certainty share a line; the evidence gets the full width below. */
+@media (max-width: 640px) {
+  .air-dates-evidence {
+    thead {
+      display: none;
+    }
+
+    tbody,
+    tr,
+    td {
+      display: block;
+    }
+
+    tr {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--divider-color);
+    }
+
+    td {
+      border: none;
+      padding: 0;
+    }
+
+    td:not(.basis) {
+      display: inline;
+    }
+
+    td:not(.basis):not(:nth-child(4))::after {
+      content: " · ";
+      color: var(--text-faint);
+    }
+
+    .num {
+      font-weight: 700;
+    }
+
+    .basis {
+      margin-top: 0.3rem;
+      line-height: 1.8;
+    }
+  }
+}
+
+/* «این ماه در گل‌های رنگارنگ» (home page and series page). */
+.this-month {
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  direction: rtl;
+  text-align: right !important;
+
+  h2,
+  h3 {
+    text-align: right !important;
+  }
+
+  h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.3rem;
+  }
+
+  .this-month-intro {
+    margin: 0 0 1rem;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  .estimate-mark {
+    font-weight: 700;
+    vertical-align: super;
+    font-size: 0.8em;
+    text-decoration: none;
+  }
+
+  h3 {
+    margin: 1rem 0 0.25rem;
+    font-size: 1.05rem;
+  }
+
+  .tm-ago,
+  .tm-singers {
+    font-weight: normal;
+    color: var(--text-muted);
+    font-size: 0.9em;
+  }
+
+  ul {
+    margin: 0;
+    padding-inline-start: 1.25rem;
+    line-height: 1.9;
+  }
+
+}
+
+.this-month {
+  .tm-week-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--divider-color);
+    }
+  }
+
+  .tm-year-label {
+    font-weight: 700;
+  }
+
+  .tm-all {
+    margin-top: 1rem;
+
+    summary {
+      cursor: pointer;
+      color: var(--accent-color);
+    }
+  }
+}
+
+/* Code blocks (e.g. the feed URL on /podcast/): left-to-right, wrap long URLs. */
+.post pre {
+  direction: ltr;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}

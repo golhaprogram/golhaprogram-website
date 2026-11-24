@@ -59,3 +59,26 @@
   width: 18px;
   height: 18px;
 }
+
+/* Dark theme: system colors flip under color-scheme dark (ButtonText becomes
+   white), so give the button the site's own dark surface instead. */
+@media (prefers-color-scheme: dark) {
+  .download-button {
+    background: var(--performer-bg);
+    border-color: var(--input-border);
+    color: var(--text-color);
+
+    svg {
+      color: var(--text-color);
+    }
+
+    &:hover {
+      background: var(--hover-color);
+      border-color: var(--accent-color);
+
+      svg {
+        color: var(--accent-color);
+      }
+    }
+  }
+}

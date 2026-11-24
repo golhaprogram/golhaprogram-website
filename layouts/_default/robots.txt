@@ -22,5 +22,5 @@ Allow: /fonts/
 Crawl-delay: 10
 
 # Sitemap location
-Sitemap: {{ .Site.BaseURL }}/sitemap.xml
+Sitemap: {{ "sitemap.xml" | absURL }}
 {{ end }}

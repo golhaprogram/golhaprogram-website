@@ -1,0 +1,51 @@
+# One place for every credit role shown on the site.
+# Order here = order in the program-page credits and in the tag cloud tabs.
+#   key       front-matter key and taxonomy (URL) name
+#   one/many  label for one person / several people (program page)
+#   list      heading of the taxonomy list page and tag-cloud tab
+#   cloud     show as a tab in the home-page tag cloud
+- key: singers
+  one: خواننده
+  many: خوانندگان
+  list: خوانندگان
+  cloud: true
+- key: composers
+  one: آهنگساز
+  many: آهنگسازان
+  list: آهنگسازان
+  cloud: true
+- key: arrangers
+  one: تنظیم‌کننده
+  many: تنظیم‌کنندگان
+  list: تنظیم‌کنندگان
+  cloud: true
+- key: lyricists
+  one: ترانه‌سرا
+  many: ترانه‌سرایان
+  list: ترانه‌سرایان
+  cloud: false
+- key: poets
+  one: شاعر
+  many: شاعران
+  list: شاعران
+  cloud: true
+- key: players
+  one: نوازنده
+  many: نوازندگان
+  list: نوازندگان
+  cloud: true
+- key: conductors
+  one: رهبر ارکستر
+  many: رهبران ارکستر
+  list: رهبران ارکستر
+  cloud: false
+- key: announcers
+  one: گوینده
+  many: گویندگان
+  list: گویندگان
+  cloud: true
+- key: dastgah
+  one: دستگاه
+  many: دستگاه
+  list: دستگاه‌ها
+  cloud: true

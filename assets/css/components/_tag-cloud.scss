@@ -1,0 +1,126 @@
+// Home / programs tag cloud (layouts/partials/tag-cloud.html)
+.tag-cloud {
+  max-width: var(--max-width);
+  margin: 2.5rem auto 1.5rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.tag-cloud-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tag-cloud-tab {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--performer-border);
+  border-radius: 999px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: var(--performer-bg);
+  }
+
+  &[aria-selected="true"] {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--surface-color);
+
+    .tag-cloud-tab-count {
+      color: inherit;
+      opacity: 0.7;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+}
+
+.tag-cloud-tab-count {
+  font-size: 0.8em;
+  color: var(--text-muted); // --text-faint was below 4.5:1 contrast on white
+  margin-right: 0.15rem;
+}
+
+.tag-cloud-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem 1.1rem;
+  line-height: 1.25;
+}
+
+// Size and emphasis come from --w (0 = rarest, 1 = most frequent), set inline.
+.tag-cloud-item {
+  --w: 0;
+  display: inline-block;
+  font-size: calc(0.85rem + var(--w) * 1.5rem);
+  color: var(--accent-dark);
+  // Rarer names fade a little, but never below 4.5:1 contrast (0.78).
+  opacity: calc(0.78 + var(--w) * 0.22);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s ease, color 0.15s ease;
+
+  &.band-2 { font-weight: 500; }
+  &.band-3 { font-weight: 700; color: var(--primary-color); }
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+.tag-cloud-count {
+  font-size: 0.55em;
+  font-weight: normal;
+  margin-right: 0.15em;
+  // Same color as the name: the item's fading opacity applies to the count
+  // too, and a gray would drop below 4.5:1 contrast.
+  color: inherit;
+  vertical-align: super;
+}
+
+.tag-cloud-all {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--accent-dark);
+}
+
+@media (max-width: 480px) {
+  .tag-cloud {
+    margin-top: 2rem;
+  }
+
+  .tag-cloud-tab {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .tag-cloud-list {
+    gap: 0.3rem 0.8rem;
+  }
+
+  .tag-cloud-item {
+    font-size: calc(0.8rem + var(--w) * 1.05rem);
+  }
+}

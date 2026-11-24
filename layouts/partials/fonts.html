@@ -1,12 +1,21 @@
-<!-- Preconnect to font CDN -->
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-<!-- Vaziramatn Font from CDN with local fallback -->
-<!--
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css"></noscript>
--->
-
-<!-- Sahel Font from CDN -->
-<link rel="preload" href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/font-face.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/font-face.css" rel="stylesheet" type="text/css"></noscript>
+{{- /* Sahel by the late Saber Rastikerdar (SIL Open Font License, see
+       static/fonts/sahel-3.4.0/LICENSE), served from our own domain.
+       Loading it from a CDN stylesheet made text appear in a fallback font
+       first and then reflow (PageSpeed "layout shift"). Same-origin files
+       declared inline and preloaded arrive with the page; font-display: swap
+       keeps text visible if they are slow. Only the three weights the site
+       uses are included. The versioned folder lets them be cached for a year
+       (netlify.toml, /fonts/*). */ -}}
+{{- $dir := "/fonts/sahel-3.4.0/" }}
+<link rel="preload" href="{{ $dir }}Sahel.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ $dir }}Sahel-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Sahel;src:url({{ $dir }}Sahel.woff2) format("woff2");font-weight:normal;font-display:swap}
+@font-face{font-family:Sahel;src:url({{ $dir }}Sahel-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Sahel;src:url({{ $dir }}Sahel-Bold.woff2) format("woff2");font-weight:bold;font-display:swap}
+{{- /* Ask for Sahel at first paint. main.css loads async, so until it arrives
+       nothing used the preloaded fonts (Firefox: "preloaded but not used"),
+       and the first paint fell back to the default font. Keep in sync with
+       --primary-font in _variables.scss. */}}
+body{font-family:Sahel,Arial,sans-serif}
+</style>

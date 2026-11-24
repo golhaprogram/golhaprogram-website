@@ -1,8 +1,8 @@
 /* Table Styles */
 .programs-table-container {
-  background: white;
+  background: var(--surface-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow-color);
   overflow-x: auto;
 }
 
@@ -16,7 +16,7 @@
   background: var(--background-color);
   padding: 1rem;
   font-weight: 600;
-  color: var(--text-color-secondary, #666);
+  color: var(--text-color-secondary);
   border-bottom: 2px solid var(--border-color);
 }
 
@@ -31,7 +31,7 @@
 }
 
 .programs-table tr:hover {
-  background: var(--hover-color, #f8f9fa);
+  background: var(--hover-color);
 }
 
 .clickable-row {
@@ -40,11 +40,11 @@
 }
 
 .clickable-row:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  box-shadow: 10 2px 8px rgba(0, 0, 0, 0.85);
+  background-color: var(--tint-color);
+  box-shadow: 0 2px 8px var(--shadow-color); /* was "10 2px 8px": no unit, so browsers dropped it */
   transform: translateY(-2px);
   text-decoration: underline;
-  text-decoration-color: var(--hover-color);
+  text-decoration-color: currentColor; /* was an undefined variable, which resolved to the text color */
   text-decoration-thickness: .2px;
   text-decoration-style: solid;
 }

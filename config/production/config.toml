@@ -7,10 +7,9 @@ enableCSP = false  # Set to true to enable CSP, false to disable
 [params.remark42]
 commentsHost = "comments.golhaprogram.com"
 commentsSiteId = "golhaprogram"
-
-[params.plausible]
-enable = true
-scriptURL = "https://plausible.io/js/pa-r3J1GffenhOYfJaUkX1Ux.js" 
+# remark42 server version; added to embed.js as ?v= so browsers fetch the
+# new script after an upgrade. Bump it with each remark42 upgrade.
+commentsVersion = "1.18"
 
 [params.umami]
 enable = true

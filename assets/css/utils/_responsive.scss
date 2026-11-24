@@ -32,11 +32,11 @@ body {
 .programs-table th,
 .programs-table td {
   padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--input-border);
 }
 
 .programs-table thead {
-  background-color: #f8f8f8;
+  background-color: var(--surface-muted-2);
 }
 
 /* Clickable Row Styles */
@@ -47,8 +47,8 @@ body {
 }
 
 .clickable-row:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: var(--tint-color);
+  box-shadow: 0 2px 8px var(--shadow-color-strong);
   transform: translateY(-2px);
 
 }
@@ -95,7 +95,7 @@ body {
 
   .clickable-row:hover {
     transform: translateY(-1px);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px var(--shadow-color);
   }
 
   /* Program Cards */
@@ -119,59 +119,6 @@ body {
   .program-performers .performer {
     padding: 0.2rem 0.5rem;
     font-size: 0.85rem;
-  }
-
-  /* Navigation */
-  .main-nav-toggle-label {
-    display: block;
-    padding: 1rem;
-    cursor: pointer;
-  }
-
-  .main-nav-toggle-label span,
-  .main-nav-toggle-label span::before,
-  .main-nav-toggle-label span::after {
-    display: block;
-    background: var(--text-color);
-    height: 2px;
-    width: 1.5rem;
-    position: relative;
-  }
-
-  .main-nav-toggle-label span::before,
-  .main-nav-toggle-label span::after {
-    content: '';
-    position: absolute;
-  }
-
-  .main-nav-toggle-label span::before {
-    bottom: 7px;
-  }
-
-  .main-nav-toggle-label span::after {
-    top: 7px;
-  }
-
-  .main-nav-links {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    background: white;
-    display: none;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .main-nav-links li {
-    text-align: center;
-    padding: 0.75rem 1rem;
-  }
-
-  .main-nav-toggle:checked~.nav-links {
-    display: flex;
   }
 
   /* Footer */

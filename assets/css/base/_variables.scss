@@ -4,9 +4,9 @@
   --primary-color: #2c3e50;
   --primary-rgb: 44, 62, 80;
   /* RGB values for primary color */
-  --secondary-color: #4095eb;
+  --secondary-color: #156dc7;
   --secondary-rgb: 52, 73, 94;
-  --accent-color: #4095eb;
+  --accent-color: #156dc7;           /* links; was #4095eb (under 4.5:1 contrast on the light page) */
   --accent-dark: #1b4f85;
   /* Darker shade for hover */
   --accent-rgb: 142, 68, 173;
@@ -20,4 +20,60 @@
   --border-color: #e0e0e0;
   --player-background: #ffffff;
   --max-width: 800px;
+
+  /* Surfaces and neutrals (light values match the original hard-coded colors) */
+  --surface-color: #ffffff;        /* cards, nav, dropdowns, program article */
+  --surface-muted: #f9f9f9;        /* search match snippets */
+  --surface-muted-2: #f8f8f8;      /* mobile table headers */
+  --hover-color: #f8f9fa;
+  --input-border: #ddd;
+  --divider-color: #eee;
+  --text-muted: #666;
+  --text-label: #555;
+  --text-faint: #888;
+  --text-color-secondary: #666;
+  --search-link-hover: #007acc;
+  --mark-bg: #ffeb3b;
+  --mark-color: inherit;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-strong: rgba(0, 0, 0, 0.15);
+  --tint-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme: follows the visitor's system setting. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #ece8df;      /* headings: warm off-white */
+    --primary-rgb: 0, 0, 0;        /* only used for shadows */
+    --primary-color-dark: #ffffff;
+    --secondary-color: #7db6f2;    /* links */
+    --secondary-rgb: 125, 182, 242;
+    --accent-color: #8cc0f5;
+    --accent-dark: #b5d6fa;        /* link hover: lighter on dark */
+    --accent-rgb: 140, 192, 245;
+    --background-color: #12171d;   /* page: deep navy-charcoal */
+    --background-accent: #2c3742;
+    --performer-bg: #222a34;
+    --performer-border: #334050;
+    --text-color: #dcd8cf;         /* body text: warm, not pure white */
+    --border-color: #2f3a46;
+    --player-background: #1a2129;
+
+    --surface-color: #1a2129;
+    --surface-muted: #212a34;
+    --surface-muted-2: #212a34;
+    --hover-color: #222b35;
+    --input-border: #3a4653;
+    --divider-color: #2a333e;
+    --text-muted: #a3acb5;
+    --text-label: #c2c9d0;
+    --text-faint: #8d97a1;
+    --text-color-secondary: #a3acb5;
+    --search-link-hover: #8cc0f5;
+    --mark-bg: rgba(255, 214, 10, 0.32);
+    --mark-color: #fff4c2;
+    --shadow-color: rgba(0, 0, 0, 0.45);
+    --shadow-color-strong: rgba(0, 0, 0, 0.55);
+    --tint-color: rgba(255, 255, 255, 0.05);
+  }
 }

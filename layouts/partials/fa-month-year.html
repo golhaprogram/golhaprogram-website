@@ -1,0 +1,8 @@
+{{- /* "1346-08" -> "آبان ۱۳۴۶" (Solar Hijri year and month). */ -}}
+{{- $months := slice "فروردین" "اردیبهشت" "خرداد" "تیر" "مرداد" "شهریور" "مهر" "آبان" "آذر" "دی" "بهمن" "اسفند" -}}
+{{- $parts := split (string .) "-" -}}
+{{- $out := partial "fa-number" (index $parts 0) -}}
+{{- if ge (len $parts) 2 -}}
+  {{- $out = printf "%s %s" (index $months (sub (int (strings.TrimLeft "0" (index $parts 1))) 1)) $out -}}
+{{- end -}}
+{{- return $out -}}

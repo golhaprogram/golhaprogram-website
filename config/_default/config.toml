@@ -1,5 +1,5 @@
 baseURL = "https://golhaprogram.com"
-title = "برنامه‌ی گلها"
+title = "برنامهٔ گل‌ها"
 theme = "PaperMod"
 defaultContentLanguage = "fa"
 
@@ -30,15 +30,22 @@ poets = "/poets/:slug/"
 announcers = "/announcers/:slug/"
 composers = "/composers/:slug/"
 arrangers = "/arrangers/:slug/"
+lyricists = "/lyricists/:slug/"
+conductors = "/conductors/:slug/"
+dastgah = "/dastgah/:slug/"
 
 [taxonomies]
-dastgah = "dastgahs"
+# Front-matter keys are the right-hand (plural) names. dastgah is singular in
+# the program files, so its taxonomy is named "dastgah" (pages under /dastgah/).
+dastgah = "dastgah"
 singer = "singers"
 poet = "poets"
 player = "players"
 announcer = "announcers"
 composers = "composers"
 arrangers = "arrangers"
+lyricist = "lyricists"
+conductor = "conductors"
 
 [menu]
 [[menu.main]]
@@ -81,6 +88,14 @@ baseName = "index"
 isPlainText = true
 notAlternative = true
 
+# Artist/dastgah names with their page URLs and program counts, so search
+# can link straight to an artist's page (see assets/js/components/Search.js).
+[outputFormats.SearchTerms]
+mediaType = "application/json"
+baseName = "search-terms"
+isPlainText = true
+notAlternative = true
+
 [sitemap]
 changefreq = "monthly"
 filename = "sitemap.xml"
@@ -94,8 +109,15 @@ isPlainText = false
 noUgly = true
 rel = "sitemap"
 
+# Podcast feed of a series: /programs/<series>/podcast.xml
+[outputFormats.Podcast]
+mediaType = "application/rss+xml"
+baseName = "podcast"
+rel = "alternate"
+noUgly = true
+
 [outputs]
-home = ["HTML", "JSON", "RSS", "Sitemap", "ROBOTS"]
+home = ["HTML", "JSON", "SearchTerms", "RSS", "Sitemap", "ROBOTS"]
 page = ["HTML"]
 section = ["HTML"]
 taxonomy = ["HTML"]
@@ -109,6 +131,24 @@ notAlternative = true
 [params]
 # Common parameters
 audioHost = "music.golhaprogram.com"
-description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گلهای رنگارنگ، گلهای تازه، گلهای جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
+description = "آرشیو کامل برنامه‌های ماندگار رادیو ایران شامل گل‌های رنگارنگ، گل‌های تازه، گل‌های جاویدان، برگ سبز و یک شاخه گل. مجموعه‌ای ارزشمند از موسیقی و شعر کلاسیک ایرانی."
 defaultImage = "/images/golha-og-image.jpg"                                                                                                                                     # Default image for social sharing
 twitter = "golhaprogram"                                                                                                                                                        # Twitter username without @
+
+# Podcast feeds (one per series; a series has one when its _index.md has a
+# `podcast:` block). artVersion: bump it when the cover design changes, so
+# every cover image gets a new name and is rendered again.
+[params.podcast]
+author = "برنامهٔ گل‌ها"
+email = "podcast@golhaprogram.com"
+artVersion = "2"
+
+# Temporary tip above the search box. Hidden automatically after `expires`
+# (and per visitor once they close it). Change `id` for a new tip so it shows
+# again to visitors who closed the previous one.
+[params.searchTip]
+enable = true
+id = "multiword-2026-11"
+expires = "2026-12-18"
+text = "حالا می‌توانید چند واژه را با هم جستجو کنید، مثلاً"
+example = "حمیرا یاحقی افتتاح"

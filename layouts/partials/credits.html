@@ -1,0 +1,36 @@
+{{- /* Program credits: one row per role (see data/roles.yaml), label on the
+       right, linked names beside it. Links come from Hugo's taxonomy pages,
+       so they always match the real URLs. */ -}}
+{{- $page := . -}}
+{{- $rows := slice -}}
+{{- range site.Data.roles -}}
+  {{- $terms := $page.GetTerms .key -}}
+  {{- if $terms -}}
+    {{- $rows = $rows | append (dict "role" . "terms" $terms) -}}
+  {{- end -}}
+{{- end -}}
+{{- with $rows }}
+<dl class="credits">
+  {{- range . }}
+  {{- $label := cond (gt (len .terms) 1) .role.many .role.one }}
+  <div class="credit-row credit-{{ .role.key }}">
+    <dt>{{ $label }}</dt>
+    <dd>
+      {{- range $i, $t := .terms }}{{ if $i }}<span class="sep">، </span>{{ end }}<a href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>{{ end -}}
+    </dd>
+  </div>
+  {{- end }}
+  {{- with $page.Params.date_aired }}
+  <div class="credit-row credit-aired">
+    <dt>تاریخ پخش</dt>
+    <dd>{{ partial "fa-month-year" . }}<a class="estimate-mark" href="/blog/air-dates/" title="تاریخ تقریبی است؛ چگونه برآورد شده؟" aria-label="تاریخ تقریبی؛ توضیح">*</a></dd>
+  </div>
+  {{- end }}
+  {{- with $page.Params.mode }}
+  <div class="credit-row credit-mode">
+    <dt>گوشه</dt>
+    <dd>{{ . }}</dd>
+  </div>
+  {{- end }}
+</dl>
+{{- end }}
