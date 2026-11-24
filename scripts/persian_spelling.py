@@ -56,6 +56,10 @@ WORD_FIXES = [
     # «از آن» shortened is the merged «زان», «زانکه», «زانچه»: not «زآن» / «ز آن».
     (re.compile(r"(?<!" + L + r")(?<!\u200c)ز ?آن(?=(?:\u200c?(?:که|چه)|ک|دم)?" + NL + ")"),
      "زان", "زآن → زان"),
+    # …written as one word with که/چه («زانکه», «زانچه», not «زان‌که»), but
+    # «زان دم» (دم is a noun: "from that moment")
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)زان\u200c(که|چه)" + NL), r"زان\1", "زان‌که → زانکه"),
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)زاندم" + NL), "زان دم", "زاندم → زان دم"),
     # «ز» (= از) before a noun stands apart, as in «ز دست»: «زآتش» → «ز آتش».
     # Not the merged «زان/زانکه/زین/کز/وز», nor «زآن…» (the pronoun آن).
     (re.compile(r"(?<!" + L + r")(?<!\u200c)ز(?=آ)(?!آن)"), "ز ", "ز joined to آ"),

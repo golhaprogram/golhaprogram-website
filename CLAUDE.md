@@ -107,7 +107,7 @@ Text follows the Farhangestan's دستور خط فارسی:
 - Ezafe after a silent ه is «هٔ» (ه + U+0654): برنامهٔ ۵۷۰، گوشهٔ میخانه. Not «ه‌ی».
 - Hamza seat by the preceding vowel: تأثیر، مؤثر، سؤال، رئیس، مسئله، جرئت.
 - In lyrics, «می» meaning wine stays a separate word (می نوش، می باید خورد), and so do the negative imperatives (میارید، میامیز). Only the verb prefix is joined.
-- «ز» (short for «از») before a noun stands apart, like «ز دست»: «ز آتش دل», not «زآتش». Only the merged words are joined, without the madda: «زان»، «زانکه»، «زانچه»، «زین»، «کز»، «وز» (not «زآن» or «ز آن»).
+- «ز» (short for «از») before a noun stands apart, like «ز دست»: «ز آتش دل», not «زآتش». Only the merged words are joined, without the madda: «زان»، «زانکه»، «زانچه»، «زین»، «کز»، «وز» (not «زآن», «ز آن», «زان‌که»). A noun after «زان» stays apart: «زان دم»، «زان شرر».
 - Renaming a performer changes their taxonomy URL: add a 301 to `static/_redirects`.
 
 `scripts/persian_spelling.py` holds these rules. On every PR that changes content, `.github/workflows/normalize-persian.yml` runs it on the changed files: the unambiguous fixes (Arabic ك/ي/ة and digits, گلها، ه‌ی/ۀ → هٔ، زآتش → ز آتش، زآن → زان، ها/‌اند/نمی with a space, a list of hamza words, double spaces) are committed to the PR; «می» + space and «می» written solid get a warning on the changed line, since only a person can tell the verb prefix from می (wine). Word-level fixes never touch front matter names (that would move a taxonomy page). Run it locally with `python3 scripts/persian_spelling.py [--fix] FILE...`.
