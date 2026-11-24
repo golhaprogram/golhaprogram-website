@@ -53,11 +53,11 @@ jobs:
           ADDED=$(git diff --name-only --diff-filter=A origin/${{ github.base_ref }}...HEAD -- 'content/programs/**/*.md' \
                   | grep -v '/_index\.md$' | tr '\n' ' ' || true)
           echo "Changed program files: ${FILES:-none}"
-          # Only programs still missing a field need measuring; skip the rest
+          # Only programs still missing a field (or with it left empty) need measuring; skip the rest
           # so a text-only edit doesn't install Hugo/ffmpeg for nothing.
           NEED=""
           for f in $FILES; do
-            grep -q '^audio_bytes:' "$f" && grep -q '^audio_duration:' "$f" || NEED="$NEED $f"
+            grep -Eq '^audio_bytes: *[1-9][0-9]* *$' "$f" && grep -Eq '^audio_duration: *[1-9][0-9]* *$' "$f" || NEED="$NEED $f"
           done
           echo "files=${NEED# }" >> "$GITHUB_OUTPUT"
           echo "added=$ADDED" >> "$GITHUB_OUTPUT"

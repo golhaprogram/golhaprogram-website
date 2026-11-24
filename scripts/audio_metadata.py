@@ -45,7 +45,7 @@ def has_fields(text):
     if parts is None:
         return False
     fm = "".join(parts[0])
-    return all(re.search(rf"^{f}:", fm, re.M) for f in FIELDS)
+    return all(re.search(rf"^{f}: *[1-9][0-9]* *$", fm, re.M) for f in FIELDS)  # empty counts as missing
 
 
 def write_fields(path, size, duration):
