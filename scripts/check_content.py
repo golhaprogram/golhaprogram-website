@@ -144,6 +144,8 @@ def check(path, types, fix):
                 errors.append(f"{key} has an empty or non-text entry: {n!r}")
             elif n != n.strip() or "  " in n:
                 errors.append(f"{key}: extra spaces in {n!r}")
+            elif re.search("\u200c(?=\\s|$)|(?:^|(?<=\\s))\u200c|\u200c\u200c", n):
+                errors.append(f"{key}: stray nim-fasele (ZWNJ) in {n!r}")
         seen = [n for n in names if isinstance(n, str)]
         dupes = sorted({n for n in seen if seen.count(n) > 1})
         if dupes:

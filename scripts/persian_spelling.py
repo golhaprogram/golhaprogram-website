@@ -67,6 +67,12 @@ WORD_FIXES = [
     (re.compile(r"(?<!" + L + r")(?<!\u200c)نمی (?=" + L + ")"), "نمی" + ZWNJ, "نمی with a space"),
     (re.compile(r"(?<!" + L + r")(?<!\u200c)(" + "|".join(sorted(HAMZA, key=len, reverse=True)) + ")" + NL),
      lambda m: HAMZA[m.group(1)], "hamza"),
+    # a nim-fasele does nothing next to a space or another nim-fasele
+    (re.compile(r"\u200c+(?= )| (?:\u200c)+|\u200c(?=\u200c)"), lambda m: " " if m.group(0).startswith(" ") else "", "stray nim-fasele"),
+    # a space after ، and ؛ between words: «تو،توبه» → «تو، توبه»
+    (re.compile(r"(?<=" + L + r")([،؛])(?=" + L + ")"), r"\1 ", "space after ،"),
+    # no space before Persian punctuation: «بوَد ، زانکه» → «بوَد، زانکه»
+    (re.compile(r"(?<=\S) +(?=[،؛؟])"), "", "space before ، ؛ ؟"),
     # two spaces between words (not the trailing two that end a lyric line)
     (re.compile(r"(?<=\S)  +(?=\S)"), " ", "double space"),
 ]
