@@ -52,7 +52,7 @@ jobs:
           echo "### Persian spelling"
           grep -E '^(fixed|[0-9]+ file)' /tmp/spelling.log || true
           n=$(grep -c '^::warning' /tmp/spelling.log || true)
-          [ "$n" != "0" ] && echo "$n changed line(s) to check by hand: see the annotations on the PR's Files tab."
+          if [ "$n" != "0" ]; then echo "$n changed line(s) to check by hand: see the annotations on the PR's Files tab."; fi
         } >> "$GITHUB_STEP_SUMMARY"
 
     - name: Commit and push fixes
