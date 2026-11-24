@@ -155,6 +155,11 @@
   gregorian: '1960-05-27'
   precision_days: 79
   fixed: false
+'228':
+  estimate: '1339-03-23'
+  gregorian: '1960-06-13'
+  precision_days: 99
+  fixed: false
 228B:
   estimate: '1339-04-09'
   gregorian: '1960-06-30'
