@@ -53,6 +53,9 @@ WORD_FIXES = [
     # (not after the words به، که، چه: «به امید», «که اند…»)
     (re.compile(r"(?<!(?<!" + L + r")[بکچ]ه)(?<=" + L + r"ه) (ام|ات|اش|ایم|اید|اند)" + NL),
      ZWNJ + r"\1", "‌ام/‌اند after ه"),
+    # «از آن» shortened is the merged «زان», «زانکه», «زانچه»: not «زآن» / «ز آن».
+    (re.compile(r"(?<!" + L + r")(?<!\u200c)ز ?آن(?=(?:\u200c?(?:که|چه)|ک|دم)?" + NL + ")"),
+     "زان", "زآن → زان"),
     # «ز» (= از) before a noun stands apart, as in «ز دست»: «زآتش» → «ز آتش».
     # Not the merged «زان/زانکه/زین/کز/وز», nor «زآن…» (the pronoun آن).
     (re.compile(r"(?<!" + L + r")(?<!\u200c)ز(?=آ)(?!آن)"), "ز ", "ز joined to آ"),
