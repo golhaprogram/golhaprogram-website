@@ -115,6 +115,11 @@
   gregorian: '1959-11-01'
   precision_days: 44
   fixed: false
+'219':
+  estimate: '1338-09-01'
+  gregorian: '1959-11-23'
+  precision_days: 22
+  fixed: false
 219B:
   estimate: '1338-09-21'
   gregorian: '1959-12-13'
