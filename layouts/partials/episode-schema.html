@@ -23,11 +23,12 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Episode",
+  "@type": "RadioEpisode",
   "name": "{{ $programTypePersian }} {{ $page.Params.program_number }}",
   "alternateName": "{{ $programTypeEnglish }} {{ $programNumberEnglish }}",
   "description": "{{ if $page.Description }}{{ $page.Description }}{{ else }}دانلود {{ $programTypePersian }} {{ $page.Params.program_number }} - آرشیو کامل برنامه‌های رادیو ایران{{ end }}",
   "url": "{{ $page.Permalink }}",
+  "episodeNumber": "{{ $programNumberEnglish }}",
   "datePublished": "{{ $page.Date.Format "2006-01-02" }}",
   {{- /* Estimated air month, in Gregorian (date_aired itself is Solar Hijri). */ -}}
   {{- if eq (path.Base $page.File.Dir) "golhaye-rangarang" }}
@@ -36,7 +37,7 @@
   {{- end }}
   {{- end }}
   "partOfSeries": {
-    "@type": "CreativeWorkSeries",
+    "@type": "RadioSeries",
     "name": "{{ $programTypePersian }}",
     "description": "مجموعه برنامه‌های {{ $programTypePersian }} از آرشیو رادیو ایران"
   },
@@ -48,30 +49,25 @@
     "duration": "PT45M",
     "inLanguage": "fa"
   },
-  {{- $allPerformers := slice }}
-  {{- if $page.Params.singers }}
-    {{- range $page.Params.singers }}
-      {{- $allPerformers = $allPerformers | append . }}
-    {{- end }}
+  {{- /* Performers, arranger and announcer as contributor + Role
+         (byArtist/arranger/narrator are not valid on RadioEpisode). */ -}}
+  {{- $roles := slice
+        (dict "key" "singers"    "role" "خواننده")
+        (dict "key" "players"    "role" "نوازنده")
+        (dict "key" "arrangers"  "role" "تنظیم‌کننده")
+        (dict "key" "announcers" "role" "گوینده") -}}
+  {{- $contributors := slice -}}
+  {{- range $roles -}}
+    {{- $roleName := .role -}}
+    {{- range (index $page.Params .key) -}}
+      {{- $contributors = $contributors | append (dict "@type" "Role" "roleName" $roleName "contributor" (dict "@type" "Person" "name" .)) -}}
+    {{- end -}}
   {{- end }}
-  {{- if $page.Params.players }}
-    {{- range $page.Params.players }}
-      {{- $allPerformers = $allPerformers | append . }}
-    {{- end }}
-  {{- end }}
-  {{- if $allPerformers }}
-  "byArtist": [
-    {{- range $i, $performer := $allPerformers -}}
-    {{- if $i }},{{ end }}
-    {
-      "@type": "Person",
-      "name": "{{ $performer }}"
-    }
-    {{- end }}
-  ],
+  {{- with $contributors }}
+  "contributor": {{ . | jsonify | safeJS }},
   {{- end }}
   {{- if $page.Params.composers }}
-  "composer": [
+  "musicBy": [
     {{- range $i, $composer := $page.Params.composers -}}
     {{- if $i }},{{ end }}
     {
@@ -81,38 +77,7 @@
     {{- end }}
   ],
   {{- end }}
-  {{- if $page.Params.arrangers }}
-  "arranger": [
-    {{- range $i, $arranger := $page.Params.arrangers -}}
-    {{- if $i }},{{ end }}
-    {
-      "@type": "Person",
-      "name": "{{ $arranger }}"
-    }
-    {{- end }}
-  ],
-  {{- end }}
-  {{- if $page.Params.announcers }}
-  "narrator": [
-    {{- range $i, $announcer := $page.Params.announcers -}}
-    {{- if $i }},{{ end }}
-    {
-      "@type": "Person",
-      "name": "{{ $announcer }}"
-    }
-    {{- end }}
-  ],
-  {{- end }}
   {{- if $page.Params.poets }}
-  "lyricist": [
-    {{- range $i, $poet := $page.Params.poets -}}
-    {{- if $i }},{{ end }}
-    {
-      "@type": "Person",
-      "name": "{{ $poet }}"
-    }
-    {{- end }}
-  ],
   "hasPart": [
     {{- range $i, $poet := $page.Params.poets -}}
     {{- if $i }},{{ end }}
@@ -140,3 +105,16 @@
   "keywords": "دانلود {{ $programTypePersian }}, {{ replace $programTypePersian "\u200c" "" }}, گل‌ها, گلها, {{ $programTypeEnglish }}, {{ $page.Params.program_number }}, {{ $programNumberEnglish }}{{ if $page.Params.dastgah }}, {{ $page.Params.dastgah }}{{ end }}, موسیقی کلاسیک ایرانی, رادیو ایران{{ if $page.Params.singers }}{{ range $page.Params.singers }}, {{ . }}{{ end }}{{ end }}{{ if $page.Params.players }}{{ range $page.Params.players }}, {{ . }}{{ end }}{{ end }}{{ if $page.Params.poets }}{{ range $page.Params.poets }}, {{ . }}{{ end }}{{ end }}"
 }
 </script>
+{{- with $page.Parent }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "{{ site.Title }}", "item": "{{ site.Home.Permalink }}"},
+    {"@type": "ListItem", "position": 2, "name": "{{ .Title }}", "item": "{{ .Permalink }}"},
+    {"@type": "ListItem", "position": 3, "name": "{{ $programTypePersian }} {{ $page.Params.program_number }}", "item": "{{ $page.Permalink }}"}
+  ]
+}
+</script>
+{{- end }}
