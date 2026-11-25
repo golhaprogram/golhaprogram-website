@@ -94,6 +94,10 @@ def check(path, types, fix):
         return errors + [f"front matter is not valid YAML: {e}".replace("\n", " ")], warnings
     if not isinstance(fm, dict):
         return errors + ["front matter is not a list of key: value lines"], warnings
+    # YAML keeps only the last of two lines with the same key, so the first is lost silently.
+    keys = [line.split(":", 1)[0] for line in parts[0] if line[:1].isalpha() and ":" in line]
+    for key in sorted({k for k in keys if keys.count(k) > 1}):
+        errors.append(f"{key} appears on more than one line; put all the names in one list")
 
     for key in REQUIRED:
         if fm.get(key) in (None, "", []):
