@@ -41,6 +41,21 @@
     margin: 0.25rem 0 0;
     color: var(--text-muted);
   }
+
+  .post-date {
+    margin-inline-start: 0.5rem;
+  }
+}
+
+/* Post date: under the title on a post, after the title in the list. */
+.post-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.post header .post-date {
+  display: block;
+  margin-top: 0.25rem;
 }
 
 /* Air-dates post: chart, evidence table, programs by year. */

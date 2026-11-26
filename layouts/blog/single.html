@@ -2,6 +2,9 @@
 <article class="post">
   <header>
     <h1>{{ .Title }}</h1>
+    {{- with .Date }}{{ if not .IsZero }}
+    <time class="post-date" datetime="{{ .Format "2006-01-02" }}">{{ partial "fa-date" . }}</time>
+    {{- end }}{{ end }}
   </header>
   <div class="content">
     {{ .Content }}
