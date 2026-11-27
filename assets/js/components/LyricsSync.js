@@ -11,9 +11,11 @@
 //
 // While following is on: the current line is highlighted and kept in view.
 // If the reader scrolls by hand, following waits 5 seconds, then brings the
-// current line back, as long as the lyrics are still on screen (not if
-// they've gone off to read the credits or comments). Seeking always jumps to
-// the line, even while paused. And
+// current line back, but only if the lyrics still fill a good part of the
+// screen (not if they've gone off to the credits or comments). Once the
+// comments reach the middle of the screen, nothing pulls the reader back, not
+// even a new line starting, and never while they're typing (a comment in the remark42 iframe, the search box).
+// Seeking always jumps to the line, even while paused. And
 // tapping a line plays from it. Between lines, while only the music plays,
 // a thin bar sits where the text is waiting (before the next line, or after
 // the last one) and fills up as the gap goes by. The choice is remembered in
@@ -137,18 +139,44 @@ export async function initializeLyricsSync() {
   const handsOff = () => Date.now() - manualScrollAt > MANUAL_SCROLL_PAUSE_MS;
 
   const autoScroll = (el) => {
-    if (!audio.paused && handsOff()) scrollToLine(el);
+    if (!audio.paused && handsOff() && !typing() && !inComments()) scrollToLine(el);
   };
 
   // The line being sung, or the music bar while the text waits.
   const target = () => active || (gap.isConnected ? gap : null);
 
-  // Is any of the lyrics on screen below the player? If the reader went off to
-  // the credits or the comments, don't pull them back.
+  // Do the lyrics fill at least 40% of the screen below the player? If the
+  // reader went off to the credits or the comments, don't pull them back.
   const lyricsOnScreen = () => {
     const r = content.getBoundingClientRect();
     const top = Math.max(0, player.getBoundingClientRect().bottom);
-    return r.bottom > top + 40 && r.top < window.innerHeight - 40;
+    const bottom = window.innerHeight;
+    const shown = Math.min(r.bottom, bottom) - Math.max(r.top, top);
+    return shown >= (bottom - top) * 0.4;
+  };
+
+  // Did the reader scroll down to the comments themselves (the comments reach
+  // above the middle of the screen when their scrolling stops)? Then nothing,
+  // not even a new line starting, pulls them back up until they scroll back,
+  // seek or tap a line. Only the reader's own scrolling counts: following the
+  // last lines can bring the comments up too.
+  const comments = document.querySelector('.comments-section');
+  const commentsUp = () => {
+    if (!comments) return false;
+    const top = Math.max(0, player.getBoundingClientRect().bottom);
+    return comments.getBoundingClientRect().top < (top + window.innerHeight) / 2;
+  };
+  let parked = false;
+  window.addEventListener('scroll', () => {
+    if (Date.now() - manualScrollAt < 1500) parked = commentsUp();
+  }, { passive: true });
+  const inComments = () => parked;
+
+  // Focus in a text field, or in an iframe (the remark42 comment box lives in
+  // one, so its keystrokes never reach this page): the reader is typing.
+  const typing = () => {
+    const el = document.activeElement;
+    return !!el && (el.tagName === 'IFRAME' || el.matches('input, textarea, select, [contenteditable=""], [contenteditable="true"]'));
   };
 
   // Music only: put the bar where the text is waiting and fill it by how far
@@ -190,7 +218,7 @@ export async function initializeLyricsSync() {
     // Bring the current line back after a manual scroll (scrollToLine does
     // nothing if it's already comfortably in view).
     const el = target();
-    if (el && !audio.paused && handsOff() && lyricsOnScreen()) scrollToLine(el);
+    if (el && !audio.paused && handsOff() && !typing() && !inComments() && lyricsOnScreen()) scrollToLine(el);
   };
 
   track.addEventListener('cuechange', update);
@@ -206,6 +234,7 @@ export async function initializeLyricsSync() {
     if (!follow) return;
     started = true;
     manualScrollAt = 0;
+    parked = false;
     update();
     const el = target();
     if (el) scrollToLine(el);
