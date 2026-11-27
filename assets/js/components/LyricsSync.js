@@ -9,8 +9,11 @@
 // <span class="lyric-line">, and the cues are matched to those lines by text,
 // in order. Labels such as «(مولوی)» simply match no cue.
 //
-// While following is on: the current line is highlighted and scrolled into
-// view (unless the reader scrolled by hand in the last few seconds), and
+// While following is on: the current line is highlighted and kept in view.
+// If the reader scrolls by hand, following waits 5 seconds, then brings the
+// current line back, as long as the lyrics are still on screen (not if
+// they've gone off to read the credits or comments). Seeking always jumps to
+// the line, even while paused. And
 // tapping a line plays from it. Between lines, while only the music plays,
 // a thin bar sits where the text is waiting (before the next line, or after
 // the last one) and fills up as the gap goes by. The choice is remembered in
@@ -131,8 +134,21 @@ export async function initializeLyricsSync() {
     autoScroll(line);
   };
 
+  const handsOff = () => Date.now() - manualScrollAt > MANUAL_SCROLL_PAUSE_MS;
+
   const autoScroll = (el) => {
-    if (!audio.paused && Date.now() - manualScrollAt > MANUAL_SCROLL_PAUSE_MS) scrollToLine(el);
+    if (!audio.paused && handsOff()) scrollToLine(el);
+  };
+
+  // The line being sung, or the music bar while the text waits.
+  const target = () => active || (gap.isConnected ? gap : null);
+
+  // Is any of the lyrics on screen below the player? If the reader went off to
+  // the credits or the comments, don't pull them back.
+  const lyricsOnScreen = () => {
+    const r = content.getBoundingClientRect();
+    const top = Math.max(0, player.getBoundingClientRect().bottom);
+    return r.bottom > top + 40 && r.top < window.innerHeight - 40;
   };
 
   // Music only: put the bar where the text is waiting and fill it by how far
@@ -171,6 +187,10 @@ export async function initializeLyricsSync() {
     setActive(cue ? pairs.get(cue) : null);
     if (cue) gap.remove();
     else showGap(t);
+    // Bring the current line back after a manual scroll (scrollToLine does
+    // nothing if it's already comfortably in view).
+    const el = target();
+    if (el && !audio.paused && handsOff() && lyricsOnScreen()) scrollToLine(el);
   };
 
   track.addEventListener('cuechange', update);
@@ -181,6 +201,15 @@ export async function initializeLyricsSync() {
     update();
   });
   audio.addEventListener('pause', () => content.classList.remove('is-playing'));
+  // Seeking (the progress bar, or tapping a line) always shows where you are.
+  audio.addEventListener('seeked', () => {
+    if (!follow) return;
+    started = true;
+    manualScrollAt = 0;
+    update();
+    const el = target();
+    if (el) scrollToLine(el);
+  });
 
   ['wheel', 'touchmove', 'keydown'].forEach((type) =>
     window.addEventListener(type, (e) => {
