@@ -194,7 +194,47 @@
   font-weight: 600;
 }
 
+/* Between lines, while only the music plays: a thin bar where the text is
+   waiting, filling up as the gap goes by (LyricsSync.js). */
+.music-gap {
+  display: block;
+  width: 50%;
+  max-width: 10rem;
+  margin: 0.55em auto;
+}
+
+.music-gap-bar {
+  display: block;
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-color) 18%, transparent);
+  overflow: hidden;
+}
+
+.music-gap-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: var(--accent-color);
+  transition: width 0.3s linear;
+}
+
+.is-playing .music-gap-bar {
+  animation: music-gap-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes music-gap-pulse {
+  50% { opacity: 0.55; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .music-gap-fill,
+  .is-playing .music-gap-bar {
+    transition: none;
+    animation: none;
+  }
+
   .lyric-line,
   .lyrics-follow-switch,
   .lyrics-follow-switch::after {

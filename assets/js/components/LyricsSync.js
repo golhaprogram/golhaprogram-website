@@ -11,7 +11,10 @@
 //
 // While following is on: the current line is highlighted and scrolled into
 // view (unless the reader scrolled by hand in the last few seconds), and
-// tapping a line plays from it. The choice is remembered in localStorage.
+// tapping a line plays from it. Between lines, while only the music plays,
+// a thin bar sits where the text is waiting (before the next line, or after
+// the last one) and fills up as the gap goes by. The choice is remembered in
+// localStorage.
 
 const STORAGE_KEY = 'golha:lyricsFollow';
 const MANUAL_SCROLL_PAUSE_MS = 5000;
@@ -91,9 +94,21 @@ export async function initializeLyricsSync() {
   const pairs = matchCues([...track.cues], lines);
   if (pairs.size === 0) return;
 
+  // Matched cues in time order, for finding the gap the music is in.
+  const timeline = [...pairs]
+    .map(([cue, line]) => ({ start: cue.startTime, end: cue.endTime, line }))
+    .sort((a, b) => a.start - b.start);
+
+  const gap = document.createElement('span');
+  gap.className = 'music-gap';
+  gap.setAttribute('aria-hidden', 'true');
+  gap.innerHTML = '<span class="music-gap-bar"><span class="music-gap-fill"></span></span>';
+  const gapFill = gap.querySelector('.music-gap-fill');
+
   let follow = true;
   try { follow = localStorage.getItem(STORAGE_KEY) !== 'off'; } catch {}
   let active = null;
+  let started = false;
   let manualScrollAt = 0;
 
   const setFollow = (on) => {
@@ -101,8 +116,10 @@ export async function initializeLyricsSync() {
     toggle.setAttribute('aria-pressed', String(on));
     content.classList.toggle('lyrics-following', on);
     try { localStorage.setItem(STORAGE_KEY, on ? 'on' : 'off'); } catch {}
-    if (!on) setActive(null);
-    else update();
+    if (!on) {
+      setActive(null);
+      gap.remove();
+    } else update();
   };
 
   const setActive = (line) => {
@@ -111,7 +128,30 @@ export async function initializeLyricsSync() {
     active = line;
     if (!line) return;
     line.classList.add('is-active');
-    if (!audio.paused && Date.now() - manualScrollAt > MANUAL_SCROLL_PAUSE_MS) scrollToLine(line);
+    autoScroll(line);
+  };
+
+  const autoScroll = (el) => {
+    if (!audio.paused && Date.now() - manualScrollAt > MANUAL_SCROLL_PAUSE_MS) scrollToLine(el);
+  };
+
+  // Music only: put the bar where the text is waiting and fill it by how far
+  // through the gap we are.
+  const showGap = (t) => {
+    if (!started) return gap.remove();
+    const i = timeline.findIndex((c) => c.start > t);
+    const next = i === -1 ? null : timeline[i];
+    const prev = i === -1 ? timeline[timeline.length - 1] : timeline[i - 1];
+    const from = prev ? Math.min(prev.end, t) : 0;
+    const to = next ? next.start : (isFinite(audio.duration) ? audio.duration : t);
+    const frac = to > from ? (t - from) / (to - from) : 1;
+    gapFill.style.width = `${Math.round(Math.min(1, Math.max(0, frac)) * 100)}%`;
+    const moved = next ? gap.nextElementSibling !== next.line : gap.previousElementSibling !== prev.line;
+    if (moved) {
+      if (next) next.line.before(gap);
+      else prev.line.after(gap);
+      autoScroll(gap);
+    }
   };
 
   // Put the line about a third of the way down the space under the sticky player.
@@ -126,11 +166,21 @@ export async function initializeLyricsSync() {
 
   const update = () => {
     if (!follow) return;
+    const t = audio.currentTime;
     const cue = [...track.activeCues].find((c) => pairs.has(c));
     setActive(cue ? pairs.get(cue) : null);
+    if (cue) gap.remove();
+    else showGap(t);
   };
 
   track.addEventListener('cuechange', update);
+  audio.addEventListener('timeupdate', update);
+  audio.addEventListener('play', () => {
+    started = true;
+    content.classList.add('is-playing');
+    update();
+  });
+  audio.addEventListener('pause', () => content.classList.remove('is-playing'));
 
   ['wheel', 'touchmove', 'keydown'].forEach((type) =>
     window.addEventListener(type, (e) => {
