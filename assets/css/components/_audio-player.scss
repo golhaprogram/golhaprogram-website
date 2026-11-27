@@ -82,3 +82,89 @@
     }
   }
 }
+
+/* Keep the player in view while the lyrics scroll (program pages). */
+.program .audio-player {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 0.75rem 1rem;
+}
+
+.program .audio-container audio,
+.program .download-button {
+  margin-top: 0;
+}
+
+/* «همراهی با شعر» toggle, shown only when the program has timed lyrics */
+.lyrics-follow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.lyrics-follow-switch {
+  position: relative;
+  width: 2.2rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  background: var(--border-color);
+  transition: background 0.2s;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0.15rem;
+    inset-inline-start: 0.15rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: inset-inline-start 0.2s;
+  }
+}
+
+.lyrics-follow[aria-pressed="true"] .lyrics-follow-switch {
+  background: var(--accent-color);
+
+  &::after {
+    inset-inline-start: 1.1rem;
+  }
+}
+
+/* Lyric lines: wrapped by assets/js/components/LyricsSync.js */
+.lyric-line {
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.lyrics-following .lyric-line[data-start] {
+  cursor: pointer;
+}
+
+.lyrics-following .lyric-line.is-active {
+  background: color-mix(in srgb, var(--accent-color) 16%, transparent);
+  box-shadow: 0 0 0 0.2em color-mix(in srgb, var(--accent-color) 16%, transparent);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lyric-line,
+  .lyrics-follow-switch,
+  .lyrics-follow-switch::after {
+    transition: none;
+  }
+}

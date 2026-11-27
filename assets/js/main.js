@@ -2,6 +2,7 @@
 import { initializeTagCloud } from './components/TagCloud.js';
 import { initializeSearch } from './components/Search.js';
 import { initializeThisMonth } from './components/ThisMonth.js';
+import { initializeLyricsSync } from './components/LyricsSync.js';
 
 // Main initialization function
 document.addEventListener('DOMContentLoaded', function() {
@@ -34,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (err) {
     console.error('Error initializing this-month:', err);
   }
+
+  // «همراهی با شعر»: highlight the line being sung (programs with a .vtt)
+  initializeLyricsSync().catch(err => console.error('Error initializing lyrics sync:', err));
 
   // Initialize search
   try {
