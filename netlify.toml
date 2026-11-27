@@ -16,14 +16,18 @@ command = "hugo --gc --minify -e production"
 # Branch deploys and deploy previews use the "beta" Hugo environment
 # (config/beta): noindex, and comments from comments-beta.golhaprogram.com.
 [context.branch-deploy]
-command = "hugo --gc --minify -e beta --baseURL /"
+# HUGO_PARAMS_HAMAHANG_SITE: Hamahang links load lyrics.txt and .vtt from this
+# deploy itself, not from production (see [params.hamahang]).
+command = "HUGO_PARAMS_HAMAHANG_SITE=\"$DEPLOY_PRIME_URL\" hugo --gc --minify -e beta --baseURL /"
 
 [context.branch-deploy.environment]
 HUGO_ENV = "beta"
 
 # Deploy previews (PRs)
 [context.deploy-preview]
-command = "hugo --gc --minify -e beta --baseURL /"
+# HUGO_PARAMS_HAMAHANG_SITE: Hamahang links load lyrics.txt and .vtt from this
+# deploy itself, not from production (see [params.hamahang]).
+command = "HUGO_PARAMS_HAMAHANG_SITE=\"$DEPLOY_PRIME_URL\" hugo --gc --minify -e beta --baseURL /"
 
 [context.deploy-preview.environment]
 HUGO_ENV = "beta"

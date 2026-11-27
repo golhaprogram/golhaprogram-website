@@ -155,8 +155,10 @@ twitter = "golhaprogram"                                                        
 # `podcast:` block). artVersion: bump it when the cover design changes, so
 # every cover image gets a new name and is rendered again.
 # Hamahang (https://github.com/golhaprogram/hamahang), the lyrics timing tool.
-# site: where Hamahang fetches lyrics.txt and existing .vtt files from (always
-# production, since deploy previews are built with a relative baseURL).
+# site: where Hamahang fetches lyrics.txt and existing .vtt files from. It must
+# be absolute (deploy previews are built with a relative baseURL), so previews
+# and branch deploys set it to their own URL in netlify.toml
+# (HUGO_PARAMS_HAMAHANG_SITE=$DEPLOY_PRIME_URL).
 [params.hamahang]
 url = "https://golhaprogram.github.io/hamahang/"
 site = "https://golhaprogram.com"
