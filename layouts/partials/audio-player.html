@@ -1,9 +1,21 @@
 {{ $audioURL := partial "audio-url" . }}
+{{ $vtt := partial "lyrics-vtt.html" . }}
 
-<div class="audio-player">
+{{- /* Marks where the player starts, so JS can tell when it's stuck to the top. */}}
+<div class="audio-player-sentinel" aria-hidden="true"></div>
+<div class="audio-player"{{ with $vtt }} data-lyrics-sync{{ end }}>
+  {{- /* One-line title, shown only while the player is stuck to the top. */}}
+  <div class="player-title" aria-hidden="true">
+    {{- replace .Params.program_type "-" " " }} {{ .Params.program_number -}}
+    {{- with .Params.singers }} · {{ delimit . "، " }}{{ end -}}
+    {{- with .Params.dastgah }} · {{ . }}{{ end -}}
+  </div>
   <div class="audio-container">
     <audio controls preload="metadata">
       <source src="{{ $audioURL }}" type="audio/mpeg">
+      {{- with $vtt }}
+      <track kind="metadata" srclang="fa" label="شعر" src="{{ .RelPermalink }}">
+      {{- end }}
       Your browser does not support the audio element.
     </audio>
     <a href="{{ $audioURL }}" download="{{ path.Base $audioURL }}" class="download-button" title="دانلود"
@@ -16,4 +28,10 @@
       </svg>
     </a>
   </div>
+  {{- with $vtt }}
+  <button type="button" class="lyrics-follow" aria-pressed="true" hidden>
+    <span class="lyrics-follow-switch" aria-hidden="true"></span>
+    همراهی با شعر
+  </button>
+  {{- end }}
 </div>

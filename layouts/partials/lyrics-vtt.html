@@ -1,0 +1,12 @@
+{{- /*
+  The program's timed lyrics, if any: a WebVTT file next to its Markdown file,
+  e.g. content/programs/golhaye-rangarang/100.vtt for 100.md (made with
+  https://github.com/golhaprogram/hamahang). Returns the resource or nil.
+*/ -}}
+{{- $vtt := "" -}}
+{{- with .File -}}
+  {{- with $.CurrentSection -}}
+    {{- $vtt = .Resources.Get (printf "%s.vtt" $.File.ContentBaseName) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $vtt -}}

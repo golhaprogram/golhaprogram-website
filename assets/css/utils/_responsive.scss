@@ -7,10 +7,14 @@
   box-sizing: border-box;
 }
 
-/* Fix for horizontal scrolling on mobile */
+/* Fix for horizontal scrolling on mobile. `clip` rather than `hidden`:
+   hidden turns html/body into scroll containers, which breaks
+   position: sticky (the program page's audio player). Browsers without
+   `clip` (Safari < 16) keep using `hidden`. */
 html,
 body {
   overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   position: relative;
 }

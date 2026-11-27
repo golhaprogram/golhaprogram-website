@@ -2,6 +2,8 @@
 import { initializeTagCloud } from './components/TagCloud.js';
 import { initializeSearch } from './components/Search.js';
 import { initializeThisMonth } from './components/ThisMonth.js';
+import { initializeLyricsSync } from './components/LyricsSync.js';
+import { initializeStickyPlayer } from './components/StickyPlayer.js';
 
 // Main initialization function
 document.addEventListener('DOMContentLoaded', function() {
@@ -34,6 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
   } catch (err) {
     console.error('Error initializing this-month:', err);
   }
+
+  // Program pages: compact player with a one-line title once it sticks to the top
+  try {
+    initializeStickyPlayer();
+  } catch (err) {
+    console.error('Error initializing sticky player:', err);
+  }
+
+  // «همراهی با شعر»: highlight the line being sung (programs with a .vtt)
+  initializeLyricsSync().catch(err => console.error('Error initializing lyrics sync:', err));
 
   // Initialize search
   try {
