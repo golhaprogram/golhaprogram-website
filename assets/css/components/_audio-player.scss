@@ -83,12 +83,45 @@
   }
 }
 
-/* Keep the player in view while the lyrics scroll (program pages). */
+/* Keep the player in view while the lyrics scroll (program pages). Once it's
+   stuck (.is-stuck, set by assets/js/components/StickyPlayer.js) it gets
+   compact and shows a one-line title. */
 .program .audio-player {
   position: sticky;
   top: 0;
   z-index: 50;
   padding: 0.75rem 1rem;
+  transition: padding 0.2s;
+}
+
+.audio-player-sentinel {
+  height: 0;
+}
+
+.player-title {
+  display: none;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.program .audio-player.is-stuck {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  .player-title {
+    display: block;
+  }
+
+  .lyrics-follow {
+    margin-top: 0.25rem;
+    padding-block: 0;
+    font-size: 0.8rem;
+  }
 }
 
 .program .audio-container audio,

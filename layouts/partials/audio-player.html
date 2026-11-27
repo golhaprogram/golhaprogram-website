@@ -1,7 +1,15 @@
 {{ $audioURL := partial "audio-url" . }}
 {{ $vtt := partial "lyrics-vtt.html" . }}
 
+{{- /* Marks where the player starts, so JS can tell when it's stuck to the top. */}}
+<div class="audio-player-sentinel" aria-hidden="true"></div>
 <div class="audio-player"{{ with $vtt }} data-lyrics-sync{{ end }}>
+  {{- /* One-line title, shown only while the player is stuck to the top. */}}
+  <div class="player-title" aria-hidden="true">
+    {{- replace .Params.program_type "-" " " }} {{ .Params.program_number -}}
+    {{- with .Params.singers }} · {{ delimit . "، " }}{{ end -}}
+    {{- with .Params.dastgah }} · {{ . }}{{ end -}}
+  </div>
   <div class="audio-container">
     <audio controls preload="metadata">
       <source src="{{ $audioURL }}" type="audio/mpeg">
