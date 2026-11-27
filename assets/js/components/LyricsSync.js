@@ -22,6 +22,18 @@
 // localStorage.
 
 const STORAGE_KEY = 'golha:lyricsFollow';
+
+// Umami custom events (production only; window.umami is absent elsewhere).
+// Umami bills every event and every stored property, so these carry no data:
+// the page URL already says which program, and the state is in the name.
+//   lyrics-follow-off / lyrics-follow-on  the reader flipped the switch
+//   lyrics-line-tap                       the reader tapped a line to play it
+//   lyrics-pulled-back                    the page scrolled the reader back to
+//                                         the current line after they had
+//                                         scrolled away (at most 5 per page)
+function trackEvent(name) {
+  try { window.umami?.track(name); } catch {}
+}
 const MANUAL_SCROLL_PAUSE_MS = 5000;
 
 // Compare lines ignoring spacing, nim-fasele, punctuation, diacritics and
@@ -115,6 +127,8 @@ export async function initializeLyricsSync() {
   let active = null;
   let started = false;
   let manualScrollAt = 0;
+  let lastPullBack = 0;
+  let pullBacks = 0;
 
   const setFollow = (on) => {
     follow = on;
@@ -203,9 +217,10 @@ export async function initializeLyricsSync() {
     const playerBottom = Math.max(0, player.getBoundingClientRect().bottom);
     const free = window.innerHeight - playerBottom;
     const r = line.getBoundingClientRect();
-    if (r.top > playerBottom + free * 0.15 && r.bottom < window.innerHeight - free * 0.25) return;
+    if (r.top > playerBottom + free * 0.15 && r.bottom < window.innerHeight - free * 0.25) return false;
     const target = window.scrollY + r.top - playerBottom - free / 3;
     window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+    return true;
   };
 
   const update = () => {
@@ -218,7 +233,14 @@ export async function initializeLyricsSync() {
     // Bring the current line back after a manual scroll (scrollToLine does
     // nothing if it's already comfortably in view).
     const el = target();
-    if (el && !audio.paused && handsOff() && !typing() && !inComments() && lyricsOnScreen()) scrollToLine(el);
+    if (el && !audio.paused && handsOff() && !typing() && !inComments() && lyricsOnScreen() && scrollToLine(el)) {
+      // Count it only if the reader had scrolled away since we last moved them.
+      if (manualScrollAt > lastPullBack && pullBacks < 5) {
+        pullBacks++;
+        trackEvent('lyrics-pulled-back');
+      }
+      lastPullBack = Date.now();
+    }
   };
 
   track.addEventListener('cuechange', update);
@@ -253,10 +275,14 @@ export async function initializeLyricsSync() {
     if (!line || e.target.closest('a')) return;
     audio.currentTime = parseFloat(line.dataset.start);
     manualScrollAt = 0;
+    trackEvent('lyrics-line-tap');
     audio.play().catch(() => {});
   });
 
-  toggle.addEventListener('click', () => setFollow(!follow));
+  toggle.addEventListener('click', () => {
+    setFollow(!follow);
+    trackEvent(follow ? 'lyrics-follow-on' : 'lyrics-follow-off');
+  });
   toggle.hidden = false;
   setFollow(follow);
 }
