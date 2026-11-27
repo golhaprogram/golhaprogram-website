@@ -43,6 +43,16 @@ Access-Control-Allow-Origin = "*"
 Access-Control-Allow-Methods = "GET"
 Cache-Control = "public, max-age=31536000"
 
+# Timed lyrics (<program>.vtt next to the program's .md; see "Timed lyrics" in
+# CLAUDE.md). The program page links them from its <audio>, so crawlers can
+# find them: keep the raw timing files out of search results. The lyrics are
+# already on the page itself.
+[[headers]]
+for = "/*.vtt"
+[headers.values]
+Content-Type = "text/vtt; charset=utf-8"
+X-Robots-Tag = "noindex"
+
 [[headers]]
 for = "/fonts/*"
 [headers.values]
