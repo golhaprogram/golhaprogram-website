@@ -1,0 +1,61 @@
+{{- /*
+  /hamahang/: every program, whether its lyrics are timed yet, and a link that
+  opens Hamahang ready to time it (see "Timed lyrics" in CLAUDE.md). A working
+  page, not linked from the site and kept out of search engines.
+*/ -}}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>{{ .Title }}</title>
+<style>
+  body { font-family: Vazirmatn, Tahoma, system-ui, sans-serif; max-width: 46rem; margin: 0 auto; padding: 1rem; line-height: 1.7; }
+  h1 { font-size: 1.3rem; }
+  h2 { font-size: 1.05rem; margin-top: 2rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  td, th { padding: .35rem .4rem; border-bottom: 1px solid rgb(127 127 127 / .25); text-align: start; }
+  td.done { color: #2f8f4f; }
+  td.todo { opacity: .5; }
+  a { color: inherit; }
+  .filter { margin: .5rem 0 1rem; }
+  body.only-todo tr.timed { display: none; }
+</style>
+</head>
+<body>
+<h1>{{ .Title }}</h1>
+<p>برای زمان‌بندی شعر یک برنامه روی «هماهنگ» بزنید. صدا، شعر و هر زمان‌بندی‌ای که از قبل دارد بار می‌شود و «Open pull request» فایل را در
+  <code>content/programs/…/&lt;شماره&gt;.vtt</code> می‌گذارد. نشانی کوتاه هر برنامه: <code>/programs/&lt;مجموعه&gt;/&lt;شماره&gt;/hamahang</code></p>
+<label class="filter"><input type="checkbox" onchange="document.body.classList.toggle('only-todo', this.checked)"> فقط برنامه‌های زمان‌بندی‌نشده</label>
+
+{{- range (site.GetPage "/programs").Sections }}
+  {{- $rows := slice }}
+  {{- $timed := 0 }}
+  {{- range .RegularPages }}
+    {{- $n := replaceRE `[^0-9].*$` "" .File.ContentBaseName | default "0" | int }}
+    {{- $rows = $rows | append (dict "key" (printf "k%05d%s" $n .File.ContentBaseName) "page" .) }}
+    {{- if partial "lyrics-vtt.html" . }}{{ $timed = add $timed 1 }}{{ end }}
+  {{- end }}
+  {{- if $rows }}
+  <h2>{{ .Title }} <small>({{ partial "fa-number.html" $timed }} از {{ partial "fa-number.html" (len $rows) }} زمان‌بندی شده)</small></h2>
+  <table>
+    <thead><tr><th>شماره</th><th>خواننده</th><th>زمان‌بندی</th><th></th></tr></thead>
+    <tbody>
+    {{- range sort $rows "key" }}
+      {{- $p := .page }}
+      {{- $vtt := partial "lyrics-vtt.html" $p }}
+      <tr{{ if $vtt }} class="timed"{{ end }}>
+        <td><a href="{{ $p.RelPermalink }}">{{ $p.Params.program_number }}</a></td>
+        <td>{{ delimit ($p.Params.singers | default slice) "، " }}</td>
+        {{- if $vtt }}<td class="done">✓</td>{{ else }}<td class="todo">—</td>{{ end }}
+        <td><a href="{{ partial "hamahang-url.html" $p }}">هماهنگ</a></td>
+      </tr>
+    {{- end }}
+    </tbody>
+  </table>
+  {{- end }}
+{{- end }}
+</body>
+</html>

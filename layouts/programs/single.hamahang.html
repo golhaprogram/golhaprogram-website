@@ -1,0 +1,14 @@
+{{- $url := partial "hamahang-url.html" . -}}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هماهنگ · {{ replace .Params.program_type "-" " " }} {{ .Params.program_number }}</title>
+<meta http-equiv="refresh" content="0; url={{ $url }}">
+</head>
+<body>
+<p><a href="{{ $url }}">زمان‌بندی شعر {{ replace .Params.program_type "-" " " }} {{ .Params.program_number }} در هماهنگ</a></p>
+</body>
+</html>

@@ -52,6 +52,27 @@ for = "/*.vtt"
 [headers.values]
 Content-Type = "text/vtt; charset=utf-8"
 X-Robots-Tag = "noindex"
+# Hamahang (on golhaprogram.github.io) loads existing timings to edit them
+Access-Control-Allow-Origin = "*"
+
+# Hamahang's inputs: each program's lyrics as plain text, and the page that
+# opens Hamahang for it (see config/_default/config.toml, [params.hamahang]).
+[[headers]]
+for = "/*/lyrics.txt"
+[headers.values]
+Content-Type = "text/plain; charset=utf-8"
+X-Robots-Tag = "noindex"
+Access-Control-Allow-Origin = "*"
+
+[[headers]]
+for = "/*/hamahang.html"
+[headers.values]
+X-Robots-Tag = "noindex"
+
+[[headers]]
+for = "/*/hamahang"
+[headers.values]
+X-Robots-Tag = "noindex"
 
 [[headers]]
 for = "/fonts/*"
