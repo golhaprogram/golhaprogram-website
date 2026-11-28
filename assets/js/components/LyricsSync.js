@@ -7,7 +7,8 @@
 //
 // Here each rendered lyric line (a <p>, split at its <br>s) is wrapped in a
 // <span class="lyric-line">, and the cues are matched to those lines by text,
-// in order. Labels such as «(مولوی)» simply match no cue.
+// so a line sung twice lights up twice. Labels such as «(مولوی)» simply match
+// no cue.
 //
 // While following is on: the current line is highlighted and kept in view.
 // If the reader scrolls by hand, following waits 5 seconds, then brings the
@@ -18,7 +19,8 @@
 // Seeking always jumps to the line, even while paused. And
 // tapping a line plays from it. Between lines, while only the music plays,
 // a thin bar sits where the text is waiting (before the next line, or after
-// the last one) and fills up as the gap goes by. The choice is remembered in
+// the last one, also when the next is a line sung before) and fills up as
+// the gap goes by. The choice is remembered in
 // localStorage.
 
 const STORAGE_KEY = 'golha:lyricsFollow';
@@ -68,23 +70,37 @@ function wrapLines(container) {
   return lines;
 }
 
-// Pair each cue with a line, in order, looking a few lines ahead for a match.
+// Pair each cue with the line that has its text. A line can be sung more
+// than once (a reprise, a refrain, a line the announcer reads again): all its
+// cues light the same line. If a text is written more than once in the .md,
+// the k-th time it's sung goes to its k-th copy, and any extra times to the
+// last copy. Tapping a line plays it from its first time.
 function matchCues(cues, lines) {
-  const keys = lines.map((l) => norm(l.textContent));
+  const byText = new Map(); // text -> lines with that text, in page order
+  lines.forEach((line) => {
+    const k = norm(line.textContent);
+    if (!k) return;
+    if (!byText.has(k)) byText.set(k, []);
+    byText.get(k).push(line);
+  });
   const pairs = new Map(); // cue -> line
-  let from = 0;
-  for (const cue of cues) {
+  const seen = new Map(); // text -> times sung so far
+  const unmatched = [];
+  for (const cue of [...cues].sort((a, b) => a.startTime - b.startTime)) {
     const k = norm(cue.text);
     if (!k) continue;
-    for (let i = from; i < Math.min(lines.length, from + 8); i++) {
-      if (keys[i] === k) {
-        pairs.set(cue, lines[i]);
-        lines[i].dataset.start = cue.startTime;
-        from = i + 1;
-        break;
-      }
+    const copies = byText.get(k);
+    if (!copies) {
+      unmatched.push(cue.text);
+      continue;
     }
+    const n = seen.get(k) || 0;
+    seen.set(k, n + 1);
+    const line = copies[Math.min(n, copies.length - 1)];
+    pairs.set(cue, line);
+    if (line.dataset.start === undefined) line.dataset.start = cue.startTime;
   }
+  if (unmatched.length) console.warn('Lyrics: cues that match no line of the text:', unmatched);
   return pairs;
 }
 
@@ -204,9 +220,13 @@ export async function initializeLyricsSync() {
     const to = next ? next.start : (isFinite(audio.duration) ? audio.duration : t);
     const frac = to > from ? (t - from) / (to - from) : 1;
     gapFill.style.width = `${Math.round(Math.min(1, Math.max(0, frac)) * 100)}%`;
-    const moved = next ? gap.nextElementSibling !== next.line : gap.previousElementSibling !== prev.line;
+    // Usually the bar waits before the next line. But if the next line comes
+    // back to one already on the page (a line read again, a reprise), it
+    // stays after the last one sung until the voice returns.
+    const ahead = next && (!prev || (prev.line.compareDocumentPosition(next.line) & Node.DOCUMENT_POSITION_FOLLOWING));
+    const moved = ahead ? gap.nextElementSibling !== next.line : gap.previousElementSibling !== prev.line;
     if (moved) {
-      if (next) next.line.before(gap);
+      if (ahead) next.line.before(gap);
       else prev.line.after(gap);
       autoScroll(gap);
     }
