@@ -60,6 +60,11 @@
   gregorian: '1958-12-13'
   precision_days: 86
   fixed: false
+'206':
+  estimate: '1337-11-03'
+  gregorian: '1959-01-23'
+  precision_days: 49
+  fixed: false
 '209':
   estimate: '1337-12-16'
   gregorian: '1959-03-07'
