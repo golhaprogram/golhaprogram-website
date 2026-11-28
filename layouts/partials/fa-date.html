@@ -1,0 +1,31 @@
+{{- /* A Gregorian time.Time -> Solar Hijri day, month and year, e.g.
+       2026-11-26 -> «۵ آذر ۱۴۰۵». Arithmetic from the widely used
+       gregorian_to_jalali (33-year cycle); checked day by day against
+       jdatetime for 1990–2094. */ -}}
+{{- $months := slice "فروردین" "اردیبهشت" "خرداد" "تیر" "مرداد" "شهریور" "مهر" "آبان" "آذر" "دی" "بهمن" "اسفند" -}}
+{{- $gy := .Year -}}
+{{- $gm := int .Month -}}
+{{- $gd := .Day -}}
+{{- $gdm := slice 0 31 59 90 120 151 181 212 243 273 304 334 -}}
+{{- $gy2 := cond (gt $gm 2) (add $gy 1) $gy -}}
+{{- $days := add 355666 (mul 365 $gy) (div (add $gy2 3) 4) $gd (index $gdm (sub $gm 1)) -}}
+{{- $days = sub $days (div (add $gy2 99) 100) -}}
+{{- $days = add $days (div (add $gy2 399) 400) -}}
+{{- $jy := add -1595 (mul 33 (div $days 12053)) -}}
+{{- $days = mod $days 12053 -}}
+{{- $jy = add $jy (mul 4 (div $days 1461)) -}}
+{{- $days = mod $days 1461 -}}
+{{- if gt $days 365 -}}
+  {{- $jy = add $jy (div (sub $days 1) 365) -}}
+  {{- $days = mod (sub $days 1) 365 -}}
+{{- end -}}
+{{- $jm := 0 -}}
+{{- $jd := 0 -}}
+{{- if lt $days 186 -}}
+  {{- $jm = add 1 (div $days 31) -}}
+  {{- $jd = add 1 (mod $days 31) -}}
+{{- else -}}
+  {{- $jm = add 7 (div (sub $days 186) 30) -}}
+  {{- $jd = add 1 (mod (sub $days 186) 30) -}}
+{{- end -}}
+{{- return printf "%s %s %s" (partial "fa-number" $jd) (index $months (sub $jm 1)) (partial "fa-number" $jy) -}}

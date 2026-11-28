@@ -6,6 +6,9 @@
     {{- range .Pages.ByDate.Reverse }}
     <li>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{- if not .Date.IsZero }}
+      <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "fa-date" .Date }}</time>
+      {{- end }}
       {{- with .Description }}<p>{{ . }}</p>{{ end }}
     </li>
     {{- end }}
