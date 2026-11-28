@@ -1,0 +1,20 @@
+{{- /*
+  Link that opens Hamahang (https://github.com/golhaprogram/hamahang) ready to
+  time this program's lyrics: its MP3, its lyrics (lyrics.txt), any timings it
+  already has (<n>.vtt), and where a pull request should put the result.
+  Settings in [params.hamahang].
+*/ -}}
+{{- $p := site.Params.hamahang -}}
+{{- $args := slice
+  "audio" (partial "audio-url" .)
+  "lyrics" (printf "%s%s" $p.site (.OutputFormats.Get "lyrics").RelPermalink)
+  "lang" "fa"
+  "dir" "rtl"
+  "repo" $p.repo
+  "path" (path.Join "content" .File.Dir (printf "%s.vtt" .File.ContentBaseName))
+  "title" (printf "Timed lyrics: %s %s" (replace .Params.program_type "-" " ") .Params.program_number)
+-}}
+{{- with partial "lyrics-vtt.html" . -}}
+  {{- $args = $args | append "vtt" (printf "%s%s" $p.site .RelPermalink) -}}
+{{- end -}}
+{{- return printf "%s?%s" $p.url (querify $args) -}}

@@ -1,0 +1,4 @@
+{{- /* The program's lyrics as plain text, for Hamahang. Hamahang drops the
+  Markdown "---" separators and treats lines in parentheses, like «(مولوی)»,
+  as labels that aren't timed. */ -}}
+{{ .RawContent | strings.TrimSpace }}
