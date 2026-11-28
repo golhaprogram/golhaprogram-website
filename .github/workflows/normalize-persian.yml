@@ -7,12 +7,21 @@ name: Normalize Persian Text
 #  - leaves a warning on changed lines a person should look at (می + space,
 #    می written solid: the verb prefix or wine?). Warnings never fail the run.
 # See "Persian spelling" in CLAUDE.md.
+#
+# Then scripts/sync_vtt.py keeps timed lyrics in step with the text: for each
+# changed program that has a .vtt (or a changed .vtt), it rewrites the cue
+# texts from the (now fixed) .md and adds missing line breaks to the .md. It
+# fails if a cue no longer matches any line: that program needs timing again.
+# It runs here, after the spelling fixes, so it sees the final text.
+# See "Timed lyrics" in CLAUDE.md.
 
 on:
   pull_request:
     paths:
       - 'content/**/*.md'
+      - 'content/**/*.vtt'
       - 'scripts/persian_spelling.py'
+      - 'scripts/sync_vtt.py'
 
 # One run at a time per PR for this workflow. (Not shared with the other
 # workflows: GitHub keeps only one waiting run per group and cancels the rest.)
@@ -55,15 +64,27 @@ jobs:
           if [ "$n" != "0" ]; then echo "$n changed line(s) to check by hand: see the annotations on the PR's Files tab."; fi
         } >> "$GITHUB_STEP_SUMMARY"
 
+    - name: Sync timed lyrics with the text
+      run: |
+        mapfile -t FILES < <(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD -- 'content/**/*.md' 'content/**/*.vtt')
+        if [ ${#FILES[@]} -eq 0 ]; then echo "No content files changed"; exit 0; fi
+        python3 scripts/sync_vtt.py --fix --github "${FILES[@]}" | tee /tmp/vtt.log
+        status=${PIPESTATUS[0]}
+        { echo "### Timed lyrics"; grep -v '^::' /tmp/vtt.log || true; } >> "$GITHUB_STEP_SUMMARY"
+        exit $status
+
     - name: Commit and push fixes
+      # Also when the lyrics sync failed: the spelling fixes still count.
+      if: ${{ !cancelled() }}
       run: |
         if git diff --quiet; then echo "No changes"; exit 0; fi
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git commit -qam "🔄 Fix Persian spelling
+        git commit -qam "🔄 Fix Persian spelling and sync timed lyrics
 
-        By scripts/persian_spelling.py (see Persian spelling in CLAUDE.md),
-        only in files changed in this PR."
+        By scripts/persian_spelling.py and scripts/sync_vtt.py (see Persian
+        spelling and Timed lyrics in CLAUDE.md), only in files changed in
+        this PR."
         for i in 1 2 3 4 5; do
           git pull -q --rebase origin ${{ github.head_ref }} && git push -q origin ${{ github.head_ref }} && break
           echo "Push failed, retrying ($i)"; sleep $((i * 5))
